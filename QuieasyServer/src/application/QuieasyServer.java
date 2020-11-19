@@ -8,50 +8,35 @@ import java.io.*;
 import java.net.*;
 
 public class QuieasyServer {
-	
-	private static ServerSocket serverSocket = null;
-	private static Socket clientSocket = null;
-	private static ObjectOutputStream out = null;
-	private static ObjectInputStream in = null;
 
     public static void main(String[] args) throws IOException {
         
         if (args.length != 1) {
-            System.err.println("Usage: java EchoServer <port number>");
+            System.err.println("Usage: java QuieasyServer <port number>");
             System.exit(1);
         }
         
         int portNumber = Integer.parseInt(args[0]);
         
-        try {
-        	serverSocket = new ServerSocket(Integer.parseInt(args[0]));
+        try (ServerSocket serverSocket = new ServerSocket(portNumber)){
         	
         	System.out.println("Quieasy server running on port " + portNumber);
         	
-        	clientSocket = serverSocket.accept();
-        	out = new ObjectOutputStream(clientSocket.getOutputStream());
-        	in = new ObjectInputStream(clientSocket.getInputStream());
+        	int count = 1; // count clients connected
         	
-        	System.out.println("Client connected!");
+        	while(true) {
+        		
+        		new QuieasyServerThread(serverSocket.accept()).start();
+        		System.out.println("Client " + count + " connected!");
+        		count++;
+        	}
         	
-        	
-        	// Listen for incoming messages.
-        	Message message;
-        	
-			while(true) {
-				message = (Message) in.readObject();
-				if(message != null) {
-					System.out.println("Message received!");
-					out.writeObject(ServerDecoder.decode(message));
-					out.flush();
-				}
-			}
-        
         } catch (IOException e) {
-            System.out.println("Exception caught when trying to listen on port "
-                + portNumber + " or listening for a connection");
+        	
+            System.err.println("Could not listen on port " + portNumber);
             System.out.println(e.getMessage());
-        }catch (Exception e) {}
+            
+        }
         
     }
 
