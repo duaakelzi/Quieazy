@@ -2,20 +2,34 @@
 
 package application;
 
-import dialog.Login;
+import dialog.*;
+import domain.User;
+import data.*;
 
 public class ClientDecoder {
 	
 	// Decode and forward message to the appropriate class for execution.
-	public static void decode(Message msg) {
+	public static void decode(Message message) {
 		
-		if(msg.arg0.equals("LOGIN_FAIL")) {
+		if(message.task.equals("LOGIN_OK")) { // on successful login or account creation
 			
-			Login.getLogin().fail();
+			UserData userData = message.userData;
+			User.getUser(userData.firstName, userData.lastName, userData.email);
 			
-		}else if(msg.arg0.equals("LOGIN_OK")) {
+			// clear user inputs
+			Login.clear();
+			Register.clear();
 			
-			PrimeScene.getPrimeScene().home();
+			// show dash board
+			PrimeScene.home();
+			
+		}else if(message.task.equals("LOGIN_FAILED")) { // user entered incorrect email or password
+			
+			Login.fail();
+			
+		}else if(message.task.equals("EMAIL_IN_USE")) { // user tried to register with an email that is already in use
+			
+			Register.emailInUse();
 			
 		}
 		

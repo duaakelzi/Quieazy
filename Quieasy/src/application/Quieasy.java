@@ -4,6 +4,7 @@ package application;
 
 import javafx.application.*;
 import javafx.stage.*;
+import dialog.PrimeScene;
 
 public class Quieasy extends Application {
 
@@ -12,7 +13,13 @@ public class Quieasy extends Application {
 	}
 	
 	public void start(Stage myStage) {
-
+		
+		//connect to server
+		ClientAgent clientAgent = ClientAgent.getClientAgent();
+		
+		// start listening for incoming messages
+		(new Thread(clientAgent)).start();
+		
 		// Setup the stage
 		myStage.setTitle("Quieasy");
 		
@@ -20,11 +27,6 @@ public class Quieasy extends Application {
 		
 		// Show the stage and its scene.
 		myStage.show();
-		
-		//start the client agent thread that sends and receives message to and from the server
-		ClientAgent clientAgent = ClientAgent.getClientAgent();
-		
-		(new Thread(clientAgent)).start();
 		
 	}
 	
