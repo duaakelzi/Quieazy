@@ -2,25 +2,26 @@
 
 package application;
 
+import data.Message;
+import data.RegisterData;
+import data.LoginData;
 import persistence.Database;
 
 public class ServerDecoder {
 	
-	public static Message decode(Message msg) {
+	public static Message decode(Message message) {
 		
-		if(msg.arg0.equals("LOG_IN")) {
+		if(message.task.equals("LOG_IN")) {
 			
-			// NOTE: This task will be assigned to another context class. This is just for now.
+			LoginData data = message.loginData;
 			
-			if(Database.login(msg.arg1, msg.arg2)) {
-				
-				return new Message("LOGIN_OK", msg.arg1, "");
-				
-			}else {
-				
-				return new Message("LOGIN_FAIL", "", "");
-				
-			}
+			return Database.login(data.email, data.password);
+			
+		}else if(message.task.equals("REGISTER")){
+			
+			RegisterData data = message.registerData;
+			
+			return Database.register(data.firstName, data.lastName, data.email, data.password);
 			
 		}
 		
