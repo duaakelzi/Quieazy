@@ -4,63 +4,70 @@ package dialog;
 
 import javafx.scene.text.*;
 import javafx.scene.layout.*;
-import javafx.scene.control.*;
-import javafx.geometry.*;
-import javafx.event.*;
-
 import javafx.scene.paint.Color;
+import domain.User;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.control.*;
 
-import application.Account;
-
-public class Login extends GridPane {
+public class Login extends VBox{
 	
 	private static Login login;
 	
-	public final double WIDTH = 300;
-	public final double HEIGHT = 275;
+	private static TextField email = new TextField();
+	private static PasswordField password = new PasswordField();
+	private static Text msg = new Text("");
 	
-	private Text msg = new Text("Enter your account.");
-	
-	private TextField userTextField = new TextField();
-	private PasswordField pwBox = new PasswordField();
-	
+	// constructor can only be accessed from within
 	private Login() {
+		
 		super();
 		
 		this.setAlignment(Pos.CENTER);
-		this.setHgap(10);
-		this.setVgap(10);
 		this.setPadding(new Insets(25, 25, 25, 25));
+		this.setSpacing(10);
 		
-		Text scenetitle = new Text("Welcome");
-		scenetitle.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
-		this.add(scenetitle, 0, 0, 2, 1);
-
-		Label userName = new Label("User Name:");
-		this.add(userName, 0, 1);
-
-		//TextField userTextField = new TextField();
-		this.add(userTextField, 1, 1);
-
-		Label pw = new Label("Password:");
-		this.add(pw, 0, 2);
-
-		//PasswordField pwBox = new PasswordField();
-		this.add(pwBox, 1, 2);
+		Text title = new Text("Log in");
+		title.setFont(new Font(20));
+		VBox.setMargin(title, new Insets(0, 0, 5, 0));
 		
-		Button btn = new Button("Log in");
-		HBox hbBtn = new HBox(10);
-		hbBtn.setAlignment(Pos.BOTTOM_RIGHT);
-		hbBtn.getChildren().add(btn);
-		this.add(hbBtn, 1, 4);
+		email.setPromptText("Email address");
+		email.setMaxWidth(200);
 		
-        this.add(msg, 1, 6);
+		password.setPromptText("Enter password");
+		password.setMaxWidth(200);
 		
-		btn.setOnAction(new EventHandler<ActionEvent>() {
+		Button loginButton = new Button("Log in");
+		
+		HBox hbox = new HBox();
+		hbox.setSpacing(10);
+		hbox.setAlignment(Pos.CENTER);
+		
+		Text question = new Text("Not registered yet?");
+		
+		Button registerButton = new Button("Create account");
+		
+		hbox.getChildren().addAll(question, registerButton);
+		
+		this.getChildren().addAll(title, email, password, loginButton, msg, hbox);
+		
+		loginButton.setOnAction(new EventHandler<ActionEvent>() {
 			 
 		    public void handle(ActionEvent e) {
 		        
-		    	Account.logIn(userTextField.getText(), pwBox.getText());
+		    	User.login(email.getText(), password.getText());
+
+		    }
+		    
+		});
+		
+		registerButton.setOnAction(new EventHandler<ActionEvent>() {
+			 
+		    public void handle(ActionEvent e) {
+		        
+		    	switchToRegister();
 		    	
 		    }
 		    
@@ -77,14 +84,26 @@ public class Login extends GridPane {
 		
 	}
 	
-	// Show "Login failed!" on unsuccessful log in attempt.
-	public void fail() {
+	// Prompt user to try again on unsuccessful login attempt.
+	public static void fail() {
 		
-		userTextField.setText("");
-		pwBox.setText("");
+		clear();
 		msg.setFill(Color.FIREBRICK);
-	    msg.setText("Failed! Please try again.");
+	    msg.setText("Incorrect email or password! Please try again.");
 	    
+	}
+	
+	// Open registration form for a new user
+	private static void switchToRegister() {
+		clear();
+		PrimeScene.register();
+	}
+	
+	// Clear user input
+	public static void clear() {
+		email.setText("");
+		password.setText("");
+		msg.setText("");
 	}
 	
 }
