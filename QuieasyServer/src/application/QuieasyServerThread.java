@@ -39,10 +39,7 @@ public class QuieasyServerThread extends Thread {
 					System.out.println("Response sent!");
 					
 				}
-				
 			}
-        	
-        	
         } catch (IOException e) {
             e.printStackTrace();
         } catch (Exception e) {
