@@ -4,7 +4,7 @@ package application;
 
 import javafx.application.*;
 import javafx.stage.*;
-import dialog.PrimeScene;
+import gui.PrimeScene;
 
 public class Quieasy extends Application {
 

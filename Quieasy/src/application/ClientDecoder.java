@@ -2,7 +2,7 @@
 
 package application;
 
-import dialog.*;
+import gui.*;
 import domain.User;
 import data.*;
 
