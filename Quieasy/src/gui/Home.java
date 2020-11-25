@@ -1,6 +1,6 @@
 // GUI for home page of the app when logged in.
 
-package dialog;
+package gui;
 
 import javafx.scene.layout.*;
 

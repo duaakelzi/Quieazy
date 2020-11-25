@@ -1,6 +1,6 @@
 // GUI for log in.
 
-package dialog;
+package gui;
 
 import javafx.scene.text.*;
 import javafx.scene.layout.*;

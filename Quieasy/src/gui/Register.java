@@ -1,6 +1,6 @@
 // Dialog for creating a new account
 
-package dialog;
+package gui;
 
 import domain.User;
 

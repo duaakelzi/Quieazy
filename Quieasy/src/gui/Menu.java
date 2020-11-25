@@ -1,6 +1,6 @@
 // Menu with a list of options
 
-package dialog;
+package gui;
 
 import domain.User;
 
@@ -18,6 +18,7 @@ public class Menu extends VBox {
 	private static final double BTN_HEIGHT = 20;
 	
 	private static Button profileButton = new Button("Profile");
+	private static Button createQuizButton = new Button("Create Quiz");
 	private static Button myQuizButton = new Button("My Quiz");
 	private static Button notifButton = new Button("Notifications");
 	private static Button settingsButton = new Button("Settings");
@@ -29,13 +30,14 @@ public class Menu extends VBox {
 		super(8);
 		this.setPadding(new Insets(15, 12, 15, 12));
 		profileButton.setPrefSize(BTN_WIDTH, BTN_HEIGHT);
+		createQuizButton.setPrefSize(BTN_WIDTH, BTN_HEIGHT);
 		myQuizButton.setPrefSize(BTN_WIDTH, BTN_HEIGHT);
 		notifButton.setPrefSize(BTN_WIDTH, BTN_HEIGHT);
 		settingsButton.setPrefSize(BTN_WIDTH, BTN_HEIGHT);
 		helpButton.setPrefSize(BTN_WIDTH, BTN_HEIGHT);
 		logoutButton.setPrefSize(BTN_WIDTH, BTN_HEIGHT);
 		
-		this.getChildren().addAll(profileButton, myQuizButton, notifButton, settingsButton, helpButton,logoutButton);
+		this.getChildren().addAll(profileButton, createQuizButton, myQuizButton, notifButton, settingsButton, helpButton,logoutButton);
 		
 		logoutButton.setOnAction(new EventHandler<ActionEvent>() {
 			 
@@ -43,6 +45,16 @@ public class Menu extends VBox {
 		    	
 		    	User.logout();
 		    	PrimeScene.login();
+		    }
+		    
+		});
+		
+		createQuizButton.setOnAction(new EventHandler<ActionEvent>() {
+			 
+		    public void handle(ActionEvent e) {
+		    	
+		    	MainPane.getMainPane().getTabs().add(CreateQuizTab.getCreateQuizTab());
+		    	
 		    }
 		    
 		});

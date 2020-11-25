@@ -1,6 +1,6 @@
 // The workspace on the dash board
 
-package dialog;
+package gui;
 
 import javafx.scene.control.TabPane;
 

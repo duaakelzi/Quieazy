@@ -1,7 +1,7 @@
 //PrimeScene is a container for all UI elements.
 //Only a single instance required. Hence, Singleton Pattern is used here.
 
-package dialog;
+package gui;
 
 import javafx.scene.*;
 import javafx.scene.paint.Color;
