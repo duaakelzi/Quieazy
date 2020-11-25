@@ -2,7 +2,7 @@
 
 package gui;
 
-import domain.User;
+import domain.UserC;
 
 import javafx.scene.text.*;
 import javafx.scene.layout.*;
@@ -108,7 +108,7 @@ public class Register extends VBox{
 		 * VALIDATION: will be implemented latter.
 		 */
 		
-		if(valid) User.register(firstName, lastName, email, password1);
+		if(valid) UserC.register(firstName, lastName, email, password1);
 		
 	}
 	

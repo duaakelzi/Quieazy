@@ -3,7 +3,7 @@
 package application;
 
 import gui.*;
-import domain.User;
+import domain.UserC;
 import data.*;
 
 public class ClientDecoder {
@@ -14,7 +14,7 @@ public class ClientDecoder {
 		if(message.task.equals("LOGIN_OK")) { // on successful login or account creation
 			
 			UserData userData = message.userData;
-			User.getUser(userData.firstName, userData.lastName, userData.email);
+			UserC.getUser(userData.firstName, userData.lastName, userData.email);
 			
 			// clear user inputs
 			Login.clear();

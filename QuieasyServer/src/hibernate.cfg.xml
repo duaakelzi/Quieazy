@@ -24,7 +24,7 @@
         <!-- Set the current session context -->
         <property name="current_session_context_class">thread</property>
 
-        <mapping class="domain.User"/>
+        <mapping class="domain.UserC"/>
 
     </session-factory>
 

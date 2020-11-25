@@ -16,39 +16,24 @@
         <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
       </path>
     </expand>
-    <select>
-      <path>
-        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="BRANCH:origin/GUI" type="e8cecc67:BranchNodeDescriptor" />
-      </path>
-    </select>
+    <select />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f294efe8-4df9-4024-9b0c-a47add265898" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/QuestionAnswerGUI/src/images/cancelicon.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/QuestionAnswerGUI/src/images/menu.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/QuestionAnswerGUI/src/images/sceneimg.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/QuestionAnswerGUI/src/images/skip.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/QuestionAnswerGUI/src/images/submit.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/QuestionAnswerGUI/src/images/user.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/QuestionAnswerGUI/src/sample/Answer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/QuestionAnswerGUI/src/sample/Controller.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/QuestionAnswerGUI/src/sample/Main.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/QuestionAnswerGUI/src/sample/Question.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/QuestionAnswerGUI/src/sample/QuestionAnswerScene.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/QuestionAnswerGUI/src/sample/QuestionRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/QuestionAnswerGUI/src/sample/SceneMaker.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/QuieasyServer/src/actions/RegisterAction.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Quieasy/src/application/ClientDecoder.java" beforeDir="false" afterPath="$PROJECT_DIR$/Quieasy/src/application/ClientDecoder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Quieasy/src/domain/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/Quieasy/src/domain/UserC.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Quieasy/src/gui/Login.java" beforeDir="false" afterPath="$PROJECT_DIR$/Quieasy/src/gui/Login.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Quieasy/src/gui/Menu.java" beforeDir="false" afterPath="$PROJECT_DIR$/Quieasy/src/gui/Menu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Quieasy/src/gui/Register.java" beforeDir="false" afterPath="$PROJECT_DIR$/Quieasy/src/gui/Register.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/QuieasyServer/src/hibernate.cfg.xml" beforeDir="false" afterPath="$PROJECT_DIR$/QuieasyServer/src/hibernate.cfg.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/QuieasyServer/src/persistence/Database.java" beforeDir="false" afterPath="$PROJECT_DIR$/QuieasyServer/src/persistence/Database.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
-  </component>
-  <component name="CodeInsightWorkspaceSettings">
-    <option name="optimizeImportsOnTheFly" value="true" />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -58,37 +43,6 @@
     </option>
   </component>
   <component name="Git.Settings">
-    <favorite-branches>
-      <branch-storage>
-        <map>
-          <entry type="LOCAL">
-            <value>
-              <list>
-                <branch-info repo="$PROJECT_DIR$" source="GUI" />
-              </list>
-            </value>
-          </entry>
-          <entry type="REMOTE">
-            <value>
-              <list>
-                <branch-info repo="$PROJECT_DIR$" source="origin/GUI" />
-              </list>
-            </value>
-          </entry>
-        </map>
-      </branch-storage>
-    </favorite-branches>
-    <option name="PUSH_TAGS">
-      <GitPushTagMode>
-        <option name="argument" value="--follow-tags" />
-        <option name="title" value="Current Branch" />
-      </GitPushTagMode>
-    </option>
-    <option name="RECENT_BRANCH_BY_REPOSITORY">
-      <map>
-        <entry key="$PROJECT_DIR$" value="GUI" />
-      </map>
-    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectId" id="1jYK7CbqdbK0GWhCES8hcXD1OnI" />
@@ -98,31 +52,15 @@
   </component>
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
-    <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/QuestionAnswerGUI/src" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../hibernate-release-5.4.23.Final" />
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
-    <property name="settings.editor.selected.configurable" value="preferences.JavaFX" />
-  </component>
-  <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\IonCicala\Documents\GitHub\Quieazy\QuestionAnswerGUI\src" />
-    </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\IonCicala\Documents\GitHub\Quieazy\QuieazyGUI" />
-    </key>
   </component>
   <component name="RunManager">
     <configuration name="Quieazy" type="Application" factoryName="Application">
-      <option name="ALTERNATIVE_JRE_PATH" value="openjdk-15" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
-      <option name="MAIN_CLASS_NAME" value="sample.Main" />
-      <module name="QuestionAnswerGUI" />
+      <module name="Quieazy" />
       <option name="PROGRAM_PARAMETERS" value="3000" />
-      <option name="VM_PARAMETERS" value="--module-path C:\Users\IonCicala\.jdks\lib\javafx-sdk-11.0.2\lib --add-modules javafx.controls,javafx.fxml" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/QuieazyGUI" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -136,51 +74,15 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1603975417676</updated>
-      <workItem from="1605730030819" duration="99000" />
-      <workItem from="1605777800229" duration="1531000" />
-      <workItem from="1605781592724" duration="257000" />
-      <workItem from="1605896926243" duration="1786000" />
-      <workItem from="1605898731450" duration="227000" />
-      <workItem from="1605898974861" duration="995000" />
     </task>
     <servers />
-  </component>
-  <component name="TypeScriptGeneratedFilesManager">
-    <option name="version" value="3" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
       <map>
         <entry key="MAIN">
           <value>
-            <State>
-              <option name="FILTERS">
-                <map>
-                  <entry key="branch">
-                    <value>
-                      <list>
-                        <option value="origin/GUI" />
-                      </list>
-                    </value>
-                  </entry>
-                </map>
-              </option>
-            </State>
-          </value>
-        </entry>
-      </map>
-    </option>
-    <option name="RECENT_FILTERS">
-      <map>
-        <entry key="Branch">
-          <value>
-            <list>
-              <RecentGroup>
-                <option name="FILTER_VALUES">
-                  <option value="GUI" />
-                </option>
-              </RecentGroup>
-            </list>
+            <State />
           </value>
         </entry>
       </map>
@@ -188,63 +90,43 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="478" y="-712" key="#Notifications" timestamp="1605781628270">
-      <screen x="0" y="-900" width="1600" height="860" />
+    <state x="1366" y="90" key="#Project_Structure" timestamp="1606332734205">
+      <screen x="1366" y="0" width="1920" height="1040" />
     </state>
-    <state x="478" y="-712" key="#Notifications/0.0.1366.728/0.-900.1600.860@0.-900.1600.860" timestamp="1605781628270" />
-    <state x="362" y="-898" key="#Project_Structure" timestamp="1605898940901">
-      <screen x="0" y="-900" width="1600" height="860" />
-    </state>
-    <state x="362" y="-898" key="#Project_Structure/0.0.1366.728/0.-900.1600.860@0.-900.1600.860" timestamp="1605898940901" />
-    <state x="175" y="0" key="#Project_Structure/0.0.1366.728/0.-900.1600.860@0.0.1366.728" timestamp="1605778123596" />
-    <state x="205" y="-841" width="1280" height="771" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1605898858802">
-      <screen x="0" y="-900" width="1600" height="860" />
-    </state>
-    <state x="205" y="-841" width="1280" height="771" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1366.728/0.-900.1600.860@0.-900.1600.860" timestamp="1605898858802" />
-    <state x="107" y="177" width="1092" height="551" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1366.728@0.0.1366.728" timestamp="1603975587872" />
-    <state x="574" y="-714" key="#com.intellij.ide.util.TreeClassChooserDialog" timestamp="1605898661801">
-      <screen x="0" y="-900" width="1600" height="860" />
-    </state>
-    <state x="574" y="-714" key="#com.intellij.ide.util.TreeClassChooserDialog/0.0.1366.728/0.-900.1600.860@0.-900.1600.860" timestamp="1605898661801" />
-    <state x="524" y="-604" key="DetectedRootsChooserDialog" timestamp="1605778858888">
-      <screen x="0" y="-900" width="1600" height="860" />
-    </state>
-    <state x="524" y="-604" key="DetectedRootsChooserDialog/0.0.1366.728/0.-900.1600.860@0.-900.1600.860" timestamp="1605778858888" />
-    <state x="433" y="-733" key="FileChooserDialogImpl" timestamp="1605898934981">
-      <screen x="0" y="-900" width="1600" height="860" />
-    </state>
-    <state x="433" y="-733" key="FileChooserDialogImpl/0.0.1366.728/0.-900.1600.860@0.-900.1600.860" timestamp="1605898934981" />
-    <state width="1048" height="222" key="GridCell.Tab.0.bottom" timestamp="1605899969894">
-      <screen x="0" y="-900" width="1600" height="860" />
-    </state>
-    <state width="1048" height="222" key="GridCell.Tab.0.bottom/0.0.1366.728/0.-900.1600.860@0.-900.1600.860" timestamp="1605899969894" />
-    <state width="1048" height="222" key="GridCell.Tab.0.center" timestamp="1605899969894">
-      <screen x="0" y="-900" width="1600" height="860" />
-    </state>
-    <state width="1048" height="222" key="GridCell.Tab.0.center/0.0.1366.728/0.-900.1600.860@0.-900.1600.860" timestamp="1605899969894" />
-    <state width="1048" height="222" key="GridCell.Tab.0.left" timestamp="1605899969894">
-      <screen x="0" y="-900" width="1600" height="860" />
-    </state>
-    <state width="1048" height="222" key="GridCell.Tab.0.left/0.0.1366.728/0.-900.1600.860@0.-900.1600.860" timestamp="1605899969894" />
-    <state width="1048" height="222" key="GridCell.Tab.0.right" timestamp="1605899969894">
-      <screen x="0" y="-900" width="1600" height="860" />
-    </state>
-    <state width="1048" height="222" key="GridCell.Tab.0.right/0.0.1366.728/0.-900.1600.860@0.-900.1600.860" timestamp="1605899969894" />
-    <state x="207" y="-900" key="SettingsEditor" timestamp="1605898797102">
-      <screen x="0" y="-900" width="1600" height="860" />
-    </state>
-    <state x="207" y="-900" key="SettingsEditor/0.0.1366.728/0.-900.1600.860@0.-900.1600.860" timestamp="1605898797102" />
-    <state x="319" y="-803" key="Vcs.Push.Dialog.v2" timestamp="1605897034318">
-      <screen x="0" y="-900" width="1600" height="860" />
-    </state>
-    <state x="319" y="-803" key="Vcs.Push.Dialog.v2/0.0.1366.728/0.-900.1600.860@0.-900.1600.860" timestamp="1605897034318" />
-    <state x="506" y="-900" width="587" height="860" key="find.popup" timestamp="1605898904189">
-      <screen x="0" y="-900" width="1600" height="860" />
-    </state>
-    <state x="506" y="-900" width="587" height="860" key="find.popup/0.0.1366.728/0.-900.1600.860@0.-900.1600.860" timestamp="1605898904189" />
-    <state x="77" y="0" key="new project wizard" timestamp="1605778099449">
+    <state x="1366" y="90" key="#Project_Structure/0.0.1366.728/1366.0.1920.1040@1366.0.1920.1040" timestamp="1606332734205" />
+    <state x="107" y="177" width="1092" height="551" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1603975587872">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="77" y="0" key="new project wizard/0.0.1366.728/0.-900.1600.860@0.0.1366.728" timestamp="1605778099449" />
+    <state x="107" y="177" width="1092" height="551" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1366.728@0.0.1366.728" timestamp="1603975587872" />
+    <state x="1624" y="318" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1606332257468">
+      <screen x="1366" y="0" width="1920" height="1040" />
+    </state>
+    <state x="1624" y="318" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1366.728/1366.0.1920.1040@1366.0.1920.1040" timestamp="1606332257468" />
+    <state x="1592" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1606334042977">
+      <screen x="1366" y="0" width="1920" height="1040" />
+    </state>
+    <state x="1592" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1366.728/1366.0.1920.1040@1366.0.1920.1040" timestamp="1606334042977" />
+    <state x="2123" y="390" key="DetectedRootsChooserDialog" timestamp="1606332553399">
+      <screen x="1366" y="0" width="1920" height="1040" />
+    </state>
+    <state x="2123" y="390" key="DetectedRootsChooserDialog/0.0.1366.728/1366.0.1920.1040@1366.0.1920.1040" timestamp="1606332553399" />
+    <state x="2068" y="297" key="FileChooserDialogImpl" timestamp="1606332551662">
+      <screen x="1366" y="0" width="1920" height="1040" />
+    </state>
+    <state x="2068" y="297" key="FileChooserDialogImpl/0.0.1366.728/1366.0.1920.1040@1366.0.1920.1040" timestamp="1606332551662" />
+    <state x="1806" y="94" key="SettingsEditor" timestamp="1606332893568">
+      <screen x="1366" y="0" width="1920" height="1040" />
+    </state>
+    <state x="1806" y="94" key="SettingsEditor/0.0.1366.728/1366.0.1920.1040@1366.0.1920.1040" timestamp="1606332893568" />
+    <state x="311" y="0" key="SettingsEditor/0.0.1366.728@0.0.1366.728" timestamp="1606313334847" />
+    <state x="1458" y="92" width="1736" height="856" key="com.intellij.history.integration.ui.views.FileHistoryDialog" timestamp="1605623220249">
+      <screen x="1366" y="0" width="1920" height="1040" />
+    </state>
+    <state x="1458" y="92" width="1736" height="856" key="com.intellij.history.integration.ui.views.FileHistoryDialog/0.0.1366.728/1366.0.1920.1040@1366.0.1920.1040" timestamp="1605623220249" />
+    <state x="1457" y="0" key="new project wizard" timestamp="1606325296954">
+      <screen x="1366" y="0" width="1920" height="1040" />
+    </state>
+    <state x="1457" y="0" key="new project wizard/0.0.1366.728/1366.0.1920.1040@1366.0.1920.1040" timestamp="1606325296954" />
+    <state x="65" y="0" key="new project wizard/0.0.1366.728@0.0.1366.728" timestamp="1606310745444" />
   </component>
 </project>
