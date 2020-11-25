@@ -20,15 +20,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f294efe8-4df9-4024-9b0c-a47add265898" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/QuieasyServer/src/actions/LoginAction.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/QuieasyServer/src/domain/User.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/QuieasyServer/src/hibernate.cfg.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/QuieasyServer/src/persistence/HibernateUtil.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/QuieasyServer/src/persistence/JDBC.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/QuieasyServer/src/actions/RegisterAction.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/QuieasyServer/src/application/QuieasyServerThread.java" beforeDir="false" afterPath="$PROJECT_DIR$/QuieasyServer/src/application/QuieasyServerThread.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Quieasy/src/application/ClientDecoder.java" beforeDir="false" afterPath="$PROJECT_DIR$/Quieasy/src/application/ClientDecoder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Quieasy/src/domain/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/Quieasy/src/domain/UserC.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Quieasy/src/gui/Login.java" beforeDir="false" afterPath="$PROJECT_DIR$/Quieasy/src/gui/Login.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Quieasy/src/gui/Menu.java" beforeDir="false" afterPath="$PROJECT_DIR$/Quieasy/src/gui/Menu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Quieasy/src/gui/Register.java" beforeDir="false" afterPath="$PROJECT_DIR$/Quieasy/src/gui/Register.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/QuieasyServer/src/hibernate.cfg.xml" beforeDir="false" afterPath="$PROJECT_DIR$/QuieasyServer/src/hibernate.cfg.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/QuieasyServer/src/persistence/Database.java" beforeDir="false" afterPath="$PROJECT_DIR$/QuieasyServer/src/persistence/Database.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mysql-connector/mysql-connector-java-8.0.22.jar" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -102,6 +102,10 @@
       <screen x="1366" y="0" width="1920" height="1040" />
     </state>
     <state x="1624" y="318" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1366.728/1366.0.1920.1040@1366.0.1920.1040" timestamp="1606332257468" />
+    <state x="1592" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1606334042977">
+      <screen x="1366" y="0" width="1920" height="1040" />
+    </state>
+    <state x="1592" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1366.728/1366.0.1920.1040@1366.0.1920.1040" timestamp="1606334042977" />
     <state x="2123" y="390" key="DetectedRootsChooserDialog" timestamp="1606332553399">
       <screen x="1366" y="0" width="1920" height="1040" />
     </state>
