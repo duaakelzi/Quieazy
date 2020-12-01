@@ -60,5 +60,21 @@ public class UserC {
 	public static void logout() {
 		userC = null;
 	}
-	
+
+	//get the current user
+	public static UserC getCurrentUser(){
+		return userC;
+	}
+
+	public String getFirstName() {
+		return firstName;
+	}
+
+	public String getLastName() {
+		return lastName;
+	}
+
+	public String getEmail() {
+		return email;
+	}
 }

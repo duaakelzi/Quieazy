@@ -1,4 +1,4 @@
-package sample;
+package domain;
 
 public class Answer {
     private final String answers;
@@ -17,4 +17,5 @@ public class Answer {
     public boolean isCorrectAnswer() {
         return correctAnswer;
     }
+
 }

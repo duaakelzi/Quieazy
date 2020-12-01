@@ -1,4 +1,4 @@
-package sample;
+package domain;
 
 public class Question {
     private final String question;
@@ -19,7 +19,5 @@ public class Question {
         return answers[index].getAnswers();
     }
 
-    public int getPoints() {
-        return points;
-    }
+
 }
