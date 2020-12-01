@@ -1,8 +1,8 @@
-package domain;
+package data;
 
 public class Question {
     private final String question;
-    private final Answer [] answers;
+    private final Answer[] answers;
     private final int points;
 
     public Question(String question, Answer[] answers, int points) {

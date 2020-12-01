@@ -14,11 +14,14 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.util.Callback;
 
-
 public class CreateQuizBox extends VBox {
-	
+
 	private static CreateQuizBox createQuizBox;
-	
+	private Button createButtom;
+	private TextField textThreshold;
+	private TextField textname;
+	private ComboBox<String> courseComboBox;
+	ComboBox<String> studyProgramComboBox;
 	// constructor can only be accessed from within
 	private CreateQuizBox() {
 		
@@ -90,10 +93,10 @@ public class CreateQuizBox extends VBox {
 	public HBox initiateStudyProgram(ObservableList<String>studyProgramHS) {
 		HBox studyProgram = new HBox(20);
 		studyProgram.setPadding(new Insets(30));
-		Label labelStudyProgram = new Label("Study Program");
+		Label labelStudyProgram = new Label("Study Program*");
 		labelStudyProgram.setFont(Font.font("Times New Roman", FontWeight.EXTRA_BOLD, 24));
-		ComboBox<String> studyProgramComboBox = new ComboBox<>();
-		studyProgramComboBox.setPromptText("Select the Study Program*");
+		studyProgramComboBox = new ComboBox<>();
+		studyProgramComboBox.setPromptText("Select the Study Program");
 		studyProgramComboBox.setItems(studyProgramHS);
 		//set the size of text of item in the buttom cell
 		settingsComboBox(studyProgramComboBox);
@@ -106,9 +109,9 @@ public class CreateQuizBox extends VBox {
 	public HBox initiateCourse(ObservableList<String> courseHS){
 		HBox course = new HBox(105);
 		course.setPadding(new Insets(0, 30, 0, 30));
-		Label labelcourse = new Label("Course");
+		Label labelcourse = new Label("Course*");
 		labelcourse.setFont(Font.font("Times New Roman", FontWeight.EXTRA_BOLD, 24));
-		ComboBox<String> courseComboBox = new ComboBox<>();
+		courseComboBox = new ComboBox<>();
 		courseComboBox.setPromptText("Select the course*");
 
 
@@ -164,9 +167,9 @@ public class CreateQuizBox extends VBox {
 	public HBox initiateNameQuiz(){
 		HBox nameQuiz = new HBox(119);
 		nameQuiz.setPadding(new Insets(30));
-		Label labelName = new Label("Name");
+		Label labelName = new Label("Name*");
 		labelName.setFont(Font.font("Times New Roman", FontWeight.EXTRA_BOLD, 24));
-		TextField textname = new TextField();
+		textname = new TextField();
 		textname.setFont(Font.font("Times New Roman", FontWeight.NORMAL, 18));
 		textname.setPromptText("Enter the name of your Quiz*");
 		textname.setMinWidth(350);
@@ -178,9 +181,9 @@ public class CreateQuizBox extends VBox {
 	public HBox initiateTreshold(){
 		HBox thresholdQuiz = new HBox(72);
 		thresholdQuiz.setPadding(new Insets(0, 30, 0, 30));
-		Label labelThreshold = new Label("Threshold");
+		Label labelThreshold = new Label("Threshold*");
 		labelThreshold.setFont(Font.font("Times New Roman", FontWeight.EXTRA_BOLD, 24));
-		TextField textThreshold = new TextField();
+		textThreshold = new TextField();
 		textThreshold.setFont(Font.font("Times New Roman", FontWeight.NORMAL, 18));
 		textThreshold.setPromptText("Enter the Quiz's threshold*");
 		textThreshold.setMinWidth(250);
@@ -190,7 +193,7 @@ public class CreateQuizBox extends VBox {
 
 	}
 	public HBox initiateDescription(){
-		HBox descriptionQuiz = new HBox(60);
+		HBox descriptionQuiz = new HBox(80);
 		descriptionQuiz.setPadding(new Insets(30, 30, 0, 30));
 		Label labelDescription = new Label("Description");
 		labelDescription.setFont(Font.font("Times New Roman", FontWeight.NORMAL, 24));
@@ -206,9 +209,10 @@ public class CreateQuizBox extends VBox {
 	public HBox initiateBotton(){
 		HBox buttonsubmit = new HBox();
 		buttonsubmit.setPadding(new Insets(30, 30, 0, 530));
-		Button createButtom = new Button("Create Quiz");
+		createButtom = new Button("Create Quiz");
 		createButtom.setFont(Font.font("Times New Roman", FontWeight.NORMAL, 16));
 		buttonsubmit.getChildren().addAll(createButtom);
+		createButtom.setOnAction(eventCreatQuiz);
 		return buttonsubmit;
 
 	}
@@ -216,6 +220,9 @@ public class CreateQuizBox extends VBox {
 	EventHandler<ActionEvent> eventCreatQuiz = new EventHandler<ActionEvent>() {
 		@Override
 		public void handle(ActionEvent actionEvent) {
+			CreateQuizTab newtab = new CreateQuizTab("Add Questions");
+			MainPane.getMainPane().getTabs().add(newtab);
+			createButtom.setDisable(true);
 
 		}
 	};

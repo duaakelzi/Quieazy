@@ -3,8 +3,6 @@
 
 package data;
 
-import domain.Quiz;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 

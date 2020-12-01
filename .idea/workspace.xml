@@ -26,40 +26,20 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f294efe8-4df9-4024-9b0c-a47add265898" name="Default Changelist" comment="Quiz Play Gui">
-      <change afterPath="$PROJECT_DIR$/Quieasy/src/domain/Course.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Quieasy/src/domain/Quiz.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Quieasy/src/domain/QuizC.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Quieasy/src/domain/StudyProgramHS.java" afterDir="false" />
+    <list default="true" id="f294efe8-4df9-4024-9b0c-a47add265898" name="Default Changelist" comment="Create Quiz Gui">
+      <change afterPath="$PROJECT_DIR$/Quieasy/src/gui/CreateQuestionBox.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/QuestionAnswerGUI/src/images/cancelicon.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/QuestionAnswerGUI/src/images/menu.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/QuestionAnswerGUI/src/images/sceneimg.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/QuestionAnswerGUI/src/images/skip.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/QuestionAnswerGUI/src/images/submit.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/QuestionAnswerGUI/src/images/user.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/QuestionAnswerGUI/src/sample/Answer.java" beforeDir="false" afterPath="$PROJECT_DIR$/Quieasy/src/domain/Answer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/QuestionAnswerGUI/src/sample/Controller.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/QuestionAnswerGUI/src/sample/Main.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/QuestionAnswerGUI/src/sample/Question.java" beforeDir="false" afterPath="$PROJECT_DIR$/Quieasy/src/domain/Question.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/QuestionAnswerGUI/src/sample/QuestionAnswerScene.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/QuestionAnswerGUI/src/sample/QuestionRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/QuestionAnswerGUI/src/sample/SceneMaker.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Quieasy/.classpath" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Quieasy/.project" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Quieasy/src/application/ClientDecoder.java" beforeDir="false" afterPath="$PROJECT_DIR$/Quieasy/src/application/ClientDecoder.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Quieasy/src/application/Quieasy.java" beforeDir="false" afterPath="$PROJECT_DIR$/Quieasy/src/application/Quieasy.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Quieasy/src/data/Message.java" beforeDir="false" afterPath="$PROJECT_DIR$/Quieasy/src/data/Message.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Quieasy/src/domain/UserC.java" beforeDir="false" afterPath="$PROJECT_DIR$/Quieasy/src/domain/UserC.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Quieasy/src/domain/Answer.java" beforeDir="false" afterPath="$PROJECT_DIR$/Quieasy/src/data/Answer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Quieasy/src/domain/Course.java" beforeDir="false" afterPath="$PROJECT_DIR$/Quieasy/src/data/Course.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Quieasy/src/domain/Question.java" beforeDir="false" afterPath="$PROJECT_DIR$/Quieasy/src/data/Question.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Quieasy/src/domain/Quiz.java" beforeDir="false" afterPath="$PROJECT_DIR$/Quieasy/src/data/Quiz.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Quieasy/src/domain/QuizC.java" beforeDir="false" afterPath="$PROJECT_DIR$/Quieasy/src/domain/QuizC.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Quieasy/src/domain/StudyProgramHS.java" beforeDir="false" afterPath="$PROJECT_DIR$/Quieasy/src/data/StudyProgramHS.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Quieasy/src/gui/CreateQuizBox.java" beforeDir="false" afterPath="$PROJECT_DIR$/Quieasy/src/gui/CreateQuizBox.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Quieasy/src/gui/CreateQuizTab.java" beforeDir="false" afterPath="$PROJECT_DIR$/Quieasy/src/gui/CreateQuizTab.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Quieasy/src/gui/MainPane.java" beforeDir="false" afterPath="$PROJECT_DIR$/Quieasy/src/gui/MainPane.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Quieasy/src/gui/PrimeScene.java" beforeDir="false" afterPath="$PROJECT_DIR$/Quieasy/src/gui/PrimeScene.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/QuieasyServer/.classpath" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/QuieasyServer/.project" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/QuieasyServer/.settings/org.eclipse.jdt.core.prefs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/QuieasyServer/src/data/LoginData.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/QuieasyServer/src/data/Message.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/QuieasyServer/src/data/RegisterData.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/QuieasyServer/src/data/UserData.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -91,7 +71,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$USER_HOME$/.jdks/lib/javafx-sdk-11.0.2/lib" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/Quieasy/src/data" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -102,6 +82,11 @@
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="settings.editor.selected.configurable" value="configurable.group.language" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\IonCicala\Documents\GitHub\Quieazy\Quieasy\src\data" />
+    </key>
   </component>
   <component name="RunManager" selected="Application.Quieazy">
     <configuration name="QuieasyServer" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
@@ -164,8 +149,16 @@
       <workItem from="1606727232077" duration="1387000" />
       <workItem from="1606754499337" duration="2000" />
       <workItem from="1606757891766" duration="6247000" />
-      <workItem from="1606814493164" duration="27164000" />
+      <workItem from="1606814493164" duration="40963000" />
     </task>
+    <task id="LOCAL-00001" summary="Create Quiz Gui">
+      <created>1606844482364</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1606844482364</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -194,6 +187,10 @@
       </map>
     </option>
     <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Create Quiz Gui" />
+    <option name="LAST_COMMIT_MESSAGE" value="Create Quiz Gui" />
   </component>
   <component name="WindowStateProjectService">
     <state x="1366" y="90" key="#Project_Structure" timestamp="1606332734205">
@@ -230,6 +227,10 @@
       <screen x="1366" y="0" width="1920" height="1040" />
     </state>
     <state x="1592" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1366.728/1366.0.1920.1040@1366.0.1920.1040" timestamp="1606334042977" />
+    <state x="530" y="-724" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1606845159125">
+      <screen x="0" y="-900" width="1600" height="860" />
+    </state>
+    <state x="530" y="-724" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1366.728/0.-900.1600.860@0.-900.1600.860" timestamp="1606845159125" />
     <state x="2123" y="390" key="DetectedRootsChooserDialog" timestamp="1606332553399">
       <screen x="1366" y="0" width="1920" height="1040" />
     </state>
@@ -239,25 +240,25 @@
     </state>
     <state x="585" y="-654" key="FileChooserDialogImpl/0.0.1366.728/0.-900.1600.860@0.-900.1600.860" timestamp="1606582574671" />
     <state x="2068" y="297" key="FileChooserDialogImpl/0.0.1366.728/1366.0.1920.1040@1366.0.1920.1040" timestamp="1606332551662" />
-    <state width="1557" height="174" key="GridCell.Tab.0.bottom" timestamp="1606843935883">
+    <state width="1557" height="141" key="GridCell.Tab.0.bottom" timestamp="1606863675144">
       <screen x="0" y="-900" width="1600" height="860" />
     </state>
-    <state width="1557" height="174" key="GridCell.Tab.0.bottom/0.0.1366.728/0.-900.1600.860@0.-900.1600.860" timestamp="1606843935883" />
+    <state width="1557" height="141" key="GridCell.Tab.0.bottom/0.0.1366.728/0.-900.1600.860@0.-900.1600.860" timestamp="1606863675144" />
     <state width="1323" height="130" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1606769768974" />
-    <state width="1557" height="174" key="GridCell.Tab.0.center" timestamp="1606843935883">
+    <state width="1557" height="141" key="GridCell.Tab.0.center" timestamp="1606863675144">
       <screen x="0" y="-900" width="1600" height="860" />
     </state>
-    <state width="1557" height="174" key="GridCell.Tab.0.center/0.0.1366.728/0.-900.1600.860@0.-900.1600.860" timestamp="1606843935883" />
+    <state width="1557" height="141" key="GridCell.Tab.0.center/0.0.1366.728/0.-900.1600.860@0.-900.1600.860" timestamp="1606863675144" />
     <state width="1323" height="130" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1606769768974" />
-    <state width="1557" height="174" key="GridCell.Tab.0.left" timestamp="1606843935882">
+    <state width="1557" height="141" key="GridCell.Tab.0.left" timestamp="1606863675144">
       <screen x="0" y="-900" width="1600" height="860" />
     </state>
-    <state width="1557" height="174" key="GridCell.Tab.0.left/0.0.1366.728/0.-900.1600.860@0.-900.1600.860" timestamp="1606843935882" />
+    <state width="1557" height="141" key="GridCell.Tab.0.left/0.0.1366.728/0.-900.1600.860@0.-900.1600.860" timestamp="1606863675144" />
     <state width="1323" height="130" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1606769768974" />
-    <state width="1557" height="174" key="GridCell.Tab.0.right" timestamp="1606843935883">
+    <state width="1557" height="141" key="GridCell.Tab.0.right" timestamp="1606863675144">
       <screen x="0" y="-900" width="1600" height="860" />
     </state>
-    <state width="1557" height="174" key="GridCell.Tab.0.right/0.0.1366.728/0.-900.1600.860@0.-900.1600.860" timestamp="1606843935883" />
+    <state width="1557" height="141" key="GridCell.Tab.0.right/0.0.1366.728/0.-900.1600.860@0.-900.1600.860" timestamp="1606863675144" />
     <state width="1323" height="130" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1606769768974" />
     <state width="778" height="393" key="GridCell.Tab.1.bottom" timestamp="1606586706134">
       <screen x="0" y="-900" width="1600" height="860" />
@@ -285,6 +286,10 @@
     <state x="367" y="-892" key="SettingsEditor/0.0.1366.728/0.-900.1600.860@0.-900.1600.860" timestamp="1606644527423" />
     <state x="1806" y="94" key="SettingsEditor/0.0.1366.728/1366.0.1920.1040@1366.0.1920.1040" timestamp="1606332893568" />
     <state x="311" y="0" key="SettingsEditor/0.0.1366.728@0.0.1366.728" timestamp="1606762188297" />
+    <state x="392" y="-738" key="Vcs.Push.Dialog.v2" timestamp="1606850945025">
+      <screen x="0" y="-900" width="1600" height="860" />
+    </state>
+    <state x="392" y="-738" key="Vcs.Push.Dialog.v2/0.0.1366.728/0.-900.1600.860@0.-900.1600.860" timestamp="1606850945025" />
     <state x="1458" y="92" width="1736" height="856" key="com.intellij.history.integration.ui.views.FileHistoryDialog" timestamp="1605623220249">
       <screen x="1366" y="0" width="1920" height="1040" />
     </state>
