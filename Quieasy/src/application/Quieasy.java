@@ -2,9 +2,9 @@
 
 package application;
 
-import javafx.application.*;
-import javafx.stage.*;
 import gui.PrimeScene;
+import javafx.application.Application;
+import javafx.stage.Stage;
 
 public class Quieasy extends Application {
 
@@ -15,10 +15,10 @@ public class Quieasy extends Application {
 	public void start(Stage myStage) {
 		
 		//connect to server
-		ClientAgent clientAgent = ClientAgent.getClientAgent();
+		//ClientAgent clientAgent = ClientAgent.getClientAgent(); //Ion's comment
 		
 		// start listening for incoming messages
-		(new Thread(clientAgent)).start();
+		//(new Thread(clientAgent)).start(); //ion's comment
 		
 		// Setup the stage
 		myStage.setTitle("Quieasy");

@@ -31,6 +31,10 @@ public class ClientDecoder {
 			
 			Register.emailInUse();
 			
+		}else if(message.task.equals("CREATE_QUIZ_SUCCESSFUL")){
+			CreateQuizBox.getCreateQuizBox().showSuccessful();
+		}else if(message.task.equals("CREATE_QUIZ_")){
+			CreateQuizBox.getCreateQuizBox().showFailed();
 		}
 		
 	}
