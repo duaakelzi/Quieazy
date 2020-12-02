@@ -21,25 +21,12 @@
         <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
         <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
         <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="BRANCH:origin/GUI" type="e8cecc67:BranchNodeDescriptor" />
       </path>
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f294efe8-4df9-4024-9b0c-a47add265898" name="Default Changelist" comment="Create Quiz Gui">
-      <change afterPath="$PROJECT_DIR$/Quieasy/src/gui/CreateQuestionBox.java" afterDir="false" />
+    <list default="true" id="e8f5b52c-53ef-4c55-b043-df8806802e11" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Quieasy/src/data/Message.java" beforeDir="false" afterPath="$PROJECT_DIR$/Quieasy/src/data/Message.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Quieasy/src/domain/Answer.java" beforeDir="false" afterPath="$PROJECT_DIR$/Quieasy/src/data/Answer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Quieasy/src/domain/Course.java" beforeDir="false" afterPath="$PROJECT_DIR$/Quieasy/src/data/Course.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Quieasy/src/domain/Question.java" beforeDir="false" afterPath="$PROJECT_DIR$/Quieasy/src/data/Question.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Quieasy/src/domain/Quiz.java" beforeDir="false" afterPath="$PROJECT_DIR$/Quieasy/src/data/Quiz.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Quieasy/src/domain/QuizC.java" beforeDir="false" afterPath="$PROJECT_DIR$/Quieasy/src/domain/QuizC.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Quieasy/src/domain/StudyProgramHS.java" beforeDir="false" afterPath="$PROJECT_DIR$/Quieasy/src/data/StudyProgramHS.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Quieasy/src/gui/CreateQuizBox.java" beforeDir="false" afterPath="$PROJECT_DIR$/Quieasy/src/gui/CreateQuizBox.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Quieasy/src/gui/CreateQuizTab.java" beforeDir="false" afterPath="$PROJECT_DIR$/Quieasy/src/gui/CreateQuizTab.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Quieasy/src/gui/MainPane.java" beforeDir="false" afterPath="$PROJECT_DIR$/Quieasy/src/gui/MainPane.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Quieasy/src/gui/PrimeScene.java" beforeDir="false" afterPath="$PROJECT_DIR$/Quieasy/src/gui/PrimeScene.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -89,6 +76,19 @@
     </key>
   </component>
   <component name="RunManager" selected="Application.Quieazy">
+    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
+      <option name="arquillianRunConfiguration">
+        <value>
+          <option name="containerStateName" value="" />
+        </value>
+      </option>
+      <option name="TEST_OBJECT" value="CLASS" />
+      <properties />
+      <listeners />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="QuieasyServer" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="application.QuieasyServer" />
       <module name="Quieazy" />
@@ -114,19 +114,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
-      <option name="arquillianRunConfiguration">
-        <value>
-          <option name="containerStateName" value="" />
-        </value>
-      </option>
-      <option name="TEST_OBJECT" value="CLASS" />
-      <properties />
-      <listeners />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <list>
       <item itemvalue="Application.Quieazy" />
       <item itemvalue="Application.QuieasyServer" />
@@ -140,7 +127,7 @@
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="f294efe8-4df9-4024-9b0c-a47add265898" name="Default Changelist" comment="" />
+      <changelist id="e8f5b52c-53ef-4c55-b043-df8806802e11" name="Default Changelist" comment="" />
       <created>1603975417676</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
@@ -169,19 +156,7 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State>
-              <option name="FILTERS">
-                <map>
-                  <entry key="branch">
-                    <value>
-                      <list>
-                        <option value="origin/GUI" />
-                      </list>
-                    </value>
-                  </entry>
-                </map>
-              </option>
-            </State>
+            <State />
           </value>
         </entry>
       </map>
