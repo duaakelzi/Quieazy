@@ -1,15 +1,20 @@
 package data;
 
 public class Question {
+
     private final String question;
     private final Answer[] answers;
     private final int points;
 
+    private String name;
+    private String author;
+    private String StudyProgram;
     public Question(String question, Answer[] answers, int points) {
         this.question = question;
         this.answers = answers;
         this.points = points;
     }
+
 
     public String getQuestion() {
         return question;
@@ -18,6 +23,8 @@ public class Question {
     public String getAnswers(int index) {
         return answers[index].getAnswers();
     }
+
+
 
 
 }

@@ -54,7 +54,8 @@ public class PrimeScene extends Scene {
 		
 	}
 	public  static void createQuestion(){
-		getPrimeScene().setRoot(CreateQuestionBox.getCreateQuestionBox());
+		getPrimeScene().setRoot(CreateAddQuestionBox.getCreateAddQuestionBox());
 	}
+
 	
 }

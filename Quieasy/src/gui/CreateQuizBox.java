@@ -220,9 +220,9 @@ public class CreateQuizBox extends VBox {
 	EventHandler<ActionEvent> eventCreatQuiz = new EventHandler<ActionEvent>() {
 		@Override
 		public void handle(ActionEvent actionEvent) {
-			CreateQuizTab newtab = new CreateQuizTab("Add Questions");
+			CreateQuizTab newtab = new CreateQuizTab("Add Questions", CreateQuizTab.getCreateQuizTab());
 			MainPane.getMainPane().getTabs().add(newtab);
-			createButtom.setDisable(true);
+
 
 		}
 	};
