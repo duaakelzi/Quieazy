@@ -19,11 +19,11 @@ public class Database {
 
         System.out.println("Database connection created!");
         return LoginAction.login(email, password);
-
 	}
 	
 	// Register a new user i.e. create account
 	public static Message register(String firstName, String lastName, String email, String password) {
+
         System.out.println("Database connection starting...");
 
         // create a database connection
@@ -34,3 +34,4 @@ public class Database {
     }
 
 }
+
