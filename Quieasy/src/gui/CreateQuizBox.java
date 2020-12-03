@@ -91,10 +91,10 @@ public class CreateQuizBox extends VBox {
 
 
 	public HBox initiateStudyProgram(ObservableList<String>studyProgramHS) {
-		HBox studyProgram = new HBox(20);
+		HBox studyProgram = new HBox(30);
 		studyProgram.setPadding(new Insets(30));
 		Label labelStudyProgram = new Label("Study Program*");
-		labelStudyProgram.setFont(Font.font("Times New Roman", FontWeight.EXTRA_BOLD, 24));
+		labelStudyProgram.setFont(Font.font("Times New Roman", FontWeight.EXTRA_BOLD, 20));
 		studyProgramComboBox = new ComboBox<>();
 		studyProgramComboBox.setPromptText("Select the Study Program");
 		studyProgramComboBox.setItems(studyProgramHS);
@@ -107,10 +107,10 @@ public class CreateQuizBox extends VBox {
 
 	}
 	public HBox initiateCourse(ObservableList<String> courseHS){
-		HBox course = new HBox(105);
+		HBox course = new HBox(100);
 		course.setPadding(new Insets(0, 30, 0, 30));
 		Label labelcourse = new Label("Course*");
-		labelcourse.setFont(Font.font("Times New Roman", FontWeight.EXTRA_BOLD, 24));
+		labelcourse.setFont(Font.font("Times New Roman", FontWeight.EXTRA_BOLD, 20));
 		courseComboBox = new ComboBox<>();
 		courseComboBox.setPromptText("Select the course*");
 
@@ -165,10 +165,10 @@ public class CreateQuizBox extends VBox {
 	}
 
 	public HBox initiateNameQuiz(){
-		HBox nameQuiz = new HBox(119);
+		HBox nameQuiz = new HBox(110);
 		nameQuiz.setPadding(new Insets(30));
 		Label labelName = new Label("Name*");
-		labelName.setFont(Font.font("Times New Roman", FontWeight.EXTRA_BOLD, 24));
+		labelName.setFont(Font.font("Times New Roman", FontWeight.EXTRA_BOLD, 20));
 		textname = new TextField();
 		textname.setFont(Font.font("Times New Roman", FontWeight.NORMAL, 18));
 		textname.setPromptText("Enter the name of your Quiz*");
@@ -179,10 +179,10 @@ public class CreateQuizBox extends VBox {
 		return nameQuiz;	
 	}
 	public HBox initiateTreshold(){
-		HBox thresholdQuiz = new HBox(72);
+		HBox thresholdQuiz = new HBox(75);
 		thresholdQuiz.setPadding(new Insets(0, 30, 0, 30));
 		Label labelThreshold = new Label("Threshold*");
-		labelThreshold.setFont(Font.font("Times New Roman", FontWeight.EXTRA_BOLD, 24));
+		labelThreshold.setFont(Font.font("Times New Roman", FontWeight.EXTRA_BOLD, 20));
 		textThreshold = new TextField();
 		textThreshold.setFont(Font.font("Times New Roman", FontWeight.NORMAL, 18));
 		textThreshold.setPromptText("Enter the Quiz's threshold*");
@@ -196,8 +196,9 @@ public class CreateQuizBox extends VBox {
 		HBox descriptionQuiz = new HBox(80);
 		descriptionQuiz.setPadding(new Insets(30, 30, 0, 30));
 		Label labelDescription = new Label("Description");
-		labelDescription.setFont(Font.font("Times New Roman", FontWeight.NORMAL, 24));
-		TextArea textDescription = new TextArea("Enter the Quiz Description");
+		labelDescription.setFont(Font.font("Times New Roman", FontWeight.NORMAL, 20));
+		TextArea textDescription = new TextArea();
+		textDescription.setPromptText("Description of the Quiz");
 		textDescription.setPrefColumnCount(7);
 		textDescription.setPrefHeight(100);
 		textDescription.setPrefWidth(400);

@@ -26,16 +26,10 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f294efe8-4df9-4024-9b0c-a47add265898" name="Default Changelist" comment="Create Quiz Gui">
-      <change afterPath="$PROJECT_DIR$/Quieasy/src/gui/CreateAddQuestionBox.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Quieasy/src/gui/CreateQuestionChoicesBox.java" afterDir="false" />
+    <list default="true" id="f294efe8-4df9-4024-9b0c-a47add265898" name="Default Changelist" comment="Create Question Answer Box">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Quieasy/src/data/Question.java" beforeDir="false" afterPath="$PROJECT_DIR$/Quieasy/src/data/Question.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Quieasy/src/data/Quiz.java" beforeDir="false" afterPath="$PROJECT_DIR$/Quieasy/src/data/Quiz.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Quieasy/src/gui/CreateQuestionBox.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Quieasy/src/gui/CreateQuestionChoicesBox.java" beforeDir="false" afterPath="$PROJECT_DIR$/Quieasy/src/gui/CreateQuestionChoicesBox.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Quieasy/src/gui/CreateQuizBox.java" beforeDir="false" afterPath="$PROJECT_DIR$/Quieasy/src/gui/CreateQuizBox.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Quieasy/src/gui/CreateQuizTab.java" beforeDir="false" afterPath="$PROJECT_DIR$/Quieasy/src/gui/CreateQuizTab.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Quieasy/src/gui/PrimeScene.java" beforeDir="false" afterPath="$PROJECT_DIR$/Quieasy/src/gui/PrimeScene.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -116,19 +110,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
-      <option name="arquillianRunConfiguration">
-        <value>
-          <option name="containerStateName" value="" />
-        </value>
-      </option>
-      <option name="TEST_OBJECT" value="CLASS" />
-      <properties />
-      <listeners />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <list>
       <item itemvalue="Application.Quieazy" />
       <item itemvalue="Application.QuieasyServer" />
@@ -155,7 +136,8 @@
       <workItem from="1606923786547" duration="611000" />
       <workItem from="1606924494620" duration="636000" />
       <workItem from="1606926800615" duration="2732000" />
-      <workItem from="1606929607530" duration="21653000" />
+      <workItem from="1606929607530" duration="22191000" />
+      <workItem from="1606985774441" duration="5585000" />
     </task>
     <task id="LOCAL-00001" summary="Create Quiz Gui">
       <created>1606844482364</created>
@@ -164,7 +146,14 @@
       <option name="project" value="LOCAL" />
       <updated>1606844482364</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Create Question Answer Box">
+      <created>1606952142205</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1606952142205</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -196,6 +185,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Create Quiz Gui" />
-    <option name="LAST_COMMIT_MESSAGE" value="Create Quiz Gui" />
+    <MESSAGE value="Create Question Answer Box" />
+    <option name="LAST_COMMIT_MESSAGE" value="Create Question Answer Box" />
   </component>
 </project>
