@@ -1,8 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="AutoImportSettings">
-    <option name="autoReloadType" value="SELECTIVE" />
-  </component>
   <component name="BranchesTreeState">
     <expand>
       <path>
@@ -24,12 +21,15 @@
         <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
         <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
         <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="BRANCH:origin/GUI" type="e8cecc67:BranchNodeDescriptor" />
       </path>
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e8f5b52c-53ef-4c55-b043-df8806802e11" name="Default Changelist" comment="">
+    <list default="true" id="f294efe8-4df9-4024-9b0c-a47add265898" name="Default Changelist" comment="Create Question Answer Box">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Quieasy/src/gui/CreateQuestionChoicesBox.java" beforeDir="false" afterPath="$PROJECT_DIR$/Quieasy/src/gui/CreateQuestionChoicesBox.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Quieasy/src/gui/CreateQuizBox.java" beforeDir="false" afterPath="$PROJECT_DIR$/Quieasy/src/gui/CreateQuizBox.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -50,10 +50,12 @@
     <option name="NEW_BASE" value="CreateQuizGUI" />
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="GUI" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
-  </component>
-  <component name="GitToolBoxStore">
-    <option name="projectConfigVersion" value="2" />
   </component>
   <component name="ProjectId" id="1jYK7CbqdbK0GWhCES8hcXD1OnI" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -65,52 +67,58 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$USER_HOME$/.jdks/lib/javafx-sdk-11.0.2/lib" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
     <property name="node.js.path.for.package.tslint" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
-    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
-    <property name="settings.editor.selected.configurable" value="preferences.JavaFX" />
+    <property name="settings.editor.selected.configurable" value="org.jetbrains.plugins.github.ui.GithubSettingsConfigurable" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\IonCicala\Documents\GitHub\Quieazy\Quieasy\src\data" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.Quieasy">
-    <configuration name="Quieasy" type="Application" factoryName="Application">
-      <option name="ALTERNATIVE_JRE_PATH" value="15" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
-      <module name="Quieazy" />
-      <option name="PROGRAM_PARAMETERS" value="3000" />
-      <option name="VM_PARAMETERS" value="-- \Users\Duaa Kelzi\.openjfx\javafx-sdk-11.0.2\lib --add-modules javafx.controls,javafx.fxml" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
+  <component name="RunManager" selected="Application.Quieazy">
     <configuration name="QuieasyServer" type="Application" factoryName="Application" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="application.QuieasyServer" />
       <module name="Quieazy" />
       <option name="PROGRAM_PARAMETERS" value="3000" />
-      <option name="VM_PARAMETERS" value="-- \Users\Duaa Kelzi\.openjfx\javafx-sdk-11.0.2\lib --add-modules javafx.controls,javafx.fxml" />
+      <option name="VM_PARAMETERS" value="--module-path \Users\IonCicala\.jdks\lib\javafx-sdk-11.0.2\lib --add-modules javafx.controls,javafx.fxml" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="application.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Quieazy" type="Application" factoryName="Application">
+      <option name="MAIN_CLASS_NAME" value="application.Quieasy" />
+      <module name="Quieazy" />
+      <option name="PROGRAM_PARAMETERS" value="3000" />
+      <option name="VM_PARAMETERS" value="--module-path \Users\IonCicala\.jdks\lib\javafx-sdk-11.0.2\lib --add-modules javafx.controls,javafx.fxml" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Quieasy/src/application" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
     <list>
-      <item itemvalue="Application.Quieasy" />
+      <item itemvalue="Application.Quieazy" />
       <item itemvalue="Application.QuieasyServer" />
     </list>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="e8f5b52c-53ef-4c55-b043-df8806802e11" name="Default Changelist" comment="" />
+      <changelist id="f294efe8-4df9-4024-9b0c-a47add265898" name="Default Changelist" comment="" />
       <created>1603975417676</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
@@ -120,10 +128,16 @@
       <workItem from="1606754499337" duration="2000" />
       <workItem from="1606757891766" duration="6247000" />
       <workItem from="1606814493164" duration="40963000" />
-      <workItem from="1606924632479" duration="74000" />
-      <workItem from="1606926110347" duration="919000" />
-      <workItem from="1606927109810" duration="954000" />
-      <workItem from="1606928076546" duration="381000" />
+      <workItem from="1606921875603" duration="48000" />
+      <workItem from="1606922287633" duration="84000" />
+      <workItem from="1606922657846" duration="230000" />
+      <workItem from="1606923144414" duration="258000" />
+      <workItem from="1606923413621" duration="226000" />
+      <workItem from="1606923786547" duration="611000" />
+      <workItem from="1606924494620" duration="636000" />
+      <workItem from="1606926800615" duration="2732000" />
+      <workItem from="1606929607530" duration="22191000" />
+      <workItem from="1606985774441" duration="5585000" />
     </task>
     <task id="LOCAL-00001" summary="Create Quiz Gui">
       <created>1606844482364</created>
@@ -132,7 +146,14 @@
       <option name="project" value="LOCAL" />
       <updated>1606844482364</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Create Question Answer Box">
+      <created>1606952142205</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1606952142205</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -143,7 +164,19 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="origin/GUI" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
           </value>
         </entry>
       </map>
@@ -152,10 +185,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Create Quiz Gui" />
-    <option name="LAST_COMMIT_MESSAGE" value="Create Quiz Gui" />
-  </component>
-  <component name="XSLT-Support.FileAssociations.UIState">
-    <expand />
-    <select />
+    <MESSAGE value="Create Question Answer Box" />
+    <option name="LAST_COMMIT_MESSAGE" value="Create Question Answer Box" />
   </component>
 </project>

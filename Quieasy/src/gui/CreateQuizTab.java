@@ -9,7 +9,7 @@ public class CreateQuizTab extends Tab {
 	
 	private static CreateQuizTab createQuizTab;
 	private CreateQuizBox createQuizBox;
-	private CreateQuestionBox createQuestionBox;
+	private CreateAddQuestionBox createQuestionBox;
 	private String name;
 
 	
@@ -19,9 +19,16 @@ public class CreateQuizTab extends Tab {
 
 		
 	}
-	public CreateQuizTab(String name){
-		super(name, CreateQuestionBox.getCreateQuestionBox());
+	public CreateQuizTab(String name, CreateQuizTab tab){
+		super(name, CreateAddQuestionBox.getCreateAddQuestionBox());
+		tab.setDisable(true) ;
 	}
+
+	public CreateQuizTab(String name){
+		super(name, CreateQuestionChoicesBox.getCreateQuestionChoicesBox());
+	}
+
+
 
 
 	// Gets the current instance -> Singleton
