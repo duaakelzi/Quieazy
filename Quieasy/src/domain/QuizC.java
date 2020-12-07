@@ -19,10 +19,13 @@ public class QuizC {
                                             UserC.getCurrentUser().getLastName(),
                                             UserC.getCurrentUser().getEmail());
 
-        ArrayList<Quiz> quizzes = new ArrayList<>();
-        quizzes.add(newQuiz);
-        saveQuizMsg.quizlist = quizzes;
+        //ArrayList<Quiz> quizzes = new ArrayList<>();
+        //quizzes.add(newQuiz);
+
+        saveQuizMsg.quizlist = newQuiz;
 
         clientAgent.send(saveQuizMsg);
     }
+
+
 }

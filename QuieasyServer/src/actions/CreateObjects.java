@@ -13,42 +13,71 @@ import java.util.Set;
 public class CreateObjects {
     public static Session session = HibernateUtil.getSessionFactory().openSession();
     public static Message message = new Message();
-    public void CreateQuiz(String name,int threshold,boolean isPublic, String email)
+    public static Message CreateQuiz(String name,int threshold,boolean isPublic, String email, String course)
     {
+        try {
         System.out.println("create quiz ");
         session.beginTransaction();
         //create quiz
-        Quiz quiz = new Quiz(name,threshold,isPublic,false);
-        //add author
-        Query query = session.getSession().createQuery("FROM User WHERE email = :email ");
-        query.setParameter("email", email);
+
+        Query queryUser = session.getSession().createQuery("FROM User WHERE email = :email ");
+            queryUser.setParameter("email", email);
         System.out.println("adding author [method]");
-        User userToAdd = (User)query.list().get(0);
+        User userToAdd = (User)queryUser.list().get(0);
+        Query queryCourse = session.getSession().createQuery("FROM Course WHERE courseName = :courseName ");
+            queryCourse.setParameter("courseName", course);
+        Course courseToAdd=(Course)queryCourse.list().get(0);
+        int CourseId =courseToAdd.getId();
+        Query queryQuiz = session.getSession().createQuery("FROM Quiz WHERE quiz_name = :name  and id_course= :id");
+            queryQuiz.setParameter("name", name);
+            queryQuiz.setParameter("id", CourseId);
+
+        if(queryQuiz.list().size() > 0)
+        { System.out.println("Quiz already exists [method]");
+            message.task = "QUIZ_IS_EXIST";}
+        //add author
+
+        else{
+        Quiz quiz = new Quiz(name,threshold,false,false);
         Set<Quiz> quizUserSet= new HashSet<Quiz>();
         quizUserSet.add(quiz);
+        quiz.setCourse(courseToAdd)
+        course.setQuiz(quizUserSet)
         userToAdd.setQuiz(quizUserSet);
         quiz.setUser(userToAdd);
 
         session.save(quiz);
         session.getTransaction().commit();
+            message.task = "QUIZ_CREATED";
+            message.QuizData = new QuizData(quiz.getId(),quiz.getQuiz_Name(), quiz.getThreshold, false);}
 
-        System.out.println("Done");
-        session.close();
-    }
-    public static Message createQuiz(String name,int threshold,boolean isPublic ,String email) {
-
-        System.out.println("calling create quiz method... ");
-        try {
-                createQuiz(name, threshold, isPublic, email);
-                message.task = "QUIZ_CREATED";
-        }
+        System.out.println("Done");}
         catch(Exception e)
-        {
-            // if the error message is "out of memory",
-            // it probably means no database file is found
-            System.err.println(e.getMessage());
-        }
+            {
+                // if the error message is "out of memory",
+                // it probably means no database file is found
+                System.err.println(e.getMessage());
+            }
+        finally
+            {
+                try
+                {
+                    if(session != null)
+                        session.close();
+                }
+                catch(Exception e)
+                {
+                    // connection close failed.
+                    System.err.println(e.getMessage());
+                }
+            }
+            session.close();
         return message;
     }
+
+
+
+
+
 
 }
