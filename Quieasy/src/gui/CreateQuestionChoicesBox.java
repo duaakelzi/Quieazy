@@ -53,7 +53,7 @@ public class CreateQuestionChoicesBox extends VBox {
         HBox labelchoice = new HBox(470);
         Label choicelabel = new Label("Choices");
         choicelabel.setFont(Font.font("Times New Roman", FontWeight.BOLD, 20));
-        Label correctlabel = new Label("Corect");
+        Label correctlabel = new Label("Correct");
         correctlabel.setFont(Font.font("Times New Roman", FontWeight.NORMAL, 16));
         labelchoice.getChildren().addAll(choicelabel, correctlabel);
         // first field of answer with radio buttom
