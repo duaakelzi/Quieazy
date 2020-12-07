@@ -1,8 +1,8 @@
 package domain;
 
 import application.ClientAgent;
-import data.Message;
-import data.UserData;
+import dataServer.Message;
+import dataServer.UserData;
 import data.Quiz;
 
 import java.util.ArrayList;

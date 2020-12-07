@@ -3,6 +3,10 @@
 
 package data;
 
+import dataServer.LoginData;
+import dataServer.RegisterData;
+import dataServer.UserData;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 

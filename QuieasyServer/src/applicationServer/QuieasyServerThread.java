@@ -1,0 +1,51 @@
+// Server thread handles individual connections.
+
+package applicationServer;
+
+import dataServer.Message;
+
+import java.net.*;
+import java.io.*;
+
+public class QuieasyServerThread extends Thread {
+	
+	private Socket socket = null;
+
+    public QuieasyServerThread(Socket socket) {
+        super("QuieasyServerThread");
+        this.socket = socket;
+    }
+    
+    public void run() {
+
+        try (
+        		ObjectOutputStream out = new ObjectOutputStream(socket.getOutputStream());
+        		ObjectInputStream in = new ObjectInputStream(socket.getInputStream());
+        		
+        ) {
+        	
+        	// Listen for incoming messages.
+        	Message message = null;
+        	
+			while(true) {
+				
+				message = (Message) in.readObject();
+				
+				if(message != null) {
+					
+					System.out.println("Message received!");
+					out.writeObject(ServerDecoder.decode(message));
+					out.flush();
+					System.out.println("Response sent!");
+					
+				}
+			}
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+        	
+        }
+        
+    }
+
+}

@@ -19,16 +19,41 @@
     <select>
       <path>
         <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="BRANCH:main" type="e8cecc67:BranchNodeDescriptor" />
       </path>
     </select>
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e8f5b52c-53ef-4c55-b043-df8806802e11" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/QuieasyServer/src/actions/CreateObjects.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/QuieasyServer/src/actions/RetrieveObjects.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/QuieasyServer/src/dataServer/QuizData.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/QuieasyServer/src/domainServer/Choices.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/QuieasyServer/src/domainServer/Course.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/QuieasyServer/src/domainServer/IDQuizChoice.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/QuieasyServer/src/domainServer/Question.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/QuieasyServer/src/domainServer/QuestionChoice.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/QuieasyServer/src/domainServer/Quiz.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/QuieasyServer/src/domainServer/Result.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/QuieasyServer/src/domainServer/StudyProgram.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Quieasy/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/Quieasy/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/QuieasyServer/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/QuieasyServer/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Quieasy/src/application/ClientAgent.java" beforeDir="false" afterPath="$PROJECT_DIR$/Quieasy/src/application/ClientAgent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Quieasy/src/application/ClientDecoder.java" beforeDir="false" afterPath="$PROJECT_DIR$/Quieasy/src/application/ClientDecoder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Quieasy/src/data/Message.java" beforeDir="false" afterPath="$PROJECT_DIR$/Quieasy/src/data/Message.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Quieasy/src/domain/QuizC.java" beforeDir="false" afterPath="$PROJECT_DIR$/Quieasy/src/domain/QuizC.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Quieasy/src/domain/UserC.java" beforeDir="false" afterPath="$PROJECT_DIR$/Quieasy/src/domain/UserC.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/QuieasyServer/src/actions/LoginAction.java" beforeDir="false" afterPath="$PROJECT_DIR$/QuieasyServer/src/actions/LoginAction.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/QuieasyServer/src/actions/RegisterAction.java" beforeDir="false" afterPath="$PROJECT_DIR$/QuieasyServer/src/actions/RegisterAction.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/QuieasyServer/src/application/QuieasyServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/QuieasyServer/src/applicationServer/QuieasyServer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/QuieasyServer/src/application/QuieasyServerThread.java" beforeDir="false" afterPath="$PROJECT_DIR$/QuieasyServer/src/applicationServer/QuieasyServerThread.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/QuieasyServer/src/application/ServerDecoder.java" beforeDir="false" afterPath="$PROJECT_DIR$/QuieasyServer/src/applicationServer/ServerDecoder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/QuieasyServer/src/data/LoginData.java" beforeDir="false" afterPath="$PROJECT_DIR$/QuieasyServer/src/dataServer/LoginData.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/QuieasyServer/src/data/Message.java" beforeDir="false" afterPath="$PROJECT_DIR$/QuieasyServer/src/dataServer/Message.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/QuieasyServer/src/data/RegisterData.java" beforeDir="false" afterPath="$PROJECT_DIR$/QuieasyServer/src/dataServer/RegisterData.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/QuieasyServer/src/data/UserData.java" beforeDir="false" afterPath="$PROJECT_DIR$/QuieasyServer/src/dataServer/UserData.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/QuieasyServer/src/domain/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/QuieasyServer/src/domainServer/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/QuieasyServer/src/persistence/Database.java" beforeDir="false" afterPath="$PROJECT_DIR$/QuieasyServer/src/persistence/Request.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -60,7 +85,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/Quieasy/src/data" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/QuieasyServer/src/domainServer" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -74,6 +99,7 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Albina Muzafarova\Documents\THU\CTS5\SWPROJ\Quieazy\QuieasyServer\src\domainServer" />
       <recent name="C:\Users\IonCicala\Documents\GitHub\Quieazy\Quieasy\src\data" />
     </key>
   </component>
@@ -158,7 +184,19 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="main" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
           </value>
         </entry>
       </map>
@@ -183,14 +221,16 @@
     </state>
     <state x="233" y="-900" width="1280" height="860" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1366.728/0.-900.1600.860@0.-900.1600.860" timestamp="1606643116610" />
     <state x="151" y="83" width="1092" height="551" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1366.728@0.0.1366.728" timestamp="1606764477476" />
-    <state x="1624" y="318" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1606332257468">
+    <state x="1624" y="318" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1606922773082">
       <screen x="1366" y="0" width="1920" height="1040" />
     </state>
+    <state x="1624" y="318" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1366.728/1366.0.1920.1040/3286.0.1920.1040@1366.0.1920.1040" timestamp="1606922773082" />
     <state x="1624" y="318" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1366.728/1366.0.1920.1040@1366.0.1920.1040" timestamp="1606332257468" />
-    <state x="589" y="-750" key="#com.intellij.ide.util.MemberChooser" timestamp="1606836802694">
-      <screen x="0" y="-900" width="1600" height="860" />
+    <state x="2073" y="181" key="#com.intellij.ide.util.MemberChooser" timestamp="1607103610490">
+      <screen x="1366" y="0" width="1920" height="1040" />
     </state>
     <state x="589" y="-750" key="#com.intellij.ide.util.MemberChooser/0.0.1366.728/0.-900.1600.860@0.-900.1600.860" timestamp="1606836802694" />
+    <state x="2073" y="181" key="#com.intellij.ide.util.MemberChooser/0.0.1366.728/1366.0.1920.1040/3286.0.1920.1040@1366.0.1920.1040" timestamp="1607103610490" />
     <state x="529" y="-681" key="#com.intellij.ide.util.TreeClassChooserDialog" timestamp="1606586577170">
       <screen x="0" y="-900" width="1600" height="860" />
     </state>
@@ -212,11 +252,16 @@
       <screen x="1366" y="0" width="1920" height="1040" />
     </state>
     <state x="2123" y="390" key="DetectedRootsChooserDialog/0.0.1366.728/1366.0.1920.1040@1366.0.1920.1040" timestamp="1606332553399" />
-    <state x="585" y="-654" key="FileChooserDialogImpl" timestamp="1606582574671">
-      <screen x="0" y="-900" width="1600" height="860" />
+    <state x="1765" y="296" width="888" height="651" maximized="true" key="DiffContextDialog" timestamp="1606920792291">
+      <screen x="1366" y="0" width="1920" height="1040" />
+    </state>
+    <state x="1765" y="296" width="888" height="651" maximized="true" key="DiffContextDialog/0.0.1366.728/1366.0.1920.1040@1366.0.1920.1040" timestamp="1606920792291" />
+    <state x="2068" y="297" key="FileChooserDialogImpl" timestamp="1607330123524">
+      <screen x="1366" y="0" width="1920" height="1040" />
     </state>
     <state x="585" y="-654" key="FileChooserDialogImpl/0.0.1366.728/0.-900.1600.860@0.-900.1600.860" timestamp="1606582574671" />
-    <state x="2068" y="297" key="FileChooserDialogImpl/0.0.1366.728/1366.0.1920.1040@1366.0.1920.1040" timestamp="1606332551662" />
+    <state x="2068" y="297" key="FileChooserDialogImpl/0.0.1366.728/1366.0.1920.1040/3286.0.1920.1040@1366.0.1920.1040" timestamp="1606922765132" />
+    <state x="2068" y="297" key="FileChooserDialogImpl/0.0.1366.728/1366.0.1920.1040@1366.0.1920.1040" timestamp="1607330123524" />
     <state width="1557" height="141" key="GridCell.Tab.0.bottom" timestamp="1606863675144">
       <screen x="0" y="-900" width="1600" height="860" />
     </state>
@@ -257,11 +302,12 @@
       <screen x="0" y="-900" width="1600" height="860" />
     </state>
     <state x="438" y="-709" key="MultipleFileMergeDialog/0.0.1366.728/0.-900.1600.860@0.-900.1600.860" timestamp="1606580621340" />
-    <state x="311" y="0" key="SettingsEditor" timestamp="1606762188297">
-      <screen x="0" y="0" width="1366" height="728" />
+    <state x="1806" y="94" key="SettingsEditor" timestamp="1607330124614">
+      <screen x="1366" y="0" width="1920" height="1040" />
     </state>
     <state x="367" y="-892" key="SettingsEditor/0.0.1366.728/0.-900.1600.860@0.-900.1600.860" timestamp="1606644527423" />
-    <state x="1806" y="94" key="SettingsEditor/0.0.1366.728/1366.0.1920.1040@1366.0.1920.1040" timestamp="1606332893568" />
+    <state x="1803" y="0" key="SettingsEditor/0.0.1366.728/1366.0.1920.1040/3286.0.1920.1040@1366.0.1920.1040" timestamp="1607013860664" />
+    <state x="1806" y="94" key="SettingsEditor/0.0.1366.728/1366.0.1920.1040@1366.0.1920.1040" timestamp="1607330124614" />
     <state x="311" y="0" key="SettingsEditor/0.0.1366.728@0.0.1366.728" timestamp="1606762188297" />
     <state x="392" y="-738" key="Vcs.Push.Dialog.v2" timestamp="1606850945025">
       <screen x="0" y="-900" width="1600" height="860" />
@@ -286,6 +332,10 @@
     <state x="352" y="-809" key="new project wizard/0.0.1366.728/0.-900.1600.860@0.-900.1600.860" timestamp="1606642401081" />
     <state x="1457" y="0" key="new project wizard/0.0.1366.728/1366.0.1920.1040@1366.0.1920.1040" timestamp="1606325296954" />
     <state x="65" y="0" key="new project wizard/0.0.1366.728@0.0.1366.728" timestamp="1606310745444" />
+    <state x="2612" y="168" key="refactoring.ChangeSignatureDialog" timestamp="1607103786317">
+      <screen x="1366" y="0" width="1920" height="1040" />
+    </state>
+    <state x="2612" y="168" key="refactoring.ChangeSignatureDialog/0.0.1366.728/1366.0.1920.1040/3286.0.1920.1040@1366.0.1920.1040" timestamp="1607103786317" />
     <state x="463" y="-720" width="672" height="678" key="search.everywhere.popup" timestamp="1606841902190">
       <screen x="0" y="-900" width="1600" height="860" />
     </state>
