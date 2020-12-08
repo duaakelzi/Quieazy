@@ -30,14 +30,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e8f5b52c-53ef-4c55-b043-df8806802e11" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/QuieasyServer/src/dataServer/QuestionData.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/QuieasyServer/src/domainServer/Role.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/QuieasyServer/src/applicationServer/ServerDecoder.java" beforeDir="false" afterPath="$PROJECT_DIR$/QuieasyServer/src/applicationServer/ServerDecoder.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/QuieasyServer/src/dataServer/Message.java" beforeDir="false" afterPath="$PROJECT_DIR$/QuieasyServer/src/dataServer/Message.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/QuieasyServer/src/domainServer/Choices.java" beforeDir="false" afterPath="$PROJECT_DIR$/QuieasyServer/src/domainServer/Choices.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/QuieasyServer/src/actions/DeleteObjects.java" beforeDir="false" afterPath="$PROJECT_DIR$/QuieasyServer/src/actions/DeleteObjects.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/QuieasyServer/src/actions/RetrieveObjects.java" beforeDir="false" afterPath="$PROJECT_DIR$/QuieasyServer/src/actions/RetrieveObjects.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/QuieasyServer/src/actions/UpdateObjects.java" beforeDir="false" afterPath="$PROJECT_DIR$/QuieasyServer/src/actions/UpdateObjects.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/QuieasyServer/src/dataServer/QuestionData.java" beforeDir="false" afterPath="$PROJECT_DIR$/QuieasyServer/src/dataServer/QuestionData.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/QuieasyServer/src/domainServer/Role.java" beforeDir="false" afterPath="$PROJECT_DIR$/QuieasyServer/src/domainServer/Role.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/QuieasyServer/src/domainServer/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/QuieasyServer/src/domainServer/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/QuieasyServer/src/persistence/Request.java" beforeDir="false" afterPath="$PROJECT_DIR$/QuieasyServer/src/persistence/Request.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -80,7 +79,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/QuieasyServer/src/dataServer" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/QuieasyServer/src/actions" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -102,6 +101,7 @@
       <recent name="persistence" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Albina Muzafarova\Documents\THU\CTS5\SWPROJ\Quieazy\QuieasyServer\src\actions" />
       <recent name="C:\Users\Albina Muzafarova\Documents\THU\CTS5\SWPROJ\Quieazy\QuieasyServer\src\dataServer" />
       <recent name="C:\Users\Albina Muzafarova\Documents\THU\CTS5\SWPROJ\Quieazy\QuieasyServer\src\domainServer" />
     </key>

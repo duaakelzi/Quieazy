@@ -1,7 +1,9 @@
-package data;
+package dataServer;
 
 import domain.User;
+import domainServer.Question;
 import domainServer.QuestionChoice;
+import domainServer.Quiz;
 
 import java.util.ArrayList;
 import java.util.HashSet;

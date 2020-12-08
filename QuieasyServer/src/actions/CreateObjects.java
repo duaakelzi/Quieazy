@@ -1,6 +1,7 @@
 package actions;
 
 import dataServer.Message;
+import domainServer.Course;
 import domainServer.Quiz;
 import domainServer.User;
 import org.hibernate.Session;

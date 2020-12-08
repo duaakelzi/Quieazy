@@ -1,10 +1,11 @@
 package actions;
 
-import data.Message;
-import domain.Question;
-import domain.Quiz;
+import dataServer.Message;
+import domainServer.Question;
+import domainServer.Quiz;
 import org.hibernate.Session;
 import persistence.HibernateUtil;
+
 import java.util.List;
 
 public class RetrieveObjects {
