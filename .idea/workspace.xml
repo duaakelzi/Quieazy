@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="BranchesTreeState">
     <expand>
       <path>
@@ -26,11 +29,16 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f294efe8-4df9-4024-9b0c-a47add265898" name="Default Changelist" comment="Create Question Answer Box">
+    <list default="true" id="f294efe8-4df9-4024-9b0c-a47add265898" name="Default Changelist" comment="ComboBox functionality implemented">
+      <change afterPath="$PROJECT_DIR$/Quieasy/src/gui/CreateAddQuestionTab.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Quieasy/src/gui/CreateQuestionChoicesTab.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Quieasy/src/data/Course.java" beforeDir="false" afterPath="$PROJECT_DIR$/Quieasy/src/data/Course.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Quieasy/src/data/StudyProgramHS.java" beforeDir="false" afterPath="$PROJECT_DIR$/Quieasy/src/data/StudyProgramHS.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Quieasy/src/data/Quiz.java" beforeDir="false" afterPath="$PROJECT_DIR$/Quieasy/src/data/Quiz.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Quieasy/src/gui/CreateAddQuestionBox.java" beforeDir="false" afterPath="$PROJECT_DIR$/Quieasy/src/gui/CreateAddQuestionBox.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Quieasy/src/gui/CreateQuestionChoicesBox.java" beforeDir="false" afterPath="$PROJECT_DIR$/Quieasy/src/gui/CreateQuestionChoicesBox.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Quieasy/src/gui/CreateQuizBox.java" beforeDir="false" afterPath="$PROJECT_DIR$/Quieasy/src/gui/CreateQuizBox.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Quieasy/src/gui/CreateQuizTab.java" beforeDir="false" afterPath="$PROJECT_DIR$/Quieasy/src/gui/CreateQuizTab.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Quieasy/src/gui/PrimeScene.java" beforeDir="false" afterPath="$PROJECT_DIR$/Quieasy/src/gui/PrimeScene.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -111,13 +119,15 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
       <option name="arquillianRunConfiguration">
         <value>
           <option name="containerStateName" value="" />
         </value>
       </option>
-      <option name="TEST_OBJECT" value="class" />
+      <option name="TEST_OBJECT" value="CLASS" />
+      <properties />
+      <listeners />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -152,7 +162,8 @@
       <workItem from="1606985774441" duration="5642000" />
       <workItem from="1607108487868" duration="2659000" />
       <workItem from="1607334018976" duration="604000" />
-      <workItem from="1607358097005" duration="16971000" />
+      <workItem from="1607358097005" duration="22336000" />
+      <workItem from="1607422791564" duration="16491000" />
     </task>
     <task id="LOCAL-00001" summary="Create Quiz Gui">
       <created>1606844482364</created>
@@ -175,7 +186,14 @@
       <option name="project" value="LOCAL" />
       <updated>1606991787704</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="ComboBox functionality implemented">
+      <created>1607375462505</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1607375462505</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -208,6 +226,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Create Quiz Gui" />
     <MESSAGE value="Create Question Answer Box" />
-    <option name="LAST_COMMIT_MESSAGE" value="Create Question Answer Box" />
+    <MESSAGE value="ComboBox functionality implemented" />
+    <option name="LAST_COMMIT_MESSAGE" value="ComboBox functionality implemented" />
   </component>
 </project>

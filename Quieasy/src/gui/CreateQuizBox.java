@@ -3,9 +3,9 @@
 package gui;
 
 import data.Course;
+import data.Question;
+import data.Quiz;
 import data.StudyProgramHS;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -29,6 +29,8 @@ public class CreateQuizBox extends VBox {
 	private TextField textname;
 	private ComboBox<String> courseComboBox;
 	private ComboBox<String> studyProgramComboBox;
+	private TextField textTime;
+	private  Label warning;
 	ArrayList<StudyProgramHS> studyProgramHSArrayList;
 	// constructor can only be accessed from within
 	private CreateQuizBox(){
@@ -65,8 +67,9 @@ public class CreateQuizBox extends VBox {
 		// give a passed grade to Quiz
 		HBox thresholdQuiz = initiateTreshold();
 		HBox timeLimit = initiateTimeLimit();
+		HBox warningMessage = initiatewarning();
 		HBox createButton = initiateBotton();
-		this.getChildren().addAll(studyProgram, courses, nameQuiz, thresholdQuiz, timeLimit, createButton);
+		this.getChildren().addAll(studyProgram, courses, nameQuiz, thresholdQuiz, timeLimit, warningMessage, createButton);
 
 
 		
@@ -146,10 +149,6 @@ public class CreateQuizBox extends VBox {
 		labelcourse.setFont(Font.font("Times New Roman", FontWeight.EXTRA_BOLD, 20));
 		courseComboBox = new ComboBox<>();
 		courseComboBox.setPromptText("Select the course*");
-		//courseComboBox.itemsProperty().bind(Bindings.createObjectBinding());
-
-		//courseComboBox.setItems(courseHS);
-
 		settingsComboBox(courseComboBox);
 		courseComboBox.setMinHeight(30);
 		courseComboBox.setMinWidth(400);
@@ -227,22 +226,21 @@ public class CreateQuizBox extends VBox {
 	}
 	// add try catch error empty entry
 	public HBox initiateTimeLimit(){
-		HBox timeLimit = new HBox();
+		HBox timeLimit = new HBox(70);
 		Label labelTime = new Label("Time limit*");
 		labelTime.setFont(Font.font("Times New Roman", FontWeight.EXTRA_BOLD, 20));
 		timeLimit.setPadding(new Insets(30));
-		TextField textTime = new TextField();
+		textTime = new TextField();
 
 		textTime.setFont(Font.font("Times New Roman", FontWeight.NORMAL, 18));
 		textTime.setMaxWidth(105);
-		textTime.setPromptText("15 minutes");
+		textTime.setPromptText(" 015 ");
 
-		textTime.textProperty().addListener(new ChangeListener<String>() {
-			@Override
-			public void changed(ObservableValue<? extends String> observableValue, String oldValue, String newValue) {
-				if(!newValue.matches("\\d{0,3}")){
-					textTime.setText("15");
-				}
+		textTime.textProperty().addListener((observableValue, oldValue, newValue) -> {
+			if(!newValue.matches("\\d{0,3}")){
+				textTime.setText("015");
+			}else{
+
 			}
 		});
 		Label labelminutes = new Label("minutes");
@@ -253,24 +251,55 @@ public class CreateQuizBox extends VBox {
 
 		return timeLimit;
 	}
+	public HBox initiatewarning(){
+		HBox warningText = new HBox();
+		warningText.setPadding(new Insets(0,0,0,200));
+		warning = new Label();
+		warning.setTextFill(Color.RED);
+		warningText.getChildren().add(warning);
+		return warningText;
+	}
 
 	public HBox initiateBotton(){
-		HBox buttonsubmit = new HBox();
+		HBox buttonsubmit = new HBox(20);
+
+
 		buttonsubmit.setPadding(new Insets(40, 30, 0, 520));
 		createButtom = new Button("Create Quiz");
 		createButtom.setFont(Font.font("Times New Roman", FontWeight.NORMAL, 16));
 		buttonsubmit.getChildren().addAll(createButtom);
-		createButtom.setOnAction(eventCreatQuiz);
+		createButtom.setOnAction(actionEvent -> {
+			if(studyProgramComboBox.getValue()==null     || courseComboBox.getValue() == null
+														 || textname.getText().isEmpty()
+														 || textThreshold.getText().isEmpty()
+														 || textTime.getText().isEmpty()) {
+
+				warning.setText("Fill all the fields marked with *");
+
+			}else{
+				Quiz newquiz = new Quiz(studyProgramComboBox.getValue(),
+						courseComboBox.getValue(), textname.getText(),
+						Double.valueOf(textThreshold.getText()),
+						Integer.valueOf(textTime.getText()),
+						new ArrayList<Question>());
+
+				MainPane.getMainPane().getTabs().add(CreateAddQuestionTab.getCreateAddQuestionTab(newquiz));
+				CreateQuizTab.getCreateQuizTab().closeTab();
+
+				// create the object Quiz here
+
+
+
+			}
+		});
+
+
+
 		return buttonsubmit;
 
 	}
 
-	EventHandler<ActionEvent> eventCreatQuiz = actionEvent -> {
-		CreateQuizTab newtab = new CreateQuizTab("Add Questions", CreateQuizTab.getCreateQuizTab());
-		MainPane.getMainPane().getTabs().add(newtab);
 
-
-	};
 
 }
 

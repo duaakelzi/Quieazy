@@ -1,5 +1,7 @@
 package gui;
 
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
@@ -95,12 +97,23 @@ public class CreateQuestionChoicesBox extends VBox {
 
     private HBox initiateSaveQuestionBtn(){
         HBox buttonHbox = new HBox();
-        buttonHbox.setPadding(new Insets(30));
+        buttonHbox.setPadding(new Insets(50, 30, 0, 490));
         Button saveQ= new Button("SAVE QUESTION");
+        saveQ.setFont(Font.font("Times New Roman", FontWeight.NORMAL, 16));
+        saveQ.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                CreateQuestionChoicesTab.getCreateQuestionChoicesTab().closeTab();
+
+
+            }
+        });
         buttonHbox.getChildren().addAll(saveQ);
 
         return buttonHbox;
     }
+
+
 
 
 

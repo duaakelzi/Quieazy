@@ -48,8 +48,12 @@ public class CreateAddQuestionBox extends VBox {
             buttons.setPadding(new Insets(20));
             Button newQuestion = new Button("New Question");
             newQuestion.setOnAction(actionEvent -> {
-                CreateQuizTab insertQuestion = new CreateQuizTab("Insert Question");
-                MainPane.getMainPane().getTabs().add(insertQuestion);
+
+
+                MainPane.getMainPane().getTabs().add(CreateQuestionChoicesTab.getCreateQuestionChoicesTab());
+
+
+
             });
             newQuestion.setMinWidth(200);
             newQuestion.setFont(Font.font("Times New Roman", FontWeight.NORMAL, 16));
@@ -75,21 +79,12 @@ public class CreateAddQuestionBox extends VBox {
         secondCol.setMinWidth(75);
         secondCol.setCellValueFactory(new PropertyValueFactory<TableFillQuestions, String>("author"));
 
-        TableColumn<TableFillQuestions, String> thirdCol = new TableColumn<>("Study Program");
-        thirdCol.setMinWidth(130);
-        thirdCol.setCellValueFactory(new PropertyValueFactory<TableFillQuestions, String>("studyProgramHS"));
-
-
-//        fourthCol.setCellValueFactory(new PropertyValueFactory<TableFillData, Button>("edit"));
-
-
-//        lastCol.setCellValueFactory(new PropertyValueFactory<TableFillData, Button>("remove"));
 
         setTableDesign();
         fillTableObservableListWithQuestion();
         listQ.setItems(questionsToList);
 
-        listQ.getColumns().addAll(firstCol,secondCol,thirdCol);
+        listQ.getColumns().addAll(firstCol,secondCol);
 
         // add edit button
         addEditButtonstoListQuestion();
@@ -114,7 +109,7 @@ public class CreateAddQuestionBox extends VBox {
     private void addEditButtonstoListQuestion(){
          // insert edit button in the fourth colomn
         TableColumn<TableFillQuestions, Void> fourthCol = new TableColumn<>("EDIT");
-        fourthCol.setMinWidth(35);
+        //fourthCol.setMinWidth(35);
         Callback<TableColumn<TableFillQuestions, Void>, TableCell<TableFillQuestions, Void>> editbtnFactory = new Callback<>() {
             @Override
             public TableCell<TableFillQuestions, Void> call(TableColumn<TableFillQuestions, Void> tableFillDataVoidTableColumn) {
@@ -154,7 +149,7 @@ public class CreateAddQuestionBox extends VBox {
     private void addDeleteButtonstoListQuestion(){
         // insert delete button in the last colomn
         TableColumn<TableFillQuestions, Void> lastCol = new TableColumn<>("REMOVE");
-        lastCol.setMinWidth(40);
+        //lastCol.setMinWidth(40);
         Callback<TableColumn<TableFillQuestions, Void>, TableCell<TableFillQuestions, Void>> deletebtnFactory = new Callback<>() {
             @Override
             public TableCell<TableFillQuestions, Void> call(TableColumn<TableFillQuestions, Void> tableFillDataVoidTableColumn) {
@@ -196,13 +191,13 @@ public class CreateAddQuestionBox extends VBox {
 
         private final SimpleStringProperty questionName;
         private final SimpleStringProperty author;
-        private final SimpleStringProperty studyProgramHS;
+
 
 
         private TableFillQuestions(String questionName, String author, String studyProgramHS) {
             this.questionName = new SimpleStringProperty(questionName);
             this.author = new SimpleStringProperty(author);
-            this.studyProgramHS = new SimpleStringProperty(studyProgramHS);
+
 
         }
 
@@ -222,18 +217,8 @@ public class CreateAddQuestionBox extends VBox {
             this.author.set(author);
         }
 
-        public String getStudyProgramHS() {
-            return studyProgramHS.get();
-        }
 
-        public void setStudyProgramHS(String studyProgramHS) {
-            this.studyProgramHS.set(studyProgramHS);
-        }
     }
-
-
-
-
 
 
 }
