@@ -30,25 +30,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e8f5b52c-53ef-4c55-b043-df8806802e11" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/extras.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/mysql_connector.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/Quieazy.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Quieazy.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Hibernate_library.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Hibernate_library.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/lib.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/lib.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_06_12_2020_15_40__Default_Changelist_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_06_12_2020_15_40__Default_Changelist_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Quieasy/src/data/Course.java" beforeDir="false" afterPath="$PROJECT_DIR$/Quieasy/src/data/Course.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Quieasy/src/data/StudyProgramHS.java" beforeDir="false" afterPath="$PROJECT_DIR$/Quieasy/src/data/StudyProgramHS.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Quieasy/src/gui/CreateQuizBox.java" beforeDir="false" afterPath="$PROJECT_DIR$/Quieasy/src/gui/CreateQuizBox.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/QuieasyServer/src/actions/CreateObjects.java" beforeDir="false" afterPath="$PROJECT_DIR$/QuieasyServer/src/actions/CreateObjects.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/QuieasyServer/src/actions/RetrieveObjects.java" beforeDir="false" afterPath="$PROJECT_DIR$/QuieasyServer/src/actions/RetrieveObjects.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/QuieasyServer/src/applicationServer/ServerDecoder.java" beforeDir="false" afterPath="$PROJECT_DIR$/QuieasyServer/src/applicationServer/ServerDecoder.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/QuieasyServer/src/dataServer/QuizData.java" beforeDir="false" afterPath="$PROJECT_DIR$/QuieasyServer/src/dataServer/QuizData.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/QuieasyServer/src/persistence/HibernateUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/QuieasyServer/src/persistence/HibernateUtil.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/QuieasyServer/src/persistence/Request.java" beforeDir="false" afterPath="$PROJECT_DIR$/QuieasyServer/src/persistence/Request.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
