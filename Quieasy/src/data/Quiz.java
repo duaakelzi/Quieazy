@@ -72,4 +72,6 @@ public class Quiz {
     public void addQuestion(Question q){
         questions.add(q);
     }
+
+
 }

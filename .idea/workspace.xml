@@ -22,8 +22,9 @@
     <select>
       <path>
         <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="BRANCH:main" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="BRANCH:origin/CreateQuizGUI" type="e8cecc67:BranchNodeDescriptor" />
       </path>
     </select>
   </component>
@@ -39,6 +40,9 @@
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_06_12_2020_15_40__Default_Changelist_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_06_12_2020_15_40__Default_Changelist_.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Quieasy/src/data/Course.java" beforeDir="false" afterPath="$PROJECT_DIR$/Quieasy/src/data/Course.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Quieasy/src/data/StudyProgramHS.java" beforeDir="false" afterPath="$PROJECT_DIR$/Quieasy/src/data/StudyProgramHS.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Quieasy/src/gui/CreateQuizBox.java" beforeDir="false" afterPath="$PROJECT_DIR$/Quieasy/src/gui/CreateQuizBox.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/QuieasyServer/src/actions/CreateObjects.java" beforeDir="false" afterPath="$PROJECT_DIR$/QuieasyServer/src/actions/CreateObjects.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/QuieasyServer/src/actions/RetrieveObjects.java" beforeDir="false" afterPath="$PROJECT_DIR$/QuieasyServer/src/actions/RetrieveObjects.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/QuieasyServer/src/applicationServer/ServerDecoder.java" beforeDir="false" afterPath="$PROJECT_DIR$/QuieasyServer/src/applicationServer/ServerDecoder.java" afterDir="false" />
@@ -65,9 +69,15 @@
     <option name="NEW_BASE" value="CreateQuizGUI" />
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="GUI" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectId" id="1jYK7CbqdbK0GWhCES8hcXD1OnI" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -92,14 +102,25 @@
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="settings.editor.selected.configurable" value="preferences.pathVariables" />
+    <property name="settings.editor.selected.configurable" value="org.jetbrains.plugins.github.ui.GithubSettingsConfigurable" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\Albina Muzafarova\Documents\THU\CTS5\SWPROJ\Quieazy\QuieasyServer\src\domainServer" />
-      <recent name="C:\Users\IonCicala\Documents\GitHub\Quieazy\Quieasy\src\data" />
     </key>
   </component>
   <component name="RunManager" selected="Application.QuieasyServer">
+    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+      <option name="arquillianRunConfiguration">
+        <value>
+          <option name="containerStateName" value="" />
+        </value>
+      </option>
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
       <option name="arquillianRunConfiguration">
         <value>
@@ -113,8 +134,8 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="QuieasyServer" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="application.QuieasyServer" />
+    <configuration name="QuieasyServer" type="Application" factoryName="Application" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="applicationServer.QuieasyServer" />
       <module name="Quieazy" />
       <option name="PROGRAM_PARAMETERS" value="3000" />
       <extension name="coverage">
@@ -188,11 +209,6 @@
       <item itemvalue="Application.Quieazy" />
       <item itemvalue="Application.QuieasyServer" />
     </list>
-    <recent_temporary>
-      <list>
-        <item itemvalue="Application.QuieasyServer" />
-      </list>
-    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -207,6 +223,19 @@
       <workItem from="1606754499337" duration="2000" />
       <workItem from="1606757891766" duration="6247000" />
       <workItem from="1606814493164" duration="40963000" />
+      <workItem from="1606921875603" duration="48000" />
+      <workItem from="1606922287633" duration="84000" />
+      <workItem from="1606922657846" duration="230000" />
+      <workItem from="1606923144414" duration="258000" />
+      <workItem from="1606923413621" duration="226000" />
+      <workItem from="1606923786547" duration="611000" />
+      <workItem from="1606924494620" duration="636000" />
+      <workItem from="1606926800615" duration="2732000" />
+      <workItem from="1606929607530" duration="22191000" />
+      <workItem from="1606985774441" duration="5642000" />
+      <workItem from="1607108487868" duration="2659000" />
+      <workItem from="1607334018976" duration="604000" />
+      <workItem from="1607358097005" duration="16971000" />
     </task>
     <task id="LOCAL-00001" summary="Create Quiz Gui">
       <created>1606844482364</created>
@@ -215,7 +244,21 @@
       <option name="project" value="LOCAL" />
       <updated>1606844482364</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Create Question Answer Box">
+      <created>1606952142205</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1606952142205</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Create Question Answer Box">
+      <created>1606991787704</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1606991787704</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -396,5 +439,7 @@
     </state>
     <state x="463" y="-720" width="672" height="678" key="search.everywhere.popup/0.0.1366.728/0.-900.1600.860@0.-900.1600.860" timestamp="1606841902190" />
     <state x="1922" y="218" width="807" height="820" key="search.everywhere.popup/0.0.1366.728/1366.0.1920.1040@1366.0.1920.1040" timestamp="1607332313530" />
+    <MESSAGE value="Create Question Answer Box" />
+    <option name="LAST_COMMIT_MESSAGE" value="Create Question Answer Box" />
   </component>
 </project>
