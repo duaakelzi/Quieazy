@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="BranchesTreeState">
     <expand>
       <path>
@@ -26,34 +29,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e8f5b52c-53ef-4c55-b043-df8806802e11" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/QuieasyServer/src/actions/CreateObjects.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/QuieasyServer/src/actions/RetrieveObjects.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/QuieasyServer/src/dataServer/QuizData.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/QuieasyServer/src/domainServer/Choices.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/QuieasyServer/src/domainServer/Course.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/QuieasyServer/src/domainServer/IDQuizChoice.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/QuieasyServer/src/domainServer/Question.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/QuieasyServer/src/domainServer/QuestionChoice.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/QuieasyServer/src/domainServer/Quiz.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/QuieasyServer/src/domainServer/Result.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/QuieasyServer/src/domainServer/StudyProgram.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Quieasy/src/application/ClientAgent.java" beforeDir="false" afterPath="$PROJECT_DIR$/Quieasy/src/application/ClientAgent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Quieasy/src/application/ClientDecoder.java" beforeDir="false" afterPath="$PROJECT_DIR$/Quieasy/src/application/ClientDecoder.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Quieasy/src/data/Message.java" beforeDir="false" afterPath="$PROJECT_DIR$/Quieasy/src/data/Message.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Quieasy/src/domain/QuizC.java" beforeDir="false" afterPath="$PROJECT_DIR$/Quieasy/src/domain/QuizC.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Quieasy/src/domain/UserC.java" beforeDir="false" afterPath="$PROJECT_DIR$/Quieasy/src/domain/UserC.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/QuieasyServer/src/actions/LoginAction.java" beforeDir="false" afterPath="$PROJECT_DIR$/QuieasyServer/src/actions/LoginAction.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/QuieasyServer/src/actions/RegisterAction.java" beforeDir="false" afterPath="$PROJECT_DIR$/QuieasyServer/src/actions/RegisterAction.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/QuieasyServer/src/application/QuieasyServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/QuieasyServer/src/applicationServer/QuieasyServer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/QuieasyServer/src/application/QuieasyServerThread.java" beforeDir="false" afterPath="$PROJECT_DIR$/QuieasyServer/src/applicationServer/QuieasyServerThread.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/QuieasyServer/src/application/ServerDecoder.java" beforeDir="false" afterPath="$PROJECT_DIR$/QuieasyServer/src/applicationServer/ServerDecoder.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/QuieasyServer/src/data/LoginData.java" beforeDir="false" afterPath="$PROJECT_DIR$/QuieasyServer/src/dataServer/LoginData.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/QuieasyServer/src/data/Message.java" beforeDir="false" afterPath="$PROJECT_DIR$/QuieasyServer/src/dataServer/Message.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/QuieasyServer/src/data/RegisterData.java" beforeDir="false" afterPath="$PROJECT_DIR$/QuieasyServer/src/dataServer/RegisterData.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/QuieasyServer/src/data/UserData.java" beforeDir="false" afterPath="$PROJECT_DIR$/QuieasyServer/src/dataServer/UserData.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/QuieasyServer/src/domain/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/QuieasyServer/src/domainServer/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/QuieasyServer/src/persistence/Database.java" beforeDir="false" afterPath="$PROJECT_DIR$/QuieasyServer/src/persistence/Request.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/QuieasyServer/src/dataServer/QuizData.java" beforeDir="false" afterPath="$PROJECT_DIR$/QuieasyServer/src/dataServer/QuizData.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/QuieasyServer/src/domainServer/Course.java" beforeDir="false" afterPath="$PROJECT_DIR$/QuieasyServer/src/domainServer/Course.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/QuieasyServer/src/persistence/Request.java" beforeDir="false" afterPath="$PROJECT_DIR$/QuieasyServer/src/persistence/Request.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -336,9 +315,10 @@
       <screen x="1366" y="0" width="1920" height="1040" />
     </state>
     <state x="2612" y="168" key="refactoring.ChangeSignatureDialog/0.0.1366.728/1366.0.1920.1040/3286.0.1920.1040@1366.0.1920.1040" timestamp="1607103786317" />
-    <state x="463" y="-720" width="672" height="678" key="search.everywhere.popup" timestamp="1606841902190">
-      <screen x="0" y="-900" width="1600" height="860" />
+    <state x="1922" y="218" width="807" height="820" key="search.everywhere.popup" timestamp="1607332313530">
+      <screen x="1366" y="0" width="1920" height="1040" />
     </state>
     <state x="463" y="-720" width="672" height="678" key="search.everywhere.popup/0.0.1366.728/0.-900.1600.860@0.-900.1600.860" timestamp="1606841902190" />
+    <state x="1922" y="218" width="807" height="820" key="search.everywhere.popup/0.0.1366.728/1366.0.1920.1040@1366.0.1920.1040" timestamp="1607332313530" />
   </component>
 </project>

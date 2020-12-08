@@ -55,10 +55,10 @@ public class Course {
 	
 	
 	@ManyToMany( mappedBy = "courses")
-	public Set<QuieazyEntityDemo.StudyProgram> getSp() {
+	public Set<StudyProgram> getSp() {
 		return sp;
 	}
-	public void setSp(Set<QuieazyEntityDemo.StudyProgram> sp) {
+	public void setSp(Set<StudyProgram> sp) {
 		this.sp = sp;
 	}
 

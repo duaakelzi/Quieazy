@@ -40,7 +40,7 @@ public class Request {
         return CreateObjects.createQuiz(name, threshold, isPublic, email);
     }
 
-    //retrieve all quizzes for user
+    //retrieve all quizzes for user --> change to return message
     public static  Message retrieveQuizzes(String email) {
         System.out.println("Database connection starting...");
 

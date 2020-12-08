@@ -1,6 +1,7 @@
 package dataServer;
 
 import actions.RetrieveObjects;
+import domainServer.Question;
 import domainServer.Quiz;
 
 import java.io.Serializable;
@@ -12,7 +13,11 @@ public class QuizData implements Serializable {
     private String quizName;
     private boolean isPublic;
     private int threshold;
+    //sp, course --> quiz is not in sp, quiz is in course. course is in sp.
     private List<Quiz> allQuizzes = new ArrayList<>();
+    //old questionsList and new questionList ?? rationale: processing is faster when we don't need to check for existence of new questions
+    private List<Question> oldQuestions;
+    private List<Question> newQuestions;
 
     //c'tor
     public QuizData(String quizName, boolean isPublic, int threshold) {
@@ -51,7 +56,7 @@ public class QuizData implements Serializable {
     //methods
     //retrieve all quizzes for that user
     public void fetchAll(String email) {
-        allQuizzes = RetrieveObjects.retrieveQuizzes();
+        allQuizzes = RetrieveObjects.retrieveQuizzes(email);
     }
 
 }
