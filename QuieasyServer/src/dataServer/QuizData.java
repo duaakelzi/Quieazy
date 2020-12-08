@@ -14,11 +14,7 @@ public class QuizData implements Serializable {
     private String quizName;
     private boolean isPublic;
     private int threshold;
-<<<<<<< HEAD
-    //sp, course --> quiz is not in sp, quiz is in course. course is in sp.
-=======
     private String course;
->>>>>>> d2cb75b2d24947efef7b882f953cfc1b573a8057
     private List<Quiz> allQuizzes = new ArrayList<>();
     //old questionsList and new questionList ?? rationale: processing is faster when we don't need to check for existence of new questions
     private List<Question> oldQuestions;

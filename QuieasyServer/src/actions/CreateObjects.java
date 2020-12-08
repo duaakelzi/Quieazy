@@ -41,8 +41,8 @@ public class CreateObjects {
         Quiz quiz = new Quiz(name,threshold,false,false);
         Set<Quiz> quizUserSet= new HashSet<Quiz>();
         quizUserSet.add(quiz);
-        quiz.setCourse(courseToAdd)
-        course.setQuiz(quizUserSet)
+        quiz.setCourse(courseToAdd);
+        course.setQuiz(quizUserSet);
         userToAdd.setQuiz(quizUserSet);
         quiz.setUser(userToAdd);
 

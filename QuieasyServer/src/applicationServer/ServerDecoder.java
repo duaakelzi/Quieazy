@@ -33,9 +33,10 @@ public class ServerDecoder {
 		else if(message.task.equals("DELETE_QUIZ")) {
 			QuizData quiz = message.quizData;
 
-			return Request.deleteQuiz(quiz.getId(),quiz.getCourse()); }
+			return Request.deleteQuiz(quiz.getId(),quiz.getCourse());
+		}
 		//should i return quiz data immediately?
-		else if(message.task.equals("FETCH_ALL_QUIZZES")) {else if(message.task.equals("FETCH_ALL_QUIZZES")) {
+		else if(message.task.equals("FETCH_ALL_QUIZZES")) {
 			UserData data = message.userData;
 			return Request.retrieveQuizzes(data.email);
 		}

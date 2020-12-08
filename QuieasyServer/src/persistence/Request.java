@@ -48,18 +48,13 @@ public class Request {
         return UpdateObjects.updateQuiz(id,name,threshold,false,course);
     }
     public static Message deleteQuiz(Long id, String course) {
-        ystem.out.println("Database connection starting...");
-
-<<<<<<< HEAD
-    //retrieve all quizzes for user --> change to return message
-=======
+        System.out.println("Database connection starting...");
         // create a database connection
         JDBC.connectMySQL();
         System.out.println("Database connection created!");
         return DeleteObjects.DeleteQuiz(id,course);
     }
-    //retrieve all quizzes for user
->>>>>>> d2cb75b2d24947efef7b882f953cfc1b573a8057
+
     public static  Message retrieveQuizzes(String email) {
         System.out.println("Database connection starting...");
 

@@ -28,7 +28,24 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e8f5b52c-53ef-4c55-b043-df8806802e11" name="Default Changelist" comment="" />
+    <list default="true" id="e8f5b52c-53ef-4c55-b043-df8806802e11" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/extras.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/mysql_connector.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/Quieazy.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Quieazy.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Hibernate_library.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Hibernate_library.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/lib.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/lib.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_06_12_2020_15_40__Default_Changelist_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_06_12_2020_15_40__Default_Changelist_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/QuieasyServer/src/actions/CreateObjects.java" beforeDir="false" afterPath="$PROJECT_DIR$/QuieasyServer/src/actions/CreateObjects.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/QuieasyServer/src/actions/RetrieveObjects.java" beforeDir="false" afterPath="$PROJECT_DIR$/QuieasyServer/src/actions/RetrieveObjects.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/QuieasyServer/src/applicationServer/ServerDecoder.java" beforeDir="false" afterPath="$PROJECT_DIR$/QuieasyServer/src/applicationServer/ServerDecoder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/QuieasyServer/src/dataServer/QuizData.java" beforeDir="false" afterPath="$PROJECT_DIR$/QuieasyServer/src/dataServer/QuizData.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/QuieasyServer/src/persistence/HibernateUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/QuieasyServer/src/persistence/HibernateUtil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/QuieasyServer/src/persistence/Request.java" beforeDir="false" afterPath="$PROJECT_DIR$/QuieasyServer/src/persistence/Request.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -56,10 +73,15 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="Downloaded.Files.Path.Enabled" value="false" />
+    <property name="Repository.Attach.Annotations" value="false" />
+    <property name="Repository.Attach.JavaDocs" value="false" />
+    <property name="Repository.Attach.Sources" value="false" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/QuieasyServer/src/domainServer" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../mysql-connector" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -69,7 +91,7 @@
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
-    <property name="settings.editor.selected.configurable" value="configurable.group.language" />
+    <property name="settings.editor.selected.configurable" value="preferences.pathVariables" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -77,7 +99,7 @@
       <recent name="C:\Users\IonCicala\Documents\GitHub\Quieazy\Quieasy\src\data" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.Quieazy">
+  <component name="RunManager" selected="Application.QuieasyServer">
     <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
       <option name="arquillianRunConfiguration">
         <value>
@@ -95,7 +117,6 @@
       <option name="MAIN_CLASS_NAME" value="application.QuieasyServer" />
       <module name="Quieazy" />
       <option name="PROGRAM_PARAMETERS" value="3000" />
-      <option name="VM_PARAMETERS" value="--module-path \Users\IonCicala\.jdks\lib\javafx-sdk-11.0.2\lib --add-modules javafx.controls,javafx.fxml" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="application.*" />
@@ -229,18 +250,19 @@
     <option name="LAST_COMMIT_MESSAGE" value="Create Quiz Gui" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="1366" y="90" key="#Project_Structure" timestamp="1606332734205">
+    <state x="1901" y="120" key="#Project_Structure" timestamp="1607434163408">
       <screen x="1366" y="0" width="1920" height="1040" />
     </state>
-    <state x="1366" y="90" key="#Project_Structure/0.0.1366.728/1366.0.1920.1040@1366.0.1920.1040" timestamp="1606332734205" />
+    <state x="1901" y="120" key="#Project_Structure/0.0.1366.728/1366.0.1920.1040@1366.0.1920.1040" timestamp="1607434163408" />
     <state x="508" y="-735" key="#Servers" timestamp="1606643932376">
       <screen x="0" y="-900" width="1600" height="860" />
     </state>
     <state x="508" y="-735" key="#Servers/0.0.1366.728/0.-900.1600.860@0.-900.1600.860" timestamp="1606643932376" />
-    <state x="151" y="83" width="1280" height="860" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1606764477476">
-      <screen x="0" y="0" width="1366" height="728" />
+    <state x="1796" y="0" width="1490" height="1040" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1607435333739">
+      <screen x="1366" y="0" width="1920" height="1040" />
     </state>
     <state x="233" y="-900" width="1280" height="860" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1366.728/0.-900.1600.860@0.-900.1600.860" timestamp="1606643116610" />
+    <state x="1796" y="0" width="1490" height="1040" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1366.728/1366.0.1920.1040@1366.0.1920.1040" timestamp="1607435333739" />
     <state x="151" y="83" width="1092" height="551" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1366.728@0.0.1366.728" timestamp="1606764477476" />
     <state x="1624" y="318" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1606922773082">
       <screen x="1366" y="0" width="1920" height="1040" />
@@ -269,20 +291,24 @@
       <screen x="0" y="-900" width="1600" height="860" />
     </state>
     <state x="530" y="-724" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1366.728/0.-900.1600.860@0.-900.1600.860" timestamp="1606845159125" />
-    <state x="2123" y="390" key="DetectedRootsChooserDialog" timestamp="1606332553399">
+    <state x="2240" y="270" key="#com.intellij.util.ui.classpath.ChooseLibrariesDialog" timestamp="1607434593106">
       <screen x="1366" y="0" width="1920" height="1040" />
     </state>
-    <state x="2123" y="390" key="DetectedRootsChooserDialog/0.0.1366.728/1366.0.1920.1040@1366.0.1920.1040" timestamp="1606332553399" />
+    <state x="2240" y="270" key="#com.intellij.util.ui.classpath.ChooseLibrariesDialog/0.0.1366.728/1366.0.1920.1040@1366.0.1920.1040" timestamp="1607434593106" />
+    <state x="2123" y="390" key="DetectedRootsChooserDialog" timestamp="1607434117453">
+      <screen x="1366" y="0" width="1920" height="1040" />
+    </state>
+    <state x="2123" y="390" key="DetectedRootsChooserDialog/0.0.1366.728/1366.0.1920.1040@1366.0.1920.1040" timestamp="1607434117453" />
     <state x="1765" y="296" width="888" height="651" maximized="true" key="DiffContextDialog" timestamp="1607433617722">
       <screen x="1366" y="0" width="1920" height="1040" />
     </state>
     <state x="1765" y="296" width="888" height="651" maximized="true" key="DiffContextDialog/0.0.1366.728/1366.0.1920.1040@1366.0.1920.1040" timestamp="1607433617722" />
-    <state x="2068" y="297" key="FileChooserDialogImpl" timestamp="1607330123524">
+    <state x="2068" y="297" key="FileChooserDialogImpl" timestamp="1607435006044">
       <screen x="1366" y="0" width="1920" height="1040" />
     </state>
     <state x="585" y="-654" key="FileChooserDialogImpl/0.0.1366.728/0.-900.1600.860@0.-900.1600.860" timestamp="1606582574671" />
     <state x="2068" y="297" key="FileChooserDialogImpl/0.0.1366.728/1366.0.1920.1040/3286.0.1920.1040@1366.0.1920.1040" timestamp="1606922765132" />
-    <state x="2068" y="297" key="FileChooserDialogImpl/0.0.1366.728/1366.0.1920.1040@1366.0.1920.1040" timestamp="1607330123524" />
+    <state x="2068" y="297" key="FileChooserDialogImpl/0.0.1366.728/1366.0.1920.1040@1366.0.1920.1040" timestamp="1607435006044" />
     <state width="1557" height="141" key="GridCell.Tab.0.bottom" timestamp="1606863675144">
       <screen x="0" y="-900" width="1600" height="860" />
     </state>
@@ -323,21 +349,29 @@
       <screen x="0" y="-900" width="1600" height="860" />
     </state>
     <state x="438" y="-709" key="MultipleFileMergeDialog/0.0.1366.728/0.-900.1600.860@0.-900.1600.860" timestamp="1606580621340" />
-    <state x="1806" y="94" key="SettingsEditor" timestamp="1607330124614">
+    <state x="2175" y="220" width="705" height="592" key="NewModule_or_Project.wizard" timestamp="1607435020647">
+      <screen x="1366" y="0" width="1920" height="1040" />
+    </state>
+    <state x="2175" y="220" width="705" height="592" key="NewModule_or_Project.wizard/0.0.1366.728/1366.0.1920.1040@1366.0.1920.1040" timestamp="1607435020647" />
+    <state x="1990" y="90" key="SettingsEditor" timestamp="1607435262331">
       <screen x="1366" y="0" width="1920" height="1040" />
     </state>
     <state x="367" y="-892" key="SettingsEditor/0.0.1366.728/0.-900.1600.860@0.-900.1600.860" timestamp="1606644527423" />
     <state x="1803" y="0" key="SettingsEditor/0.0.1366.728/1366.0.1920.1040/3286.0.1920.1040@1366.0.1920.1040" timestamp="1607013860664" />
-    <state x="1806" y="94" key="SettingsEditor/0.0.1366.728/1366.0.1920.1040@1366.0.1920.1040" timestamp="1607330124614" />
+    <state x="1990" y="90" key="SettingsEditor/0.0.1366.728/1366.0.1920.1040@1366.0.1920.1040" timestamp="1607435262331" />
     <state x="311" y="0" key="SettingsEditor/0.0.1366.728@0.0.1366.728" timestamp="1606762188297" />
     <state x="392" y="-738" key="Vcs.Push.Dialog.v2" timestamp="1606850945025">
       <screen x="0" y="-900" width="1600" height="860" />
     </state>
     <state x="392" y="-738" key="Vcs.Push.Dialog.v2/0.0.1366.728/0.-900.1600.860@0.-900.1600.860" timestamp="1606850945025" />
-    <state x="1458" y="92" width="1736" height="856" key="com.intellij.history.integration.ui.views.FileHistoryDialog" timestamp="1605623220249">
+    <state x="1458" y="92" width="1736" height="856" key="com.intellij.history.integration.ui.views.FileHistoryDialog" timestamp="1607433992330">
       <screen x="1366" y="0" width="1920" height="1040" />
     </state>
-    <state x="1458" y="92" width="1736" height="856" key="com.intellij.history.integration.ui.views.FileHistoryDialog/0.0.1366.728/1366.0.1920.1040@1366.0.1920.1040" timestamp="1605623220249" />
+    <state x="1458" y="92" width="1736" height="856" key="com.intellij.history.integration.ui.views.FileHistoryDialog/0.0.1366.728/1366.0.1920.1040@1366.0.1920.1040" timestamp="1607433992330" />
+    <state x="2065" y="353" key="com.intellij.jarRepository.RepositoryAttachDialog-DOWNLOAD" timestamp="1607434800222">
+      <screen x="1366" y="0" width="1920" height="1040" />
+    </state>
+    <state x="2065" y="353" key="com.intellij.jarRepository.RepositoryAttachDialog-DOWNLOAD/0.0.1366.728/1366.0.1920.1040@1366.0.1920.1040" timestamp="1607434800222" />
     <state x="527" y="290" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1606766704592">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -347,11 +381,11 @@
       <screen x="0" y="-900" width="1600" height="860" />
     </state>
     <state x="511" y="-558" key="git4idea.rebase.GitUnstructuredEditor/0.0.1366.728/0.-900.1600.860@0.-900.1600.860" timestamp="1606580628526" />
-    <state x="352" y="-809" key="new project wizard" timestamp="1606642401081">
-      <screen x="0" y="-900" width="1600" height="860" />
+    <state x="1457" y="0" key="new project wizard" timestamp="1607434553489">
+      <screen x="1366" y="0" width="1920" height="1040" />
     </state>
     <state x="352" y="-809" key="new project wizard/0.0.1366.728/0.-900.1600.860@0.-900.1600.860" timestamp="1606642401081" />
-    <state x="1457" y="0" key="new project wizard/0.0.1366.728/1366.0.1920.1040@1366.0.1920.1040" timestamp="1606325296954" />
+    <state x="1457" y="0" key="new project wizard/0.0.1366.728/1366.0.1920.1040@1366.0.1920.1040" timestamp="1607434553488" />
     <state x="65" y="0" key="new project wizard/0.0.1366.728@0.0.1366.728" timestamp="1606310745444" />
     <state x="2612" y="168" key="refactoring.ChangeSignatureDialog" timestamp="1607103786317">
       <screen x="1366" y="0" width="1920" height="1040" />
