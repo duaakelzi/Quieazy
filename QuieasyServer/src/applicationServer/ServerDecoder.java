@@ -24,8 +24,18 @@ public class ServerDecoder {
 		} else if(message.task.equals("CREATE_QUIZ")) {
 			QuizData quiz = message.quizData;
 			UserData data = message.userData;
-			return Request.createQuiz(quiz.getQuizName(), quiz.getThreshold(), quiz.isPublic(), data.email); //should i return quiz data immediately?
-		} else if(message.task.equals("FETCH_ALL_QUIZZES")) {
+			return Request.createQuiz(quiz.getQuizName(), quiz.getThreshold(), quiz.isPublic(), data.email, quiz.getCourse()); //should i return quiz data immediately?
+		}
+		else if(message.task.equals("UPDATE_QUIZ")) {
+			QuizData quiz = message.quizData;
+
+			return Request.updateQuiz(quiz.getId(),quiz.getQuizName(), quiz.getThreshold(), quiz.isPublic(),quiz.getCourse()); }
+		else if(message.task.equals("DELETE_QUIZ")) {
+			QuizData quiz = message.quizData;
+
+			return Request.deleteQuiz(quiz.getId(),quiz.getCourse()); }
+		//should i return quiz data immediately?
+		else if(message.task.equals("FETCH_ALL_QUIZZES")) {else if(message.task.equals("FETCH_ALL_QUIZZES")) {
 			UserData data = message.userData;
 			return Request.retrieveQuizzes(data.email);
 		}
