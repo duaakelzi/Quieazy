@@ -16,6 +16,7 @@ public class Answer {
 
     public boolean isCorrectAnswer() {
         return correctAnswer;
+
     }
 
 }

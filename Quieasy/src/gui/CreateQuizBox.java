@@ -32,6 +32,7 @@ public class CreateQuizBox extends VBox {
 	private TextField textTime;
 	private  Label warning;
 	ArrayList<StudyProgramHS> studyProgramHSArrayList;
+	private Quiz quiz;
 	// constructor can only be accessed from within
 	private CreateQuizBox(){
 		
@@ -138,6 +139,7 @@ public class CreateQuizBox extends VBox {
 		settingsComboBox(studyProgramComboBox);
 
 		studyProgramComboBox.setMinHeight(30);
+		studyProgramComboBox.setMinWidth(400);
 		studyProgram.getChildren().addAll(labelStudyProgram, studyProgramComboBox);
 		return studyProgram;
 
@@ -148,7 +150,7 @@ public class CreateQuizBox extends VBox {
 		Label labelcourse = new Label("Course*");
 		labelcourse.setFont(Font.font("Times New Roman", FontWeight.EXTRA_BOLD, 20));
 		courseComboBox = new ComboBox<>();
-		courseComboBox.setPromptText("Select the course*");
+		courseComboBox.setPromptText("Select the course");
 		settingsComboBox(courseComboBox);
 		courseComboBox.setMinHeight(30);
 		courseComboBox.setMinWidth(400);
@@ -203,7 +205,7 @@ public class CreateQuizBox extends VBox {
 		labelName.setFont(Font.font("Times New Roman", FontWeight.EXTRA_BOLD, 20));
 		textname = new TextField();
 		textname.setFont(Font.font("Times New Roman", FontWeight.NORMAL, 18));
-		textname.setPromptText("Enter the name of your Quiz*");
+		textname.setPromptText("Name of the Quiz*");
 		textname.setMinWidth(350);
 		textname.setMinHeight(30);
 		nameQuiz.getChildren().addAll(labelName, textname);
@@ -217,9 +219,14 @@ public class CreateQuizBox extends VBox {
 		labelThreshold.setFont(Font.font("Times New Roman", FontWeight.EXTRA_BOLD, 20));
 		textThreshold = new TextField();
 		textThreshold.setFont(Font.font("Times New Roman", FontWeight.NORMAL, 18));
-		textThreshold.setPromptText("Enter the Quiz's threshold*");
+		textThreshold.setPromptText("Quiz's threshold");
 		textThreshold.setMinWidth(250);
 		textThreshold.setMinHeight(30);
+		textThreshold.textProperty().addListener((observableValue, oldValue, newValue) -> {
+			if(!newValue.matches("\\d{0,2}([\\.]\\d{0,2})?")) {
+				textThreshold.setText("80.00");
+			}else{}
+		});
 		thresholdQuiz.getChildren().addAll(labelThreshold, textThreshold);
 		return thresholdQuiz;
 
@@ -265,7 +272,7 @@ public class CreateQuizBox extends VBox {
 
 
 		buttonsubmit.setPadding(new Insets(40, 30, 0, 520));
-		createButtom = new Button("Create Quiz");
+		createButtom = new Button("➦ Create Quiz");
 		createButtom.setFont(Font.font("Times New Roman", FontWeight.NORMAL, 16));
 		buttonsubmit.getChildren().addAll(createButtom);
 		createButtom.setOnAction(actionEvent -> {
@@ -277,13 +284,13 @@ public class CreateQuizBox extends VBox {
 				warning.setText("Fill all the fields marked with *");
 
 			}else{
-				Quiz newquiz = new Quiz(studyProgramComboBox.getValue(),
+				quiz = new Quiz(studyProgramComboBox.getValue(),
 						courseComboBox.getValue(), textname.getText(),
 						Double.valueOf(textThreshold.getText()),
 						Integer.valueOf(textTime.getText()),
 						new ArrayList<Question>());
 
-				MainPane.getMainPane().getTabs().add(CreateAddQuestionTab.getCreateAddQuestionTab(newquiz));
+				MainPane.getMainPane().getTabs().add(CreateAddQuestionTab.getCreateAddQuestionTab());
 				CreateQuizTab.getCreateQuizTab().closeTab();
 
 				// create the object Quiz here
@@ -299,7 +306,8 @@ public class CreateQuizBox extends VBox {
 
 	}
 
-
-
+	public Quiz getQuiz() {
+		return quiz;
+	}
 }
 

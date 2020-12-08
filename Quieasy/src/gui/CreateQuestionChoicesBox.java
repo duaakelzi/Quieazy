@@ -1,7 +1,7 @@
 package gui;
 
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
+import data.Answer;
+import data.Question;
 import javafx.geometry.Insets;
 import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
@@ -9,11 +9,21 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 
+import java.util.ArrayList;
+
 
 public class CreateQuestionChoicesBox extends VBox {
 
     private static CreateQuestionChoicesBox createQuestionChoicesBox;
-
+    private TextField firstchoice;
+    private RadioButton firstradiobtn;
+    private TextField secondchoice;
+    private RadioButton secondradiobtn;
+    private TextField thirdchoice;
+    private RadioButton thirdradiobtn;
+    private TextField fourthchoice;
+    private RadioButton fourthradiobtn;
+    private TextArea textQuestion;
     private CreateQuestionChoicesBox(){
         super();
         // initiate the Question area
@@ -39,7 +49,7 @@ public class CreateQuestionChoicesBox extends VBox {
         questionVbox.setPadding(new Insets(20,30, 10, 30));
         Label questionlabel = new Label("Question");
         questionlabel.setFont(Font.font("Times New Roman", FontWeight.BOLD, 20));
-        TextArea textQuestion = new TextArea();
+        textQuestion = new TextArea();
         textQuestion.setPromptText("Enter the Question");
         textQuestion.setPrefColumnCount(10);
         textQuestion.setPrefHeight(100);
@@ -60,34 +70,34 @@ public class CreateQuestionChoicesBox extends VBox {
         labelchoice.getChildren().addAll(choicelabel, correctlabel);
         // first field of answer with radio buttom
         HBox fistanswer = new HBox(150);
-        TextField firstchoice = new TextField();
+        firstchoice = new TextField();
         firstchoice.setPromptText("Enter the 1 st answer");
         firstchoice.setMinWidth(400);
-        RadioButton firstradiobtn = new RadioButton();
+        firstradiobtn = new RadioButton();
         fistanswer.getChildren().addAll(firstchoice, firstradiobtn);
 
         //second field of answer with radio buttom
         HBox secondanswer = new HBox(150);
-        TextField secondchoice = new TextField();
+        secondchoice = new TextField();
         secondchoice.setPromptText("Enter the 2nd answer");
         secondchoice.setMinWidth(400);
-        RadioButton secondradiobtn = new RadioButton();
+        secondradiobtn = new RadioButton();
         secondanswer.getChildren().addAll(secondchoice, secondradiobtn);
 
         //third field of answer with radio buttom
         HBox thirdanswer = new HBox(150);
-        TextField thirdchoice = new TextField();
+        thirdchoice = new TextField();
         thirdchoice.setPromptText("Enter the 3rd answer");
         thirdchoice.setMinWidth(400);
-        RadioButton thirdradiobtn = new RadioButton();
+        thirdradiobtn = new RadioButton();
         thirdanswer.getChildren().addAll(thirdchoice, thirdradiobtn);
 
         // fourth field of answer with radio buttom
         HBox fourthanswer = new HBox(150);
-        TextField fourthchoice = new TextField();
+        fourthchoice = new TextField();
         fourthchoice.setPromptText("Enter the 4th answer");
         fourthchoice.setMinWidth(400);
-        RadioButton fourthradiobtn = new RadioButton();
+        fourthradiobtn = new RadioButton();
         fourthanswer.getChildren().addAll(fourthchoice, fourthradiobtn);
 
         choices.getChildren().addAll(labelchoice,fistanswer, secondanswer, thirdanswer, fourthanswer);
@@ -100,18 +110,26 @@ public class CreateQuestionChoicesBox extends VBox {
         buttonHbox.setPadding(new Insets(50, 30, 0, 490));
         Button saveQ= new Button("SAVE QUESTION");
         saveQ.setFont(Font.font("Times New Roman", FontWeight.NORMAL, 16));
-        saveQ.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent actionEvent) {
-                CreateQuestionChoicesTab.getCreateQuestionChoicesTab().closeTab();
+        saveQ.setOnAction(actionEvent -> {
+            CreateQuestionChoicesTab.getCreateQuestionChoicesTab().closeTab();
+            ArrayList<Answer> answers = new ArrayList<>();
+            answers.add(new Answer(firstchoice.getText(), firstradiobtn.isSelected()));
+            answers.add(new Answer(secondchoice.getText(), secondradiobtn.isSelected()));
+            answers.add(new Answer(thirdchoice.getText(), thirdradiobtn.isSelected()));
+            answers.add(new Answer(fourthchoice.getText(), fourthradiobtn.isSelected()));
 
+            Question question = new Question(textQuestion.getText(), answers);
 
-            }
+            CreateQuizBox.getCreateQuizBox().getQuiz().addQuestion(question);
+            CreateAddQuestionBox.getCreateAddQuestionBox().fillTableObservableListWithQuestion();
+
         });
         buttonHbox.getChildren().addAll(saveQ);
 
         return buttonHbox;
     }
+
+
 
 
 

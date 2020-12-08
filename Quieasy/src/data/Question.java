@@ -1,30 +1,27 @@
 package data;
 
+import java.util.ArrayList;
+
 public class Question {
 
     private final String question;
-    private final Answer[] answers;
-    private final int points;
+    private final ArrayList<Answer> answers;
 
-    private String name;
-    private String author;
-    private String StudyProgram;
-    public Question(String question, Answer[] answers, int points) {
+
+
+    public Question(String question, ArrayList<Answer> answers) {
         this.question = question;
         this.answers = answers;
-        this.points = points;
+
     }
 
 
     public String getQuestion() {
+
         return question;
     }
 
-    public String getAnswers(int index) {
-        return answers[index].getAnswers();
+    public ArrayList<Answer> getAnswers() {
+        return answers;
     }
-
-
-
-
 }

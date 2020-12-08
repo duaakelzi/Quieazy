@@ -1,6 +1,5 @@
 package gui;
 
-import data.Quiz;
 import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.scene.control.Tab;
@@ -8,25 +7,25 @@ import javafx.scene.control.Tab;
 public class CreateAddQuestionTab extends Tab {
 
     private static CreateAddQuestionTab createAddQuestionTab;
-    private Quiz quiz;
 
 
-    private CreateAddQuestionTab(Quiz quiz){
+
+    private CreateAddQuestionTab(){
         super("+ Questions to Quiz", CreateAddQuestionBox.getCreateAddQuestionBox());
-        this.quiz = quiz;
+
     }
 
-    public static CreateAddQuestionTab getCreateAddQuestionTab(Quiz quiz) {
+    public static CreateAddQuestionTab getCreateAddQuestionTab() {
         if(createAddQuestionTab == null){
 
-            createAddQuestionTab = new CreateAddQuestionTab(quiz);
+            createAddQuestionTab = new CreateAddQuestionTab();
         }
         return createAddQuestionTab;
     }
 
 
     public void closeTab(){
-        CreateAddQuestionTab tab = getCreateAddQuestionTab(quiz);
+        CreateAddQuestionTab tab = getCreateAddQuestionTab();
         EventHandler<Event> handler = tab.getOnClosed();
         if(handler != null){
             handler.handle(null);
@@ -35,4 +34,6 @@ public class CreateAddQuestionTab extends Tab {
         }
 
     }
+
+
 }
