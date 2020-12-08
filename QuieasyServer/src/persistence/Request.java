@@ -3,7 +3,11 @@
 package persistence;
 
 import actions.*;
-import dataServer.Message;
+import data.Message;
+import domainServer.*;
+import org.hibernate.sql.Delete;
+
+import java.util.Set;
 
 
 public class Request {
@@ -52,10 +56,10 @@ public class Request {
         // create a database connection
         JDBC.connectMySQL();
         System.out.println("Database connection created!");
-        return DeleteObjects.DeleteQuiz(id,course);
+        return DeleteObjects.deleteQuiz(id,course);
     }
-
-    public static  Message retrieveQuizzes(String email) {
+    //retrieve all quizzes for user
+    public static Message retrieveQuizzes(String email) {
         System.out.println("Database connection starting...");
 
         // create a database connection
@@ -63,7 +67,38 @@ public class Request {
         System.out.println("Database connection created!");
         return RetrieveObjects.retrieveQuizzes(email);
     }
+    //CRUD for questions
+    public static Message retrieveQuestions(Long quizID) {
+        System.out.println("Database connection starting...");
 
+        // create a database connection
+        JDBC.connectMySQL();
+        System.out.println("Database connection created!");
+        return RetrieveObjects.retrieveQuestions(quizID);
+    }
+    public static Message createQuestion(String questionText,int points, String email) {
+        System.out.println("Database connection starting...");
 
+        // create a database connection
+        JDBC.connectMySQL();
+        System.out.println("Database connection created!");
+        return CreateObjects.CreateQuestion(questionText, points, email);
+    }
+    public static Message updateQuestion(Long questionID, Set<QuestionChoice> choicesList, String questionText, int points, boolean isCorrect) {
+        System.out.println("Database connection starting...");
+
+        // create a database connection
+        JDBC.connectMySQL();
+        System.out.println("Database connection created!");
+        return UpdateObjects.updateQuestion(questionID, choicesList, questionText, points, isCorrect);
+    }
+    public static Message deleteQuestion(Long questionID) {
+        System.out.println("Database connection starting...");
+
+        // create a database connection
+        JDBC.connectMySQL();
+        System.out.println("Database connection created!");
+        return DeleteObjects.deleteQuestion(questionID);
+    }
 }
 

@@ -24,13 +24,20 @@
         <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
         <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
         <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="BRANCH:origin/CreateQuizGUI" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="BRANCH:origin/experiment" type="e8cecc67:BranchNodeDescriptor" />
       </path>
     </select>
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e8f5b52c-53ef-4c55-b043-df8806802e11" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/QuieasyServer/src/dataServer/QuestionData.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/QuieasyServer/src/domainServer/Role.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/QuieasyServer/src/applicationServer/ServerDecoder.java" beforeDir="false" afterPath="$PROJECT_DIR$/QuieasyServer/src/applicationServer/ServerDecoder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/QuieasyServer/src/dataServer/Message.java" beforeDir="false" afterPath="$PROJECT_DIR$/QuieasyServer/src/dataServer/Message.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/QuieasyServer/src/domainServer/Choices.java" beforeDir="false" afterPath="$PROJECT_DIR$/QuieasyServer/src/domainServer/Choices.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/QuieasyServer/src/domainServer/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/QuieasyServer/src/domainServer/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/QuieasyServer/src/persistence/Request.java" beforeDir="false" afterPath="$PROJECT_DIR$/QuieasyServer/src/persistence/Request.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -73,7 +80,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../mysql-connector" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/QuieasyServer/src/dataServer" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -83,11 +90,19 @@
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
-    <property name="settings.editor.selected.configurable" value="preferences.pathVariables" />
     <property name="settings.editor.selected.configurable" value="org.jetbrains.plugins.github.ui.GithubSettingsConfigurable" />
   </component>
   <component name="RecentsManager">
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="applicationServer" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="applicationServer" />
+      <recent name="dataServer" />
+      <recent name="persistence" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Albina Muzafarova\Documents\THU\CTS5\SWPROJ\Quieazy\QuieasyServer\src\dataServer" />
       <recent name="C:\Users\Albina Muzafarova\Documents\THU\CTS5\SWPROJ\Quieazy\QuieasyServer\src\domainServer" />
     </key>
   </component>
@@ -257,7 +272,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="main" />
+                        <option value="origin/experiment" />
                       </list>
                     </value>
                   </entry>
@@ -312,10 +327,11 @@
       <screen x="1366" y="0" width="1920" height="1040" />
     </state>
     <state x="1592" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1366.728/1366.0.1920.1040@1366.0.1920.1040" timestamp="1606334042977" />
-    <state x="530" y="-724" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1606845159125">
-      <screen x="0" y="-900" width="1600" height="860" />
+    <state x="2002" y="213" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1607446526262">
+      <screen x="1366" y="0" width="1920" height="1040" />
     </state>
     <state x="530" y="-724" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1366.728/0.-900.1600.860@0.-900.1600.860" timestamp="1606845159125" />
+    <state x="2002" y="213" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1366.728/1366.0.1920.1040@1366.0.1920.1040" timestamp="1607446526262" />
     <state x="2240" y="270" key="#com.intellij.util.ui.classpath.ChooseLibrariesDialog" timestamp="1607434593106">
       <screen x="1366" y="0" width="1920" height="1040" />
     </state>
@@ -324,7 +340,7 @@
       <screen x="1366" y="0" width="1920" height="1040" />
     </state>
     <state x="2123" y="390" key="DetectedRootsChooserDialog/0.0.1366.728/1366.0.1920.1040@1366.0.1920.1040" timestamp="1607434117453" />
-    <state x="1765" y="296" width="888" height="651" maximized="true" key="DiffContextDialog" timestamp="1607433617722">
+    <state x="1765" y="296" width="888" height="651" maximized="true" key="DiffContextDialog" timestamp="1607444755362">
       <screen x="1366" y="0" width="1920" height="1040" />
     </state>
     <state x="1765" y="296" width="888" height="651" maximized="true" key="DiffContextDialog/0.0.1366.728/1366.0.1920.1040@1366.0.1920.1040" timestamp="1607433617722" />
@@ -421,7 +437,5 @@
     </state>
     <state x="463" y="-720" width="672" height="678" key="search.everywhere.popup/0.0.1366.728/0.-900.1600.860@0.-900.1600.860" timestamp="1606841902190" />
     <state x="1922" y="218" width="807" height="820" key="search.everywhere.popup/0.0.1366.728/1366.0.1920.1040@1366.0.1920.1040" timestamp="1607332313530" />
-    <MESSAGE value="Create Question Answer Box" />
-    <option name="LAST_COMMIT_MESSAGE" value="Create Question Answer Box" />
   </component>
 </project>
