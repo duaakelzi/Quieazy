@@ -1,9 +1,13 @@
 package data;
 
 public class Course {
-    private String [] courses;
+    private String courses;
 
-    public Course() {
-        this.courses = new String[]{};
+    public Course(String courses) {
+        this.courses = courses;
+    }
+
+    public String getCourses() {
+        return courses;
     }
 }

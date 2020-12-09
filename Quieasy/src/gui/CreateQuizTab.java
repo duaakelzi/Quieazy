@@ -2,26 +2,30 @@
 
 package gui;
 
+import javafx.event.Event;
+import javafx.event.EventHandler;
 import javafx.scene.control.Tab;
 
 
 public class CreateQuizTab extends Tab {
 	
 	private static CreateQuizTab createQuizTab;
-	private CreateQuizBox createQuizBox;
-	private CreateQuestionBox createQuestionBox;
-	private String name;
 
-	
+
 	// constructor can only be accessed from within
 	private CreateQuizTab() {
 		super("New Quiz", CreateQuizBox.getCreateQuizBox());
 
 		
 	}
+
+
 	public CreateQuizTab(String name){
-		super(name, CreateQuestionBox.getCreateQuestionBox());
+
+		super(name, CreateQuestionChoicesBox.getCreateQuestionChoicesBox());
 	}
+
+
 
 
 	// Gets the current instance -> Singleton
@@ -33,6 +37,19 @@ public class CreateQuizTab extends Tab {
 		return createQuizTab;
 		
 	}
+
+	public void closeTab(){
+		CreateQuizTab tab = getCreateQuizTab();
+		EventHandler<Event> handler = tab.getOnClosed();
+		if(handler != null){
+			handler.handle(null);
+		}else{
+			tab.getTabPane().getTabs().remove(tab);
+		}
+
+	}
+
+
 
 	
 }

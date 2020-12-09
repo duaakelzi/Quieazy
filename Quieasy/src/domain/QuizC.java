@@ -2,10 +2,8 @@ package domain;
 
 import application.ClientAgent;
 import data.Message;
-import data.UserData;
 import data.Quiz;
-
-import java.util.ArrayList;
+import data.UserData;
 
 public class QuizC {
 
@@ -19,8 +17,8 @@ public class QuizC {
                                             UserC.getCurrentUser().getLastName(),
                                             UserC.getCurrentUser().getEmail());
 
-        ArrayList<Quiz> quizzes = new ArrayList<>();
-        quizzes.add(newQuiz);
+        Quiz quizzes = new Quiz();
+        quizzes = newQuiz;
         saveQuizMsg.quizlist = quizzes;
 
         clientAgent.send(saveQuizMsg);

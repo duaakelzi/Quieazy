@@ -53,8 +53,7 @@ public class PrimeScene extends Scene {
 		getPrimeScene().setRoot(Register.getRegister());
 		
 	}
-	public  static void createQuestion(){
-		getPrimeScene().setRoot(CreateQuestionBox.getCreateQuestionBox());
-	}
+
+
 	
 }

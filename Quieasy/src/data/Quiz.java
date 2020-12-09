@@ -7,20 +7,39 @@ public class Quiz {
     private String course;
     private String name;
     private double threshold;
-    private String description;
-
+    private int timer;
     private ArrayList<Question> questions;
+    private String firstName;
+    private String lastName;
 
-    public Quiz(String program, String course, String name, double threshold, String description, ArrayList<Question> questions) {
+    public Quiz() {
+
+    }
+
+    public Quiz(String program, String course, String name, double threshold, int timer, ArrayList<Question> questions) {
         this.program = program;
         this.course = course;
         this.name = name;
         this.threshold = threshold;
-        this.description = description;
+        this.timer = timer;
         this.questions = questions;
+        //firstName = UserC.getCurrentUser().getFirstName();
+        //lastName = UserC.getCurrentUser().getLastName();
+    }
+
+    public String getName() {
+        return name;
     }
 
     public void addQuestion(Question q){
         questions.add(q);
     }
+
+    public ArrayList<Question> getQuestions() {
+        return questions;
+    }
+    public String getOwnerQuiz() {
+        return firstName +" " + lastName;
+    }
+
 }

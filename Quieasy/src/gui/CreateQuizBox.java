@@ -2,6 +2,11 @@
 
 package gui;
 
+import data.Course;
+import data.Question;
+import data.Quiz;
+import data.StudyProgramHS;
+import domain.QuizC;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -14,6 +19,9 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.util.Callback;
 
+import java.util.ArrayList;
+import java.util.stream.Collectors;
+
 public class CreateQuizBox extends VBox {
 
 	private static CreateQuizBox createQuizBox;
@@ -21,34 +29,49 @@ public class CreateQuizBox extends VBox {
 	private TextField textThreshold;
 	private TextField textname;
 	private ComboBox<String> courseComboBox;
-	ComboBox<String> studyProgramComboBox;
+	private ComboBox<String> studyProgramComboBox;
+	private TextField textTime;
+	private  Label warning;
+	ArrayList<StudyProgramHS> studyProgramHSArrayList;
+	private Quiz quiz;
 	// constructor can only be accessed from within
-	private CreateQuizBox() {
+	private CreateQuizBox(){
 		
 		super();
-		ObservableList<String> studyProgramHS = FXCollections.observableArrayList("Computational Science and Engineering",
-				"Computer Science",
-				"Data Science in der Medizin",
-				"Digital Media",
-				"Digital Media",
-				"Elektrotechnik und Informationstechnik",
-				"Energie-Informationsmanagement",
-				"Energietechnik",
-				"Informationsmanagement im Gesundheitswesen");
+		studyProgramHSArrayList = new ArrayList() {{
+			add(new StudyProgramHS("Computational Science and Engineering", new ArrayList<>()));
+			add(new StudyProgramHS("Computer Science", new ArrayList<>(){{
+				add(new Course("SOFE"));
+				add(new Course("Calculus"));
+				add(new Course("C++"));
+				add(new Course("WebEngineering"));
+			}}));
+			add(new StudyProgramHS("Data Science in der Medizin", new ArrayList<>()));
+			add(new StudyProgramHS("Digital Media", new ArrayList<>()));
+			add(new StudyProgramHS("Elektrotechnik und Informationstechnik", new ArrayList<>()));
+			add(new StudyProgramHS("Energie-Informationsmanagement", new ArrayList<>()));
+			add(new StudyProgramHS("Energietechnik", new ArrayList<>()));
+		}};
+
+		ArrayList<String> studyProgramNames = studyProgramHSArrayList.stream()
+				.map(studyProgramHS -> studyProgramHS.getStudyprogram())
+				.collect(Collectors.toCollection(ArrayList::new));
+		ObservableList<String> studyProgramHS = FXCollections.observableArrayList(studyProgramNames);
 
 		// study program selection
 		HBox studyProgram = initiateStudyProgram(studyProgramHS);
 		//courses selection
-		ObservableList<String> course = FXCollections.observableArrayList("SOFE", "Calculus", "C++", "WebEngineering");
-		HBox courses = initiateCourse(course);
+		//ObservableList<String> course = FXCollections.observableArrayList("SOFE", "Calculus", "C++", "WebEngineering");
+		HBox courses = initiateCourse();
 		//give a name to Quiz
 		HBox nameQuiz = initiateNameQuiz();
 
 		// give a passed grade to Quiz
 		HBox thresholdQuiz = initiateTreshold();
-		HBox descriptionQuiz = initiateDescription();
+		HBox timeLimit = initiateTimeLimit();
+		HBox warningMessage = initiatewarning();
 		HBox createButton = initiateBotton();
-		this.getChildren().addAll(studyProgram, courses, nameQuiz, thresholdQuiz, descriptionQuiz, createButton);
+		this.getChildren().addAll(studyProgram, courses, nameQuiz, thresholdQuiz, timeLimit, warningMessage, createButton);
 
 
 		
@@ -91,32 +114,44 @@ public class CreateQuizBox extends VBox {
 
 
 	public HBox initiateStudyProgram(ObservableList<String>studyProgramHS) {
-		HBox studyProgram = new HBox(20);
+		HBox studyProgram = new HBox(30);
 		studyProgram.setPadding(new Insets(30));
 		Label labelStudyProgram = new Label("Study Program*");
-		labelStudyProgram.setFont(Font.font("Times New Roman", FontWeight.EXTRA_BOLD, 24));
+		labelStudyProgram.setFont(Font.font("Times New Roman", FontWeight.EXTRA_BOLD, 20));
 		studyProgramComboBox = new ComboBox<>();
 		studyProgramComboBox.setPromptText("Select the Study Program");
+		studyProgramComboBox.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent actionEvent) {
+					String selected = studyProgramComboBox.getValue();
+					ArrayList<Course> courses = studyProgramHSArrayList.stream()
+							.filter(studyProgramHS1 -> studyProgramHS1.getStudyprogram().equals(selected))
+							.map(StudyProgramHS::getCourses)
+							.collect(Collectors.toCollection(ArrayList::new)).get(0);
+					ArrayList<String> courseNames = courses.stream()
+							.map(Course::getCourses)
+							.collect(Collectors.toCollection(ArrayList::new));
+					courseComboBox.setItems(FXCollections.observableArrayList(courseNames));
+			}
+		});
+
 		studyProgramComboBox.setItems(studyProgramHS);
 		//set the size of text of item in the buttom cell
 		settingsComboBox(studyProgramComboBox);
 
 		studyProgramComboBox.setMinHeight(30);
+		studyProgramComboBox.setMinWidth(400);
 		studyProgram.getChildren().addAll(labelStudyProgram, studyProgramComboBox);
 		return studyProgram;
 
 	}
-	public HBox initiateCourse(ObservableList<String> courseHS){
-		HBox course = new HBox(105);
+	public HBox initiateCourse(){
+		HBox course = new HBox(100);
 		course.setPadding(new Insets(0, 30, 0, 30));
 		Label labelcourse = new Label("Course*");
-		labelcourse.setFont(Font.font("Times New Roman", FontWeight.EXTRA_BOLD, 24));
+		labelcourse.setFont(Font.font("Times New Roman", FontWeight.EXTRA_BOLD, 20));
 		courseComboBox = new ComboBox<>();
-		courseComboBox.setPromptText("Select the course*");
-
-
-		courseComboBox.setItems(courseHS);
-
+		courseComboBox.setPromptText("Select the course");
 		settingsComboBox(courseComboBox);
 		courseComboBox.setMinHeight(30);
 		courseComboBox.setMinWidth(400);
@@ -125,7 +160,7 @@ public class CreateQuizBox extends VBox {
 	}
 
 	private void settingsComboBox(ComboBox<String> combobox){
-		combobox.setButtonCell(new ListCell<String>() {
+		combobox.setButtonCell(new ListCell<>() {
 			@Override
 			protected void updateItem(String item, boolean empty) {
 				super.updateItem(item, empty);
@@ -140,17 +175,17 @@ public class CreateQuizBox extends VBox {
 			}
 		});
 		//set the size and font for CumboBox List of item
-		combobox.setCellFactory(new Callback<ListView<String>, ListCell<String>>() {
+		combobox.setCellFactory(new Callback<>() {
 			@Override
 			public ListCell<String> call(ListView<String> stringListView) {
 
-				return new ListCell<>(){
+				return new ListCell<>() {
 					@Override
 					protected void updateItem(String s, boolean b) {
 						super.updateItem(s, b);
-						if(s== null){
+						if (s == null) {
 							setText(null);
-						}else {
+						} else {
 							setText(s);
 							setFont(Font.font("Times New Roman", FontWeight.NORMAL, 18));
 							setTextFill(Color.BLACK);
@@ -165,13 +200,13 @@ public class CreateQuizBox extends VBox {
 	}
 
 	public HBox initiateNameQuiz(){
-		HBox nameQuiz = new HBox(119);
+		HBox nameQuiz = new HBox(110);
 		nameQuiz.setPadding(new Insets(30));
 		Label labelName = new Label("Name*");
-		labelName.setFont(Font.font("Times New Roman", FontWeight.EXTRA_BOLD, 24));
+		labelName.setFont(Font.font("Times New Roman", FontWeight.EXTRA_BOLD, 20));
 		textname = new TextField();
 		textname.setFont(Font.font("Times New Roman", FontWeight.NORMAL, 18));
-		textname.setPromptText("Enter the name of your Quiz*");
+		textname.setPromptText("Name of the Quiz*");
 		textname.setMinWidth(350);
 		textname.setMinHeight(30);
 		nameQuiz.getChildren().addAll(labelName, textname);
@@ -182,50 +217,99 @@ public class CreateQuizBox extends VBox {
 		HBox thresholdQuiz = new HBox(72);
 		thresholdQuiz.setPadding(new Insets(0, 30, 0, 30));
 		Label labelThreshold = new Label("Threshold*");
-		labelThreshold.setFont(Font.font("Times New Roman", FontWeight.EXTRA_BOLD, 24));
+		labelThreshold.setFont(Font.font("Times New Roman", FontWeight.EXTRA_BOLD, 20));
 		textThreshold = new TextField();
 		textThreshold.setFont(Font.font("Times New Roman", FontWeight.NORMAL, 18));
-		textThreshold.setPromptText("Enter the Quiz's threshold*");
+		textThreshold.setPromptText("Quiz's threshold");
 		textThreshold.setMinWidth(250);
 		textThreshold.setMinHeight(30);
+		textThreshold.textProperty().addListener((observableValue, oldValue, newValue) -> {
+			if(!newValue.matches("\\d{0,2}([\\.]\\d{0,2})?")) {
+				textThreshold.setText("80.00");
+			}else{}
+		});
 		thresholdQuiz.getChildren().addAll(labelThreshold, textThreshold);
 		return thresholdQuiz;
 
 	}
-	public HBox initiateDescription(){
-		HBox descriptionQuiz = new HBox(80);
-		descriptionQuiz.setPadding(new Insets(30, 30, 0, 30));
-		Label labelDescription = new Label("Description");
-		labelDescription.setFont(Font.font("Times New Roman", FontWeight.NORMAL, 24));
-		TextArea textDescription = new TextArea("Enter the Quiz Description");
-		textDescription.setPrefColumnCount(7);
-		textDescription.setPrefHeight(100);
-		textDescription.setPrefWidth(400);
-		descriptionQuiz.getChildren().addAll(labelDescription, textDescription);
+	// add try catch error empty entry
+	public HBox initiateTimeLimit(){
+		HBox timeLimit = new HBox(70);
+		Label labelTime = new Label("Time limit*");
+		labelTime.setFont(Font.font("Times New Roman", FontWeight.EXTRA_BOLD, 20));
+		timeLimit.setPadding(new Insets(30));
+		textTime = new TextField();
 
-		return descriptionQuiz;
+		textTime.setFont(Font.font("Times New Roman", FontWeight.NORMAL, 18));
+		textTime.setMaxWidth(105);
+		textTime.setPromptText(" 015 ");
+
+		textTime.textProperty().addListener((observableValue, oldValue, newValue) -> {
+			if(!newValue.matches("\\d{0,3}")){
+				textTime.setText("015");
+			}else{
+
+			}
+		});
+		Label labelminutes = new Label("minutes");
+		labelminutes.setPadding(new Insets(5, 0, 0, 10));
+		labelminutes.setFont(Font.font("Times New Roman", FontWeight.NORMAL, 18));
+
+		timeLimit.getChildren().addAll(labelTime, textTime, labelminutes);
+
+		return timeLimit;
+	}
+	public HBox initiatewarning(){
+		HBox warningText = new HBox();
+		warningText.setPadding(new Insets(0,0,0,200));
+		warning = new Label();
+		warning.setTextFill(Color.RED);
+		warningText.getChildren().add(warning);
+		return warningText;
 	}
 
 	public HBox initiateBotton(){
-		HBox buttonsubmit = new HBox();
-		buttonsubmit.setPadding(new Insets(30, 30, 0, 530));
-		createButtom = new Button("Create Quiz");
+		HBox buttonsubmit = new HBox(20);
+
+
+		buttonsubmit.setPadding(new Insets(40, 30, 0, 520));
+		createButtom = new Button("➦ Create Quiz");
 		createButtom.setFont(Font.font("Times New Roman", FontWeight.NORMAL, 16));
 		buttonsubmit.getChildren().addAll(createButtom);
-		createButtom.setOnAction(eventCreatQuiz);
+		createButtom.setOnAction(actionEvent -> {
+			if(studyProgramComboBox.getValue()==null     || courseComboBox.getValue() == null
+														 || textname.getText().isEmpty()
+														 || textThreshold.getText().isEmpty()
+														 || textTime.getText().isEmpty()) {
+
+				warning.setText("Fill all the fields marked with *");
+
+			}else{
+				quiz = new Quiz(studyProgramComboBox.getValue(),
+						courseComboBox.getValue(), textname.getText(),
+						Double.valueOf(textThreshold.getText()),
+						Integer.valueOf(textTime.getText()),
+						new ArrayList<Question>());
+				QuizC.createNewQuiz(quiz);
+
+				MainPane.getMainPane().getTabs().add(CreateAddQuestionTab.getCreateAddQuestionTab());
+				CreateQuizTab.getCreateQuizTab().closeTab();
+
+				// create the object Quiz here
+
+
+
+			}
+		});
+
+
+
 		return buttonsubmit;
 
 	}
 
-	EventHandler<ActionEvent> eventCreatQuiz = new EventHandler<ActionEvent>() {
-		@Override
-		public void handle(ActionEvent actionEvent) {
-			CreateQuizTab newtab = new CreateQuizTab("Add Questions");
-			MainPane.getMainPane().getTabs().add(newtab);
-			createButtom.setDisable(true);
-
-		}
-	};
-
+	public Quiz getQuiz() {
+		return quiz;
+	}
 }
 
