@@ -2,9 +2,9 @@
 
 package application;
 
+import dataServer.Message;
 import gui.*;
 import domain.UserC;
-import data.*;
 
 public class ClientDecoder {
 	
@@ -13,7 +13,7 @@ public class ClientDecoder {
 		
 		if(message.task.equals("LOGIN_OK")) { // on successful login or account creation
 			
-			UserData userData = message.userData;
+			dataServer.UserData userData = message.userData;
 			UserC.getUser(userData.firstName, userData.lastName, userData.email);
 			
 			// clear user inputs
@@ -33,6 +33,7 @@ public class ClientDecoder {
 			
 		}else if(message.task.equals("CREATE_QUIZ_SUCCESSFUL")){
 			CreateQuizBox.getCreateQuizBox().showSuccessful();
+
 		}else if(message.task.equals("CREATE_QUIZ_")){
 			CreateQuizBox.getCreateQuizBox().showFailed();
 		}

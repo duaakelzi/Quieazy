@@ -1,7 +1,7 @@
 package persistence;
 
-import org.hibernate.SessionFactory;
-import org.hibernate.cfg.Configuration;
+import com.mysql.cj.xdevapi.SessionFactory;
+//import org.hibernate.cfg.Configuration;
 
 public class HibernateUtil {
 

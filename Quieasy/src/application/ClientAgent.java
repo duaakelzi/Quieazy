@@ -5,7 +5,7 @@ package application;
 
 import java.io.*;
 import java.net.*;
-import data.Message;
+import dataServer.Message;
 
 public class ClientAgent implements Runnable{
 	

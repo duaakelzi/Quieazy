@@ -9,7 +9,7 @@ public class QuizC {
 
     public static void createNewQuiz(Quiz newQuiz){
         ClientAgent clientAgent = ClientAgent.getClientAgent();
-        Message saveQuizMsg = new Message();
+        dataServer.Message saveQuizMsg = new Message();
         saveQuizMsg.task = "CREATE_QUIZ";
 
         // set user data so that server knows which user created this quiz
@@ -23,4 +23,6 @@ public class QuizC {
 
         clientAgent.send(saveQuizMsg);
     }
+
+
 }

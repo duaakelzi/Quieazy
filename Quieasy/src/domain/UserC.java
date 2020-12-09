@@ -3,9 +3,9 @@
 package domain;
 
 import application.ClientAgent;
-import data.Message;
-import data.RegisterData;
-import data.LoginData;
+import dataServer.Message;
+import dataServer.RegisterData;
+import dataServer.LoginData;
 
 public class UserC {
 	
