@@ -7,6 +7,8 @@ import org.hibernate.Session;
 import org.hibernate.query.Query;
 import persistence.HibernateUtil;
 
+import java.util.Set;
+
 public class UpdateObjects {
     public static Session session = HibernateUtil.getSessionFactory().openSession();
     public static Message message = new Message();
@@ -55,5 +57,44 @@ public class UpdateObjects {
         return message;
     }
 
+    //what do we do with isCorrect?? so far not in question, only choices
+    public static data.Message updateQuestion(Long questionID, Set<QuestionChoice> choicesList, String questionText, int points, boolean isCorrect) {
+        try {
+            session.beginTransaction();
+            //retrieve the question
+            Question questionToUpdate = session.getSession().createQuery("from Question WHERE id = :id ", Question.class).setParameter("id", questionID).getSingleResult();
+
+            //set vals to passed ones
+            if (questionToUpdate == null) {
+                message.task = "UPDATE_FAILED";
+            }else {
+                questionToUpdate.setQuestionChoices(choicesList);
+                questionToUpdate.setQuestionText(questionText);
+                questionToUpdate.setPoints(points);
+                session.update(questionToUpdate);
+                session.getTransaction().commit();
+                message.task = "UPDATE_OK";
+                message.questionData = new QuestionData(questionToUpdate.getId(), questionToUpdate.getQuestionText(), questionToUpdate.getQuestionChoices(), questionToUpdate.getPoints(), questionToUpdate.getUser());
+            }
+        } catch(Exception e){
+            // if the error message is "out of memory",
+            // it probably means no database file is found
+            System.err.println(e.getMessage());
+        }finally{
+            try
+            {
+                if(session != null)
+                    session.close();
+            }
+            catch(Exception e)
+            {
+                // connection close failed.
+                System.err.println(e.getMessage());
+            }
+        }
+        session.close();
+        return message;
     }
+
+}
 

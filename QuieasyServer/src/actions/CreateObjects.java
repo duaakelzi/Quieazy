@@ -76,7 +76,52 @@ public class CreateObjects {
         return message;
     }
 
+    public static data.Message CreateQuestion(String questionText, int points, String email)
+    {
+        try {
+            System.out.println("create Question ");
+            session.beginTransaction();
+            //does not check for existence of the question, since the client is separating the two requests
+            Question question = new Question(questionText,points);
 
+            //retrieve user to assign it to the question later
+            User userToAdd = session.getSession().createQuery("FROM User WHERE email = :email ", User.class).setParameter("email", email).getSingleResult();
+
+            Set<Question> questionUserSet= new HashSet<Question>();
+            questionUserSet.add(question);
+            userToAdd.setQuestion(questionUserSet);
+            question.setUser(userToAdd);
+
+            session.save(question);
+            session.getTransaction().commit();
+            message.task = "QUESTION_CREATED";
+            message.questionData = new QuestionData(question.getId(), question.getQuestionText(), question.getPoints(), question.getUser()); //the rest should already be on the client side??
+
+            System.out.println("Done");
+        }
+        catch(Exception e)
+        {
+            // if the error message is "out of memory",
+            // it probably means no database file is found
+            System.err.println(e.getMessage());
+        }
+        finally
+        {
+            try
+            {
+                if(session != null) {
+                    session.close();
+                }
+            }
+            catch(Exception e)
+            {
+                // connection close failed.
+                System.err.println(e.getMessage());
+            }
+        }
+        session.close();
+        return message;
+    }
 
 
 

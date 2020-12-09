@@ -49,4 +49,40 @@ public class DeleteObjects {
         session.close();
         return message;
     }
+
+    public static data.Message deleteQuestion(Long questionID)
+    {
+        try {
+            session.beginTransaction();
+            Question questionToDelete = session.getSession().createQuery("FROM Question WHERE id = :id ", Question.class).setParameter("id", questionID).getSingleResult();
+            if (questionToDelete == null) {
+                message.task = "DELETE_FAILED";
+            }else {
+                session.delete(questionToDelete);
+                session.getTransaction().commit();
+                message.task = "DELETE_OK";
+            }
+        }
+        catch(Exception e)
+        {
+            // if the error message is "out of memory",
+            // it probably means no database file is found
+            System.err.println(e.getMessage());
+        }
+        finally
+        {
+            try
+            {
+                if(session != null)
+                    session.close();
+            }
+            catch(Exception e)
+            {
+                // connection close failed.
+                System.err.println(e.getMessage());
+            }
+        }
+        session.close();
+        return message;
+    }
 }
