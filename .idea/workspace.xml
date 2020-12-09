@@ -30,9 +30,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e8f5b52c-53ef-4c55-b043-df8806802e11" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/QuieasyServer/src/dataServer/ChoicesData.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Quieasy/src/data/Message.java" beforeDir="false" afterPath="$PROJECT_DIR$/Quieasy/src/data/Message.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/QuieasyServer/src/actions/CreateObjects.java" beforeDir="false" afterPath="$PROJECT_DIR$/QuieasyServer/src/actions/CreateObjects.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/QuieasyServer/src/actions/UpdateObjects.java" beforeDir="false" afterPath="$PROJECT_DIR$/QuieasyServer/src/actions/UpdateObjects.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/QuieasyServer/src/applicationServer/ServerDecoder.java" beforeDir="false" afterPath="$PROJECT_DIR$/QuieasyServer/src/applicationServer/ServerDecoder.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/QuieasyServer/src/dataServer/QuestionData.java" beforeDir="false" afterPath="$PROJECT_DIR$/QuieasyServer/src/dataServer/QuestionData.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -75,31 +78,31 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/QuieasyServer/src/actions" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/Quieasy" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
     <property name="node.js.path.for.package.tslint" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
-    <property name="project.structure.last.edited" value="Libraries" />
+    <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="settings.editor.selected.configurable" value="org.jetbrains.plugins.github.ui.GithubSettingsConfigurable" />
   </component>
   <component name="RecentsManager">
-    <key name="CreateClassDialog.RecentsKey">
-      <recent name="applicationServer" />
-    </key>
-    <key name="CopyClassDialog.RECENTS_KEY">
-      <recent name="applicationServer" />
-      <recent name="dataServer" />
-      <recent name="persistence" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\Albina Muzafarova\Documents\THU\CTS5\SWPROJ\Quieazy\QuieasyServer\src\actions" />
       <recent name="C:\Users\Albina Muzafarova\Documents\THU\CTS5\SWPROJ\Quieazy\QuieasyServer\src\dataServer" />
       <recent name="C:\Users\Albina Muzafarova\Documents\THU\CTS5\SWPROJ\Quieazy\QuieasyServer\src\domainServer" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="dataServer" />
+      <recent name="applicationServer" />
+      <recent name="persistence" />
+    </key>
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="applicationServer" />
     </key>
   </component>
   <component name="RunManager" selected="Application.QuieasyServer">
@@ -317,12 +320,13 @@
       <screen x="1366" y="0" width="1920" height="1040" />
     </state>
     <state x="1765" y="296" width="888" height="651" maximized="true" key="DiffContextDialog/0.0.1366.728/1366.0.1920.1040@1366.0.1920.1040" timestamp="1607433617722" />
-    <state x="2068" y="297" key="FileChooserDialogImpl" timestamp="1607435006044">
-      <screen x="1366" y="0" width="1920" height="1040" />
+    <state x="499" y="146" key="FileChooserDialogImpl" timestamp="1607536210482">
+      <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="585" y="-654" key="FileChooserDialogImpl/0.0.1366.728/0.-900.1600.860@0.-900.1600.860" timestamp="1606582574671" />
     <state x="2068" y="297" key="FileChooserDialogImpl/0.0.1366.728/1366.0.1920.1040/3286.0.1920.1040@1366.0.1920.1040" timestamp="1606922765132" />
     <state x="2068" y="297" key="FileChooserDialogImpl/0.0.1366.728/1366.0.1920.1040@1366.0.1920.1040" timestamp="1607435006044" />
+    <state x="499" y="146" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1607536210482" />
     <state width="1557" height="141" key="GridCell.Tab.0.bottom" timestamp="1606863675144">
       <screen x="0" y="-900" width="1600" height="860" />
     </state>
@@ -363,17 +367,18 @@
       <screen x="0" y="-900" width="1600" height="860" />
     </state>
     <state x="438" y="-709" key="MultipleFileMergeDialog/0.0.1366.728/0.-900.1600.860@0.-900.1600.860" timestamp="1606580621340" />
-    <state x="2175" y="220" width="705" height="592" key="NewModule_or_Project.wizard" timestamp="1607435020647">
-      <screen x="1366" y="0" width="1920" height="1040" />
+    <state x="576" y="154" width="741" height="415" key="NewModule_or_Project.wizard" timestamp="1607536222703">
+      <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="2175" y="220" width="705" height="592" key="NewModule_or_Project.wizard/0.0.1366.728/1366.0.1920.1040@1366.0.1920.1040" timestamp="1607435020647" />
-    <state x="311" y="0" key="SettingsEditor" timestamp="1607520204714">
+    <state x="576" y="154" width="741" height="415" key="NewModule_or_Project.wizard/0.0.1366.728@0.0.1366.728" timestamp="1607536222703" />
+    <state x="311" y="0" key="SettingsEditor" timestamp="1607536238787">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="367" y="-892" key="SettingsEditor/0.0.1366.728/0.-900.1600.860@0.-900.1600.860" timestamp="1606644527423" />
     <state x="1803" y="0" key="SettingsEditor/0.0.1366.728/1366.0.1920.1040/3286.0.1920.1040@1366.0.1920.1040" timestamp="1607013860664" />
     <state x="1990" y="90" key="SettingsEditor/0.0.1366.728/1366.0.1920.1040@1366.0.1920.1040" timestamp="1607435262331" />
-    <state x="311" y="0" key="SettingsEditor/0.0.1366.728@0.0.1366.728" timestamp="1607520204714" />
+    <state x="311" y="0" key="SettingsEditor/0.0.1366.728@0.0.1366.728" timestamp="1607536238787" />
     <state x="392" y="-738" key="Vcs.Push.Dialog.v2" timestamp="1606850945025">
       <screen x="0" y="-900" width="1600" height="860" />
     </state>

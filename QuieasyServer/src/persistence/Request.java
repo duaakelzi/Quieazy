@@ -3,10 +3,12 @@
 package persistence;
 
 import actions.*;
+import data.ChoicesData;
 import data.Message;
 import domainServer.*;
 import org.hibernate.sql.Delete;
 
+import java.util.List;
 import java.util.Set;
 
 
@@ -76,21 +78,21 @@ public class Request {
         System.out.println("Database connection created!");
         return RetrieveObjects.retrieveQuestions(quizID);
     }
-    public static Message createQuestion(String questionText,int points, String email) {
+    public static <Choices> Message createQuestion(String questionText, int points, List<ChoicesData> questionChoicesList, String email) {
         System.out.println("Database connection starting...");
 
         // create a database connection
         JDBC.connectMySQL();
         System.out.println("Database connection created!");
-        return CreateObjects.CreateQuestion(questionText, points, email);
+        return CreateObjects.CreateQuestion(questionText, points, questionChoicesList, email);
     }
-    public static Message updateQuestion(Long questionID, Set<QuestionChoice> choicesList, String questionText, int points, boolean isCorrect) {
+    public static Message updateQuestion(Long questionID, List<ChoicesData> choicesDataList, String questionText, int points, boolean isCorrect) {
         System.out.println("Database connection starting...");
 
         // create a database connection
         JDBC.connectMySQL();
         System.out.println("Database connection created!");
-        return UpdateObjects.updateQuestion(questionID, choicesList, questionText, points, isCorrect);
+        return UpdateObjects.updateQuestion(questionID, choicesDataList, questionText, points, isCorrect);
     }
     public static Message deleteQuestion(Long questionID) {
         System.out.println("Database connection starting...");

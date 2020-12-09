@@ -1,13 +1,15 @@
 package actions;
 
+import data.ChoicesData;
 import dataServer.Message;
 import domainServer.Course;
+import domainServer.Question;
 import domainServer.Quiz;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 import persistence.HibernateUtil;
 
-import java.util.Set;
+import java.util.List;
 
 public class UpdateObjects {
     public static Session session = HibernateUtil.getSessionFactory().openSession();
@@ -57,8 +59,10 @@ public class UpdateObjects {
         return message;
     }
 
+
     //what do we do with isCorrect?? so far not in question, only choices
-    public static data.Message updateQuestion(Long questionID, Set<QuestionChoice> choicesList, String questionText, int points, boolean isCorrect) {
+    // switch QuestionChoice to Choice
+    public static data.Message updateQuestion(Long questionID, List<ChoicesData> choicesList, String questionText, int points, boolean isCorrect) {
         try {
             session.beginTransaction();
             //retrieve the question
@@ -74,7 +78,8 @@ public class UpdateObjects {
                 session.update(questionToUpdate);
                 session.getTransaction().commit();
                 message.task = "UPDATE_OK";
-                message.questionData = new QuestionData(questionToUpdate.getId(), questionToUpdate.getQuestionText(), questionToUpdate.getQuestionChoices(), questionToUpdate.getPoints(), questionToUpdate.getUser());
+                //return choiceslist too
+                message.questionData = new QuestionData(questionToUpdate.getId(), questionToUpdate.getQuestionText(), questionToUpdate.getPoints(), questionToUpdate.getUser());
             }
         } catch(Exception e){
             // if the error message is "out of memory",
@@ -95,6 +100,5 @@ public class UpdateObjects {
         session.close();
         return message;
     }
-
 }
 

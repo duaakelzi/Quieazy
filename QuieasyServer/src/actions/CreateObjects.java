@@ -1,14 +1,14 @@
 package actions;
 
+import data.ChoicesData;
 import dataServer.Message;
-import domainServer.Course;
-import domainServer.Quiz;
-import domainServer.User;
+import domainServer.*;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 import persistence.HibernateUtil;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 public class CreateObjects {
@@ -76,12 +76,27 @@ public class CreateObjects {
         return message;
     }
 
-    public static data.Message CreateQuestion(String questionText, int points, String email)
+    public static data.Message CreateQuestion(String questionText, int points, List<ChoicesData> choicesList, String email)
     {
         try {
-            System.out.println("create Question ");
+            System.out.println("create Choices ");
             session.beginTransaction();
             //does not check for existence of the question, since the client is separating the two requests
+            Choices ch1 = new Choices();
+            ch1.setChoiceDescription(choicesList.get(0).getChoiceDescription());
+            Choices ch2 = new Choices();
+            ch2.setChoiceDescription(choicesList.get(1).getChoiceDescription());
+            Choices ch3 = new Choices();
+            ch3.setChoiceDescription(choicesList.get(2).getChoiceDescription());
+            Choices ch4 = new Choices();
+            ch4.setChoiceDescription(choicesList.get(3).getChoiceDescription());
+
+            session.save(ch1);
+            session.save(ch2);
+            session.save(ch3);
+            session.save(ch4);
+
+            System.out.println("create Question ");
             Question question = new Question(questionText,points);
 
             //retrieve user to assign it to the question later
@@ -92,10 +107,39 @@ public class CreateObjects {
             userToAdd.setQuestion(questionUserSet);
             question.setUser(userToAdd);
 
+            //choices question
+            Set <QuestionChoice> qch =new HashSet<QuestionChoice>();
+            QuestionChoice qc1=new QuestionChoice();
+            QuestionChoice qc2=new QuestionChoice();
+            QuestionChoice qc3=new QuestionChoice();
+            QuestionChoice qc4=new QuestionChoice();
+
+            qc1.setQuestion(question);
+            qc1.setChoices(ch1);
+            qc1.setCorrect(choicesList.get(0).isCorrect());
+
+            qc2.setQuestion(qc1.getQuestion());
+            qc2.setChoices(ch2);
+            qc2.setCorrect(choicesList.get(1).isCorrect());
+
+            qc3.setQuestion(qc1.getQuestion());
+            qc3.setChoices(ch3);
+            qc3.setCorrect(choicesList.get(2).isCorrect());
+
+            qc4.setQuestion(qc1.getQuestion());
+            qc4.setChoices(ch4);
+            qc4.setCorrect(choicesList.get(3).isCorrect());
+            qch.add(qc1);
+            qch.add(qc2);
+            qch.add(qc3);
+            qch.add(qc4);
+            question.setQuestionsChoices(qch);
+
             session.save(question);
             session.getTransaction().commit();
             message.task = "QUESTION_CREATED";
-            message.questionData = new QuestionData(question.getId(), question.getQuestionText(), question.getPoints(), question.getUser()); //the rest should already be on the client side??
+            //return choiceslist too
+            message.questionData = new QuestionData(question.getId(), question.getQuestionText(), question.getPoints(),  question.getUser()); //the rest should already be on the client side??
 
             System.out.println("Done");
         }
@@ -122,7 +166,6 @@ public class CreateObjects {
         session.close();
         return message;
     }
-
 
 
 

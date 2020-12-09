@@ -40,7 +40,7 @@ public class ServerDecoder {
             return Request.retrieveQuizzes(data.email);
         } else if (message.task.equals("CREATE_QUESTION")) {
             QuestionData question = message.questionData;
-            return Request.createQuestion(question.getQuestionText(), question.getPoints(), question.getUser().getEmail());
+            return Request.createQuestion(question.getQuestionText(), question.getPoints(), question.getQuestionChoices(), question.getUser().getEmail());
         } else if (message.task.equals("UPDATE_QUESTION")) {
             QuestionData question = message.questionData;
             return Request.updateQuestion(question.getId(), question.getQuestionChoices(), question.getQuestionText(), question.getPoints(), question.getCorrect());
@@ -50,7 +50,7 @@ public class ServerDecoder {
         } else if (message.task.equals("FETCH_ALL_QUESTIONS")) {
             QuizData quiz = message.quizData;
             return Request.retrieveQuestions(quiz.getId()); //all questions belonging to that quiz
-        } //fetch results for user, save result
+        }//fetch results for user, save result
         return null;
     }
 }
