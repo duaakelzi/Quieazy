@@ -50,7 +50,7 @@ public class ServerDecoder {
         } else if (message.task.equals("FETCH_ALL_QUESTIONS")) {
             QuizData quiz = message.quizData;
             return Request.retrieveQuestions(quiz.getId()); //all questions belonging to that quiz
-        }
+        } //fetch results for user, save result
         return null;
     }
 }
