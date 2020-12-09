@@ -29,14 +29,13 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f294efe8-4df9-4024-9b0c-a47add265898" name="Default Changelist" comment="add quiz functionality">
+    <list default="true" id="f294efe8-4df9-4024-9b0c-a47add265898" name="Default Changelist" comment="for add questionBox the question can be added and deleted">
+      <change afterPath="$PROJECT_DIR$/Quieasy/src/domain/QuestionC.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Quieasy/src/data/Answer.java" beforeDir="false" afterPath="$PROJECT_DIR$/Quieasy/src/data/Answer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Quieasy/src/data/Question.java" beforeDir="false" afterPath="$PROJECT_DIR$/Quieasy/src/data/Question.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Quieasy/src/data/Message.java" beforeDir="false" afterPath="$PROJECT_DIR$/Quieasy/src/data/Message.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Quieasy/src/data/Quiz.java" beforeDir="false" afterPath="$PROJECT_DIR$/Quieasy/src/data/Quiz.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Quieasy/src/domain/QuizC.java" beforeDir="false" afterPath="$PROJECT_DIR$/Quieasy/src/domain/QuizC.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Quieasy/src/gui/CreateAddQuestionBox.java" beforeDir="false" afterPath="$PROJECT_DIR$/Quieasy/src/gui/CreateAddQuestionBox.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Quieasy/src/gui/CreateAddQuestionTab.java" beforeDir="false" afterPath="$PROJECT_DIR$/Quieasy/src/gui/CreateAddQuestionTab.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Quieasy/src/gui/CreateQuestionChoicesBox.java" beforeDir="false" afterPath="$PROJECT_DIR$/Quieasy/src/gui/CreateQuestionChoicesBox.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Quieasy/src/gui/CreateQuizBox.java" beforeDir="false" afterPath="$PROJECT_DIR$/Quieasy/src/gui/CreateQuizBox.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -118,19 +117,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
-      <option name="arquillianRunConfiguration">
-        <value>
-          <option name="containerStateName" value="" />
-        </value>
-      </option>
-      <option name="TEST_OBJECT" value="CLASS" />
-      <properties />
-      <listeners />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <list>
       <item itemvalue="Application.Quieazy" />
       <item itemvalue="Application.QuieasyServer" />
@@ -162,7 +148,9 @@
       <workItem from="1607108487868" duration="2659000" />
       <workItem from="1607334018976" duration="604000" />
       <workItem from="1607358097005" duration="22336000" />
-      <workItem from="1607422791564" duration="41589000" />
+      <workItem from="1607422791564" duration="41679000" />
+      <workItem from="1607471098356" duration="248000" />
+      <workItem from="1607524947260" duration="4478000" />
     </task>
     <task id="LOCAL-00001" summary="Create Quiz Gui">
       <created>1606844482364</created>
@@ -199,7 +187,14 @@
       <option name="project" value="LOCAL" />
       <updated>1607443514793</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="for add questionBox the question can be added and deleted">
+      <created>1607470683102</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1607470683102</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -234,6 +229,7 @@
     <MESSAGE value="Create Question Answer Box" />
     <MESSAGE value="ComboBox functionality implemented" />
     <MESSAGE value="add quiz functionality" />
-    <option name="LAST_COMMIT_MESSAGE" value="add quiz functionality" />
+    <MESSAGE value="for add questionBox the question can be added and deleted" />
+    <option name="LAST_COMMIT_MESSAGE" value="for add questionBox the question can be added and deleted" />
   </component>
 </project>

@@ -1,6 +1,7 @@
 package gui;
 
 import data.Question;
+import domain.QuestionC;
 import domain.QuizC;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.beans.property.SimpleStringProperty;
@@ -293,6 +294,8 @@ public class CreateAddQuestionBox extends VBox {
             @Override
             public void handle(ActionEvent actionEvent) {
                 //savequiz();
+
+                QuestionC.createnewQuestions(CreateQuizBox.getCreateQuizBox().getQuiz());
 
             }
         });

@@ -6,6 +6,7 @@ import data.Course;
 import data.Question;
 import data.Quiz;
 import data.StudyProgramHS;
+import domain.QuizC;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -289,6 +290,7 @@ public class CreateQuizBox extends VBox {
 						Double.valueOf(textThreshold.getText()),
 						Integer.valueOf(textTime.getText()),
 						new ArrayList<Question>());
+				QuizC.createNewQuiz(quiz);
 
 				MainPane.getMainPane().getTabs().add(CreateAddQuestionTab.getCreateAddQuestionTab());
 				CreateQuizTab.getCreateQuizTab().closeTab();

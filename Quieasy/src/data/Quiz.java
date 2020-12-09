@@ -12,6 +12,9 @@ public class Quiz {
     private String firstName;
     private String lastName;
 
+    public Quiz() {
+
+    }
 
     public Quiz(String program, String course, String name, double threshold, int timer, ArrayList<Question> questions) {
         this.program = program;
@@ -22,6 +25,10 @@ public class Quiz {
         this.questions = questions;
         //firstName = UserC.getCurrentUser().getFirstName();
         //lastName = UserC.getCurrentUser().getLastName();
+    }
+
+    public String getName() {
+        return name;
     }
 
     public void addQuestion(Question q){
