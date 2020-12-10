@@ -6,7 +6,6 @@ import data.Course;
 import data.Question;
 import data.Quiz;
 import data.StudyProgramHS;
-import domain.QuizC;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -34,11 +33,12 @@ public class CreateQuizBox extends VBox {
 	private  Label warning;
 	ArrayList<StudyProgramHS> studyProgramHSArrayList;
 	private Quiz quiz;
+	private ObservableList<String> studyProgramHSObservList;
 	// constructor can only be accessed from within
 	private CreateQuizBox(){
 		
 		super();
-		studyProgramHSArrayList = new ArrayList() {{
+		studyProgramHSArrayList = new ArrayList<>() {{
 			add(new StudyProgramHS("Computational Science and Engineering", new ArrayList<>()));
 			add(new StudyProgramHS("Computer Science", new ArrayList<>(){{
 				add(new Course("SOFE"));
@@ -54,12 +54,12 @@ public class CreateQuizBox extends VBox {
 		}};
 
 		ArrayList<String> studyProgramNames = studyProgramHSArrayList.stream()
-				.map(studyProgramHS -> studyProgramHS.getStudyprogram())
+				.map(StudyProgramHS::getStudyprogram)
 				.collect(Collectors.toCollection(ArrayList::new));
-		ObservableList<String> studyProgramHS = FXCollections.observableArrayList(studyProgramNames);
+		studyProgramHSObservList = FXCollections.observableArrayList(studyProgramNames);
 
 		// study program selection
-		HBox studyProgram = initiateStudyProgram(studyProgramHS);
+		HBox studyProgram = initiateStudyProgram(studyProgramHSObservList);
 		//courses selection
 		//ObservableList<String> course = FXCollections.observableArrayList("SOFE", "Calculus", "C++", "WebEngineering");
 		HBox courses = initiateCourse();
@@ -207,7 +207,7 @@ public class CreateQuizBox extends VBox {
 		textname = new TextField();
 		textname.setFont(Font.font("Times New Roman", FontWeight.NORMAL, 18));
 		textname.setPromptText("Name of the Quiz*");
-		textname.setMinWidth(350);
+		textname.setMinWidth(400);
 		textname.setMinHeight(30);
 		nameQuiz.getChildren().addAll(labelName, textname);
 
@@ -220,8 +220,8 @@ public class CreateQuizBox extends VBox {
 		labelThreshold.setFont(Font.font("Times New Roman", FontWeight.EXTRA_BOLD, 20));
 		textThreshold = new TextField();
 		textThreshold.setFont(Font.font("Times New Roman", FontWeight.NORMAL, 18));
-		textThreshold.setPromptText("Quiz's threshold");
-		textThreshold.setMinWidth(250);
+		textThreshold.setPromptText("80 %");
+		textThreshold.setMinWidth(100);
 		textThreshold.setMinHeight(30);
 		textThreshold.textProperty().addListener((observableValue, oldValue, newValue) -> {
 			if(!newValue.matches("\\d{0,2}([\\.]\\d{0,2})?")) {
@@ -241,21 +241,17 @@ public class CreateQuizBox extends VBox {
 		textTime = new TextField();
 
 		textTime.setFont(Font.font("Times New Roman", FontWeight.NORMAL, 18));
-		textTime.setMaxWidth(105);
-		textTime.setPromptText(" 015 ");
+		textTime.setMinWidth(100);
+		textTime.setPromptText("15 minutes");
 
 		textTime.textProperty().addListener((observableValue, oldValue, newValue) -> {
 			if(!newValue.matches("\\d{0,3}")){
-				textTime.setText("015");
+				textTime.setText("15");
 			}else{
 
 			}
 		});
-		Label labelminutes = new Label("minutes");
-		labelminutes.setPadding(new Insets(5, 0, 0, 10));
-		labelminutes.setFont(Font.font("Times New Roman", FontWeight.NORMAL, 18));
-
-		timeLimit.getChildren().addAll(labelTime, textTime, labelminutes);
+				timeLimit.getChildren().addAll(labelTime, textTime);
 
 		return timeLimit;
 	}
@@ -263,16 +259,14 @@ public class CreateQuizBox extends VBox {
 		HBox warningText = new HBox();
 		warningText.setPadding(new Insets(0,0,0,200));
 		warning = new Label();
-		warning.setTextFill(Color.RED);
+		warning.setTextFill(Color.FIREBRICK);
 		warningText.getChildren().add(warning);
 		return warningText;
 	}
 
 	public HBox initiateBotton(){
-		HBox buttonsubmit = new HBox(20);
-
-
-		buttonsubmit.setPadding(new Insets(40, 30, 0, 520));
+		HBox buttonsubmit = new HBox();
+		buttonsubmit.setPadding(new Insets(40, 30, 0, 500));
 		createButtom = new Button("➦ Create Quiz");
 		createButtom.setFont(Font.font("Times New Roman", FontWeight.NORMAL, 16));
 		buttonsubmit.getChildren().addAll(createButtom);
@@ -282,19 +276,20 @@ public class CreateQuizBox extends VBox {
 														 || textThreshold.getText().isEmpty()
 														 || textTime.getText().isEmpty()) {
 
+
 				warning.setText("Fill all the fields marked with *");
 
 			}else{
 				quiz = new Quiz(studyProgramComboBox.getValue(),
 						courseComboBox.getValue(), textname.getText(),
-						Double.valueOf(textThreshold.getText()),
-						Integer.valueOf(textTime.getText()),
+						Double.parseDouble(textThreshold.getText()),
+						Integer.parseInt(textTime.getText()),
 						new ArrayList<Question>());
-				QuizC.createNewQuiz(quiz);
+				//QuizC.createNewQuiz(quiz); // it is not connected to DB
 
 				MainPane.getMainPane().getTabs().add(CreateAddQuestionTab.getCreateAddQuestionTab());
 				CreateQuizTab.getCreateQuizTab().closeTab();
-
+				 sanitizeInputs();
 				// create the object Quiz here
 
 
@@ -311,5 +306,18 @@ public class CreateQuizBox extends VBox {
 	public Quiz getQuiz() {
 		return quiz;
 	}
+
+	private void sanitizeInputs(){
+		textname.clear();
+		textThreshold.clear();
+		textTime.clear();
+
+	}
+
+
+
+
 }
+
+
 

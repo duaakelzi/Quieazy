@@ -29,14 +29,12 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f294efe8-4df9-4024-9b0c-a47add265898" name="Default Changelist" comment="for add questionBox the question can be added and deleted">
-      <change afterPath="$PROJECT_DIR$/Quieasy/src/domain/QuestionC.java" afterDir="false" />
+    <list default="true" id="e8f5b52c-53ef-4c55-b043-df8806802e11" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Quieasy/src/data/Message.java" beforeDir="false" afterPath="$PROJECT_DIR$/Quieasy/src/data/Message.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Quieasy/src/data/Quiz.java" beforeDir="false" afterPath="$PROJECT_DIR$/Quieasy/src/data/Quiz.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Quieasy/src/domain/QuizC.java" beforeDir="false" afterPath="$PROJECT_DIR$/Quieasy/src/domain/QuizC.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Quieasy/src/gui/CreateAddQuestionBox.java" beforeDir="false" afterPath="$PROJECT_DIR$/Quieasy/src/gui/CreateAddQuestionBox.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Quieasy/src/gui/CreateQuestionChoicesBox.java" beforeDir="false" afterPath="$PROJECT_DIR$/Quieasy/src/gui/CreateQuestionChoicesBox.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Quieasy/src/gui/CreateQuizBox.java" beforeDir="false" afterPath="$PROJECT_DIR$/Quieasy/src/gui/CreateQuizBox.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Quieasy/src/gui/CreateQuizTab.java" beforeDir="false" afterPath="$PROJECT_DIR$/Quieasy/src/gui/CreateQuizTab.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -59,7 +57,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="GUI" />
+        <entry key="$PROJECT_DIR$" value="main" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -117,6 +115,19 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
+      <option name="arquillianRunConfiguration">
+        <value>
+          <option name="containerStateName" value="" />
+        </value>
+      </option>
+      <option name="TEST_OBJECT" value="CLASS" />
+      <properties />
+      <listeners />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <list>
       <item itemvalue="Application.Quieazy" />
       <item itemvalue="Application.QuieasyServer" />
@@ -125,7 +136,7 @@
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="f294efe8-4df9-4024-9b0c-a47add265898" name="Default Changelist" comment="" />
+      <changelist id="e8f5b52c-53ef-4c55-b043-df8806802e11" name="Default Changelist" comment="" />
       <created>1603975417676</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
@@ -151,6 +162,7 @@
       <workItem from="1607422791564" duration="41679000" />
       <workItem from="1607471098356" duration="248000" />
       <workItem from="1607524947260" duration="4478000" />
+      <workItem from="1607538269340" duration="21127000" />
     </task>
     <task id="LOCAL-00001" summary="Create Quiz Gui">
       <created>1606844482364</created>

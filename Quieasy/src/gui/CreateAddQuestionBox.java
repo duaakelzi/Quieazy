@@ -1,7 +1,6 @@
 package gui;
 
 import data.Question;
-import domain.QuestionC;
 import domain.QuizC;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.beans.property.SimpleStringProperty;
@@ -26,10 +25,14 @@ public class CreateAddQuestionBox extends VBox {
 
         private static CreateAddQuestionBox createAddQuestionBox;
         private TableView<TableFillQuestions> tableViewListQuestions;
-        private ObservableList<TableFillQuestions> questionsToList = FXCollections.observableArrayList();;
-        private static int track = 0;
-        private Object ReadOnlyObjectWrapper;
-        private Object Number;
+        private final ObservableList<TableFillQuestions> questionsToList;
+        private TableColumn<TableFillQuestions, Integer> idCol;
+        private ArrayList<Question> questions = CreateQuizBox.getCreateQuizBox().getQuiz().getQuestions();
+
+    {
+        questionsToList = FXCollections.observableArrayList();
+    }
+
 
     //constructor
         private CreateAddQuestionBox() {
@@ -59,12 +62,7 @@ public class CreateAddQuestionBox extends VBox {
             buttons.setPadding(new Insets(20));
             Button newQuestion = new Button("➕ Question");
             newQuestion.setOnAction(actionEvent -> {
-
-
                 MainPane.getMainPane().getTabs().add(CreateQuestionChoicesTab.getCreateQuestionChoicesTab());
-
-
-
             });
             newQuestion.setMinWidth(200);
             newQuestion.setFont(Font.font("Times New Roman", FontWeight.NORMAL, 16));
@@ -83,7 +81,8 @@ public class CreateAddQuestionBox extends VBox {
 
 //
 
-        addNrColumn();
+        addNrColumn(); // nr column
+
         TableColumn <TableFillQuestions, String> firstCol = new TableColumn<>("Question Name");
         firstCol.setMinWidth(290);
         firstCol.setCellValueFactory(new PropertyValueFactory<>("questionName"));
@@ -112,23 +111,18 @@ public class CreateAddQuestionBox extends VBox {
         tableViewListQuestions.setEditable(false);
         tableViewListQuestions.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
     }
+    // fill table row with data from added Question
+    public void fillTableObservableListWithQuestion(int index){
 
-    public void fillTableObservableListWithQuestion(){
-        //questionsToList = FXCollections.observableArrayList();
-        ArrayList<Question> added = CreateQuizBox.getCreateQuizBox().getQuiz().getQuestions();
+        Question addedQuestiontoQuiz = CreateQuizBox.getCreateQuizBox().getQuiz().getQuestions().get(index);
 
-                questionsToList.add(new TableFillQuestions(++track, added.get(--track).getQuestion(), ""));
-                track++;
-                tableViewListQuestions.setItems(questionsToList);
+        questionsToList.add(new TableFillQuestions(String.valueOf(index), addedQuestiontoQuiz.getQuestion(), "Che Li"));
 
 
-
-//                questionsToList.addAll(new TableFillQuestions("What is a Singleton", "Che Li"));
-//                questionsToList.addAll(new TableFillQuestions("What is copy constructor", "Iva Beu"));
-//                questionsToList.addAll(new TableFillQuestions("",""));
+        tableViewListQuestions.setItems(questionsToList);
     }
     private void addNrColumn(){
-            TableColumn<TableFillQuestions, Integer> idCol = new TableColumn<>("#");
+            idCol = new TableColumn<>("#");
             idCol.setMinWidth(25);
             idCol.setMaxWidth(25);
             idCol.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<TableFillQuestions, Integer>, ObservableValue<Integer>>() {
@@ -196,7 +190,7 @@ public class CreateAddQuestionBox extends VBox {
 
 
     }
-
+    TableFillQuestions selectedItem;
     private void addDeleteButtonstoListQuestion(){
         // insert delete button in the last colomn
         TableColumn<TableFillQuestions, Void> lastCol = new TableColumn<>("REMOVE");
@@ -213,7 +207,10 @@ public class CreateAddQuestionBox extends VBox {
                     {
                         deletebtn.setOnAction(actionEvent -> {
                             // remove the question from list
-                            TableFillQuestions selectedItem = tableViewListQuestions.getSelectionModel().getSelectedItem();
+
+                                selectedItem = tableViewListQuestions.getSelectionModel().getSelectedItem();
+                                int index = tableViewListQuestions.getSelectionModel().getSelectedIndex();
+                                questions.remove(questions.get(index));
                                 tableViewListQuestions.getItems().remove(selectedItem);
 
                         });
@@ -247,10 +244,11 @@ public class CreateAddQuestionBox extends VBox {
 
 
 
-        private TableFillQuestions(int nr, String questionName, String author) {
+        private TableFillQuestions(String nr, String questionName, String author) {
+            this.nr = new SimpleStringProperty(nr);
             this.questionName = new SimpleStringProperty(questionName);
             this.author = new SimpleStringProperty(author);
-            this.nr = new SimpleStringProperty(Integer.toString(nr));
+
 
 
         }
@@ -295,7 +293,11 @@ public class CreateAddQuestionBox extends VBox {
             public void handle(ActionEvent actionEvent) {
                 //savequiz();
 
-                QuestionC.createnewQuestions(CreateQuizBox.getCreateQuizBox().getQuiz());
+                //QuestionC.createnewQuestions(CreateQuizBox.getCreateQuizBox().getQuiz()); // not connected to server yet
+
+                for(int i = 0; i < CreateQuizBox.getCreateQuizBox().getQuiz().getQuestions().size(); i ++){
+                    System.out.println(CreateQuizBox.getCreateQuizBox().getQuiz().getQuestions().get(i).getQuestion());
+                }
 
             }
         });

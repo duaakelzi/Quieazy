@@ -24,6 +24,7 @@ public class CreateQuestionChoicesBox extends VBox {
     private TextField fourthchoice;
     private RadioButton fourthradiobtn;
     private TextArea textQuestion;
+    private Question question;
     private CreateQuestionChoicesBox(){
         super();
         // initiate the Question area
@@ -111,6 +112,7 @@ public class CreateQuestionChoicesBox extends VBox {
         Button saveQ= new Button("SAVE QUESTION");
         saveQ.setFont(Font.font("Times New Roman", FontWeight.NORMAL, 16));
         saveQ.setOnAction(actionEvent -> {
+
             CreateQuestionChoicesTab.getCreateQuestionChoicesTab().closeTab();
             ArrayList<Answer> answers = new ArrayList<>();
             answers.add(new Answer(firstchoice.getText(), firstradiobtn.isSelected()));
@@ -118,15 +120,29 @@ public class CreateQuestionChoicesBox extends VBox {
             answers.add(new Answer(thirdchoice.getText(), thirdradiobtn.isSelected()));
             answers.add(new Answer(fourthchoice.getText(), fourthradiobtn.isSelected()));
 
-            Question question = new Question(textQuestion.getText(), answers);
+            question = new Question(textQuestion.getText(), answers);
 
             CreateQuizBox.getCreateQuizBox().getQuiz().addQuestion(question);
-            CreateAddQuestionBox.getCreateAddQuestionBox().fillTableObservableListWithQuestion();
+            int index = CreateQuizBox.getCreateQuizBox().getQuiz().getQuestions().indexOf(question);
+            CreateAddQuestionBox.getCreateAddQuestionBox().fillTableObservableListWithQuestion(index);
+            sanitizeInputs();
 
         });
         buttonHbox.getChildren().addAll(saveQ);
 
         return buttonHbox;
+    }
+
+    private void sanitizeInputs(){
+        textQuestion.clear();
+        firstchoice.clear();
+        secondchoice.clear();
+        thirdchoice.clear();
+        fourthchoice.clear();
+        firstradiobtn.setSelected(false);
+        secondradiobtn.setSelected(false);
+        thirdradiobtn.setSelected(false);
+        fourthradiobtn.setSelected(false);
     }
 
 
