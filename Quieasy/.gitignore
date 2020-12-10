@@ -1,6 +1,5 @@
 # eclipse project file
 .settings/
 .classpath
-.idea
 *.iml
-
+.idea/

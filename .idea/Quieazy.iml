@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="JAVA_MODULE" version="4">
+  <component name="FacetManager">
+    <facet type="hibernate" name="Hibernate">
+      <configuration>
+        <datasource-map />
+        <naming-strategy-map />
+        <deploymentDescriptor name="hibernate.cfg.xml" url="file://$MODULE_DIR$/QuieasyServer/src/hibernate.cfg.xml" />
+      </configuration>
+    </facet>
+  </component>
+  <component name="NewModuleRootManager" inherit-compiler-output="true">
+    <exclude-output />
+    <content url="file://$MODULE_DIR$">
+      <sourceFolder url="file://$MODULE_DIR$/Quieasy/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/QuieasyServer/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$" isTestSource="false" />
+    </content>
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" name="lib" level="project" />
+    <orderEntry type="library" name="Hibernate library" level="project" />
+    <orderEntry type="library" name="mysql-connector" level="project" />
+    <orderEntry type="library" name="extras" level="project" />
+    <orderEntry type="module-library">
+      <library name="testng">
+        <CLASSES>
+          <root url="jar://$MAVEN_REPOSITORY$/org/testng/testng/6.14.3/testng-6.14.3.jar!/" />
+          <root url="jar://$MAVEN_REPOSITORY$/com/beust/jcommander/1.72/jcommander-1.72.jar!/" />
+          <root url="jar://$MAVEN_REPOSITORY$/org/apache-extras/beanshell/bsh/2.0b6/bsh-2.0b6.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+  </component>
+</module>

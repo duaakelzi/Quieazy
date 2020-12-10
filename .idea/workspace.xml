@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="BranchesTreeState">
     <expand>
       <path>
@@ -21,15 +24,76 @@
         <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
         <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
         <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="BRANCH:origin/GUI" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="BRANCH:origin/main" type="e8cecc67:BranchNodeDescriptor" />
       </path>
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f294efe8-4df9-4024-9b0c-a47add265898" name="Default Changelist" comment="Create Question Answer Box">
+    <list default="true" id="dadb00a7-eb66-47b3-a0cf-a34de94047e2" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/Quieazy.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Hibernate_library.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/lib.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/mysql_connector.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_06_12_2020_15_40_[Default_Changelist]/shelved.patch" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_06_12_2020_15_40__Default_Changelist_.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Quieasy/src/data/QuestionData.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Quieasy/src/data/QuizData.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Quieasy/src/domain/QuestionC.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Quieasy/src/gui/CreateAddQuestionTab.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Quieasy/src/gui/CreateQuestionChoicesTab.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/QuieasyServer/src/actions/CreateObjects.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/QuieasyServer/src/actions/DeleteObjects.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/QuieasyServer/src/actions/RetrieveObjects.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/QuieasyServer/src/actions/UpdateObjects.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/QuieasyServer/src/dataServer/ChoicesData.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/QuieasyServer/src/dataServer/Message.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/QuieasyServer/src/dataServer/QuestionData.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/QuieasyServer/src/dataServer/QuizData.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/QuieasyServer/src/domain/Choices.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/QuieasyServer/src/domain/Course.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/QuieasyServer/src/domain/IDQuizChoice.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/QuieasyServer/src/domain/Question.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/QuieasyServer/src/domain/QuestionChoice.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/QuieasyServer/src/domain/Quiz.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/QuieasyServer/src/domain/Result.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/QuieasyServer/src/domain/Role.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/QuieasyServer/src/domain/StudyProgram.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/QuieasyServer/src/persistence/Request.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Quieasy/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/Quieasy/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Quieasy/src/application/ClientAgent.java" beforeDir="false" afterPath="$PROJECT_DIR$/Quieasy/src/application/ClientAgent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Quieasy/src/application/ClientDecoder.java" beforeDir="false" afterPath="$PROJECT_DIR$/Quieasy/src/application/ClientDecoder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Quieasy/src/data/Answer.java" beforeDir="false" afterPath="$PROJECT_DIR$/Quieasy/src/data/Answer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Quieasy/src/data/Course.java" beforeDir="false" afterPath="$PROJECT_DIR$/Quieasy/src/data/Course.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Quieasy/src/data/Message.java" beforeDir="false" afterPath="$PROJECT_DIR$/Quieasy/src/data/Message.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Quieasy/src/data/Question.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Quieasy/src/data/Quiz.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Quieasy/src/data/StudyProgramHS.java" beforeDir="false" afterPath="$PROJECT_DIR$/Quieasy/src/data/StudyProgramHS.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Quieasy/src/domain/QuizC.java" beforeDir="false" afterPath="$PROJECT_DIR$/Quieasy/src/domain/QuizC.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Quieasy/src/gui/CreateAddQuestionBox.java" beforeDir="false" afterPath="$PROJECT_DIR$/Quieasy/src/gui/CreateAddQuestionBox.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Quieasy/src/gui/CreateQuestionChoicesBox.java" beforeDir="false" afterPath="$PROJECT_DIR$/Quieasy/src/gui/CreateQuestionChoicesBox.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Quieasy/src/gui/CreateQuizBox.java" beforeDir="false" afterPath="$PROJECT_DIR$/Quieasy/src/gui/CreateQuizBox.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Quieasy/src/gui/CreateQuizTab.java" beforeDir="false" afterPath="$PROJECT_DIR$/Quieasy/src/gui/CreateQuizTab.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Quieasy/src/gui/PrimeScene.java" beforeDir="false" afterPath="$PROJECT_DIR$/Quieasy/src/gui/PrimeScene.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/QuieasyServer/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/QuieasyServer/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/QuieasyServer/src/actions/LoginAction.java" beforeDir="false" afterPath="$PROJECT_DIR$/QuieasyServer/src/actions/LoginAction.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/QuieasyServer/src/actions/RegisterAction.java" beforeDir="false" afterPath="$PROJECT_DIR$/QuieasyServer/src/actions/RegisterAction.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/QuieasyServer/src/application/QuieasyServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/QuieasyServer/src/application/QuieasyServer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/QuieasyServer/src/application/QuieasyServerThread.java" beforeDir="false" afterPath="$PROJECT_DIR$/QuieasyServer/src/application/QuieasyServerThread.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/QuieasyServer/src/application/ServerDecoder.java" beforeDir="false" afterPath="$PROJECT_DIR$/QuieasyServer/src/application/ServerDecoder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/QuieasyServer/src/data/LoginData.java" beforeDir="false" afterPath="$PROJECT_DIR$/QuieasyServer/src/dataServer/LoginData.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/QuieasyServer/src/data/Message.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/QuieasyServer/src/data/RegisterData.java" beforeDir="false" afterPath="$PROJECT_DIR$/QuieasyServer/src/dataServer/RegisterData.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/QuieasyServer/src/data/UserData.java" beforeDir="false" afterPath="$PROJECT_DIR$/QuieasyServer/src/dataServer/UserData.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/QuieasyServer/src/domain/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/QuieasyServer/src/domain/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/QuieasyServer/src/hibernate.cfg.xml" beforeDir="false" afterPath="$PROJECT_DIR$/QuieasyServer/src/hibernate.cfg.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/QuieasyServer/src/persistence/Database.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/QuieasyServer/src/persistence/HibernateUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/QuieasyServer/src/persistence/HibernateUtil.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -57,45 +121,82 @@
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GitToolBoxStore">
+    <option name="projectConfigVersion" value="2" />
+    <option name="recentBranches">
+      <RecentBranches>
+        <option name="branchesForRepo">
+          <list>
+            <RecentBranchesForRepo>
+              <option name="branches">
+                <list>
+                  <RecentBranch>
+                    <option name="branchName" value="main" />
+                    <option name="lastUsedInstant" value="1607543409" />
+                  </RecentBranch>
+                  <RecentBranch>
+                    <option name="branchName" value="experiment" />
+                    <option name="lastUsedInstant" value="1607543408" />
+                  </RecentBranch>
+                </list>
+              </option>
+              <option name="repositoryRootUrl" value="file://$PROJECT_DIR$" />
+            </RecentBranchesForRepo>
+          </list>
+        </option>
+      </RecentBranches>
+    </option>
+  </component>
   <component name="ProjectId" id="1jYK7CbqdbK0GWhCES8hcXD1OnI" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="Downloaded.Files.Path.Enabled" value="false" />
+    <property name="Repository.Attach.Annotations" value="false" />
+    <property name="Repository.Attach.JavaDocs" value="false" />
+    <property name="Repository.Attach.Sources" value="false" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$USER_HOME$/.jdks/lib/javafx-sdk-11.0.2/lib" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/Quieasy" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
     <property name="node.js.path.for.package.tslint" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
-    <property name="project.structure.last.edited" value="Project" />
+    <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="settings.editor.selected.configurable" value="org.jetbrains.plugins.github.ui.GithubSettingsConfigurable" />
   </component>
   <component name="RecentsManager">
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="applicationServer" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\IonCicala\Documents\GitHub\Quieazy\Quieasy\src\data" />
+      <recent name="C:\Users\Albina Muzafarova\Documents\THU\CTS5\SWPROJ\Quieazy\QuieasyServer\src\actions" />
+      <recent name="C:\Users\Albina Muzafarova\Documents\THU\CTS5\SWPROJ\Quieazy\QuieasyServer\src\dataServer" />
+      <recent name="C:\Users\Albina Muzafarova\Documents\THU\CTS5\SWPROJ\Quieazy\QuieasyServer\src\domainServer" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="dataServer" />
+      <recent name="applicationServer" />
+      <recent name="persistence" />
     </key>
   </component>
   <component name="RunManager" selected="Application.Quieazy">
-    <configuration name="QuieasyServer" type="Application" factoryName="Application" nameIsGenerated="true">
+    <configuration name="QuieasyServer" type="Application" factoryName="Application">
       <option name="MAIN_CLASS_NAME" value="application.QuieasyServer" />
       <module name="Quieazy" />
       <option name="PROGRAM_PARAMETERS" value="3000" />
-      <option name="VM_PARAMETERS" value="--module-path \Users\IonCicala\.jdks\lib\javafx-sdk-11.0.2\lib --add-modules javafx.controls,javafx.fxml" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="application.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
+      <option name="VM_PARAMETERS" value="--module-path &quot;C:\Users\Duaa Kelzi\.openjfx\javafx-sdk-11.0.2\lib&quot; --add-modules javafx.controls,javafx.fxml" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -104,8 +205,19 @@
       <option name="MAIN_CLASS_NAME" value="application.Quieasy" />
       <module name="Quieazy" />
       <option name="PROGRAM_PARAMETERS" value="3000" />
-      <option name="VM_PARAMETERS" value="--module-path \Users\IonCicala\.jdks\lib\javafx-sdk-11.0.2\lib --add-modules javafx.controls,javafx.fxml" />
+      <option name="VM_PARAMETERS" value="--module-path &quot;C:\Users\Duaa Kelzi\.openjfx\javafx-sdk-11.0.2\lib&quot; --add-modules javafx.controls,javafx.fxml" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Quieasy/src/application" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+      <option name="arquillianRunConfiguration">
+        <value>
+          <option name="containerStateName" value="" />
+        </value>
+      </option>
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -118,7 +230,7 @@
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="f294efe8-4df9-4024-9b0c-a47add265898" name="Default Changelist" comment="" />
+      <changelist id="dadb00a7-eb66-47b3-a0cf-a34de94047e2" name="Default Changelist" comment="" />
       <created>1603975417676</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
@@ -137,7 +249,15 @@
       <workItem from="1606924494620" duration="636000" />
       <workItem from="1606926800615" duration="2732000" />
       <workItem from="1606929607530" duration="22191000" />
-      <workItem from="1606985774441" duration="5585000" />
+      <workItem from="1606985774441" duration="5642000" />
+      <workItem from="1607108487868" duration="2659000" />
+      <workItem from="1607334018976" duration="604000" />
+      <workItem from="1607358097005" duration="22336000" />
+      <workItem from="1607422791564" duration="41679000" />
+      <workItem from="1607471098356" duration="248000" />
+      <workItem from="1607524947260" duration="4478000" />
+      <workItem from="1607548837894" duration="7373000" />
+      <workItem from="1607580977105" duration="2040000" />
     </task>
     <task id="LOCAL-00001" summary="Create Quiz Gui">
       <created>1606844482364</created>
@@ -153,7 +273,35 @@
       <option name="project" value="LOCAL" />
       <updated>1606952142205</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Create Question Answer Box">
+      <created>1606991787704</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1606991787704</updated>
+    </task>
+    <task id="LOCAL-00004" summary="ComboBox functionality implemented">
+      <created>1607375462505</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1607375462505</updated>
+    </task>
+    <task id="LOCAL-00005" summary="add quiz functionality">
+      <created>1607443514793</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1607443514793</updated>
+    </task>
+    <task id="LOCAL-00006" summary="for add questionBox the question can be added and deleted">
+      <created>1607470683102</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1607470683102</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -170,7 +318,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="origin/GUI" />
+                        <option value="origin/main" />
                       </list>
                     </value>
                   </entry>
@@ -185,7 +333,16 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Create Quiz Gui" />
-    <MESSAGE value="Create Question Answer Box" />
-    <option name="LAST_COMMIT_MESSAGE" value="Create Question Answer Box" />
+    <option name="LAST_COMMIT_MESSAGE" value="Create Quiz Gui" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <breakpoint enabled="true" type="java-exception">
+          <properties class="java.io.NotSerializableException" package="java.io" />
+          <option name="timeStamp" value="1" />
+        </breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

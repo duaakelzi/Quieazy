@@ -3,6 +3,8 @@
 
 package data;
 
+
+
 import java.io.Serializable;
 import java.util.ArrayList;
 
@@ -13,6 +15,7 @@ public class Message implements Serializable {
 	public RegisterData registerData; // field values from "create account" form
 	public UserData userData; // user email, first and last name
 	public LoginData loginData; // user email and password
-	public ArrayList<Quiz> quizlist;
+	public QuizData quizlist;
+	public ArrayList<QuestionData> questionData;
 	
 }

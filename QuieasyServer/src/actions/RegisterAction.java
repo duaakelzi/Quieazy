@@ -1,7 +1,7 @@
 package actions;
 
-import data.Message;
-import data.UserData;
+import dataServer.Message;
+import dataServer.UserData;
 import domain.User;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
