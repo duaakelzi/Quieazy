@@ -4,8 +4,8 @@ import java.util.ArrayList;
 
 public class Question {
 
-    private final String question;
-    private final ArrayList<Answer> answers;
+    private String question;
+    private ArrayList<Answer> answers;
 
 
 
@@ -23,5 +23,13 @@ public class Question {
 
     public ArrayList<Answer> getAnswers() {
         return answers;
+    }
+
+    public void setQuestion(String question){
+        this.question = question;
+    }
+
+    public void setAnswers(ArrayList<Answer> answers) {
+        this.answers = answers;
     }
 }

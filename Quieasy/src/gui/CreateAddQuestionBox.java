@@ -4,7 +4,6 @@ import data.Question;
 import domain.QuizC;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -25,13 +24,14 @@ public class CreateAddQuestionBox extends VBox {
 
         private static CreateAddQuestionBox createAddQuestionBox;
         private TableView<TableFillQuestions> tableViewListQuestions;
-        private final ObservableList<TableFillQuestions> questionsToList;
+        private ObservableList<TableFillQuestions> questionsToList;
         private TableColumn<TableFillQuestions, Integer> idCol;
         private ArrayList<Question> questions = CreateQuizBox.getCreateQuizBox().getQuiz().getQuestions();
+        private TableFillQuestions selectedItem;
+        private Question addedQuestiontoQuiz;
 
-    {
-        questionsToList = FXCollections.observableArrayList();
-    }
+
+
 
 
     //constructor
@@ -63,6 +63,7 @@ public class CreateAddQuestionBox extends VBox {
             Button newQuestion = new Button("➕ Question");
             newQuestion.setOnAction(actionEvent -> {
                 MainPane.getMainPane().getTabs().add(CreateQuestionChoicesTab.getCreateQuestionChoicesTab());
+                tableViewListQuestions.getSelectionModel().clearSelection();
             });
             newQuestion.setMinWidth(200);
             newQuestion.setFont(Font.font("Times New Roman", FontWeight.NORMAL, 16));
@@ -112,35 +113,35 @@ public class CreateAddQuestionBox extends VBox {
         tableViewListQuestions.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
     }
     // fill table row with data from added Question
-    public void fillTableObservableListWithQuestion(int index){
+    public void fillTableObservableListWithQuestion(){
 
-        Question addedQuestiontoQuiz = CreateQuizBox.getCreateQuizBox().getQuiz().getQuestions().get(index);
+        //addedQuestiontoQuiz = questions.get(index);
+        questionsToList = FXCollections.observableArrayList();
 
-        questionsToList.add(new TableFillQuestions(String.valueOf(index), addedQuestiontoQuiz.getQuestion(), "Che Li"));
+        for(int i = 0; i < questions.size(); i++){
+            questionsToList.add(new TableFillQuestions(String.valueOf(i), questions.get(i).getQuestion(), "Chen Li"));
+        }
+           tableViewListQuestions.setItems(questionsToList);
+           // tableViewListQuestions.setItems(questionsToList);
 
 
-        tableViewListQuestions.setItems(questionsToList);
+
     }
     private void addNrColumn(){
             idCol = new TableColumn<>("#");
             idCol.setMinWidth(25);
             idCol.setMaxWidth(25);
-            idCol.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<TableFillQuestions, Integer>, ObservableValue<Integer>>() {
-                @Override
-                public ObservableValue<Integer> call(TableColumn.CellDataFeatures<TableFillQuestions, Integer> data) {
-                    return new ReadOnlyObjectWrapper<Integer>(Integer.parseInt(data.getValue().getNr()));
-                }
-            });
-            idCol.setCellFactory(new Callback<TableColumn<TableFillQuestions, Integer>, TableCell<TableFillQuestions, Integer>>() {
+            idCol.setCellValueFactory(data -> new ReadOnlyObjectWrapper<>(Integer.parseInt(data.getValue().getNr())));
+            idCol.setCellFactory(new Callback<>() {
                 @Override
                 public TableCell<TableFillQuestions, Integer> call(TableColumn<TableFillQuestions, Integer> tableFillQuestionsIntegerTableColumn) {
-                    return new TableCell<>(){
+                    return new TableCell<>() {
                         @Override
                         protected void updateItem(Integer item, boolean empty) {
                             super.updateItem(item, empty);
-                            if(this.getTableRow() != null && item != null){
-                                setText(this.getTableRow().getIndex()+"");
-                            }else{
+                            if (this.getTableRow() != null && item != null) {
+                                setText(this.getTableRow().getIndex() + "");
+                            } else {
                                 setText("");
                             }
                         }
@@ -167,6 +168,17 @@ public class CreateAddQuestionBox extends VBox {
                     {
                         editbtn.setOnAction(actionEvent -> {
                             // action when the button is pressed
+                            try {
+                                MainPane.getMainPane().getTabs().add(CreateQuestionChoicesTab.getCreateQuestionChoicesTab());
+                                int index = indexSelecteditem();
+                                CreateQuestionChoicesBox.getCreateQuestionChoicesBox().editQuestion(index);
+
+                            } catch (IndexOutOfBoundsException e){
+                                Alert alert = new Alert(Alert.AlertType.NONE);
+                                alert.setAlertType(Alert.AlertType.INFORMATION);
+                                alert.setContentText("Selecte the item what you want to edit");
+                                alert.show();
+                            }
 
                         });
                     }
@@ -190,7 +202,7 @@ public class CreateAddQuestionBox extends VBox {
 
 
     }
-    TableFillQuestions selectedItem;
+
     private void addDeleteButtonstoListQuestion(){
         // insert delete button in the last colomn
         TableColumn<TableFillQuestions, Void> lastCol = new TableColumn<>("REMOVE");
@@ -207,11 +219,18 @@ public class CreateAddQuestionBox extends VBox {
                     {
                         deletebtn.setOnAction(actionEvent -> {
                             // remove the question from list
-
+                            try {
                                 selectedItem = tableViewListQuestions.getSelectionModel().getSelectedItem();
                                 int index = tableViewListQuestions.getSelectionModel().getSelectedIndex();
                                 questions.remove(questions.get(index));
                                 tableViewListQuestions.getItems().remove(selectedItem);
+                                tableViewListQuestions.getSelectionModel().clearSelection(); // clear all the selection
+                            }catch (IndexOutOfBoundsException e){
+                                Alert alert = new Alert(Alert.AlertType.NONE);
+                                alert.setAlertType(Alert.AlertType.INFORMATION);
+                                alert.setContentText("Select the Question to be removed");
+                                alert.show();
+                            }
 
                         });
                     }
@@ -284,6 +303,7 @@ public class CreateAddQuestionBox extends VBox {
 
     }
 
+
     private HBox initiateSavedBtns(){
         HBox savedbtn = new HBox(360);
         savedbtn.setPadding(new Insets(30,10,30,30));
@@ -313,5 +333,8 @@ public class CreateAddQuestionBox extends VBox {
         QuizC.createNewQuiz(CreateQuizBox.getCreateQuizBox().getQuiz());
     }
 
+    public int indexSelecteditem(){
+        return tableViewListQuestions.getSelectionModel().getSelectedIndex();
+    }
 
 }

@@ -29,12 +29,12 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e8f5b52c-53ef-4c55-b043-df8806802e11" name="Default Changelist" comment="">
+    <list default="true" id="e8f5b52c-53ef-4c55-b043-df8806802e11" name="Default Changelist" comment="AddQuestionsBox delete button implemented and tested">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Quieasy/src/data/Answer.java" beforeDir="false" afterPath="$PROJECT_DIR$/Quieasy/src/data/Answer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Quieasy/src/data/Question.java" beforeDir="false" afterPath="$PROJECT_DIR$/Quieasy/src/data/Question.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Quieasy/src/gui/CreateAddQuestionBox.java" beforeDir="false" afterPath="$PROJECT_DIR$/Quieasy/src/gui/CreateAddQuestionBox.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Quieasy/src/gui/CreateQuestionChoicesBox.java" beforeDir="false" afterPath="$PROJECT_DIR$/Quieasy/src/gui/CreateQuestionChoicesBox.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Quieasy/src/gui/CreateQuizBox.java" beforeDir="false" afterPath="$PROJECT_DIR$/Quieasy/src/gui/CreateQuizBox.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Quieasy/src/gui/CreateQuizTab.java" beforeDir="false" afterPath="$PROJECT_DIR$/Quieasy/src/gui/CreateQuizTab.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -115,19 +115,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
-      <option name="arquillianRunConfiguration">
-        <value>
-          <option name="containerStateName" value="" />
-        </value>
-      </option>
-      <option name="TEST_OBJECT" value="CLASS" />
-      <properties />
-      <listeners />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <list>
       <item itemvalue="Application.Quieazy" />
       <item itemvalue="Application.QuieasyServer" />
@@ -162,7 +149,9 @@
       <workItem from="1607422791564" duration="41679000" />
       <workItem from="1607471098356" duration="248000" />
       <workItem from="1607524947260" duration="4478000" />
-      <workItem from="1607538269340" duration="21127000" />
+      <workItem from="1607538269340" duration="21328000" />
+      <workItem from="1607589715663" duration="9869000" />
+      <workItem from="1607610533437" duration="11652000" />
     </task>
     <task id="LOCAL-00001" summary="Create Quiz Gui">
       <created>1606844482364</created>
@@ -206,7 +195,14 @@
       <option name="project" value="LOCAL" />
       <updated>1607470683102</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="AddQuestionsBox delete button implemented and tested">
+      <created>1607561377448</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1607561377448</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -242,6 +238,7 @@
     <MESSAGE value="ComboBox functionality implemented" />
     <MESSAGE value="add quiz functionality" />
     <MESSAGE value="for add questionBox the question can be added and deleted" />
-    <option name="LAST_COMMIT_MESSAGE" value="for add questionBox the question can be added and deleted" />
+    <MESSAGE value="AddQuestionsBox delete button implemented and tested" />
+    <option name="LAST_COMMIT_MESSAGE" value="AddQuestionsBox delete button implemented and tested" />
   </component>
 </project>

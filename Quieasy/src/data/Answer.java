@@ -1,22 +1,31 @@
 package data;
 
 public class Answer {
-    private final String answers;
-    private final boolean correctAnswer;
+    private String answer;
+    private boolean correctAnswer;
 
 
-    public Answer(String answers, boolean correctAnswer) {
-        this.answers = answers;
+    public Answer(String answer, boolean correctAnswer) {
+        this.answer = answer;
         this.correctAnswer = correctAnswer;
     }
 
-    public String getAnswers() {
-        return answers;
+    public String getAnswer() {
+        return answer;
     }
 
     public boolean isCorrectAnswer() {
         return correctAnswer;
 
     }
+
+    public void setAnswer(String answer){
+        this.answer = answer;
+    }
+
+    public void setCorrectAnswer(boolean correctAnswer){
+        this.correctAnswer = correctAnswer;
+    }
+
 
 }
