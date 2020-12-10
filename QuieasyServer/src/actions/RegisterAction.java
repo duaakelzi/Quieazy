@@ -2,7 +2,7 @@ package actions;
 
 import dataServer.Message;
 import dataServer.UserData;
-import domain.User;
+import domainServer.User;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 import persistence.HibernateUtil;

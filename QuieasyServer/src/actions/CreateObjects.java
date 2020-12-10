@@ -2,7 +2,11 @@ package actions;
 
 import dataServer.ChoicesData;
 import dataServer.Message;
-import domain.*;
+
+import domainServer.*;
+
+import dataServer.QuestionData;
+
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 import persistence.HibernateUtil;
@@ -29,7 +33,10 @@ public class CreateObjects {
             queryCourse.setParameter("courseName", course);
         Course courseToAdd=(Course)queryCourse.list().get(0);
         Long CourseId =courseToAdd.getId();
+
         Query queryQuiz = session.getSession().createQuery("FROM Quiz WHERE quiz_Name = :name  and id= :id");
+
+
             queryQuiz.setParameter("name", name);
             queryQuiz.setParameter("id", CourseId);
 
@@ -39,7 +46,7 @@ public class CreateObjects {
         //add author
 
         else{
-        Quiz quiz =new domain.Quiz(name,threshold,false,false,timer);
+        Quiz quiz =new Quiz(name,threshold,false,false,timer);
         Set<Quiz> quizUserSet= new HashSet<Quiz>();
         quizUserSet.add(quiz);
         quiz.setCourse(courseToAdd);
@@ -140,7 +147,9 @@ public class CreateObjects {
             session.getTransaction().commit();
             message.task = "QUESTION_CREATED";
             //return choiceslist too
-            //message.questionData = new QuestionData(question.getId(), question.getQuestionText(), question.getPoints(),  question.getUser()); //the rest should already be on the client side??
+
+            message.questionData = new QuestionData(question.getId(), question.getQuestionText(), (List) question.getQuestionChoices(), question.getPoints(),  question.getUser()); //the rest should already be on the client side??
+
 
             System.out.println("Done");
         }

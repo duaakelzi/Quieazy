@@ -1,8 +1,12 @@
 package dataServer;
 
-import domain.Question;
-import domain.Quiz;
-import domain.User;
+<<<<<<< HEAD
+import domainServer.Question;
+import domainServer.Quiz;
+import domainServer.User;
+=======
+import data.ChoicesData;
+>>>>>>> 46497b06ba12f59ceb87697301ffd4191ce89265
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -18,7 +22,9 @@ public class QuestionData {
     
     private List<Question> allQuestions = new ArrayList<>();
     private Set<Quiz> quiz = new HashSet<Quiz>(0);
-    private List<ChoicesData> questionChoices = new ArrayList<>(0);
+
+    private List<ChoicesData> questionChoices;
+
     
     //c'tors
     public QuestionData(Long id, String questionText, int points, User user) {

@@ -1,7 +1,10 @@
-package domain;
+package domainServer;
+
+import dataServer.ChoicesData;
 
 import javax.persistence.*;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -78,7 +81,7 @@ public class Question  {
 	     {
 	    	 this.quiz.add(quiz);
 	     }
-	public void setQuestionChoices(Set<QuestionChoice> questionChoices) {
+	public void setQuestionChoices(Set<ChoicesData> questionChoices) {
 			this.questionChoices = questionChoices;
 		}
 
@@ -98,7 +101,6 @@ public class Question  {
 	
 	@ManyToOne
     @JoinColumn(name = "id_user")
-    
 	public User getUser() {
 		return user;
 	}

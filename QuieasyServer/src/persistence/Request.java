@@ -3,7 +3,9 @@
 package persistence;
 
 import actions.*;
+
 import dataServer.ChoicesData;
+
 import dataServer.Message;
 
 import java.util.List;
@@ -32,7 +34,9 @@ public class Request {
     }
 
     //create a quiz
+
     public static Message createQuiz(String name, double threshold, boolean isPublic, String email, String course,int timer) {
+
         System.out.println("Database connection starting...");
 
         // create a database connection
@@ -41,7 +45,9 @@ public class Request {
         return CreateObjects.CreateQuiz(name,threshold,false,timer,email,course);
     }
 
+
     public static Message updateQuiz( String name, double threshold, boolean isPublic, String course)
+
     {
         System.out.println("Database connection starting...");
 
@@ -55,7 +61,7 @@ public class Request {
         // create a database connection
         JDBC.connectMySQL();
         System.out.println("Database connection created!");
-        return DeleteObjects.DeleteQuiz(id,course);
+        return DeleteObjects.deleteQuiz(id,course);
     }
     //retrieve all quizzes for user
     public static Message retrieveQuizzes(String email) {
@@ -75,7 +81,9 @@ public class Request {
         System.out.println("Database connection created!");
         return RetrieveObjects.retrieveQuestions(quizID);
     }
-    public static Message createQuestion(String questionText, int points, List<ChoicesData> questionChoicesList, String email) {
+
+    public static <ChoicesData> Message createQuestion(String questionText, int points, List<dataServer.ChoicesData> questionChoicesList, String email) {
+
         System.out.println("Database connection starting...");
 
         // create a database connection

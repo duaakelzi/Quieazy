@@ -1,7 +1,7 @@
 package dataServer;
 
-import domain.Question;
-import domain.Quiz;
+import domainServer.Question;
+import domainServer.Quiz;
 
 import java.io.Serializable;
 import java.util.ArrayList;

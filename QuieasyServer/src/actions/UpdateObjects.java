@@ -1,11 +1,18 @@
 package actions;
 
+import dataServer.ChoicesData;
 import dataServer.Message;
-import domain.Course;
-import domain.Quiz;
+
+import dataServer.QuestionData;
+import domainServer.Course;
+import domainServer.Question;
+import domainServer.Quiz;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 import persistence.HibernateUtil;
+
+import java.util.List;
+import java.util.Set;
 
 public class UpdateObjects {
     public static Session session = HibernateUtil.getSessionFactory().openSession();
@@ -14,7 +21,7 @@ public class UpdateObjects {
     public static Message updateQuiz(String name, double threshold, boolean isPublic, String course) {
         try {
             session.beginTransaction();
-            Query queryCourse = session.getSession().createQuery("FROM domain.Course WHERE courseName = :courseName ");
+            Query queryCourse = session.getSession().createQuery("FROM Course WHERE courseName = :courseName ");
             queryCourse.setParameter("courseName", course);
             Course courseToAdd = (Course) queryCourse.list().get(0);
             Long CourseId = courseToAdd.getId();
@@ -60,7 +67,9 @@ public class UpdateObjects {
 
     //what do we do with isCorrect?? so far not in question, only choices
     // switch QuestionChoice to Choice
-    /*public static data.Message updateQuestion(Long questionID, List<ChoicesData> choicesList, String questionText, int points, boolean isCorrect) {
+
+    public static Message updateQuestion(Long questionID, List<ChoicesData> choicesList, String questionText, int points, boolean isCorrect) {
+
         try {
             session.beginTransaction();
             //retrieve the question
@@ -70,14 +79,14 @@ public class UpdateObjects {
             if (questionToUpdate == null) {
                 message.task = "UPDATE_FAILED";
             }else {
-                questionToUpdate.setQuestionChoices(choicesList);
+                questionToUpdate.setQuestionsChoices(((Set)(choicesList)));
                 questionToUpdate.setQuestionText(questionText);
                 questionToUpdate.setPoints(points);
                 session.update(questionToUpdate);
                 session.getTransaction().commit();
                 message.task = "UPDATE_OK";
                 //return choiceslist too
-                message.questionData = new QuestionData(questionToUpdate.getId(), questionToUpdate.getQuestionText(), questionToUpdate.getPoints(), questionToUpdate.getUser());
+                message.questionData = new QuestionData(questionToUpdate.getId(), questionToUpdate.getQuestionText(), (List) questionToUpdate.getQuestionChoices(), questionToUpdate.getPoints(), questionToUpdate.getUser());
             }
         } catch(Exception e){
             // if the error message is "out of memory",
@@ -97,6 +106,6 @@ public class UpdateObjects {
         }
         session.close();
         return message;
-    }*/
+    }}
 
 

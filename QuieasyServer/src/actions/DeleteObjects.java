@@ -1,8 +1,9 @@
 package actions;
 
 import dataServer.Message;
-import domain.Question;
-import domain.Quiz;
+import domainServer.Course;
+import domainServer.Question;
+import domainServer.Quiz;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 import persistence.HibernateUtil;
@@ -10,13 +11,14 @@ import persistence.HibernateUtil;
 public class DeleteObjects {
     public static Session session = HibernateUtil.getSessionFactory().openSession();
     public static Message message = new Message();
-    public static Message DeleteQuiz(Long id, String course)
+
+    public static Message deleteQuiz(Long id, String course)
     {
         try {
             session.beginTransaction();
             Query queryCourse = session.getSession().createQuery("FROM Course WHERE courseName = :courseName ");
             queryCourse.setParameter("courseName", course);
-            domain.Course courseToAdd = (domain.Course) queryCourse.list().get(0);
+            Course courseToAdd = (Course) queryCourse.list().get(0);
             Long CourseId = courseToAdd.getId();
             Query queryQuiz = session.getSession().createQuery("FROM Quiz WHERE quiz_Name= :id ");
             queryQuiz.setParameter("id", id);
