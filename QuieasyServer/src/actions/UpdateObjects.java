@@ -2,6 +2,7 @@ package actions;
 
 import data.ChoicesData;
 import dataServer.Message;
+import dataServer.QuestionData;
 import domainServer.Course;
 import domainServer.Question;
 import domainServer.Quiz;
@@ -62,7 +63,7 @@ public class UpdateObjects {
 
     //what do we do with isCorrect?? so far not in question, only choices
     // switch QuestionChoice to Choice
-    public static data.Message updateQuestion(Long questionID, List<ChoicesData> choicesList, String questionText, int points, boolean isCorrect) {
+    public static Message updateQuestion(Long questionID, List<ChoicesData> choicesList, String questionText, int points, boolean isCorrect) {
         try {
             session.beginTransaction();
             //retrieve the question
@@ -79,7 +80,7 @@ public class UpdateObjects {
                 session.getTransaction().commit();
                 message.task = "UPDATE_OK";
                 //return choiceslist too
-                message.questionData = new QuestionData(questionToUpdate.getId(), questionToUpdate.getQuestionText(), questionToUpdate.getPoints(), questionToUpdate.getUser());
+                message.questionData = new QuestionData(questionToUpdate.getId(), questionToUpdate.getQuestionText(), (List) questionToUpdate.getQuestionChoices(), questionToUpdate.getPoints(), questionToUpdate.getUser());
             }
         } catch(Exception e){
             // if the error message is "out of memory",

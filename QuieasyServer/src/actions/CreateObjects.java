@@ -2,6 +2,7 @@ package actions;
 
 import data.ChoicesData;
 import dataServer.Message;
+import dataServer.QuestionData;
 import domainServer.*;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
@@ -28,7 +29,7 @@ public class CreateObjects {
         Query queryCourse = session.getSession().createQuery("FROM Course WHERE courseName = :courseName ");
             queryCourse.setParameter("courseName", course);
         Course courseToAdd=(Course)queryCourse.list().get(0);
-        int CourseId =courseToAdd.getId();
+        Long CourseId =courseToAdd.getId();
         Query queryQuiz = session.getSession().createQuery("FROM Quiz WHERE quiz_name = :name  and id_course= :id");
             queryQuiz.setParameter("name", name);
             queryQuiz.setParameter("id", CourseId);
@@ -76,7 +77,7 @@ public class CreateObjects {
         return message;
     }
 
-    public static data.Message CreateQuestion(String questionText, int points, List<ChoicesData> choicesList, String email)
+    public static Message CreateQuestion(String questionText, int points, List<ChoicesData> choicesList, String email)
     {
         try {
             System.out.println("create Choices ");
@@ -139,7 +140,7 @@ public class CreateObjects {
             session.getTransaction().commit();
             message.task = "QUESTION_CREATED";
             //return choiceslist too
-            message.questionData = new QuestionData(question.getId(), question.getQuestionText(), question.getPoints(),  question.getUser()); //the rest should already be on the client side??
+            message.questionData = new QuestionData(question.getId(), question.getQuestionText(), (List) question.getQuestionChoices(), question.getPoints(),  question.getUser()); //the rest should already be on the client side??
 
             System.out.println("Done");
         }

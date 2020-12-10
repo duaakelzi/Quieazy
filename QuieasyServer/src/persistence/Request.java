@@ -4,12 +4,9 @@ package persistence;
 
 import actions.*;
 import data.ChoicesData;
-import data.Message;
-import domainServer.*;
-import org.hibernate.sql.Delete;
+import dataServer.Message;
 
 import java.util.List;
-import java.util.Set;
 
 
 public class Request {
@@ -35,7 +32,7 @@ public class Request {
     }
 
     //create a quiz
-    public static Message createQuiz(String name, int threshold, boolean isPublic, String email,String course) {
+    public static Message createQuiz(String name, int threshold, boolean isPublic, String email, String course) {
         System.out.println("Database connection starting...");
 
         // create a database connection
@@ -44,7 +41,7 @@ public class Request {
         return CreateObjects.CreateQuiz(name,threshold,false,email,course);
     }
 
-    public static Message updateQuiz(Long id,String name, int threshold, boolean isPublic, String course)
+    public static Message updateQuiz(Long id, String name, int threshold, boolean isPublic, String course)
     {
         System.out.println("Database connection starting...");
 
@@ -78,7 +75,7 @@ public class Request {
         System.out.println("Database connection created!");
         return RetrieveObjects.retrieveQuestions(quizID);
     }
-    public static <Choices> Message createQuestion(String questionText, int points, List<ChoicesData> questionChoicesList, String email) {
+    public static <ChoicesData> Message createQuestion(String questionText, int points, List<ChoicesData> questionChoicesList, String email) {
         System.out.println("Database connection starting...");
 
         // create a database connection

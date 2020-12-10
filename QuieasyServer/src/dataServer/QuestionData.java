@@ -1,7 +1,7 @@
 package dataServer;
 
+import data.ChoicesData;
 import domainServer.Question;
-import domainServer.QuestionChoice;
 import domainServer.Quiz;
 import domainServer.User;
 
@@ -19,7 +19,7 @@ public class QuestionData {
     
     private List<Question> allQuestions = new ArrayList<>();
     private Set<Quiz> quiz = new HashSet<Quiz>(0);
-    private Set<QuestionChoice> questionChoices = new HashSet<QuestionChoice>(0);
+    private List<ChoicesData> questionChoices;
     
     //c'tors
     public QuestionData(Long id, String questionText, int points, User user) {
@@ -33,7 +33,7 @@ public class QuestionData {
         this.points = points;
         this.isCorrect = isCorrect;
     }
-    public QuestionData(Long id, String questionText, Set<QuestionChoice> questionChoices, int points, User user) {
+    public QuestionData(Long id, String questionText, List<ChoicesData> questionChoices, int points, User user) {
         this.id = id;
         this.questionText = questionText;
         this.questionChoices = questionChoices;
@@ -99,11 +99,11 @@ public class QuestionData {
         this.quiz = quiz;
     }
 
-    public Set<QuestionChoice> getQuestionChoices() {
+    public List<ChoicesData> getQuestionChoices() {
         return questionChoices;
     }
 
-    public void setQuestionChoices(Set<QuestionChoice> questionChoices) {
+    public void setQuestionChoices(List<ChoicesData> questionChoices) {
         this.questionChoices = questionChoices;
     }
 }

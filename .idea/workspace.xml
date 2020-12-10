@@ -30,12 +30,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e8f5b52c-53ef-4c55-b043-df8806802e11" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/QuieasyServer/src/dataServer/ChoicesData.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Quieasy/src/data/Message.java" beforeDir="false" afterPath="$PROJECT_DIR$/Quieasy/src/data/Message.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/QuieasyServer/src/actions/CreateObjects.java" beforeDir="false" afterPath="$PROJECT_DIR$/QuieasyServer/src/actions/CreateObjects.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/QuieasyServer/src/actions/DeleteObjects.java" beforeDir="false" afterPath="$PROJECT_DIR$/QuieasyServer/src/actions/DeleteObjects.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/QuieasyServer/src/actions/UpdateObjects.java" beforeDir="false" afterPath="$PROJECT_DIR$/QuieasyServer/src/actions/UpdateObjects.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/QuieasyServer/src/applicationServer/ServerDecoder.java" beforeDir="false" afterPath="$PROJECT_DIR$/QuieasyServer/src/applicationServer/ServerDecoder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/QuieasyServer/src/dataServer/QuestionData.java" beforeDir="false" afterPath="$PROJECT_DIR$/QuieasyServer/src/dataServer/QuestionData.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/QuieasyServer/src/domainServer/IDQuizChoice.java" beforeDir="false" afterPath="$PROJECT_DIR$/QuieasyServer/src/domainServer/IDQuizChoice.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/QuieasyServer/src/domainServer/Question.java" beforeDir="false" afterPath="$PROJECT_DIR$/QuieasyServer/src/domainServer/Question.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/QuieasyServer/src/persistence/Request.java" beforeDir="false" afterPath="$PROJECT_DIR$/QuieasyServer/src/persistence/Request.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -406,10 +408,11 @@
     <state x="352" y="-809" key="new project wizard/0.0.1366.728/0.-900.1600.860@0.-900.1600.860" timestamp="1606642401081" />
     <state x="1457" y="0" key="new project wizard/0.0.1366.728/1366.0.1920.1040@1366.0.1920.1040" timestamp="1607434553488" />
     <state x="65" y="0" key="new project wizard/0.0.1366.728@0.0.1366.728" timestamp="1606310745444" />
-    <state x="2612" y="168" key="refactoring.ChangeSignatureDialog" timestamp="1607103786317">
+    <state x="2202" y="192" key="refactoring.ChangeSignatureDialog" timestamp="1607582186487">
       <screen x="1366" y="0" width="1920" height="1040" />
     </state>
     <state x="2612" y="168" key="refactoring.ChangeSignatureDialog/0.0.1366.728/1366.0.1920.1040/3286.0.1920.1040@1366.0.1920.1040" timestamp="1607103786317" />
+    <state x="2202" y="192" key="refactoring.ChangeSignatureDialog/0.0.1366.728/1366.0.1920.1040@1366.0.1920.1040" timestamp="1607582186487" />
     <state x="1922" y="218" width="807" height="820" key="search.everywhere.popup" timestamp="1607332313530">
       <screen x="1366" y="0" width="1920" height="1040" />
     </state>

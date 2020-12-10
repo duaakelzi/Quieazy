@@ -8,8 +8,8 @@ import java.io.Serializable;
 @Embeddable
 public class IDQuizChoice implements Serializable {
     //composite id approach
-    private QuieazyEntityDemo.Question question;
-    private QuieazyEntityDemo.Choices choices;
+    private Question question;
+    private Choices choices;
 
     // getters and setters
     @ManyToOne(cascade = CascadeType.ALL)
@@ -17,7 +17,7 @@ public class IDQuizChoice implements Serializable {
         return question;
     }
 
-    public void setQuestion(QuieazyEntityDemo.Question question) {
+    public void setQuestion(Question question) {
         this.question = question;
     }
 
@@ -26,7 +26,7 @@ public class IDQuizChoice implements Serializable {
         return choices;
     }
 
-    public void setChoices(QuieazyEntityDemo.Choices choices) {
+    public void setChoices(Choices choices) {
         this.choices = choices;
     }
 }

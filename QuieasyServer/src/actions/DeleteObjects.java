@@ -10,7 +10,8 @@ import persistence.HibernateUtil;
 public class DeleteObjects {
     public static Session session = HibernateUtil.getSessionFactory().openSession();
     public static Message message = new Message();
-    public static Message DeleteQuiz(Long id, String course)
+
+    public static Message deleteQuiz(Long id, String course)
     {
         try {
             session.beginTransaction();
@@ -50,7 +51,7 @@ public class DeleteObjects {
         return message;
     }
 
-    public static data.Message deleteQuestion(Long questionID)
+    public static Message deleteQuestion(Long questionID)
     {
         try {
             session.beginTransaction();
