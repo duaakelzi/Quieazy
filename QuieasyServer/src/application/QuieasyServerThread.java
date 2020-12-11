@@ -2,7 +2,7 @@
 
 package application;
 
-import data.Message;
+import dataServer.Message;
 
 import java.net.*;
 import java.io.*;
@@ -26,19 +26,22 @@ public class QuieasyServerThread extends Thread {
         	
         	// Listen for incoming messages.
         	Message message = null;
-        	
+
 			while(true) {
 				
 				message = (Message) in.readObject();
+
 				
 				if(message != null) {
-					
+					System.out.println("server "+message.task);
 					System.out.println("Message received!");
+					System.out.println(message.task);
 					out.writeObject(ServerDecoder.decode(message));
 					out.flush();
 					System.out.println("Response sent!");
 					
 				}
+				else{System.out.println("server message null");}
 			}
         } catch (IOException e) {
             e.printStackTrace();

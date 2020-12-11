@@ -3,9 +3,13 @@
 
 package application;
 
-import java.io.*;
-import java.net.*;
 import data.Message;
+
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.net.Socket;
+import java.net.UnknownHostException;
 
 public class ClientAgent implements Runnable{
 	
@@ -45,13 +49,13 @@ public class ClientAgent implements Runnable{
 	// Continuously listens for incoming messages.
 	public void run() {
 		
-		Message message;
+		dataServer.Message message;
 		
 		try {
 			
 			while(true) {
 				
-				message = (Message) in.readObject();
+				message = (dataServer.Message) in.readObject();
 				
 				if(message != null) { // if message received
 					
@@ -79,6 +83,7 @@ public class ClientAgent implements Runnable{
 	public void send(Message message) {
 		
 		try {
+			System.out.println(message.task);
 			
 			out.writeObject(message);
 			out.flush();

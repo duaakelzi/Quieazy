@@ -1,15 +1,16 @@
 package data;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Question {
+public class QuestionData implements Serializable {
 
     private String question;
     private ArrayList<Answer> answers;
 
 
 
-    public Question(String question, ArrayList<Answer> answers) {
+    public QuestionData(String question, ArrayList<Answer> answers) {
         this.question = question;
         this.answers = answers;
 

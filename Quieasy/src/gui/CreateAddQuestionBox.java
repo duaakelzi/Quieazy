@@ -1,9 +1,11 @@
 package gui;
 
-import data.Question;
+import data.QuestionData;
+import domain.QuestionC;
 import domain.QuizC;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -24,15 +26,10 @@ public class CreateAddQuestionBox extends VBox {
 
         private static CreateAddQuestionBox createAddQuestionBox;
         private TableView<TableFillQuestions> tableViewListQuestions;
-        private ObservableList<TableFillQuestions> questionsToList;
-        private TableColumn<TableFillQuestions, Integer> idCol;
-        private ArrayList<Question> questions = CreateQuizBox.getCreateQuizBox().getQuiz().getQuestions();
-        private TableFillQuestions selectedItem;
-        private Question addedQuestiontoQuiz;
-
-
-
-
+        private ObservableList<TableFillQuestions> questionsToList = FXCollections.observableArrayList();;
+        private static int track = 0;
+        private Object ReadOnlyObjectWrapper;
+        private Object Number;
 
     //constructor
         private CreateAddQuestionBox() {
@@ -62,8 +59,12 @@ public class CreateAddQuestionBox extends VBox {
             buttons.setPadding(new Insets(20));
             Button newQuestion = new Button("➕ Question");
             newQuestion.setOnAction(actionEvent -> {
+
+
                 MainPane.getMainPane().getTabs().add(CreateQuestionChoicesTab.getCreateQuestionChoicesTab());
-                tableViewListQuestions.getSelectionModel().clearSelection();
+
+
+
             });
             newQuestion.setMinWidth(200);
             newQuestion.setFont(Font.font("Times New Roman", FontWeight.NORMAL, 16));
@@ -82,8 +83,7 @@ public class CreateAddQuestionBox extends VBox {
 
 //
 
-        addNrColumn(); // nr column
-
+        addNrColumn();
         TableColumn <TableFillQuestions, String> firstCol = new TableColumn<>("Question Name");
         firstCol.setMinWidth(290);
         firstCol.setCellValueFactory(new PropertyValueFactory<>("questionName"));
@@ -112,36 +112,41 @@ public class CreateAddQuestionBox extends VBox {
         tableViewListQuestions.setEditable(false);
         tableViewListQuestions.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
     }
-    // fill table row with data from added Question
+
     public void fillTableObservableListWithQuestion(){
+        //questionsToList = FXCollections.observableArrayList();
+        ArrayList<QuestionData> added = CreateQuizBox.getCreateQuizBox().getQuiz().getQuestions();
 
-        //addedQuestiontoQuiz = questions.get(index);
-        questionsToList = FXCollections.observableArrayList();
-
-        for(int i = 0; i < questions.size(); i++){
-            questionsToList.add(new TableFillQuestions(String.valueOf(i), questions.get(i).getQuestion(), "Chen Li"));
-        }
-           tableViewListQuestions.setItems(questionsToList);
-           // tableViewListQuestions.setItems(questionsToList);
+                questionsToList.add(new TableFillQuestions(++track, added.get(--track).getQuestion(), ""));
+                track++;
+                tableViewListQuestions.setItems(questionsToList);
 
 
 
+//                questionsToList.addAll(new TableFillQuestions("What is a Singleton", "Che Li"));
+//                questionsToList.addAll(new TableFillQuestions("What is copy constructor", "Iva Beu"));
+//                questionsToList.addAll(new TableFillQuestions("",""));
     }
     private void addNrColumn(){
-            idCol = new TableColumn<>("#");
+            TableColumn<TableFillQuestions, Integer> idCol = new TableColumn<>("#");
             idCol.setMinWidth(25);
             idCol.setMaxWidth(25);
-            idCol.setCellValueFactory(data -> new ReadOnlyObjectWrapper<>(Integer.parseInt(data.getValue().getNr())));
-            idCol.setCellFactory(new Callback<>() {
+            idCol.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<TableFillQuestions, Integer>, ObservableValue<Integer>>() {
+                @Override
+                public ObservableValue<Integer> call(TableColumn.CellDataFeatures<TableFillQuestions, Integer> data) {
+                    return new ReadOnlyObjectWrapper<Integer>(Integer.parseInt(data.getValue().getNr()));
+                }
+            });
+            idCol.setCellFactory(new Callback<TableColumn<TableFillQuestions, Integer>, TableCell<TableFillQuestions, Integer>>() {
                 @Override
                 public TableCell<TableFillQuestions, Integer> call(TableColumn<TableFillQuestions, Integer> tableFillQuestionsIntegerTableColumn) {
-                    return new TableCell<>() {
+                    return new TableCell<>(){
                         @Override
                         protected void updateItem(Integer item, boolean empty) {
                             super.updateItem(item, empty);
-                            if (this.getTableRow() != null && item != null) {
-                                setText(this.getTableRow().getIndex() + "");
-                            } else {
+                            if(this.getTableRow() != null && item != null){
+                                setText(this.getTableRow().getIndex()+"");
+                            }else{
                                 setText("");
                             }
                         }
@@ -168,17 +173,6 @@ public class CreateAddQuestionBox extends VBox {
                     {
                         editbtn.setOnAction(actionEvent -> {
                             // action when the button is pressed
-                            try {
-                                MainPane.getMainPane().getTabs().add(CreateQuestionChoicesTab.getCreateQuestionChoicesTab());
-                                int index = indexSelecteditem();
-                                CreateQuestionChoicesBox.getCreateQuestionChoicesBox().editQuestion(index);
-
-                            } catch (IndexOutOfBoundsException e){
-                                Alert alert = new Alert(Alert.AlertType.NONE);
-                                alert.setAlertType(Alert.AlertType.INFORMATION);
-                                alert.setContentText("Selecte the item what you want to edit");
-                                alert.show();
-                            }
 
                         });
                     }
@@ -219,18 +213,8 @@ public class CreateAddQuestionBox extends VBox {
                     {
                         deletebtn.setOnAction(actionEvent -> {
                             // remove the question from list
-                            try {
-                                selectedItem = tableViewListQuestions.getSelectionModel().getSelectedItem();
-                                int index = tableViewListQuestions.getSelectionModel().getSelectedIndex();
-                                questions.remove(questions.get(index));
+                            TableFillQuestions selectedItem = tableViewListQuestions.getSelectionModel().getSelectedItem();
                                 tableViewListQuestions.getItems().remove(selectedItem);
-                                tableViewListQuestions.getSelectionModel().clearSelection(); // clear all the selection
-                            }catch (IndexOutOfBoundsException e){
-                                Alert alert = new Alert(Alert.AlertType.NONE);
-                                alert.setAlertType(Alert.AlertType.INFORMATION);
-                                alert.setContentText("Select the Question to be removed");
-                                alert.show();
-                            }
 
                         });
                     }
@@ -263,11 +247,10 @@ public class CreateAddQuestionBox extends VBox {
 
 
 
-        private TableFillQuestions(String nr, String questionName, String author) {
-            this.nr = new SimpleStringProperty(nr);
+        private TableFillQuestions(int nr, String questionName, String author) {
             this.questionName = new SimpleStringProperty(questionName);
             this.author = new SimpleStringProperty(author);
-
+            this.nr = new SimpleStringProperty(Integer.toString(nr));
 
 
         }
@@ -303,7 +286,6 @@ public class CreateAddQuestionBox extends VBox {
 
     }
 
-
     private HBox initiateSavedBtns(){
         HBox savedbtn = new HBox(360);
         savedbtn.setPadding(new Insets(30,10,30,30));
@@ -313,11 +295,7 @@ public class CreateAddQuestionBox extends VBox {
             public void handle(ActionEvent actionEvent) {
                 //savequiz();
 
-                //QuestionC.createnewQuestions(CreateQuizBox.getCreateQuizBox().getQuiz()); // not connected to server yet
-
-                for(int i = 0; i < CreateQuizBox.getCreateQuizBox().getQuiz().getQuestions().size(); i ++){
-                    System.out.println(CreateQuizBox.getCreateQuizBox().getQuiz().getQuestions().get(i).getQuestion());
-                }
+                QuestionC.createnewQuestions(CreateQuizBox.getCreateQuizBox().getQuiz());
 
             }
         });
@@ -333,8 +311,5 @@ public class CreateAddQuestionBox extends VBox {
         QuizC.createNewQuiz(CreateQuizBox.getCreateQuizBox().getQuiz());
     }
 
-    public int indexSelecteditem(){
-        return tableViewListQuestions.getSelectionModel().getSelectedIndex();
-    }
 
 }
