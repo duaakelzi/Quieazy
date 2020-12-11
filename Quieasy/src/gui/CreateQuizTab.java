@@ -24,10 +24,6 @@ public class CreateQuizTab extends Tab {
 
 		super(name, CreateQuestionChoicesBox.getCreateQuestionChoicesBox());
 	}
-
-
-
-
 	// Gets the current instance -> Singleton
 	public static CreateQuizTab getCreateQuizTab() {
 		
@@ -44,7 +40,11 @@ public class CreateQuizTab extends Tab {
 		if(handler != null){
 			handler.handle(null);
 		}else{
+
 			tab.getTabPane().getTabs().remove(tab);
+
+
+
 		}
 
 	}
