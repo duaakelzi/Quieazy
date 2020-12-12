@@ -30,3 +30,5 @@ Try to login as username: user@example.com
                            password: 123
 
 Other login attempts should fail.
+
+git Reset 12/12 
