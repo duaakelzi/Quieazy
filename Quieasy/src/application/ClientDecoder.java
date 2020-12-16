@@ -2,10 +2,9 @@
 
 package application;
 
-import data.Message;
-import data.UserData;
 import gui.*;
 import domain.UserC;
+import data.*;
 
 public class ClientDecoder {
 	
@@ -32,9 +31,8 @@ public class ClientDecoder {
 			
 			Register.emailInUse();
 			
-		}else if(message.task.equals("QUIZ_CREATED")){
+		}else if(message.task.equals("CREATE_QUIZ_SUCCESSFUL")){
 			CreateQuizBox.getCreateQuizBox().showSuccessful();
-
 		}else if(message.task.equals("CREATE_QUIZ_")){
 			CreateQuizBox.getCreateQuizBox().showFailed();
 		}

@@ -2,31 +2,30 @@ package domain;
 
 import application.ClientAgent;
 import data.Message;
-import data.QuestionData;
-import data.QuizData;
+import data.Question;
+import data.Quiz;
 import data.UserData;
 
 import java.util.ArrayList;
 
 public class QuestionC {
 
-    private static ArrayList<QuestionData> quesntions;
+    private static ArrayList<Question> quesntions;
     private UserData ownerQuiz;
-    private QuizData name;
+    private Quiz name;
     private static Message saveQuiestionsMsg = new Message();
 
-    public static void createnewQuestions(QuizData newQuizData) {
+    public static void createnewQuestions(Quiz newQuiz) {
         ClientAgent clientAgent = ClientAgent.getClientAgent();
 
         saveQuiestionsMsg.task = "CREATE_QUESTION";
-        quesntions= newQuizData.getQuestions();
-        saveQuiestionsMsg.questionData =quesntions;
-//        saveQuiestionsMsg.userData = new UserData(UserC.getCurrentUser().getFirstName(),
-//                                            UserC.getCurrentUser().getLastName(),
-//                                            UserC.getCurrentUser().getEmail());
+        quesntions= newQuiz.getQuestions();
+        saveQuiestionsMsg.questions=quesntions;
+        saveQuiestionsMsg.userData = new UserData(UserC.getCurrentUser().getFirstName(),
+                                            UserC.getCurrentUser().getLastName(),
+                                            UserC.getCurrentUser().getEmail());
 
-        saveQuiestionsMsg.quizlist= newQuizData;
-        clientAgent.send(saveQuiestionsMsg);
+        saveQuiestionsMsg.quizlist=newQuiz;
 
 
     }

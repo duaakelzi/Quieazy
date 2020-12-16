@@ -2,26 +2,25 @@ package domain;
 
 import application.ClientAgent;
 import data.Message;
-import data.QuizData;
+import data.Quiz;
+import data.UserData;
 
 public class QuizC {
 
-    public static void createNewQuiz(QuizData newQuizData){
+    public static void createNewQuiz(Quiz newQuiz){
         ClientAgent clientAgent = ClientAgent.getClientAgent();
-       Message saveQuizMsg = new Message();
+        Message saveQuizMsg = new Message();
         saveQuizMsg.task = "CREATE_QUIZ";
 
         // set user data so that server knows which user created this quiz
-       /* saveQuizMsg.userData = new UserData(UserC.getCurrentUser().getFirstName(),
+        saveQuizMsg.userData = new UserData(UserC.getCurrentUser().getFirstName(),
                                             UserC.getCurrentUser().getLastName(),
-                                            UserC.getCurrentUser().getEmail());*/
+                                            UserC.getCurrentUser().getEmail());
 
-        QuizData quizzes = new QuizData();
-        quizzes = newQuizData;
-        saveQuizMsg.quizlist = new QuizData(quizzes.getProgram(),quizzes.getCourse(),quizzes.getName(),quizzes.getThreshold(),quizzes.getTimer(),quizzes.getQuestions());
-        System.out.println(saveQuizMsg.quizlist.getName());
+        Quiz quizzes = new Quiz();
+        quizzes = newQuiz;
+        saveQuizMsg.quizlist = quizzes;
+
         clientAgent.send(saveQuizMsg);
     }
-
-
 }
