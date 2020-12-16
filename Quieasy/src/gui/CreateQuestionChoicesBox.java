@@ -30,7 +30,6 @@ public class CreateQuestionChoicesBox extends VBox {
     private ArrayList<Answer> answers;
     private int indexEditQuestion;
     private CreateQuestionChoicesBox(){
-        super();
         // initiate the Question area
         VBox question = initiateQuestion();
 
@@ -60,6 +59,7 @@ public class CreateQuestionChoicesBox extends VBox {
         textQuestion.setPrefHeight(100);
         textQuestion.setPrefWidth(600);
         questionVbox.getChildren().addAll(questionlabel, textQuestion);
+
         return questionVbox;
 
     }

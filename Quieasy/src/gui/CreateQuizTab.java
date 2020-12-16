@@ -19,11 +19,6 @@ public class CreateQuizTab extends Tab {
 		
 	}
 
-
-	public CreateQuizTab(String name){
-
-		super(name, CreateQuestionChoicesBox.getCreateQuestionChoicesBox());
-	}
 	// Gets the current instance -> Singleton
 	public static CreateQuizTab getCreateQuizTab() {
 		

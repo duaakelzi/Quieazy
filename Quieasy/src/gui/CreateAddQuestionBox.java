@@ -68,6 +68,9 @@ public class CreateAddQuestionBox extends VBox {
             newQuestion.setMinWidth(200);
             newQuestion.setFont(Font.font("Times New Roman", FontWeight.NORMAL, 16));
             Button importQuestion = new Button("▲ Import Question");
+            importQuestion.setOnAction(actionEvent -> {
+                MainPane.getMainPane().getTabs().add(CreateQuestionBankTab.getCreateQuestionBankTab());
+            });
             importQuestion.setMinWidth(200);
             importQuestion.setFont(Font.font("Times New Roman", FontWeight.NORMAL, 16));
             buttons.getChildren().addAll(newQuestion, importQuestion);
