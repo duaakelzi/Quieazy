@@ -31,8 +31,6 @@ public class QuieasyServerThread extends Thread {
 				
 				message = (Message) in.readObject();
 
-
-				
 				if(message != null) {
 					System.out.println("server "+message.task);
 					System.out.println("Message received!");

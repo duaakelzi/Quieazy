@@ -3,7 +3,7 @@
 package application;
 
 import gui.*;
-import domain.UserC;
+import requests.UserC;
 import data.*;
 
 public class ClientDecoder {
@@ -33,7 +33,7 @@ public class ClientDecoder {
 			
 		}else if(message.task.equals("CREATE_QUIZ_SUCCESSFUL")){
 			CreateQuizBox.getCreateQuizBox().showSuccessful();
-		}else if(message.task.equals("CREATE_QUIZ_")){
+		}else if(message.task.equals("CREATE_QUIZ_FAILED")){
 			CreateQuizBox.getCreateQuizBox().showFailed();
 		}
 		

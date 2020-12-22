@@ -1,14 +1,15 @@
 package gui;
 
-import data.Answer;
-import data.Question;
-import data.Quiz;
+import data.ChoicesData;
+import data.QuestionData;
+import data.QuizData;
 import javafx.geometry.Insets;
 import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
+import requests.QuestionC;
 
 import java.util.ArrayList;
 
@@ -25,9 +26,9 @@ public class CreateQuestionChoicesBox extends VBox {
     private TextField fourthchoice;
     private RadioButton fourthradiobtn;
     private TextArea textQuestion;
-    private Question newQuestionAdd;
-    private Quiz data = CreateQuizBox.getCreateQuizBox().getQuiz();
-    private ArrayList<Answer> answers;
+    private QuestionData newQuestionAdd;
+    private QuizData data = CreateQuizBox.getCreateQuizBox().getQuiz();
+    private ArrayList<ChoicesData> choicesData;
     private int indexEditQuestion;
     private CreateQuestionChoicesBox(){
         // initiate the Question area
@@ -143,17 +144,17 @@ public class CreateQuestionChoicesBox extends VBox {
 
     public void editQuestion(int index){
         textQuestion.setText(data.getQuestions().get(index).getQuestion());
-        firstchoice.setText(data.getQuestions().get(index).getAnswers().get(0).getAnswer());
-        firstradiobtn.setSelected(data.getQuestions().get(index).getAnswers().get(0).isCorrectAnswer());
+        firstchoice.setText(data.getQuestions().get(index).getAnswers().get(0).getChoiceDescription());
+        firstradiobtn.setSelected(data.getQuestions().get(index).getAnswers().get(0).isCorrect());
 
-        secondchoice.setText(data.getQuestions().get(index).getAnswers().get(1).getAnswer());
-        secondradiobtn.setSelected(data.getQuestions().get(index).getAnswers().get(1).isCorrectAnswer());
+        secondchoice.setText(data.getQuestions().get(index).getAnswers().get(1).getChoiceDescription());
+        secondradiobtn.setSelected(data.getQuestions().get(index).getAnswers().get(1).isCorrect());
 
-        thirdchoice.setText(data.getQuestions().get(index).getAnswers().get(2).getAnswer());
-        thirdradiobtn.setSelected(data.getQuestions().get(index).getAnswers().get(2).isCorrectAnswer());
+        thirdchoice.setText(data.getQuestions().get(index).getAnswers().get(2).getChoiceDescription());
+        thirdradiobtn.setSelected(data.getQuestions().get(index).getAnswers().get(2).isCorrect());
 
-        fourthchoice.setText(data.getQuestions().get(index).getAnswers().get(3).getAnswer());
-        fourthradiobtn.setSelected(data.getQuestions().get(index).getAnswers().get(3).isCorrectAnswer());
+        fourthchoice.setText(data.getQuestions().get(index).getAnswers().get(3).getChoiceDescription());
+        fourthradiobtn.setSelected(data.getQuestions().get(index).getAnswers().get(3).isCorrect());
 
     }
 
@@ -169,31 +170,46 @@ public class CreateQuestionChoicesBox extends VBox {
         fourthradiobtn.setSelected(false);
     }
 
-    private Question createnewQuestion(){
-        answers = new ArrayList<>();
-        answers.add(new Answer(firstchoice.getText(), firstradiobtn.isSelected()));
-        answers.add(new Answer(secondchoice.getText(), secondradiobtn.isSelected()));
-        answers.add(new Answer(thirdchoice.getText(), thirdradiobtn.isSelected()));
-        answers.add(new Answer(fourthchoice.getText(), fourthradiobtn.isSelected()));
+//    private QuestionData createnewQuestion(){
+//        answers = new ArrayList<>();
+//        answers.add(new Answer(firstchoice.getText(), firstradiobtn.isSelected()));
+//        answers.add(new Answer(secondchoice.getText(), secondradiobtn.isSelected()));
+//        answers.add(new Answer(thirdchoice.getText(), thirdradiobtn.isSelected()));
+//        answers.add(new Answer(fourthchoice.getText(), fourthradiobtn.isSelected()));
+//
+//        QuestionData newQuestion = new QuestionData(textQuestion.getText(), answers);
+//
+//        data.addQuestion(newQuestion);
+//        return newQuestion;
+//    }
+    //experiment -> questions aren't there?
+    private QuestionData createnewQuestion(){
+        choicesData = new ArrayList<>();
+        choicesData.add(new ChoicesData(firstchoice.getText(), firstradiobtn.isSelected()));
+        choicesData.add(new ChoicesData(secondchoice.getText(), secondradiobtn.isSelected()));
+        choicesData.add(new ChoicesData(thirdchoice.getText(), thirdradiobtn.isSelected()));
+        choicesData.add(new ChoicesData(fourthchoice.getText(), fourthradiobtn.isSelected()));
 
-        Question newQuestion = new Question(textQuestion.getText(), answers);
-
+        QuestionData newQuestion = new QuestionData(textQuestion.getText(), choicesData);
+        //make question persistent
+        QuestionC.createnewQuestions(data, newQuestion);
+        //ask to update Quiz
         data.addQuestion(newQuestion);
         return newQuestion;
     }
 
     private void saveEditQuestion(int index){
         data.getQuestions().get(index).setQuestion(textQuestion.getText());
-        answers.get(0).setAnswer(firstchoice.getText());
-        answers.get(0).setCorrectAnswer(firstradiobtn.isSelected());
-        answers.get(1).setAnswer(secondchoice.getText());
-        answers.get(1).setCorrectAnswer(secondradiobtn.isSelected());
-        answers.get(2).setAnswer(thirdchoice.getText());
-        answers.get(2).setCorrectAnswer(thirdradiobtn.isSelected());
-        answers.get(3).setAnswer(fourthchoice.getText());
-        answers.get(3).setCorrectAnswer(fourthradiobtn.isSelected());
+        choicesData.get(0).setChoiceDescription(firstchoice.getText());
+        choicesData.get(0).setCorrect(firstradiobtn.isSelected());
+        choicesData.get(1).setChoiceDescription(secondchoice.getText());
+        choicesData.get(1).setCorrect(secondradiobtn.isSelected());
+        choicesData.get(2).setChoiceDescription(thirdchoice.getText());
+        choicesData.get(2).setCorrect(thirdradiobtn.isSelected());
+        choicesData.get(3).setChoiceDescription(fourthchoice.getText());
+        choicesData.get(3).setCorrect(fourthradiobtn.isSelected());
         //update amswers Edit Button pushed
-        data.getQuestions().get(index).setAnswers(answers);
+        data.getQuestions().get(index).setAnswers(choicesData);
 
     }
 

@@ -79,7 +79,8 @@ public class ClientAgent implements Runnable{
 	public void send(Message message) {
 		
 		try {
-			
+			System.out.println(message.task);
+
 			out.writeObject(message);
 			out.flush();
 			

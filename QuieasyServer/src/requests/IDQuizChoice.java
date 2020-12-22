@@ -1,4 +1,4 @@
-package domain;
+package requests;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Embeddable;

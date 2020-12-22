@@ -1,7 +1,7 @@
 package gui;
 
-import data.Question;
-import domain.QuizC;
+import data.QuestionData;
+import requests.QuizC;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -26,9 +26,9 @@ public class CreateAddQuestionBox extends VBox {
         private TableView<TableFillQuestions> tableViewListQuestions;
         private ObservableList<TableFillQuestions> questionsToList;
         private TableColumn<TableFillQuestions, Integer> idCol;
-        private ArrayList<Question> questions = CreateQuizBox.getCreateQuizBox().getQuiz().getQuestions();
+        private ArrayList<QuestionData> questions = CreateQuizBox.getCreateQuizBox().getQuiz().getQuestions();
         private TableFillQuestions selectedItem;
-        private Question addedQuestiontoQuiz;
+        private QuestionData addedQuestiontoQuiz;
 
 
 

@@ -2,10 +2,7 @@
 
 package application;
 
-import data.LoginData;
-import data.Message;
-import data.QuestionData;
-import data.QuizData;
+import data.*;
 import persistence.Request;
 
 import java.util.ArrayList;
@@ -48,15 +45,17 @@ public class ServerDecoder {
 //            QuestionData question = message.questionData;
 //            return Request.createQuestion(question.getQuestionText(), question.getPoints(), question.getQuestionChoices(), question.getUser().getEmail());
       else if (message.task.equals("CREATE_QUESTION")) {
+            System.out.println("server: create question method entered >> ");
             data.QuizData quiz = message.quizlist;
-           ArrayList< data.QuestionData> questionData = message.questionData;
+           ArrayList<QuestionData> questionData = message.questionData;
             //System.out.println(message.task);
             System.out.println(quiz.getName());
-            System.out.println(questionData.size());
+            System.out.println("server check: question size = " + questionData.size());
 
+            //check if choices are part of Question
             for (int i=0;i<questionData.size();i++){
-                System.out.println(questionData.get(i).getQuestionText());
-            return Request.createQuestion(questionData.get(i).getQuestionText(), 5,questionData.get(i).getQuestionChoices(),quiz.getName(),"user@mail.com");}}
+                System.out.println(questionData.get(i).printAnswers());
+            return Request.createQuestion(questionData.get(i).getQuestion(), 5,questionData.get(i).getAnswers(),quiz.getName(),"user@mail.com");}}
 //        } else if (message.task.equals("DELETE_QUESTION")) {
 //            QuestionData question = message.questionData;
 //            return Request.deleteQuestion(question.getId());

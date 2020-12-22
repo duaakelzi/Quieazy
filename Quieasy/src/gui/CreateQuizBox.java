@@ -3,8 +3,8 @@
 package gui;
 
 import data.Course;
-import data.Question;
-import data.Quiz;
+import data.QuestionData;
+import data.QuizData;
 import data.StudyProgramHS;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -32,7 +32,7 @@ public class CreateQuizBox extends VBox {
 	private TextField textTime;
 	private  Label warning;
 	ArrayList<StudyProgramHS> studyProgramHSArrayList;
-	private Quiz quiz;
+	private QuizData quiz;
 	private ObservableList<String> studyProgramHSObservList;
 	// constructor can only be accessed from within
 	private CreateQuizBox(){
@@ -280,11 +280,11 @@ public class CreateQuizBox extends VBox {
 				warning.setText("Fill all the fields marked with *");
 
 			}else{
-				quiz = new Quiz(studyProgramComboBox.getValue(),
+				quiz = new QuizData(studyProgramComboBox.getValue(),
 						courseComboBox.getValue(), textname.getText(),
 						Double.parseDouble(textThreshold.getText()),
 						Integer.parseInt(textTime.getText()),
-						new ArrayList<Question>());
+						new ArrayList<QuestionData>());
 				//QuizC.createNewQuiz(quiz); // it is not connected to DB
 
 				MainPane.getMainPane().getTabs().add(CreateAddQuestionTab.getCreateAddQuestionTab());
@@ -303,7 +303,7 @@ public class CreateQuizBox extends VBox {
 
 	}
 
-	public Quiz getQuiz() {
+	public QuizData getQuiz() {
 		return quiz;
 	}
 

@@ -2,8 +2,7 @@ package actions;
 
 import data.ChoicesData;
 import data.Message;
-import data.QuestionData;
-import domain.*;
+import requests.*;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 import persistence.HibernateUtil;

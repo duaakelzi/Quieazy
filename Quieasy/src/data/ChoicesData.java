@@ -5,7 +5,6 @@ import java.io.Serializable;
 public class ChoicesData implements Serializable {
     private String choiceDescription;
     private boolean isCorrect;
-    //c-tor
 
     public ChoicesData(){ }
 
@@ -14,21 +13,22 @@ public class ChoicesData implements Serializable {
         this.isCorrect = isCorrect;
     }
 
-    //getter and setter
-
     public String getChoiceDescription() {
         return choiceDescription;
     }
 
-    public void setChoiceDescription(String choiceDescription) {
+    public boolean isCorrect() {
+        return isCorrect;
+
+    }
+
+    public void setChoiceDescription(String choiceDescription){
         this.choiceDescription = choiceDescription;
     }
 
-    public boolean isCorrect() {
-        return isCorrect;
+    public void setCorrect(boolean correct){
+        this.isCorrect = correct;
     }
 
-    public void setCorrect(boolean correct) {
-        isCorrect = correct;
-    }
+
 }

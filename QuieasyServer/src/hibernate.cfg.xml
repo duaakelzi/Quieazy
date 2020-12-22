@@ -24,15 +24,15 @@
 		<!-- Set the current session context -->
 		<property name="current_session_context_class">thread</property>
 		
-		 <mapping class="domain.Quiz"/>
-        <mapping class="domain.Question"/>
+		 <mapping class="requests.Quiz"/>
+        <mapping class="requests.Question"/>
         <!--        <mapping class="QuieazyEntityDemo.IDQuizChoice "/>-->
-        <mapping class="domain.Choices"/>
-        <mapping class="domain.QuestionChoice"/>
-        <mapping class="domain.User"/>
-        <mapping class="domain.Course"/>
-        <mapping class="domain.StudyProgram"/>
-        <mapping class="domain.Result"/>
+        <mapping class="requests.Choices"/>
+        <mapping class="requests.QuestionChoice"/>
+        <mapping class="requests.User"/>
+        <mapping class="requests.Course"/>
+        <mapping class="requests.StudyProgram"/>
+        <mapping class="requests.Result"/>
          
     </session-factory>
 

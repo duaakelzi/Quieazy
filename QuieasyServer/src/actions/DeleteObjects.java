@@ -1,9 +1,9 @@
 package actions;
 
 import data.Message;
-import domain.Course;
-import domain.Question;
-import domain.Quiz;
+import requests.Course;
+import requests.Question;
+import requests.Quiz;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 import persistence.HibernateUtil;

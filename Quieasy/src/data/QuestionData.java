@@ -18,24 +18,17 @@ public class QuestionData implements Serializable {
     }
 
 
-    public String getQuestion() {  return question; }
+    public String getQuestion() {  return question;  }
 
-    public ArrayList<ChoicesData> getAnswers() { return answers; }
+    public ArrayList<ChoicesData> getAnswers() {   return answers;  }
 
-    public void setQuestion(String question){
-        this.question = question;
-    }
+    public void setQuestion(String question){ this.question = question; }
 
-    public void setAnswers(ArrayList<ChoicesData> answers) {
-        this.answers = answers;
-    }
-
-    //temporary print statement => to be improved
-    //method to check if Question from client is passed with Choices
+    public void setAnswers(ArrayList<ChoicesData> choicesData) { this.answers = choicesData;}
     public String printAnswers() {
         String res = "";
         for(int i = 0; i < this.answers.size();i++) {
-            res += " Choice: " + answers.get(i).getChoiceDescription();
+            res += "Choice: " + answers.get(i).getChoiceDescription();
         }
         return res;
     }
