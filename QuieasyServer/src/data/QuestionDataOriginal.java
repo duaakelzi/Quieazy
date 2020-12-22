@@ -12,6 +12,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+//to be deprecated once necessary attributes/methods are integrated in the actual QuestionData
+//main reason: deviations with client side
 public class QuestionDataOriginal implements Serializable {
     private Long id;
     private String questionText;

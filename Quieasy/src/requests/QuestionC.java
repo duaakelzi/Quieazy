@@ -14,20 +14,6 @@ public class QuestionC {
     private QuizData name;
     private static Message saveQuestionsMsg = new Message();
 
-//    public static void createnewQuestions(QuizData newQuizData) {
-//        ClientAgent clientAgent = ClientAgent.getClientAgent();
-//
-//        saveQuiestionsMsg.task = "CREATE_QUESTION";
-//        questions = newQuizData.getQuestions();
-//        saveQuiestionsMsg.questionData = questions;
-////        saveQuiestionsMsg.userData = new UserData(UserC.getCurrentUser().getFirstName(),
-////                                            UserC.getCurrentUser().getLastName(),
-////                                            UserC.getCurrentUser().getEmail());
-//
-//        saveQuiestionsMsg.quizlist= newQuizData;
-//        clientAgent.send(saveQuiestionsMsg);
-//    }
-
     //experiment
     public static void createnewQuestions(QuizData newQuizData, QuestionData newQuestionData) {
         ClientAgent clientAgent = ClientAgent.getClientAgent();

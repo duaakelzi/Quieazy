@@ -170,18 +170,6 @@ public class CreateQuestionChoicesBox extends VBox {
         fourthradiobtn.setSelected(false);
     }
 
-//    private QuestionData createnewQuestion(){
-//        answers = new ArrayList<>();
-//        answers.add(new Answer(firstchoice.getText(), firstradiobtn.isSelected()));
-//        answers.add(new Answer(secondchoice.getText(), secondradiobtn.isSelected()));
-//        answers.add(new Answer(thirdchoice.getText(), thirdradiobtn.isSelected()));
-//        answers.add(new Answer(fourthchoice.getText(), fourthradiobtn.isSelected()));
-//
-//        QuestionData newQuestion = new QuestionData(textQuestion.getText(), answers);
-//
-//        data.addQuestion(newQuestion);
-//        return newQuestion;
-//    }
     //experiment -> questions aren't there?
     private QuestionData createnewQuestion(){
         choicesData = new ArrayList<>();
@@ -191,7 +179,7 @@ public class CreateQuestionChoicesBox extends VBox {
         choicesData.add(new ChoicesData(fourthchoice.getText(), fourthradiobtn.isSelected()));
 
         QuestionData newQuestion = new QuestionData(textQuestion.getText(), choicesData);
-        //make question persistent
+        //make question persistent ==> should receive question back from server here!
         QuestionC.createnewQuestions(data, newQuestion);
         //ask to update Quiz
         data.addQuestion(newQuestion);

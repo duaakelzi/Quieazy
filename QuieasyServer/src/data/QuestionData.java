@@ -3,6 +3,7 @@ package data;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+//fully consistent with client-side QuestionData
 public class QuestionData implements Serializable {
 
     private String question;
