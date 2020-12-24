@@ -53,12 +53,12 @@ public class CreateObjects {
 
         session.save(quiz);
         session.getTransaction().commit();
-            message.task = "QUIZ_CREATED";
+        message.task = "QUIZ_CREATED";
             //message.quizlist = new QuizData(quiz.getQuiz_Name(), quiz.isPublic(),quiz.getThreshold(),quiz.getCourse().getCourseName());}
 
-        System.out.println("Done");}}
-        catch(Exception e)
-            {
+        System.out.println("Done");
+        }
+        }catch(Exception e) {
                 // if the error message is "out of memory",
                 // it probably means no database file is found
                 System.err.println(e.getMessage());

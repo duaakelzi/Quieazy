@@ -7,10 +7,7 @@ import data.QuizData;
 import java.util.ArrayList;
 
 public class QuestionC {
-
-   // private static ArrayList<QuestionData> questions;
-   // private UserData ownerQuiz;
-   // private QuizData quiz;
+    // private UserData ownerQuiz;
     private static Message saveQuestionsMsg = new Message();
 
     //experiment
@@ -22,8 +19,6 @@ public class QuestionC {
         saveQuestionsMsg.task = "CREATE_QUESTIONS";
         saveQuestionsMsg.quizData = quiz;
         saveQuestionsMsg.questionData = questionsToPersist;
-  //      saveQuestionsMsg.questionData.add(newQuestionData);
- //       saveQuestionsMsg.questionData = questions;
 //        saveQuiestionsMsg.userData = new UserData(UserC.getCurrentUser().getFirstName(),
 //                                            UserC.getCurrentUser().getLastName(),
 //                                            UserC.getCurrentUser().getEmail());

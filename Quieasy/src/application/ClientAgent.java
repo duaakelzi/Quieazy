@@ -50,14 +50,14 @@ public class ClientAgent implements Runnable{
 		try {
 			
 			while(true) {
-				
+				System.out.println("Run method entered..");
 				message = (Message) in.readObject();
 				
 				if(message != null) { // if message received
-					
+					System.out.println("Non-null message received.. ");
 					// decode and execute received message
+					System.out.println("Message task: " + message.task);
 					ClientDecoder.decode(message);
-					
 				}
 				
 			}
@@ -83,8 +83,6 @@ public class ClientAgent implements Runnable{
 
 			out.writeObject(message);
 			out.flush();
-			run(); //try this as an attempt to receive something from server
-			
 		}catch(Exception e) {
 			
 			e.printStackTrace();

@@ -48,16 +48,16 @@ public class ServerDecoder {
             System.out.println("server: create questions method entered >> ");
             data.QuizData quiz = message.quizData;
             ArrayList<QuestionData> questionData = message.questionData;
-            System.out.println("Message task" + message.task);
-            System.out.println("Quiz name: " + quiz.getName());
-            System.out.println("Question array size = " + questionData.size());
+//            System.out.println("Message task" + message.task);
+//            System.out.println("Quiz name: " + quiz.getName());
+//            System.out.println("Question array size = " + questionData.size());
 
             //go through array of new questions and make each persistent
             int i;
             for (i=0; i<questionData.size(); i++) {
                 Request.createQuestion(questionData.get(i).getQuestion(), 5,questionData.get(i).getAnswers(),quiz.getName(),"user@mail.com");
             }
-            if (i == questionData.size()+1) {
+            if (i == questionData.size()) {
                 message.task = "CREATE_QUESTIONS_SUCCESSFUL";
             }
             return message; //this message contains new task: "Create_question_successfull"

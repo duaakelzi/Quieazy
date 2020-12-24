@@ -68,12 +68,8 @@ public class CreateAddQuestionBox extends VBox {
             buttons.setPadding(new Insets(20));
             Button newQuestion = new Button("➕ Question");
             newQuestion.setOnAction(actionEvent -> {
-                System.out.println("Size of array of new questions before adding: " + newQuestions.size());
+                System.out.println("Size of array of new questions before adding: " + newQuestions.size()); //temporary check
                 MainPane.getMainPane().getTabs().add(CreateQuestionChoicesTab.getCreateQuestionChoicesTab());
-                //save newly created question to the Array of questions (not persisted yet)
-               // newQuestions.add(CreateQuestionChoicesBox.getCreateQuestionChoicesBox().getNewQuestionAdd());
-                //alternative approach being tried: update the newQuestions array at the CreateQuestionChoicesBox.initiateSaveQuestionBtn level
-                //check if the set of Questions is growing
                 tableViewListQuestions.getSelectionModel().clearSelection();
             });
             newQuestion.setMinWidth(200);
@@ -131,10 +127,8 @@ public class CreateAddQuestionBox extends VBox {
 
         //addedQuestiontoQuiz = questions.get(index);
         questionsToList = FXCollections.observableArrayList();
-        //this is probably all questions listed. since we want to have new and old, maybe a total set should be composed of those
-
         for(int i = 0; i < allQuestions.size(); i++){
-            questionsToList.add(new TableFillQuestions(String.valueOf(i), allQuestions.get(i).getQuestion(), "Chen Li"));
+            questionsToList.add(new TableFillQuestions(String.valueOf(i+1), allQuestions.get(i).getQuestion(), "Chen Li"));
         }
            tableViewListQuestions.setItems(questionsToList);
            // tableViewListQuestions.setItems(questionsToList);
@@ -332,11 +326,6 @@ public class CreateAddQuestionBox extends VBox {
                 //make the new questions persistent
                 QuestionC.persistNewQuestions(CreateQuizBox.getCreateQuizBox().getQuiz(), newQuestions);
              //   QuestionC.updateExistingQuestions(CreateQuizBox.getCreateQuizBox().getQuiz());
-                System.out.println("This (useless?) loop inside CreateAddQuestionBox. Here's what it's doing: ");
-                for(int i = 0; i < CreateQuizBox.getCreateQuizBox().getQuiz().getQuestions().size(); i ++){
-                    System.out.println(CreateQuizBox.getCreateQuizBox().getQuiz().getQuestions().get(i).getQuestion());
-                }
-
             }
         });
         save.setFont(Font.font("Times New Roman", FontWeight.SEMI_BOLD, 16));
