@@ -116,13 +116,13 @@ public class CreateQuestionChoicesBox extends VBox {
     private HBox initiateSaveQuestionBtn(){
         HBox buttonHbox = new HBox();
         buttonHbox.setPadding(new Insets(50, 30, 0, 490));
-        Button saveQ= new Button("CREATE");
+        Button saveQ= new Button("ADD");
         saveQ.setFont(Font.font("Times New Roman", FontWeight.NORMAL, 16));
         saveQ.setOnAction(actionEvent -> {
                 indexEditQuestion = CreateAddQuestionBox.getCreateAddQuestionBox().indexSelecteditem();
                if(indexEditQuestion >=0 && indexEditQuestion < quiz.getQuestions().size()){
                    //update question with new data
-                    saveEditQuestion(indexEditQuestion);
+                    saveEditedQuestion(indexEditQuestion);
                     CreateAddQuestionBox.getCreateAddQuestionBox().fillTableObservableListWithQuestion();
                }else {
                    //create new question and add to the tableView
@@ -175,8 +175,8 @@ public class CreateQuestionChoicesBox extends VBox {
         fourthradiobtn.setSelected(false);
     }
 
-    //this one seems to serve only the purpose of creating a question, not yet
-    //making it persistent => remove persistence related calls from here
+    //this one serves only the purpose of creating a question,
+    // not yet making it persistent
     private QuestionData createNewQuestion(){
         choicesData = new ArrayList<>();
         choicesData.add(new ChoicesData(firstchoice.getText(), firstradiobtn.isSelected()));
@@ -185,14 +185,11 @@ public class CreateQuestionChoicesBox extends VBox {
         choicesData.add(new ChoicesData(fourthchoice.getText(), fourthradiobtn.isSelected()));
         //create questionData with necessary attributes
         QuestionData newQuestion = new QuestionData(textQuestion.getText(), choicesData);
-        //make question persistent ==> should receive question back from server here!
-       // QuestionC.createnewQuestions(data, newQuestion);
-        //ask to update Quiz => maybe this should be done at a later stage, once the "final" list exists
-       // data.addQuestion(newQuestion);
+
         return newQuestion;
     }
 
-    private void saveEditQuestion(int index){
+    private void saveEditedQuestion(int index){
         quiz.getQuestions().get(index).setQuestion(textQuestion.getText());
         choicesData.get(0).setChoiceDescription(firstchoice.getText());
         choicesData.get(0).setCorrect(firstradiobtn.isSelected());
@@ -204,7 +201,7 @@ public class CreateQuestionChoicesBox extends VBox {
         choicesData.get(3).setCorrect(fourthradiobtn.isSelected());
         //update answers Edit Button pushed
         quiz.getQuestions().get(index).setAnswers(choicesData);
-
+        CreateAddQuestionBox.getUpdatedQuestions().add(quiz.getQuestions().get(index)); //for easier processing on the server side
     }
 
 

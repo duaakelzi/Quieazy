@@ -57,11 +57,17 @@ public class ServerDecoder {
             for (i=0; i<questionData.size(); i++) {
                 Request.createQuestion(questionData.get(i).getQuestion(), 5,questionData.get(i).getAnswers(),quiz.getName(),"user@mail.com");
             }
-            if (i == questionData.size()) {
+            if (i != questionData.size()) {
+                message.task = "CREATE_QUESTIONS_FAILED";
+            }else {
                 message.task = "CREATE_QUESTIONS_SUCCESSFUL";
             }
             return message; //this message contains new task: "Create_question_successfull"
-      }
+        } else if (message.task.equals("SAVE_QUESTION_EDITS")) {
+
+        } else if (message.task.equals("ADD_OLD_QUESTIONS")) {
+
+        }
 //        } else if (message.task.equals("DELETE_QUESTION")) {
 //            QuestionData question = message.questionData;
 //            return Request.deleteQuestion(question.getId());

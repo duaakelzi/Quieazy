@@ -50,13 +50,13 @@ public class ClientAgent implements Runnable{
 		try {
 			
 			while(true) {
-				System.out.println("Run method entered..");
+				//System.out.println("Run method entered.."); for testing
 				message = (Message) in.readObject();
 				
 				if(message != null) { // if message received
-					System.out.println("Non-null message received.. ");
+					//System.out.println("Non-null message received.. "); for testing
 					// decode and execute received message
-					System.out.println("Message task: " + message.task);
+					//System.out.println("Message task: " + message.task); for testing only
 					ClientDecoder.decode(message);
 				}
 				

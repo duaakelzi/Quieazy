@@ -8,7 +8,7 @@ public class CreateQuestionChoicesTab extends Tab {
     private static CreateQuestionChoicesTab createQuestionChoicesTab;
 
     public CreateQuestionChoicesTab() {
-        super("+ new Question", CreateQuestionChoicesBox.getCreateQuestionChoicesBox());
+        super("Question Editor", CreateQuestionChoicesBox.getCreateQuestionChoicesBox()); //changed from "+ Question" to avoid confusion when Edit is called
     }
 
     public static CreateQuestionChoicesTab getCreateQuestionChoicesTab() {

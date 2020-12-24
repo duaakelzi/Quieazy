@@ -36,7 +36,17 @@ public class ClientDecoder {
 		}else if(message.task.equals("CREATE_QUIZ_FAILED")){
 			CreateQuizBox.getCreateQuizBox().showFailed();
 		}else if(message.task.equals("CREATE_QUESTIONS_SUCCESSFUL")) {
-			System.out.println("Questions created and saved");
+			System.out.println("Questions created and saved"); //depends on Ion's needs
+		}else if(message.task.equals("CREATE_QUESTIONS_FAILED")) {
+			System.out.println("Questions not persisted"); //depends on Ion's needs
+		}else if(message.task.equals("SAVE_QUESTION_EDITS_SUCCESSFUL")) {
+			System.out.println("Questions updated"); //depends on Ion's needs
+		}else if(message.task.equals("SAVE_QUESTION_EDITS_FAILED")) {
+			System.out.println("Questions not updated"); //depends on Ion's needs
+		}else if(message.task.equals("ADD_OLD_QUESTIONS_SUCCESSFUL")) {
+			System.out.println("Questions updated"); //depends on Ion's needs
+		}else if(message.task.equals("ADD_OLD_QUESTIONS_FAILED")) {
+			System.out.println("Questions not updated"); //depends on Ion's needs
 		}
 	}
 

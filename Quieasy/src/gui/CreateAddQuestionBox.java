@@ -29,8 +29,9 @@ public class CreateAddQuestionBox extends VBox {
         private TableColumn<TableFillQuestions, Integer> idCol;
         private ArrayList<QuestionData> allQuestions = CreateQuizBox.getCreateQuizBox().getQuiz().getQuestions(); //to list all questions
         private static ArrayList<QuestionData> newQuestions = new ArrayList<>(); //for new questions only
+        private static ArrayList<QuestionData> oldQuestions = new ArrayList<>(); //for questions from the QuestionBank
         private TableFillQuestions selectedItem;
-        private QuestionData addedQuestiontoQuiz; //what is this one for??
+        private static ArrayList<QuestionData> updatedQuestions = new ArrayList<>(); //for those that only need updating
 
         //constructor
         private CreateAddQuestionBox() {
@@ -52,6 +53,14 @@ public class CreateAddQuestionBox extends VBox {
 
     public void setNewQuestions(ArrayList<QuestionData> newQuestions) {
         this.newQuestions = newQuestions;
+    }
+
+    public static ArrayList<QuestionData> getUpdatedQuestions() {
+        return updatedQuestions;
+    }
+
+    public void setUpdatedQuestions(ArrayList<QuestionData> updatedQuestions) {
+        this.updatedQuestions = updatedQuestions;
     }
 
     //get the current instance ->Singleton
@@ -90,8 +99,6 @@ public class CreateAddQuestionBox extends VBox {
         questionVbox.setPadding(new Insets(10, 25, 0, 20));
         tableViewListQuestions = new TableView<TableFillQuestions>();
 
-//
-
         addNrColumn(); // nr column
 
         TableColumn <TableFillQuestions, String> firstCol = new TableColumn<>("Question Name");
@@ -128,7 +135,7 @@ public class CreateAddQuestionBox extends VBox {
         //addedQuestiontoQuiz = questions.get(index);
         questionsToList = FXCollections.observableArrayList();
         for(int i = 0; i < allQuestions.size(); i++){
-            questionsToList.add(new TableFillQuestions(String.valueOf(i+1), allQuestions.get(i).getQuestion(), "Chen Li"));
+            questionsToList.add(new TableFillQuestions(String.valueOf(i), allQuestions.get(i).getQuestion(), "Chen Li"));
         }
            tableViewListQuestions.setItems(questionsToList);
            // tableViewListQuestions.setItems(questionsToList);
@@ -166,11 +173,9 @@ public class CreateAddQuestionBox extends VBox {
             @Override
             public TableCell<TableFillQuestions, Void> call(TableColumn<TableFillQuestions, Void> tableFillDataVoidTableColumn) {
 
-
                 return new TableCell<>() {
 
                     final Button editbtn = new Button("⭯ Edit");
-
                     {
                         editbtn.setOnAction(actionEvent -> {
                             // action when the button is pressed
@@ -319,13 +324,12 @@ public class CreateAddQuestionBox extends VBox {
             @Override
             public void handle(ActionEvent actionEvent) {
                 //savequiz();
-
-              //  QuestionC.createnewQuestions(CreateQuizBox.getCreateQuizBox().getQuiz()); // not connected to server yet
-                //update Quiz with newly added questions --> this is already done in CreateQuestionBox
-               // CreateQuizBox.getCreateQuizBox().getQuiz().addQuestions(newQuestions);
                 //make the new questions persistent
                 QuestionC.persistNewQuestions(CreateQuizBox.getCreateQuizBox().getQuiz(), newQuestions);
-             //   QuestionC.updateExistingQuestions(CreateQuizBox.getCreateQuizBox().getQuiz());
+                //update edited questions
+                QuestionC.updateEditedQuestions(updatedQuestions);
+                //update relationships of old questions
+
             }
         });
         save.setFont(Font.font("Times New Roman", FontWeight.SEMI_BOLD, 16));
@@ -336,9 +340,9 @@ public class CreateAddQuestionBox extends VBox {
     }
 
 
-    public void savequiz(){
+    public void saveQuiz(){
         QuizC.createNewQuiz(CreateQuizBox.getCreateQuizBox().getQuiz());
-    }
+    } //why is this outside CreateQuiz??
 
     public int indexSelecteditem(){
         return tableViewListQuestions.getSelectionModel().getSelectedIndex();
