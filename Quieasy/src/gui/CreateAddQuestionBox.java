@@ -1,6 +1,7 @@
 package gui;
 
 import data.QuestionData;
+import requests.QuestionC;
 import requests.QuizC;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.beans.property.SimpleStringProperty;
@@ -24,32 +25,36 @@ public class CreateAddQuestionBox extends VBox {
 
         private static CreateAddQuestionBox createAddQuestionBox;
         private TableView<TableFillQuestions> tableViewListQuestions;
-        private ObservableList<TableFillQuestions> questionsToList;
+        private ObservableList<TableFillQuestions> questionsToList; //not sure what this is for
         private TableColumn<TableFillQuestions, Integer> idCol;
-        private ArrayList<QuestionData> questions = CreateQuizBox.getCreateQuizBox().getQuiz().getQuestions();
+        private ArrayList<QuestionData> allQuestions = CreateQuizBox.getCreateQuizBox().getQuiz().getQuestions(); //to list all questions
+        private static ArrayList<QuestionData> newQuestions = new ArrayList<>(); //for new questions only
         private TableFillQuestions selectedItem;
-        private QuestionData addedQuestiontoQuiz;
+        private QuestionData addedQuestiontoQuiz; //what is this one for??
 
-
-
-
-
-    //constructor
+        //constructor
         private CreateAddQuestionBox() {
             super();
             // initialize the buttons for adding questions
-            HBox buttons = initiateaddButton();
+            HBox buttons = initiateAddButton();
             // initialize the table where will be store the Question List
             // Sample data
-            VBox listofQuestion = initiatelistofQuestions();
-            HBox savebtn = initiateSavedBtns();
+            VBox listofQuestion = initiateListOfQuestions();
+            HBox savebtn = initiateSaveBtns();
 
             this.getChildren().addAll(buttons, listofQuestion, savebtn);
         }
 
+    //getter/setter
+    public static ArrayList<QuestionData> getNewQuestions() {
+        return newQuestions;
+    }
 
+    public void setNewQuestions(ArrayList<QuestionData> newQuestions) {
+        this.newQuestions = newQuestions;
+    }
 
-        //get the current instance ->Singleton
+    //get the current instance ->Singleton
     public static CreateAddQuestionBox getCreateAddQuestionBox(){
             if(createAddQuestionBox == null){
                 createAddQuestionBox = new CreateAddQuestionBox();
@@ -57,12 +62,18 @@ public class CreateAddQuestionBox extends VBox {
             return createAddQuestionBox;
     }
 
-    private HBox initiateaddButton(){
+    //to initiate creation of new questions
+    private HBox initiateAddButton(){
             HBox buttons = new HBox(230);
             buttons.setPadding(new Insets(20));
             Button newQuestion = new Button("➕ Question");
             newQuestion.setOnAction(actionEvent -> {
+                System.out.println("Size of array of new questions before adding: " + newQuestions.size());
                 MainPane.getMainPane().getTabs().add(CreateQuestionChoicesTab.getCreateQuestionChoicesTab());
+                //save newly created question to the Array of questions (not persisted yet)
+               // newQuestions.add(CreateQuestionChoicesBox.getCreateQuestionChoicesBox().getNewQuestionAdd());
+                //alternative approach being tried: update the newQuestions array at the CreateQuestionChoicesBox.initiateSaveQuestionBtn level
+                //check if the set of Questions is growing
                 tableViewListQuestions.getSelectionModel().clearSelection();
             });
             newQuestion.setMinWidth(200);
@@ -77,7 +88,7 @@ public class CreateAddQuestionBox extends VBox {
             return buttons;
     }
 
-    private VBox initiatelistofQuestions(){
+    private VBox initiateListOfQuestions(){
         VBox  questionVbox = new VBox();
         questionVbox.setSpacing(50);
         questionVbox.setPadding(new Insets(10, 25, 0, 20));
@@ -120,15 +131,13 @@ public class CreateAddQuestionBox extends VBox {
 
         //addedQuestiontoQuiz = questions.get(index);
         questionsToList = FXCollections.observableArrayList();
+        //this is probably all questions listed. since we want to have new and old, maybe a total set should be composed of those
 
-        for(int i = 0; i < questions.size(); i++){
-            questionsToList.add(new TableFillQuestions(String.valueOf(i), questions.get(i).getQuestion(), "Chen Li"));
+        for(int i = 0; i < allQuestions.size(); i++){
+            questionsToList.add(new TableFillQuestions(String.valueOf(i), allQuestions.get(i).getQuestion(), "Chen Li"));
         }
            tableViewListQuestions.setItems(questionsToList);
            // tableViewListQuestions.setItems(questionsToList);
-
-
-
     }
     private void addNrColumn(){
             idCol = new TableColumn<>("#");
@@ -179,7 +188,7 @@ public class CreateAddQuestionBox extends VBox {
                             } catch (IndexOutOfBoundsException e){
                                 Alert alert = new Alert(Alert.AlertType.NONE);
                                 alert.setAlertType(Alert.AlertType.INFORMATION);
-                                alert.setContentText("Selecte the item what you want to edit");
+                                alert.setContentText("Select the item what you want to edit");
                                 alert.show();
                             }
 
@@ -225,7 +234,7 @@ public class CreateAddQuestionBox extends VBox {
                             try {
                                 selectedItem = tableViewListQuestions.getSelectionModel().getSelectedItem();
                                 int index = tableViewListQuestions.getSelectionModel().getSelectedIndex();
-                                questions.remove(questions.get(index));
+                                allQuestions.remove(allQuestions.get(index));
                                 tableViewListQuestions.getItems().remove(selectedItem);
                                 tableViewListQuestions.getSelectionModel().clearSelection(); // clear all the selection
                             }catch (IndexOutOfBoundsException e){
@@ -306,18 +315,24 @@ public class CreateAddQuestionBox extends VBox {
 
     }
 
-
-    private HBox initiateSavedBtns(){
+    //makes calls to save Questions and Quiz
+    private HBox initiateSaveBtns(){
         HBox savedbtn = new HBox(360);
         savedbtn.setPadding(new Insets(30,10,30,30));
         Button save = new Button("▼ SAVE");
+        //calls to make the array of questions persistent
         save.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
                 //savequiz();
 
-                //QuestionC.createnewQuestions(CreateQuizBox.getCreateQuizBox().getQuiz()); // not connected to server yet
-
+              //  QuestionC.createnewQuestions(CreateQuizBox.getCreateQuizBox().getQuiz()); // not connected to server yet
+                //update Quiz with newly added questions --> this is already done in CreateQuestionBox
+               // CreateQuizBox.getCreateQuizBox().getQuiz().addQuestions(newQuestions);
+                //make the new questions persistent
+                QuestionC.persistNewQuestions(CreateQuizBox.getCreateQuizBox().getQuiz(), newQuestions);
+             //   QuestionC.updateExistingQuestions(CreateQuizBox.getCreateQuizBox().getQuiz());
+                System.out.println("This (useless?) loop inside CreateAddQuestionBox. Here's what it's doing: ");
                 for(int i = 0; i < CreateQuizBox.getCreateQuizBox().getQuiz().getQuestions().size(); i ++){
                     System.out.println(CreateQuizBox.getCreateQuizBox().getQuiz().getQuestions().get(i).getQuestion());
                 }

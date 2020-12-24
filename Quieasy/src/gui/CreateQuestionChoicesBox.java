@@ -9,7 +9,6 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
-import requests.QuestionC;
 
 import java.util.ArrayList;
 
@@ -27,17 +26,15 @@ public class CreateQuestionChoicesBox extends VBox {
     private RadioButton fourthradiobtn;
     private TextArea textQuestion;
     private QuestionData newQuestionAdd;
-    private QuizData data = CreateQuizBox.getCreateQuizBox().getQuiz();
+    private QuizData quiz = CreateQuizBox.getCreateQuizBox().getQuiz();
     private ArrayList<ChoicesData> choicesData;
     private int indexEditQuestion;
+    //c'tor
     private CreateQuestionChoicesBox(){
         // initiate the Question area
         VBox question = initiateQuestion();
-
         // initiate the answer field with radiobutton
         VBox answer = initiateChoices();
-
-
         // initiate saveButton
         HBox button = initiateSaveQuestionBtn();
         this.getChildren().addAll(question, answer, button);
@@ -48,7 +45,12 @@ public class CreateQuestionChoicesBox extends VBox {
         return createQuestionChoicesBox;
     }
 
+    //getter and setter
+    public QuestionData getNewQuestionAdd() {
+        return newQuestionAdd;
+    }
 
+    //buttons
     private VBox initiateQuestion(){
         VBox questionVbox = new VBox(10);
         questionVbox.setPadding(new Insets(20,30, 10, 30));
@@ -114,21 +116,24 @@ public class CreateQuestionChoicesBox extends VBox {
     private HBox initiateSaveQuestionBtn(){
         HBox buttonHbox = new HBox();
         buttonHbox.setPadding(new Insets(50, 30, 0, 490));
-        Button saveQ= new Button("SAVE QUESTION");
+        Button saveQ= new Button("CREATE");
         saveQ.setFont(Font.font("Times New Roman", FontWeight.NORMAL, 16));
         saveQ.setOnAction(actionEvent -> {
                 indexEditQuestion = CreateAddQuestionBox.getCreateAddQuestionBox().indexSelecteditem();
-               if(indexEditQuestion >=0 && indexEditQuestion < data.getQuestions().size()){
+               if(indexEditQuestion >=0 && indexEditQuestion < quiz.getQuestions().size()){
                    //update question with new data
                     saveEditQuestion(indexEditQuestion);
-
                     CreateAddQuestionBox.getCreateAddQuestionBox().fillTableObservableListWithQuestion();
-
-
                }else {
                    //create new question and add to the tableView
-                   newQuestionAdd = createnewQuestion();
-                   int index = data.getQuestions().indexOf(newQuestionAdd);
+                   newQuestionAdd = createNewQuestion();
+                   //add the newly-created question to the list of newQuestions
+                   //not sure this works:
+                   CreateAddQuestionBox.getNewQuestions().add(newQuestionAdd);
+                   System.out.println("Size of array of new questions after adding: " + CreateAddQuestionBox.getNewQuestions().size());
+                   //add to allQuestions
+                   quiz.getQuestions().add(newQuestionAdd);
+                   int index = quiz.getQuestions().indexOf(newQuestionAdd);
                    CreateAddQuestionBox.getCreateAddQuestionBox().fillTableObservableListWithQuestion();
                }
                 CreateQuestionChoicesTab.getCreateQuestionChoicesTab().closeTab();
@@ -143,18 +148,18 @@ public class CreateQuestionChoicesBox extends VBox {
 
 
     public void editQuestion(int index){
-        textQuestion.setText(data.getQuestions().get(index).getQuestion());
-        firstchoice.setText(data.getQuestions().get(index).getAnswers().get(0).getChoiceDescription());
-        firstradiobtn.setSelected(data.getQuestions().get(index).getAnswers().get(0).isCorrect());
+        textQuestion.setText(quiz.getQuestions().get(index).getQuestion());
+        firstchoice.setText(quiz.getQuestions().get(index).getAnswers().get(0).getChoiceDescription());
+        firstradiobtn.setSelected(quiz.getQuestions().get(index).getAnswers().get(0).isCorrect());
 
-        secondchoice.setText(data.getQuestions().get(index).getAnswers().get(1).getChoiceDescription());
-        secondradiobtn.setSelected(data.getQuestions().get(index).getAnswers().get(1).isCorrect());
+        secondchoice.setText(quiz.getQuestions().get(index).getAnswers().get(1).getChoiceDescription());
+        secondradiobtn.setSelected(quiz.getQuestions().get(index).getAnswers().get(1).isCorrect());
 
-        thirdchoice.setText(data.getQuestions().get(index).getAnswers().get(2).getChoiceDescription());
-        thirdradiobtn.setSelected(data.getQuestions().get(index).getAnswers().get(2).isCorrect());
+        thirdchoice.setText(quiz.getQuestions().get(index).getAnswers().get(2).getChoiceDescription());
+        thirdradiobtn.setSelected(quiz.getQuestions().get(index).getAnswers().get(2).isCorrect());
 
-        fourthchoice.setText(data.getQuestions().get(index).getAnswers().get(3).getChoiceDescription());
-        fourthradiobtn.setSelected(data.getQuestions().get(index).getAnswers().get(3).isCorrect());
+        fourthchoice.setText(quiz.getQuestions().get(index).getAnswers().get(3).getChoiceDescription());
+        fourthradiobtn.setSelected(quiz.getQuestions().get(index).getAnswers().get(3).isCorrect());
 
     }
 
@@ -170,24 +175,25 @@ public class CreateQuestionChoicesBox extends VBox {
         fourthradiobtn.setSelected(false);
     }
 
-    //experiment -> questions aren't there?
-    private QuestionData createnewQuestion(){
+    //this one seems to serve only the purpose of creating a question, not yet
+    //making it persistent => remove persistence related calls from here
+    private QuestionData createNewQuestion(){
         choicesData = new ArrayList<>();
         choicesData.add(new ChoicesData(firstchoice.getText(), firstradiobtn.isSelected()));
         choicesData.add(new ChoicesData(secondchoice.getText(), secondradiobtn.isSelected()));
         choicesData.add(new ChoicesData(thirdchoice.getText(), thirdradiobtn.isSelected()));
         choicesData.add(new ChoicesData(fourthchoice.getText(), fourthradiobtn.isSelected()));
-
+        //create questionData with necessary attributes
         QuestionData newQuestion = new QuestionData(textQuestion.getText(), choicesData);
         //make question persistent ==> should receive question back from server here!
-        QuestionC.createnewQuestions(data, newQuestion);
-        //ask to update Quiz
-        data.addQuestion(newQuestion);
+       // QuestionC.createnewQuestions(data, newQuestion);
+        //ask to update Quiz => maybe this should be done at a later stage, once the "final" list exists
+       // data.addQuestion(newQuestion);
         return newQuestion;
     }
 
     private void saveEditQuestion(int index){
-        data.getQuestions().get(index).setQuestion(textQuestion.getText());
+        quiz.getQuestions().get(index).setQuestion(textQuestion.getText());
         choicesData.get(0).setChoiceDescription(firstchoice.getText());
         choicesData.get(0).setCorrect(firstradiobtn.isSelected());
         choicesData.get(1).setChoiceDescription(secondchoice.getText());
@@ -196,8 +202,8 @@ public class CreateQuestionChoicesBox extends VBox {
         choicesData.get(2).setCorrect(thirdradiobtn.isSelected());
         choicesData.get(3).setChoiceDescription(fourthchoice.getText());
         choicesData.get(3).setCorrect(fourthradiobtn.isSelected());
-        //update amswers Edit Button pushed
-        data.getQuestions().get(index).setAnswers(choicesData);
+        //update answers Edit Button pushed
+        quiz.getQuestions().get(index).setAnswers(choicesData);
 
     }
 

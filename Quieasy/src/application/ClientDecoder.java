@@ -35,8 +35,9 @@ public class ClientDecoder {
 			CreateQuizBox.getCreateQuizBox().showSuccessful();
 		}else if(message.task.equals("CREATE_QUIZ_FAILED")){
 			CreateQuizBox.getCreateQuizBox().showFailed();
+		}else if(message.task.equals("CREATE_QUESTIONS_SUCCESSFUL")) {
+			System.out.println("Questions created and saved");
 		}
-		
 	}
 
 }

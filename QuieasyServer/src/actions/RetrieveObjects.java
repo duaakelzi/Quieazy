@@ -1,8 +1,8 @@
 package actions;
 
 import data.Message;
-import requests.Question;
-import requests.Quiz;
+import domain.Question;
+import domain.Quiz;
 import org.hibernate.Session;
 import persistence.HibernateUtil;
 

@@ -24,16 +24,16 @@ public class ServerDecoder {
             return Request.register(data.firstName, data.lastName, data.email, data.password);
 
         } else if (message.task.equals("CREATE_QUIZ")) {
-            data.QuizData quiz = message.quizlist;
+            data.QuizData quiz = message.quizData;
             data.UserData data = message.userData;
-            System.out.println(message.quizlist.getName());
+            System.out.println(message.quizData.getName());
             return Request.createQuiz(quiz.getName(), quiz.getThreshold(), false, "user@mail.com", quiz.getCourse(),quiz.getTimer()); //should i return quiz data immediately?
         } else if (message.task.equals("UPDATE_QUIZ")) {
-            data.QuizData quiz = message.quizlist;
+            data.QuizData quiz = message.quizData;
 
             return Request.updateQuiz( quiz.getName(), quiz.getThreshold(), false, quiz.getCourse());
         } else if (message.task.equals("DELETE_QUIZ")) {
-            QuizData quiz = message.quizlist;
+            QuizData quiz = message.quizData;
 
             return Request.deleteQuiz(quiz.getId(), quiz.getCourse());
         }
@@ -44,18 +44,24 @@ public class ServerDecoder {
 //        } else if (message.task.equals("CREATE_QUESTION")) {
 //            QuestionData question = message.questionData;
 //            return Request.createQuestion(question.getQuestionText(), question.getPoints(), question.getQuestionChoices(), question.getUser().getEmail());
-      else if (message.task.equals("CREATE_QUESTION")) {
-            System.out.println("server: create question method entered >> ");
-            data.QuizData quiz = message.quizlist;
-           ArrayList<QuestionData> questionData = message.questionData;
-            //System.out.println(message.task);
-            System.out.println(quiz.getName());
-            System.out.println("server check: question size = " + questionData.size());
+      else if (message.task.equals("CREATE_QUESTIONS")) {
+            System.out.println("server: create questions method entered >> ");
+            data.QuizData quiz = message.quizData;
+            ArrayList<QuestionData> questionData = message.questionData;
+            System.out.println("Message task" + message.task);
+            System.out.println("Quiz name: " + quiz.getName());
+            System.out.println("Question array size = " + questionData.size());
 
-            //check if choices are part of Question
-            for (int i=0;i<questionData.size();i++){
-                System.out.println(questionData.get(i).printAnswers());
-            return Request.createQuestion(questionData.get(i).getQuestion(), 5,questionData.get(i).getAnswers(),quiz.getName(),"user@mail.com");}}
+            //go through array of new questions and make each persistent
+            int i;
+            for (i=0; i<questionData.size(); i++) {
+                Request.createQuestion(questionData.get(i).getQuestion(), 5,questionData.get(i).getAnswers(),quiz.getName(),"user@mail.com");
+            }
+            if (i == questionData.size()+1) {
+                message.task = "CREATE_QUESTIONS_SUCCESSFUL";
+            }
+            return message; //this message contains new task: "Create_question_successfull"
+      }
 //        } else if (message.task.equals("DELETE_QUESTION")) {
 //            QuestionData question = message.questionData;
 //            return Request.deleteQuestion(question.getId());

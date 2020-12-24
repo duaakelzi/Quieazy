@@ -15,10 +15,10 @@ public class Quieasy extends Application {
 	public void start(Stage myStage) {
 		
 		//connect to server
-		//ClientAgent clientAgent = ClientAgent.getClientAgent(); //Ion's comment
+		ClientAgent clientAgent = ClientAgent.getClientAgent();
 		
 		// start listening for incoming messages
-		//(new Thread(clientAgent)).start(); //ion's comment
+		(new Thread(clientAgent)).start();
 		
 		// Setup the stage
 		myStage.setTitle("Quieasy");

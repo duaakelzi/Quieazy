@@ -78,13 +78,16 @@ public class QuizData implements Serializable {
         this.timer = timer;
     }
 
-    public void addQuestion(QuestionData q) {
-        questions.add(q);
+    public void addQuestions(ArrayList<QuestionData> q) {
+        for(int i=0; i<q.size(); i++) {
+            questions.add(q.get(i));
+        }
     }
 
     public ArrayList<QuestionData> getQuestions() {
         return questions;
     }
+
 
     public String getOwnerQuiz() {
         return firstName + " " + lastName;

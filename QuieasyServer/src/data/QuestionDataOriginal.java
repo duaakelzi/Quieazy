@@ -1,9 +1,9 @@
 package data;
 
 
-import requests.Question;
-import requests.Quiz;
-import requests.User;
+import domain.Question;
+import domain.Quiz;
+import domain.User;
 
 
 import java.io.Serializable;

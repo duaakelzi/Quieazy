@@ -18,8 +18,9 @@ public class QuizC {
 
         QuizData quizzes = new QuizData();
         quizzes = newQuizData;
-        saveQuizMsg.quizlist = new QuizData(quizzes.getProgram(),quizzes.getCourse(),quizzes.getName(),quizzes.getThreshold(),quizzes.getTimer(),quizzes.getQuestions());
-        System.out.println(saveQuizMsg.quizlist.getName());
+        //first time you make an empty quiz persistent
+        saveQuizMsg.quizData = new QuizData(quizzes.getProgram(),quizzes.getCourse(),quizzes.getName(),quizzes.getThreshold(),quizzes.getTimer(),quizzes.getQuestions());
+        System.out.println(saveQuizMsg.quizData.getName());
         clientAgent.send(saveQuizMsg);
     }
 

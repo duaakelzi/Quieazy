@@ -83,6 +83,7 @@ public class ClientAgent implements Runnable{
 
 			out.writeObject(message);
 			out.flush();
+			run(); //try this as an attempt to receive something from server
 			
 		}catch(Exception e) {
 			

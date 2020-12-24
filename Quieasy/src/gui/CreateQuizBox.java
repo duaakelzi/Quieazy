@@ -24,7 +24,7 @@ import java.util.stream.Collectors;
 public class CreateQuizBox extends VBox {
 
 	private static CreateQuizBox createQuizBox;
-	private Button createButtom;
+	private Button createButton;
 	private TextField textThreshold;
 	private TextField textname;
 	private ComboBox<String> courseComboBox;
@@ -267,10 +267,10 @@ public class CreateQuizBox extends VBox {
 	public HBox initiateBotton(){
 		HBox buttonsubmit = new HBox();
 		buttonsubmit.setPadding(new Insets(40, 30, 0, 500));
-		createButtom = new Button("➦ Create Quiz");
-		createButtom.setFont(Font.font("Times New Roman", FontWeight.NORMAL, 16));
-		buttonsubmit.getChildren().addAll(createButtom);
-		createButtom.setOnAction(actionEvent -> {
+		createButton = new Button("➦ Create Quiz");
+		createButton.setFont(Font.font("Times New Roman", FontWeight.NORMAL, 16));
+		buttonsubmit.getChildren().addAll(createButton);
+		createButton.setOnAction(actionEvent -> {
 			if(studyProgramComboBox.getValue()==null     || courseComboBox.getValue() == null
 														 || textname.getText().isEmpty()
 														 || textThreshold.getText().isEmpty()
