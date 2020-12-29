@@ -41,6 +41,7 @@ public class CreateQuestionBankBox extends VBox {
         TextField searchKeyWords = new TextField();
         searchKeyWords.setFont(Font.font("Times New Roman", FontWeight.NORMAL, 18));
         searchKeyWords.setMinWidth(100);
+        searchKeyWords.setPromptText("Filter");
         Button searchButton = new Button("➔");
         searchButton.setFont(Font.font(14));
         searchFieldHBox.getChildren().addAll(searchLabel, searchKeyWords, searchButton);
