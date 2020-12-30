@@ -39,6 +39,7 @@ public class CreateQuizBox extends VBox {
 		
 		super();
 		studyProgramHSArrayList = new ArrayList<>() {{
+			//call studyPro from db and ArrayList<Courses> as its attr
 			add(new StudyProgramHS("Computational Science and Engineering", new ArrayList<>()));
 			add(new StudyProgramHS("Computer Science", new ArrayList<>(){{
 				add(new Course("SOFE"));

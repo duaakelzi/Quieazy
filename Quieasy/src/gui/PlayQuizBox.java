@@ -52,6 +52,7 @@ public class PlayQuizBox extends VBox {
     }
 
     //i believe, this one is the track to navigate among questions. it probably needs to be linked to the actual array of questions
+    // yes
     public HBox initiateQuestionTrack(){
         HBox questionstrack = new HBox(10);
         questionstrack.setAlignment(Pos.CENTER);
