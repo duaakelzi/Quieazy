@@ -1,13 +1,8 @@
 package gui;
 
 import javafx.geometry.Insets;
-import javafx.geometry.Pos;
-import javafx.scene.Node;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
+import javafx.scene.control.*;
+import javafx.scene.layout.*;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 
@@ -18,8 +13,13 @@ public class CreateQuestionBankBox extends VBox {
     //constructor
     private CreateQuestionBankBox() {
 
-        HBox searchField = initiateSearchField();
-        this.getChildren().addAll(searchField);
+        HBox searchfield = initiateSearchField();
+
+        HBox scrollPane = initiateScrollPane();
+
+        HBox save = initiateSaveButton();
+
+        this.getChildren().addAll(searchfield, scrollPane, save);
 
     }
 
@@ -48,5 +48,31 @@ public class CreateQuestionBankBox extends VBox {
         return searchFieldHBox;
 
     }
-    //methods for initiating the search itself seem to be missing
+
+    private HBox initiateScrollPane(){
+        HBox scrolPaneHbox = new HBox();
+        ScrollPane scrollPane = new ScrollPane();
+        ListView<String> list = new ListView<>();
+        for(int i= 0; i < 100; i++){
+            list.getItems().add(String.valueOf(i));
+        }
+        //list.getItems(). addAll();
+        list.setPrefWidth(650);
+        list.setPrefHeight(300);
+        scrollPane.setContent(list);
+        scrolPaneHbox.getChildren().addAll(scrollPane);
+        return  scrolPaneHbox;
+    }
+
+    HBox initiateSaveButton(){
+        HBox saveHbox = new HBox();
+        Button save = new Button("▼ SAVE QUESTION");
+        saveHbox.setPadding(new Insets(10, 0, 0, 530));
+        saveHbox.getChildren().addAll(save);
+        return saveHbox;
+    }
+
+
+
+
 }

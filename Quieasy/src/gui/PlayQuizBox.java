@@ -40,6 +40,7 @@ public class PlayQuizBox extends VBox {
         this.getChildren().addAll(questionstrack, markQuestion, answers, buttons);
 
 
+
     }
 
     public static PlayQuizBox getPlayQuizBox() {
@@ -78,6 +79,7 @@ public class PlayQuizBox extends VBox {
         textmark.setFont(Font.font("Times New Roman", 17));
         mark.getChildren().addAll(textmark);
         mark.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
+
 
         HBox question = new HBox();
         question.setBackground(new Background(new BackgroundFill(Color.LIGHTSKYBLUE, null, null)));
@@ -163,6 +165,9 @@ public class PlayQuizBox extends VBox {
         cancel.setEffect(new DropShadow());
         return cancel;
     }
+
+
+
 
 
 }
