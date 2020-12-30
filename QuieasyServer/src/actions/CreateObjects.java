@@ -173,6 +173,40 @@ public class CreateObjects {
         return message;
     }
 
+//int points, boolean isPassed, String userEmail
+    public static Message createResult(int points, boolean isPassed, String quizName, String userEmail) {
+        try {
+            System.out.println("create result entered.. ");
+            session.beginTransaction();
+            //result needs user and quiz
+            //retrieve quiz
+            //this won't work if different quizzes with same name will exist
+            Quiz resultQuiz = session.getSession().createQuery("FROM Quiz WHERE name = :name", Quiz.class).setParameter("name", quizName).getSingleResult();
+            //retrieve user
+            User resultUser = session.getSession().createQuery("FROM User WHERE email = :email", User.class).setParameter("email", userEmail).getSingleResult();
+            //create result with all info
+            Result newResult = new Result(isPassed, points);
+            newResult.setQuiz(resultQuiz);
+            newResult.setUser(resultUser);
 
+            session.save(newResult);
+            session.getTransaction().commit();
+            message.task = "RESULT_CREATED";
+        }catch(Exception e) {
+            // if the error message is "out of memory",
+            // it probably means no database file is found
+            System.err.println(e.getMessage());
+        }finally{
+            try{
+                if(session != null)
+                    session.close();
+            }catch(Exception e){
+                // connection close failed.
+                System.err.println(e.getMessage());
+            }
+        }
+        session.close();
+        return message;
+    }
 
 }

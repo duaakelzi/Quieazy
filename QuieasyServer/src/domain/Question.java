@@ -1,8 +1,7 @@
 package domain;
 
 import javax.persistence.*;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 @Entity
 @Table(name="question")
@@ -12,8 +11,8 @@ public class Question  {
 	private String questionText;
 	private int points;
 	private User user;
-	 private Set<Quiz> quiz = new HashSet<Quiz>(0);
-	 private Set<QuestionChoice> questionChoices = new HashSet<QuestionChoice>(0);
+	private Set<Quiz> quiz = new HashSet<Quiz>(0);
+	private Set<QuestionChoice> questionChoices = new HashSet<QuestionChoice>(0);
 	
 	public Question() {}
 	
@@ -74,13 +73,9 @@ public class Question  {
 	        this.quiz = quiz;
 	    }
 	
-	    public void addQuiz(Quiz quiz) 
-	     {
+	    public void addQuiz(Quiz quiz) {
 	    	 this.quiz.add(quiz);
 	     }
-	public void setQuestionChoices(Set<QuestionChoice> questionChoices) {
-			this.questionChoices = questionChoices;
-		}
 
 	//owning for Questions
 	@OneToMany(mappedBy = "primaryKey.question", cascade = CascadeType.ALL)

@@ -9,6 +9,7 @@ import java.util.ArrayList;
 
 public class ServerDecoder {
 
+    //can we get rid of the if-else??
     public static Message decode(Message message) {
 
         if (message.task.equals("LOG_IN")) {
@@ -25,32 +26,24 @@ public class ServerDecoder {
 
         } else if (message.task.equals("CREATE_QUIZ")) {
             data.QuizData quiz = message.quizData;
-            data.UserData data = message.userData;
+            data.UserData userData = message.userData;
             System.out.println(message.quizData.getName());
-            return Request.createQuiz(quiz.getName(), quiz.getThreshold(), false, "user@mail.com", quiz.getCourse(),quiz.getTimer()); //should i return quiz data immediately?
+            return Request.createQuiz(quiz.getName(), quiz.getThreshold(), false, userData.getEmail(), quiz.getCourse(),quiz.getTimer()); //should i return quiz data immediately?
         } else if (message.task.equals("UPDATE_QUIZ")) {
             data.QuizData quiz = message.quizData;
 
             return Request.updateQuiz( quiz.getName(), quiz.getThreshold(), false, quiz.getCourse());
         } else if (message.task.equals("DELETE_QUIZ")) {
             QuizData quiz = message.quizData;
-
             return Request.deleteQuiz(quiz.getId(), quiz.getCourse());
-        }
-        //should i return quiz data immediately?
-//        else if (message.task.equals("FETCH_ALL_QUIZZES")) {
-//            UserData data = message.userData;
-//            return Request.retrieveQuizzes(data.email);
-//        } else if (message.task.equals("CREATE_QUESTION")) {
-//            QuestionData question = message.questionData;
-//            return Request.createQuestion(question.getQuestionText(), question.getPoints(), question.getQuestionChoices(), question.getUser().getEmail());
-      else if (message.task.equals("CREATE_QUESTIONS")) {
+
+        } else if (message.task.equals("FETCH_ALL_QUIZZES")) {
+            UserData userData = message.userData;
+            return Request.retrieveQuizzes(userData.getEmail());
+        } else if (message.task.equals("CREATE_QUESTIONS")) {
             System.out.println("server: create questions method entered >> ");
-            data.QuizData quiz = message.quizData;
+            QuizData quiz = message.quizData;
             ArrayList<QuestionData> questionData = message.questionData;
-//            System.out.println("Message task" + message.task);
-//            System.out.println("Quiz name: " + quiz.getName());
-//            System.out.println("Question array size = " + questionData.size());
 
             //go through array of new questions and make each persistent
             int i;
@@ -64,17 +57,50 @@ public class ServerDecoder {
             }
             return message; //this message contains new task: "Create_question_successfull"
         } else if (message.task.equals("SAVE_QUESTION_EDITS")) {
-
+            //to be added
         } else if (message.task.equals("ADD_OLD_QUESTIONS")) {
+            //to be added
+        } else if (message.task.equals("DELETE_QUESTION")) {
+            QuizData quiz = message.quizData;
+            ArrayList<QuestionData> questionData = message.questionData;
+            int i;
+            for (i=0; i<questionData.size(); i++) {
+                Request.deleteQuestion((long)i);   //this is only to make the comp. happy. figure out if id's will be there
+            }
+            if (i != questionData.size()) {
+                message.task = "DELETE_QUESTIONS_FAILED";
+            }else {
+                message.task = "DELETE_QUESTIONS_SUCCESSFUL";
+            }
+            return message;
+        } else if (message.task.equals("FETCH_ALL_QUESTIONS")) {
+            QuizData quiz = message.quizData;
+            return Request.retrieveQuestions(quiz.getId()); //all questions belonging to that quiz
+        }else if (message.task.equals("SAVE_RESULT")) {
+            UserData userData = message.userData;
+            QuizData quizData = message.quizData;
+            ArrayList<ResultData> resultData = message.resultData;
 
+            //go through array of results and make each persistent
+            int i;
+            for (i = 0; i < resultData.size(); i++) {
+                //ideally, we should be working with IDs here
+                //session closed after each call to persist. Might be interfering
+                Request.createResult(resultData.get(i).getPoints(), resultData.get(i).isPassed(), quizData.getName(), userData.getEmail());
+            }
+
+            if (i != resultData.size()) {
+                message.task = "CREATE_RESULT_FAILED";
+            }else {
+                message.task = "CREATE_RESULT_SUCCESSFUL";
+            }
+            return message;
+        }else if (message.task.equals("FETCH_RESULTS")) {
+            UserData userData = message.userData;
+            return Request.retrieveResults(userData.getEmail());
+        }else if (message.task.equals("UPDATE_RESULT")) {
+            //to be added once repeat quiz is ready
         }
-//        } else if (message.task.equals("DELETE_QUESTION")) {
-//            QuestionData question = message.questionData;
-//            return Request.deleteQuestion(question.getId());
-//        } else if (message.task.equals("FETCH_ALL_QUESTIONS")) {
-//            QuizData quiz = message.quizlist;
-//            return Request.retrieveQuestions(quiz.getId()); //all questions belonging to that quiz
-//        }//fetch results for user, save result
         return null;
     }
 }

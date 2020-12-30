@@ -15,7 +15,6 @@ public class QuestionData implements Serializable {
     public QuestionData(String question, ArrayList<ChoicesData> answers) {
         this.question = question;
         this.answers = answers;
-
     }
 
 

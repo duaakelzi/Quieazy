@@ -10,7 +10,7 @@ public class JDBC {
         String pass="Sahadu123";
         try
         {
-
+            System.out.println("Database connection starting...");
             Connection myConn = DriverManager.getConnection(url,user,pass);
             System.out.println("Connection successful!!");
         }

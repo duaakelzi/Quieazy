@@ -22,6 +22,8 @@ public class PlayQuizBox extends VBox {
     private Button submit;
     private Button skip;
     private Button cancel;
+    //missing: Quiz with its questionData and user info
+
     //constructor*****
     public PlayQuizBox() {
 
@@ -49,6 +51,7 @@ public class PlayQuizBox extends VBox {
         return playQuizBox;
     }
 
+    //i believe, this one is the track to navigate among questions. it probably needs to be linked to the actual array of questions
     public HBox initiateQuestionTrack(){
         HBox questionstrack = new HBox(10);
         questionstrack.setAlignment(Pos.CENTER);
@@ -66,6 +69,8 @@ public class PlayQuizBox extends VBox {
         return questionstrack;
     }
 
+    // i'm guessing, this method should display the questions and choices? if so, we should load/fetch questions before or as
+    // the first step
     public HBox initiateQuestionMarkandQuestion(){
         HBox markQuestion = new HBox(10);
         //markQuestion.setPadding(new Insets(10));
@@ -93,6 +98,8 @@ public class PlayQuizBox extends VBox {
         return markQuestion;
     }
 
+    // i suppose, this one saves user choice? if yes, we need to have a way to save that input (in an array, i guess)
+    // user input from here would be checked with actual array with correct answers
     public VBox initiateAnswers(){
         VBox answers = new VBox(20);
         answers.setPrefWidth(650);
@@ -113,7 +120,7 @@ public class PlayQuizBox extends VBox {
 
         return answers;
     }
-
+    //not sure what this does
     public CheckBox initiateAnswer(){
         CheckBox answer = new CheckBox();
         answer.setFont(Font.font("Times New Roman", 16));
@@ -133,14 +140,20 @@ public class PlayQuizBox extends VBox {
 
     }
 
+    // method to finish quiz, save user input, check for correctness, send results to the server and display to user
+    // also gateway to go back or repeat quiz
     public Button initiateSubmitButton(){
         submit = new Button();
         submit.setEffect(new DropShadow());
         submit.setBackground(new Background(new BackgroundFill(Color.LIGHTGREEN, new CornerRadii(0), Insets.EMPTY)));
-        ImageView submitimg = new ImageView(new Image("images/submit.png"));
-        submit.setGraphic(submitimg);
+        ImageView submitImg = new ImageView(new Image("images/submit.png"));
+        submit.setGraphic(submitImg);
         submit.setOnAction(e->{
             //on button submit action
+            // here local checking of correctly answered questions can take place, since client already has the data
+            // the number of correctly answered questions will be sent to server, along with info on quiz&user
+            // concurrently, user can be informed about the results of the played quiz
+            // options to repeat or go back to QuizBrowser should be offered
         });
         return submit;
     }
@@ -152,6 +165,8 @@ public class PlayQuizBox extends VBox {
         skip.setEffect(new DropShadow());
         skip.setOnAction(e->{
             //on button skip action
+            // all questions skipped will have no user choice saved. hence, they will be marked as "wrong" by the system, when submit button is clicked
+            // !! it should be possible to change choice before user clicked submit!!
         });
         return skip;
     }
