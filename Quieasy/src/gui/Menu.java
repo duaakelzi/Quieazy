@@ -2,7 +2,7 @@
 
 package gui;
 
-import domain.UserC;
+import requests.UserC;
 
 import javafx.scene.layout.VBox;
 import javafx.scene.control.Button;

@@ -1,6 +1,6 @@
 // class for user and account related operations such as registration, log in/out
 
-package domain;
+package requests;
 
 import application.ClientAgent;
 import data.Message;

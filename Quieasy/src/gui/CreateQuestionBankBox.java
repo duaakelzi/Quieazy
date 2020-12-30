@@ -18,8 +18,8 @@ public class CreateQuestionBankBox extends VBox {
     //constructor
     private CreateQuestionBankBox() {
 
-        HBox searchfield = initiateSearchField();
-        this.getChildren().addAll(searchfield);
+        HBox searchField = initiateSearchField();
+        this.getChildren().addAll(searchField);
 
     }
 
@@ -48,4 +48,5 @@ public class CreateQuestionBankBox extends VBox {
         return searchFieldHBox;
 
     }
+    //methods for initiating the search itself seem to be missing
 }

@@ -5,7 +5,7 @@ package gui;
 import javafx.scene.text.*;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
-import domain.UserC;
+import requests.UserC;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;

@@ -1,8 +1,9 @@
 package data;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class StudyProgramHS {
+public class StudyProgramHS implements Serializable {
 
     private String studyprogram;
     private ArrayList<Course> courses;

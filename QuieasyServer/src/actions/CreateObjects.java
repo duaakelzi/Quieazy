@@ -2,7 +2,6 @@ package actions;
 
 import data.ChoicesData;
 import data.Message;
-import data.QuestionData;
 import domain.*;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
@@ -15,6 +14,7 @@ import java.util.Set;
 public class CreateObjects {
     public static Session session = HibernateUtil.getSessionFactory().openSession();
     public static Message message = new Message();
+
     public static Message CreateQuiz(String name,double threshold,boolean isPublic,int timer,  String email,String course)
     {
         try {
@@ -53,12 +53,12 @@ public class CreateObjects {
 
         session.save(quiz);
         session.getTransaction().commit();
-            message.task = "QUIZ_CREATED";
+        message.task = "QUIZ_CREATED";
             //message.quizlist = new QuizData(quiz.getQuiz_Name(), quiz.isPublic(),quiz.getThreshold(),quiz.getCourse().getCourseName());}
 
-        System.out.println("Done");}}
-        catch(Exception e)
-            {
+        System.out.println("Done");
+        }
+        }catch(Exception e) {
                 // if the error message is "out of memory",
                 // it probably means no database file is found
                 System.err.println(e.getMessage());
@@ -144,10 +144,9 @@ public class CreateObjects {
             session.getTransaction().commit();
             message.task = "QUESTION_CREATED";
             //return choiceslist too
-
-           // message.questionData = new QuestionData(question.getId(), question.getQuestionText(), (List) question.getQuestionChoices(), question.getPoints(),  question.getUser()); //the rest should already be on the client side??
-
-
+         //  message.questionData = new QuestionData(question.getId(), question.getQuestionText(), (ArrayList) question.getQuestionChoices(), question.getPoints(),  question.getUser()); //the rest should already be on the client side??
+        //    message.questionData = new ArrayList<>();
+       //     message.questionData.add(new QuestionData(question.getQuestionText(), (ArrayList) question.getQuestionChoices())); //the rest should already be on the client side??
             System.out.println("Done");
         }
         catch(Exception e)
@@ -161,7 +160,7 @@ public class CreateObjects {
             try
             {
                 if(session != null) {
-                    session.close();
+              //      session.close();
                 }
             }
             catch(Exception e)
@@ -170,7 +169,7 @@ public class CreateObjects {
                 System.err.println(e.getMessage());
             }
         }
-        session.close();
+      //  session.close();
         return message;
     }
 

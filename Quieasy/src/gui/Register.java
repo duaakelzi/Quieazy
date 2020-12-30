@@ -2,7 +2,7 @@
 
 package gui;
 
-import domain.UserC;
+import requests.UserC;
 
 import javafx.scene.text.*;
 import javafx.scene.layout.*;

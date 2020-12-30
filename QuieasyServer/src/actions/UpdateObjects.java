@@ -3,7 +3,6 @@ package actions;
 import data.ChoicesData;
 import data.Message;
 
-import data.QuestionData;
 import domain.Course;
 import domain.Question;
 import domain.Quiz;

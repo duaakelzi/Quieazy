@@ -58,7 +58,6 @@ public class QuizData implements Serializable {
     }
 
 
-
     public void setName(String name) {
         this.name = name;
     }
@@ -80,7 +79,7 @@ public class QuizData implements Serializable {
     }
 
     public void addQuestions(ArrayList<QuestionData> q) {
-        for (int i = 0; i < q.size(); i++) {
+        for(int i=0; i<q.size(); i++) {
             questions.add(q.get(i));
         }
     }
@@ -88,8 +87,9 @@ public class QuizData implements Serializable {
     public ArrayList<QuestionData> getQuestions() {
         return questions;
     }
-    public String getOwnerQuiz() {
-        return firstName +" " + lastName;
-    }
 
+
+    public String getOwnerQuiz() {
+        return firstName + " " + lastName;
+    }
 }
