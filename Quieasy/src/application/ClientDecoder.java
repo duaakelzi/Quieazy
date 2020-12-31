@@ -54,6 +54,11 @@ public class ClientDecoder {
 			System.out.println("Questions fetched");
 			ArrayList<QuestionData> questionData = message.questionData;
 			//add here methods that should be called when quiz questions received
+		} else if (message.task.equals("STUDY_PROGRAMS_FETCH_OK")) {
+			System.out.println("Study Programs fetched");
+			CreateQuizBox.getCreateQuizBox().setStudyProgramDataArrayList(message.studyProgramData);
+		}else if (message.task.equals("STUDY_PROGRAMS_FETCH_FAILED")) {
+			System.out.println("Study Programs fetch failed");
 		}
 	}
 }

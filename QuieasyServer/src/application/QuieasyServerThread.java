@@ -34,10 +34,12 @@ public class QuieasyServerThread extends Thread {
 				if(message != null) {
 					System.out.println("server "+message.task);
 					System.out.println("Message received!");
-
-					out.writeObject(ServerDecoder.decode(message));
+					//for testing
+					Message messageBack = ServerDecoder.decode(message);
+					//out.writeObject(ServerDecoder.decode(message));
+					out.writeObject(messageBack);
 					out.flush();
-					System.out.println("Response sent!");
+					System.out.println("Response " + "\"" + messageBack.task + "\"" + " sent!");
 					
 				}
 				else{System.out.println("server message null");}

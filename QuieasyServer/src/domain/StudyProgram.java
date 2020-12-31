@@ -62,27 +62,21 @@ public class StudyProgram {
 	}
 
 	
-	@ManyToMany(cascade = {CascadeType.ALL}
-		    )
-		@JoinTable(name = "sp_course", joinColumns = { @JoinColumn(name = "id_sp") }, inverseJoinColumns = { @JoinColumn(name = "id_course") })
-		
-			public Set<Course> getCourses() {
-			return courses;
-				}
+	@ManyToMany(cascade = {CascadeType.ALL})
+	@JoinTable(name = "sp_course", joinColumns = { @JoinColumn(name = "id_sp") }, inverseJoinColumns = { @JoinColumn(name = "id_course") })
+	public Set<Course> getCourses() { return courses; }
 
-			public void setCourses(Set<Course> courses) {
+	public void setCourses(Set<Course> courses) {
 			this.courses = courses;
 				}
 
-	@ManyToMany(cascade = {CascadeType.ALL}
-				    )
-			@JoinTable(name = "sp_user", joinColumns = { @JoinColumn(name = "id_sp") }, inverseJoinColumns = { @JoinColumn(name = "id_user") })
-
-			public Set<User> getUsers() {
+	@ManyToMany(cascade = {CascadeType.ALL} )
+	@JoinTable(name = "sp_user", joinColumns = { @JoinColumn(name = "id_sp") }, inverseJoinColumns = { @JoinColumn(name = "id_user") })
+	public Set<User> getUsers() {
 				return users;
 			}
 
-			public void setUsers(Set<User> users) {
+	public void setUsers(Set<User> users) {
 				this.users = users;
 			}
 }

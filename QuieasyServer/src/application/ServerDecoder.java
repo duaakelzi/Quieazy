@@ -100,6 +100,8 @@ public class ServerDecoder {
             return Request.retrieveResults(userData.getEmail());
         }else if (message.task.equals("UPDATE_RESULT")) {
             //to be added once repeat quiz is ready
+        }else if (message.task.equals("FETCH_STUDY_PROGRAMS")) {
+            return Request.retrieveStudyPrograms();
         }
         return null;
     }

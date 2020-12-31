@@ -40,7 +40,7 @@ public class PlayQuizBox extends VBox {
         HBox buttons = initiateButtons();
 
         this.getChildren().addAll(questionstrack, markQuestion, answers, buttons);
-
+        //fetch all questions here
 
     }
 
@@ -82,6 +82,7 @@ public class PlayQuizBox extends VBox {
         textmark = new Label();
         textmark.setWrapText(true);
         textmark.setFont(Font.font("Times New Roman", 17));
+        //....setText() create methods to populate with questions and call textmark attr from that method. analogously with questionLabel
         mark.getChildren().addAll(textmark);
         mark.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
 
@@ -107,7 +108,7 @@ public class PlayQuizBox extends VBox {
         answersCheck = new CheckBox[4];
         answers.setBackground(new Background(new BackgroundFill(Color.LIGHTCYAN, null, null)));
         answers.setPadding(new Insets(20, 10, 10, 140));
-        for(int i= 0; i < answersCheck.length; i++){
+        for(int i= 0; i < answersCheck.length; i++){ //are choices displayed here??
             CheckBox answer = answersCheck[i] = initiateAnswer();
             answers.getChildren().addAll(answer);
             answer.selectedProperty().addListener(new ChangeListener<Boolean>() {

@@ -78,7 +78,7 @@ public class UpdateObjects {
             if (questionToUpdate == null) {
                 message.task = "UPDATE_FAILED";
             }else {
-                questionToUpdate.setQuestionsChoices(((Set)(choicesList)));
+                questionToUpdate.setQuestionChoices(((Set)(choicesList)));
                 questionToUpdate.setQuestionText(questionText);
                 questionToUpdate.setPoints(points);
                 session.update(questionToUpdate);

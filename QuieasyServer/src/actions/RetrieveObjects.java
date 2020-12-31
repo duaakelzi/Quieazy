@@ -1,13 +1,7 @@
 package actions;
 
-import data.ChoicesData;
-import data.Message;
-import data.QuestionData;
-import data.ResultData;
-import domain.Question;
-import domain.QuestionChoice;
-import domain.Quiz;
-import domain.Result;
+import data.*;
+import domain.*;
 import org.hibernate.Session;
 import persistence.HibernateUtil;
 
@@ -127,6 +121,49 @@ public class RetrieveObjects {
                 System.err.println(e.getMessage());
             }
         }
+        return message;
+    }
+
+    public static Message retrieveSP() {
+        System.out.println("Retrieving study programs.");
+        try {
+            List<StudyProgram> studyPrograms = session.getSession().createQuery("from StudyProgram", StudyProgram.class).list();
+            if(studyPrograms.size()>0) {
+                System.out.println("Results retrieved. ");
+                for (int i = 0; i < studyPrograms.size(); i++) {
+                    //studyprogram, ArrayList<CourseData> courses
+                    StudyProgramData newSP = new StudyProgramData();
+                    newSP.setStudyprogram(studyPrograms.get(i).getStudyProgramName());
+                    if(studyPrograms.get(i).getCourses() != null) {
+                        System.out.println("SP course fetch entered " + i + " time");
+                        for(Iterator<Course> it = studyPrograms.get(i).getCourses().iterator(); it.hasNext(); ) {
+                            Course newCourse = it.next();
+                            CourseData studyProgramCourse = new CourseData(newCourse.getCourseName());
+                            newSP.getCourses().add(studyProgramCourse);
+                        }
+                    }
+                    message.studyProgramData.add(newSP);
+                }
+                message.task = "STUDY_PROGRAMS_FETCH_OK";
+            }else{
+                message.task = "STUDY_PROGRAMS_FETCH_FAILED"; //user might not have any results yet
+            }
+            session.close();
+        }catch(Exception e)
+        {
+            // if the error message is "out of memory",
+            // it probably means no database file is found
+            System.err.println(e.getMessage());
+        }finally{
+            try{
+                if(session != null)
+                    session.close();
+            } catch(Exception e) {
+                // connection close failed.
+                System.err.println(e.getMessage());
+            }
+        }
+        System.out.println("Message " + message.task + " will be sent");
         return message;
     }
 }

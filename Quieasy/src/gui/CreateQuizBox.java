@@ -2,10 +2,10 @@
 
 package gui;
 
-import data.Course;
+import data.CourseData;
 import data.QuestionData;
 import data.QuizData;
-import data.StudyProgramHS;
+import data.StudyProgramData;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -17,6 +17,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.util.Callback;
+import requests.StudyProgramC;
 
 import java.util.ArrayList;
 import java.util.stream.Collectors;
@@ -31,31 +32,18 @@ public class CreateQuizBox extends VBox {
 	private ComboBox<String> studyProgramComboBox;
 	private TextField textTime;
 	private  Label warning;
-	ArrayList<StudyProgramHS> studyProgramHSArrayList;
+	private ArrayList<StudyProgramData> studyProgramDataArrayList = new ArrayList<>();
 	private QuizData quiz;
 	private ObservableList<String> studyProgramHSObservList;
 	// constructor can only be accessed from within
 	private CreateQuizBox(){
 		
 		super();
-		studyProgramHSArrayList = new ArrayList<>() {{
-			//call studyPro from db and ArrayList<Courses> as its attr
-			add(new StudyProgramHS("Computational Science and Engineering", new ArrayList<>()));
-			add(new StudyProgramHS("Computer Science", new ArrayList<>(){{
-				add(new Course("SOFE"));
-				add(new Course("Calculus"));
-				add(new Course("C++"));
-				add(new Course("WebEngineering"));
-			}}));
-			add(new StudyProgramHS("Data Science in der Medizin", new ArrayList<>()));
-			add(new StudyProgramHS("Digital Media", new ArrayList<>()));
-			add(new StudyProgramHS("Elektrotechnik und Informationstechnik", new ArrayList<>()));
-			add(new StudyProgramHS("Energie-Informationsmanagement", new ArrayList<>()));
-			add(new StudyProgramHS("Energietechnik", new ArrayList<>()));
-		}};
+		//call fetchStudyPrograms
+		StudyProgramC.fetchAllStudyPrograms();
 
-		ArrayList<String> studyProgramNames = studyProgramHSArrayList.stream()
-				.map(StudyProgramHS::getStudyprogram)
+		ArrayList<String> studyProgramNames = studyProgramDataArrayList.stream()
+				.map(StudyProgramData::getStudyprogram)
 				.collect(Collectors.toCollection(ArrayList::new));
 		studyProgramHSObservList = FXCollections.observableArrayList(studyProgramNames);
 
@@ -73,11 +61,17 @@ public class CreateQuizBox extends VBox {
 		HBox warningMessage = initiatewarning();
 		HBox createButton = initiateBotton();
 		this.getChildren().addAll(studyProgram, courses, nameQuiz, thresholdQuiz, timeLimit, warningMessage, createButton);
-
-
-		
 	}
-	
+
+	public ArrayList<StudyProgramData> getStudyProgramDataArrayList() {
+		return studyProgramDataArrayList;
+	}
+
+	public void setStudyProgramDataArrayList(ArrayList<StudyProgramData> studyProgramDataArrayList) {
+		this.studyProgramDataArrayList = studyProgramDataArrayList;
+	}
+
+
 	// Gets the current instance -> Singleton
 	public static CreateQuizBox getCreateQuizBox() {
 		
@@ -125,12 +119,12 @@ public class CreateQuizBox extends VBox {
 			@Override
 			public void handle(ActionEvent actionEvent) {
 					String selected = studyProgramComboBox.getValue();
-					ArrayList<Course> courses = studyProgramHSArrayList.stream()
-							.filter(studyProgramHS1 -> studyProgramHS1.getStudyprogram().equals(selected))
-							.map(StudyProgramHS::getCourses)
+					ArrayList<CourseData> courses = studyProgramDataArrayList.stream()
+							.filter(studyProgramData1 -> studyProgramData1.getStudyprogram().equals(selected))
+							.map(StudyProgramData::getCourses)
 							.collect(Collectors.toCollection(ArrayList::new)).get(0);
 					ArrayList<String> courseNames = courses.stream()
-							.map(Course::getCourses)
+							.map(CourseData::getCourses)
 							.collect(Collectors.toCollection(ArrayList::new));
 					courseComboBox.setItems(FXCollections.observableArrayList(courseNames));
 			}

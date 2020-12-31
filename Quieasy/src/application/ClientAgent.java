@@ -44,19 +44,21 @@ public class ClientAgent implements Runnable{
 	
 	// Continuously listens for incoming messages.
 	public void run() {
-		
-		Message message;
-		
+		System.out.println("Run entered1.. "); //for testing
 		try {
-			
+			Message message = new Message();
 			while(true) {
-				//System.out.println("Run method entered.."); for testing
-				message = (Message) in.readObject();
-				
-				if(message != null) { // if message received
-					//System.out.println("Non-null message received.. "); for testing
+				System.out.println("Run method entered2.."); //for testing
+
+				while(message.task == null) {
+
+					message = (Message) in.readObject();
+					System.out.println("Message still null... "); //for testing
+				}
+				if(message.task != null) { // if message received
+					System.out.println("Non-null message received.. "); //for testing
 					// decode and execute received message
-					//System.out.println("Message task: " + message.task); for testing only
+					System.out.println("Message task: " + message.task); //for testing only
 					ClientDecoder.decode(message);
 				}
 				
@@ -79,10 +81,24 @@ public class ClientAgent implements Runnable{
 	public void send(Message message) {
 		
 		try {
-			System.out.println(message.task);
+			System.out.println("Message sent: " + message.task);
 
 			out.writeObject(message);
 			out.flush();
+			run();
+			//for testing
+//			Message messageBack = new Message();
+//			do {
+//				System.out.println("Message still null... "); //for testing
+//				messageBack = (Message) in.readObject();
+//			} while (messageBack.task == null);
+//
+//			if(messageBack.task != null) { // if message received
+//					System.out.println("Non-null message received.. "); //for testing
+//					// decode and execute received message
+//					System.out.println("Message task: " + messageBack.task); //for testing only
+//					ClientDecoder.decode(messageBack);
+//			}
 		}catch(Exception e) {
 			
 			e.printStackTrace();

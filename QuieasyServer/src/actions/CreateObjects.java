@@ -138,7 +138,7 @@ public class CreateObjects {
             qch.add(qc2);
             qch.add(qc3);
             qch.add(qc4);
-            question.setQuestionsChoices(qch);
+            question.setQuestionChoices(qch);
 
             session.save(question);
             session.getTransaction().commit();

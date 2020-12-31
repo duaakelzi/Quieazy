@@ -79,11 +79,12 @@ public class Question  {
 
 	//owning for Questions
 	@OneToMany(mappedBy = "primaryKey.question", cascade = CascadeType.ALL)
+
 	public Set<QuestionChoice> getQuestionChoices() {
 		return questionChoices;
 	}
 
-	public void setQuestionsChoices(Set<QuestionChoice> questionChoices) {
+	public void setQuestionChoices(Set<QuestionChoice> questionChoices) {
 		this.questionChoices = questionChoices;
 	}
 

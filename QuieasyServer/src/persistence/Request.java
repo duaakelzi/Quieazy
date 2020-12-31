@@ -50,6 +50,12 @@ public class Request {
         return RetrieveObjects.retrieveQuizzes(email);
     }
 
+    public static Message retrieveStudyPrograms(){
+        // create a database connection
+        JDBC.connectMySQL();
+        return RetrieveObjects.retrieveSP();
+    }
+
     /* Quiestion related */
     public static Message retrieveQuestions(Long quizID) {
         // create a database connection

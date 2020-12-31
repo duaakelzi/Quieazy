@@ -3,12 +3,14 @@ package data;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-public class StudyProgramHS implements Serializable {
+public class StudyProgramData implements Serializable {
 
     private String studyprogram;
-    private ArrayList<Course> courses;
+    private ArrayList<CourseData> courses  = new ArrayList<>();;
 
-    public StudyProgramHS(String studyprogram, ArrayList<Course> courses) {
+    public StudyProgramData(){}
+
+    public StudyProgramData(String studyprogram, ArrayList<CourseData> courses) {
         this.studyprogram = studyprogram;
         this.courses = courses;
     }
@@ -17,7 +19,7 @@ public class StudyProgramHS implements Serializable {
         return studyprogram;
     }
 
-    public ArrayList<Course> getCourses() {
+    public ArrayList<CourseData> getCourses() {
         return courses;
     }
 }
