@@ -1,8 +1,10 @@
 package gui;
 
+import data.QuestionData;
 import javafx.geometry.Insets;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 
@@ -18,6 +20,8 @@ public class CreateQuestionBankBox extends VBox {
         HBox scrollPane = initiateScrollPane();
 
         HBox save = initiateSaveButton();
+
+       // VBox q = initiateFilterData();
 
         this.getChildren().addAll(searchfield, scrollPane, save);
 
@@ -40,7 +44,7 @@ public class CreateQuestionBankBox extends VBox {
         searchLabel.setFont(Font.font("Times New Roman", FontWeight.EXTRA_BOLD, 24));
         TextField searchKeyWords = new TextField();
         searchKeyWords.setFont(Font.font("Times New Roman", FontWeight.NORMAL, 18));
-        searchKeyWords.setMinWidth(100);
+        searchKeyWords.setMinWidth(200);
         searchKeyWords.setPromptText("Filter");
         Button searchButton = new Button("➔");
         searchButton.setFont(Font.font(14));
@@ -52,13 +56,13 @@ public class CreateQuestionBankBox extends VBox {
     private HBox initiateScrollPane(){
         HBox scrolPaneHbox = new HBox();
         ScrollPane scrollPane = new ScrollPane();
-        ListView<String> list = new ListView<>();
-        for(int i= 0; i < 100; i++){
-            list.getItems().add(String.valueOf(i));
+        ListView<GridPane> list = new ListView<>();
+        for(int i= 0; i < 10; i++){
+            list.getItems().add(initiateFilterData());
         }
-        //list.getItems(). addAll();
-        list.setPrefWidth(650);
-        list.setPrefHeight(300);
+
+        list.setPrefWidth(660);
+        list.setPrefHeight(310);
         scrollPane.setContent(list);
         scrolPaneHbox.getChildren().addAll(scrollPane);
         return  scrolPaneHbox;
@@ -72,7 +76,59 @@ public class CreateQuestionBankBox extends VBox {
         return saveHbox;
     }
 
+    GridPane initiateFilterData(){
+        GridPane dataGrid = new GridPane();
+        dataGrid.setHgap(10);
+        dataGrid.setVgap(10);
 
+
+        Button addQuestion = new Button("+ ADD");
+        dataGrid.add(addQuestion, 0, 0);
+
+        TextArea question = new TextArea("There was a time when pub quizzes happened in… well, pubs.\n" +
+                " But with the pandemic going on, it has become more common to organise a virtual pub quiz \n + " +
+                "on your choice of video chat for the evening (or in the day, we’re not judging you). Whether it’s \n + " +
+                "Google Hangouts, Zoom, Skype, or any other video call platforms, big brains are flexing around the \n +" +
+                "internet and laughter ensues.");
+        question.setEditable(false);
+//        question.setMaxWidth(400);
+        question.setMaxHeight(70);
+        dataGrid.add(question, 1,1,2,1);
+        Label author = new Label("CHen Li");
+        author.setMinWidth(70);
+        dataGrid.add(author, 3,0);
+
+        Label studyProgram = new Label("CTS");
+        studyProgram.setMinWidth(70);
+        dataGrid.add(studyProgram, 4, 0);
+
+//        VBox dataQuestionfiltered = new VBox(5);
+////        dataQuestionfiltered.setPrefWidth(600);
+////        dataQuestionfiltered.setPrefHeight(60);
+//        dataQuestionfiltered.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
+//        dataQuestionfiltered.setBackground(new Background(new BackgroundFill(Color.LIGHTCYAN, null, null)));
+//        HBox dataHBox = new HBox(15);
+//        dataHBox.setPrefWidth(600);
+//        dataHBox.setPrefHeight(50);
+//        CheckBox checkQuestion = new CheckBox();
+//        checkQuestion.setText(String.valueOf(1));
+//        TextArea question = new TextArea("Hew is meee stioopaaaabvbvnbvnbvnbvnbvbfghfghdfgcbbcvvvvvvvvvvvvxxhjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjerrrdsfggffffffffgffffffffffferrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrreeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeewwwwwwwwwwwwwwwwwwwwwwwwwwwww");
+//        question.setEditable(false);
+//        Label author = new Label("Chen lifggggggggggggggggggggggggggggggggggggggggggggggg");
+//        Label studyProgram = new Label("CTS");
+//        dataHBox.getChildren().addAll(checkQuestion, question, author,studyProgram);
+//
+//        Button viewMore = new Button(">> VIEW MORE");
+//        viewMore.setBackground(new Background(new BackgroundFill(Color.TRANSPARENT, null, null)));
+//
+//        dataQuestionfiltered.getChildren().addAll(dataHBox, viewMore);
+
+//        return dataQuestionfiltered;
+
+        return dataGrid;
+
+    }
 
 
 }
+
