@@ -1,6 +1,8 @@
 package gui;
 
 import data.QuestionData;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
@@ -83,14 +85,21 @@ public class CreateQuestionBankBox extends VBox {
 
 
         Button addQuestion = new Button("+ ADD");
+        addQuestion.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                addQuestion.setBackground(new Background(new BackgroundFill(Color.LIGHTGREEN, null, null)));
+            }
+        });
+        addQuestion.setBackground(new Background(new BackgroundFill(Color.LIGHTCYAN, null, null)));
         dataGrid.add(addQuestion, 0, 0);
 
-        TextArea question = new TextArea("There was a time when pub quizzes happened in… well, pubs.\n" +
-                " But with the pandemic going on, it has become more common to organise a virtual pub quiz \n + " +
-                "on your choice of video chat for the evening (or in the day, we’re not judging you). Whether it’s \n + " +
-                "Google Hangouts, Zoom, Skype, or any other video call platforms, big brains are flexing around the \n +" +
+        TextArea question = new TextArea("There was a time when pub quizzes happened in… well, pubs." + "But with the pandemic going on, it has become more common to organise a virtual pub quiz " +
+                "on your choice of video chat for the evening (or in the day, we’re not judging you). Whether it’s  " +
+                "Google Hangouts, Zoom, Skype, or any other video call platforms, big brains are flexing around the " +
                 "internet and laughter ensues.");
         question.setEditable(false);
+        question.setWrapText(true);
 //        question.setMaxWidth(400);
         question.setMaxHeight(70);
         dataGrid.add(question, 1,1,2,1);
