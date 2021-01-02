@@ -15,7 +15,6 @@ public class ServerDecoder {
         if (message.task.equals("LOG_IN")) {
 
             LoginData data = message.loginData;
-
             return Request.login(data.email, data.password);
 
         } else if (message.task.equals("REGISTER")) {
@@ -101,7 +100,11 @@ public class ServerDecoder {
         }else if (message.task.equals("UPDATE_RESULT")) {
             //to be added once repeat quiz is ready
         }else if (message.task.equals("FETCH_STUDY_PROGRAMS")) {
-            return Request.retrieveStudyPrograms();
+            //create new message, otherwise the old one seems to be returned
+            //returns a message with the task + array of sps (with courses)
+            Message returnMessage = Request.retrieveStudyPrograms();
+            returnMessage.task = message.task;
+            return returnMessage;
         }
         return null;
     }

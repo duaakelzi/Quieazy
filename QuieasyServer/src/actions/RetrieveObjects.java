@@ -144,9 +144,9 @@ public class RetrieveObjects {
                     }
                     message.studyProgramData.add(newSP);
                 }
-                message.task = "STUDY_PROGRAMS_FETCH_OK";
+                message.status = true;
             }else{
-                message.task = "STUDY_PROGRAMS_FETCH_FAILED"; //user might not have any results yet
+                message.status = false; //user might not have any results yet
             }
             session.close();
         }catch(Exception e)

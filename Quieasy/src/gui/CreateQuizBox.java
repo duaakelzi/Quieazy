@@ -40,29 +40,33 @@ public class CreateQuizBox extends VBox {
 		
 		super();
 		//call fetchStudyPrograms
-		StudyProgramC.fetchAllStudyPrograms();
-
-		ArrayList<String> studyProgramNames = studyProgramDataArrayList.stream()
-				.map(StudyProgramData::getStudyprogram)
-				.collect(Collectors.toCollection(ArrayList::new));
-		studyProgramHSObservList = FXCollections.observableArrayList(studyProgramNames);
-
-		// study program selection
-		HBox studyProgram = initiateStudyProgram(studyProgramHSObservList);
-		//courses selection
-		//ObservableList<String> course = FXCollections.observableArrayList("SOFE", "Calculus", "C++", "WebEngineering");
-		HBox courses = initiateCourse();
-		//give a name to Quiz
-		HBox nameQuiz = initiateNameQuiz();
-
-		// give a passed grade to Quiz
-		HBox thresholdQuiz = initiateTreshold();
-		HBox timeLimit = initiateTimeLimit();
-		HBox warningMessage = initiatewarning();
-		HBox createButton = initiateBotton();
-		this.getChildren().addAll(studyProgram, courses, nameQuiz, thresholdQuiz, timeLimit, warningMessage, createButton);
+		afterFetch(); //return arraylist
 	}
+	//for testing the sequence of client-server message sending
+	public void afterFetch(){
+		studyProgramDataArrayList = StudyProgramC.fetchAllStudyPrograms();
+		if(studyProgramDataArrayList != null) {
+			ArrayList<String> studyProgramNames = studyProgramDataArrayList.stream()
+					.map(StudyProgramData::getStudyprogram)
+					.collect(Collectors.toCollection(ArrayList::new));
+			studyProgramHSObservList = FXCollections.observableArrayList(studyProgramNames);
 
+			// study program selection
+			HBox studyProgram = initiateStudyProgram(studyProgramHSObservList);
+			//courses selection
+			//ObservableList<String> course = FXCollections.observableArrayList("SOFE", "Calculus", "C++", "WebEngineering");
+			HBox courses = initiateCourse();
+			//give a name to Quiz
+			HBox nameQuiz = initiateNameQuiz();
+
+			// give a passed grade to Quiz
+			HBox thresholdQuiz = initiateTreshold();
+			HBox timeLimit = initiateTimeLimit();
+			HBox warningMessage = initiatewarning();
+			HBox createButton = initiateBotton();
+			this.getChildren().addAll(studyProgram, courses, nameQuiz, thresholdQuiz, timeLimit, warningMessage, createButton);
+		}
+	}
 	public ArrayList<StudyProgramData> getStudyProgramDataArrayList() {
 		return studyProgramDataArrayList;
 	}

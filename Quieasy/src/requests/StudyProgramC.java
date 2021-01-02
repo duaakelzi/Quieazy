@@ -7,12 +7,20 @@ import data.StudyProgramData;
 import java.util.ArrayList;
 
 public class StudyProgramC {
-    private static Message message = new Message();
+    private static Message request = new Message();
 
-    public static void fetchAllStudyPrograms(){
+    public static ArrayList<StudyProgramData> fetchAllStudyPrograms(){
         ClientAgent clientAgent = ClientAgent.getClientAgent();
 
-        message.task = "FETCH_STUDY_PROGRAMS";
-        clientAgent.send(message);
+        request.task = "FETCH_STUDY_PROGRAMS";
+        ArrayList<StudyProgramData> returnedSP = new ArrayList<>();
+        Message response = clientAgent.sendAndWaitForResponse(request);
+        if(response != null && response.status){
+            returnedSP = response.studyProgramData;
+        }else if(response != null && (!response.status)){
+            //informed user that no SPs returned
+            System.out.println("no SPs found");
+        }
+        return returnedSP;
     }
 }

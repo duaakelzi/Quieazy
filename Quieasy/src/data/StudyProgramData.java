@@ -22,4 +22,11 @@ public class StudyProgramData implements Serializable {
     public ArrayList<CourseData> getCourses() {
         return courses;
     }
+    public void setStudyprogram(String studyprogram) {
+        this.studyprogram = studyprogram;
+    }
+
+    public void setCourses(ArrayList<CourseData> courses) {
+        this.courses = courses;
+    }
 }

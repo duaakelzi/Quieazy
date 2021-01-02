@@ -41,7 +41,7 @@ public class UserC {
 		Message message = new Message();
 		message.task = "REGISTER";
 		message.registerData = new RegisterData(firstName, lastName, email, password);
-		clientAgent.send(message);
+		clientAgent.sendAndWaitForResponse(message);
 		
 	}
 	
@@ -52,7 +52,7 @@ public class UserC {
 		Message message = new Message();
 		message.task = "LOG_IN";
 		message.loginData = new LoginData(email, password);
-		clientAgent.send(message);
+		clientAgent.sendAndWaitForResponse(message);
 		
 	}
 	

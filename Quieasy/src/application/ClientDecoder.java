@@ -3,6 +3,7 @@
 package application;
 
 import gui.*;
+import requests.StudyProgramC;
 import requests.UserC;
 import data.*;
 
@@ -55,8 +56,14 @@ public class ClientDecoder {
 			ArrayList<QuestionData> questionData = message.questionData;
 			//add here methods that should be called when quiz questions received
 		} else if (message.task.equals("STUDY_PROGRAMS_FETCH_OK")) {
+			ArrayList<StudyProgramData> receivedSPData = message.studyProgramData;
 			System.out.println("Study Programs fetched");
-			CreateQuizBox.getCreateQuizBox().setStudyProgramDataArrayList(message.studyProgramData);
+			System.out.printf("calling setSudyProgram..");
+			CreateQuizBox.getCreateQuizBox().setStudyProgramDataArrayList(receivedSPData);
+			System.out.printf("calling setSudyProgram..done");
+			System.out.println("calling afterFetch");
+			CreateQuizBox.getCreateQuizBox().afterFetch();
+			System.out.println("calling afterFetch..done");
 		}else if (message.task.equals("STUDY_PROGRAMS_FETCH_FAILED")) {
 			System.out.println("Study Programs fetch failed");
 		}

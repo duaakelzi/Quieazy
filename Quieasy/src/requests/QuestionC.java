@@ -21,7 +21,7 @@ public class QuestionC {
 //        saveQuiestionsMsg.userData = new UserData(UserC.getCurrentUser().getFirstName(),
 //                                            UserC.getCurrentUser().getLastName(),
 //                                            UserC.getCurrentUser().getEmail());
-        clientAgent.send(message);
+        clientAgent.sendAndWaitForResponse(message);
     }
 
     //only text or choices were updated, not the relationships
@@ -31,7 +31,7 @@ public class QuestionC {
         message.task = "SAVE_QUESTION_EDITS";
         message.questionData = questionsToUpdate;
 
-        clientAgent.send(message);
+        clientAgent.sendAndWaitForResponse(message);
     }
     //update the relationships of the existing,old questions
     public static void addOldQuestions(QuizData quiz, ArrayList<QuestionData> questionsToAdd) {
@@ -43,7 +43,7 @@ public class QuestionC {
 //        saveQuiestionsMsg.userData = new UserData(UserC.getCurrentUser().getFirstName(),
 //                                            UserC.getCurrentUser().getLastName(),
 //                                            UserC.getCurrentUser().getEmail());
-        clientAgent.send(message);
+        clientAgent.sendAndWaitForResponse(message);
     }
 
     //method to request all questions for given quiz. For now the received arraylist is not passed back to the gui from client decoder.
@@ -51,6 +51,6 @@ public class QuestionC {
         ClientAgent clientAgent = ClientAgent.getClientAgent();
         message.task = "FETCH_ALL_QUESTIONS";
         message.quizData = quiz;
-        clientAgent.send(message);
+        clientAgent.sendAndWaitForResponse(message);
     }
 }
