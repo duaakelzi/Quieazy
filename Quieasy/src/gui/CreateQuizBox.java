@@ -17,6 +17,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.util.Callback;
+import requests.QuizC;
 import requests.StudyProgramC;
 
 import java.util.ArrayList;
@@ -85,12 +86,16 @@ public class CreateQuizBox extends VBox {
 		
 	}
 
-	public void showSuccessful(){
+	public static void showSuccessful(){
 		// let the user know that the server has successfully saved a list of quizes to persistence
+		System.out.println("Quiz successfully created. "); //should be on UI, not console
 	}
-	public void showFailed(){
+	public static void showFailed(){
 		// let the user know server has failed saving the list of quizes to persistence
+		System.out.println("Quiz creation failed. "); //should be on UI, not console
 	}
+
+	//this seems not to be needed
 	public void createNewQuiz(){
 		//1 create Quiz object
 		//2.Quiz newQuiz = new Quiz; take from the Gui
@@ -284,7 +289,7 @@ public class CreateQuizBox extends VBox {
 						Double.parseDouble(textThreshold.getText()),
 						Integer.parseInt(textTime.getText()),
 						new ArrayList<QuestionData>());
-				//QuizC.createNewQuiz(quiz); // it is not connected to DB
+				QuizC.createNewQuiz(quiz);
 
 				MainPane.getMainPane().getTabs().add(CreateAddQuestionTab.getCreateAddQuestionTab());
 				CreateQuizTab.getCreateQuizTab().closeTab();

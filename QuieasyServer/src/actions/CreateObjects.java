@@ -12,12 +12,13 @@ import java.util.List;
 import java.util.Set;
 
 public class CreateObjects {
-    public static Session session = HibernateUtil.getSessionFactory().openSession();
+    public static Session session;
     public static Message message = new Message();
 
     public static Message CreateQuiz(String name,double threshold,boolean isPublic,int timer,  String email,String course)
     {
         try {
+        session = HibernateUtil.getSessionFactory().openSession();
         System.out.println("create quiz ");
         session.beginTransaction();
         //create quiz
@@ -39,7 +40,7 @@ public class CreateObjects {
 
         if(queryQuiz.list().size() > 0)
         { System.out.println("Quiz already exists [method]");
-            message.task = "QUIZ_IS_EXIST";}
+            message.status = false;}
         //add author
 
         else{
@@ -53,10 +54,8 @@ public class CreateObjects {
 
         session.save(quiz);
         session.getTransaction().commit();
-        message.task = "QUIZ_CREATED";
+        message.status = true;
             //message.quizlist = new QuizData(quiz.getQuiz_Name(), quiz.isPublic(),quiz.getThreshold(),quiz.getCourse().getCourseName());}
-
-        System.out.println("Done");
         }
         }catch(Exception e) {
                 // if the error message is "out of memory",
@@ -85,6 +84,7 @@ public class CreateObjects {
     {
         try {
             System.out.println("create Choices ");
+            session = HibernateUtil.getSessionFactory().openSession();
             session.beginTransaction();
             //does not check for existence of the question, since the client is separating the two requests
             Choices ch1 = new Choices();
@@ -142,25 +142,25 @@ public class CreateObjects {
 
             session.save(question);
             session.getTransaction().commit();
-            message.task = "QUESTION_CREATED";
+            message.status = true;
             //return choiceslist too
          //  message.questionData = new QuestionData(question.getId(), question.getQuestionText(), (ArrayList) question.getQuestionChoices(), question.getPoints(),  question.getUser()); //the rest should already be on the client side??
         //    message.questionData = new ArrayList<>();
        //     message.questionData.add(new QuestionData(question.getQuestionText(), (ArrayList) question.getQuestionChoices())); //the rest should already be on the client side??
-            System.out.println("Done");
         }
         catch(Exception e)
         {
             // if the error message is "out of memory",
             // it probably means no database file is found
             System.err.println(e.getMessage());
+            message.status = false;
         }
         finally
         {
             try
             {
                 if(session != null) {
-              //      session.close();
+                    session.close();
                 }
             }
             catch(Exception e)
@@ -169,7 +169,7 @@ public class CreateObjects {
                 System.err.println(e.getMessage());
             }
         }
-      //  session.close();
+        session.close();
         return message;
     }
 
@@ -177,6 +177,7 @@ public class CreateObjects {
     public static Message createResult(int points, boolean isPassed, String quizName, String userEmail) {
         try {
             System.out.println("create result entered.. ");
+            session = HibernateUtil.getSessionFactory().openSession();
             session.beginTransaction();
             //result needs user and quiz
             //retrieve quiz

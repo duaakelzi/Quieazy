@@ -8,7 +8,7 @@ import persistence.Request;
 import java.util.ArrayList;
 
 public class ServerDecoder {
-
+    private static Message response;
     //can we get rid of the if-else??
     public static Message decode(Message message) {
 
@@ -26,8 +26,9 @@ public class ServerDecoder {
         } else if (message.task.equals("CREATE_QUIZ")) {
             data.QuizData quiz = message.quizData;
             data.UserData userData = message.userData;
-            System.out.println(message.quizData.getName());
-            return Request.createQuiz(quiz.getName(), quiz.getThreshold(), false, userData.getEmail(), quiz.getCourse(),quiz.getTimer()); //should i return quiz data immediately?
+            response = Request.createQuiz(quiz.getName(), quiz.getThreshold(), false, "user@mail.com", quiz.getCourse(),quiz.getTimer()); //should i return quiz data immediately?
+            response.task = message.task;
+            return response;
         } else if (message.task.equals("UPDATE_QUIZ")) {
             data.QuizData quiz = message.quizData;
 
@@ -39,8 +40,10 @@ public class ServerDecoder {
         } else if (message.task.equals("FETCH_ALL_QUIZZES")) {
             UserData userData = message.userData;
             return Request.retrieveQuizzes(userData.getEmail());
+
         } else if (message.task.equals("CREATE_QUESTIONS")) {
             System.out.println("server: create questions method entered >> ");
+            response = new Message();
             QuizData quiz = message.quizData;
             ArrayList<QuestionData> questionData = message.questionData;
 
@@ -49,12 +52,15 @@ public class ServerDecoder {
             for (i=0; i<questionData.size(); i++) {
                 Request.createQuestion(questionData.get(i).getQuestion(), 5,questionData.get(i).getAnswers(),quiz.getName(),"user@mail.com");
             }
+
             if (i != questionData.size()) {
-                message.task = "CREATE_QUESTIONS_FAILED";
+                response.status = false;
             }else {
-                message.task = "CREATE_QUESTIONS_SUCCESSFUL";
+                response.status = true; //should i return quiz data immediately?
             }
-            return message; //this message contains new task: "Create_question_successfull"
+            response.task = message.task;
+            return response;
+
         } else if (message.task.equals("SAVE_QUESTION_EDITS")) {
             //to be added
         } else if (message.task.equals("ADD_OLD_QUESTIONS")) {
@@ -102,9 +108,10 @@ public class ServerDecoder {
         }else if (message.task.equals("FETCH_STUDY_PROGRAMS")) {
             //create new message, otherwise the old one seems to be returned
             //returns a message with the task + array of sps (with courses)
-            Message returnMessage = Request.retrieveStudyPrograms();
-            returnMessage.task = message.task;
-            return returnMessage;
+            response = new Message();
+            response = Request.retrieveStudyPrograms();
+            response.task = message.task;
+            return response;
         }
         return null;
     }

@@ -325,9 +325,10 @@ public class CreateAddQuestionBox extends VBox {
             public void handle(ActionEvent actionEvent) {
                 //savequiz();
                 //make the new questions persistent
+                //if successful, let user know? (for Ion to decide)
                 QuestionC.persistNewQuestions(CreateQuizBox.getCreateQuizBox().getQuiz(), newQuestions);
                 //update edited questions
-                QuestionC.updateEditedQuestions(updatedQuestions);
+              //  QuestionC.updateEditedQuestions(updatedQuestions);
                 //update relationships of old questions
 
             }

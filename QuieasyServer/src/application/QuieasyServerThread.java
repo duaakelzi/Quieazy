@@ -32,8 +32,9 @@ public class QuieasyServerThread extends Thread {
 				message = (Message) in.readObject();
 
 				if(message != null) {
-					System.out.println("server "+message.task);
+
 					System.out.println("Message received!");
+					System.out.println("server "+message.task);
 					//for testing
 					Message messageBack = ServerDecoder.decode(message);
 					//out.writeObject(ServerDecoder.decode(message));
@@ -47,7 +48,7 @@ public class QuieasyServerThread extends Thread {
         } catch (IOException e) {
             e.printStackTrace();
         } catch (Exception e) {
-        	
+			System.out.println("server exception caught. " + e.getMessage());
         }
         
     }

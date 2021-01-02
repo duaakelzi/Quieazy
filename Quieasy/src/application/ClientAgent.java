@@ -20,7 +20,7 @@ public class ClientAgent implements Runnable {
 	private ObjectOutputStream out = null;
 	private ObjectInputStream in = null;
 	private Queue<Message> messageQueue = new LinkedList<>(); //maybe another DT would be more suitable; thread-safe and what happens with irrelevant messages (they might be waiting for another task to be picked up)?
-	private final int MAX_RETRIES = 20;
+	private final int MAX_RETRIES = 30;
 
 	// constructor can only be accessed from within
 	private ClientAgent() {
@@ -59,13 +59,11 @@ public class ClientAgent implements Runnable {
 	// (-) Tight coupling of Client-Decoder with the UI.
 	public void run() {
 
-		Message message;
-
 		try {
 
 			while (true) {
 				System.out.println("Run method entered.."); //for testing
-				message = (Message) in.readObject();
+				Message message = (Message) in.readObject();
 				System.out.println("ClientAgent received a message"); //for testing
 				if (message != null) { // if message received
 					System.out.println("Non-null message received.. "); //for testing
