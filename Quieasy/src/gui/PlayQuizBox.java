@@ -1,5 +1,7 @@
 package gui;
 
+import data.QuestionData;
+import data.QuizData;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.geometry.Insets;
@@ -12,6 +14,9 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
+import requests.QuestionC;
+
+import java.util.ArrayList;
 
 public class PlayQuizBox extends VBox {
 
@@ -23,9 +28,14 @@ public class PlayQuizBox extends VBox {
     private Button skip;
     private Button cancel;
     //missing: Quiz with its questionData and user info
+    private QuizData quiz;
+    private ArrayList<QuestionData> quizQuestions;
 
     //constructor*****
-    public PlayQuizBox() {
+    public PlayQuizBox(QuizData quizToPlay) { //this shouldn't be empty but receive the quizData from the MyQuiz
+        quiz = quizToPlay;
+        //fetch all questions here
+        fetchQuestions(quizToPlay);
 
         // questions track with Pagination
         HBox questionstrack = initiateQuestionTrack();
@@ -40,17 +50,12 @@ public class PlayQuizBox extends VBox {
         HBox buttons = initiateButtons();
 
         this.getChildren().addAll(questionstrack, markQuestion, answers, buttons);
-        //fetch all questions here
 
     }
 
-    public static PlayQuizBox getPlayQuizBox() {
-        if(playQuizBox == null){
-            playQuizBox = new PlayQuizBox();
-        }
-        return playQuizBox;
+    private void fetchQuestions(QuizData quiz){
+        quizQuestions = QuestionC.fetchQuizQuestions(quiz);
     }
-
     //i believe, this one is the track to navigate among questions. it probably needs to be linked to the actual array of questions
     // yes
     public HBox initiateQuestionTrack(){
@@ -83,6 +88,7 @@ public class PlayQuizBox extends VBox {
         textmark.setWrapText(true);
         textmark.setFont(Font.font("Times New Roman", 17));
         //....setText() create methods to populate with questions and call textmark attr from that method. analogously with questionLabel
+        textmark.setText(quizQuestions.get(0).getQuestion());
         mark.getChildren().addAll(textmark);
         mark.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
 
@@ -94,6 +100,7 @@ public class PlayQuizBox extends VBox {
         questionlabel.setPadding(new Insets(10));
         questionlabel.setWrapText(true);
         questionlabel.setFont(Font.font("Times New Roman", 20));
+        questionlabel.setText(quizQuestions.get(0).getQuestion());
         question.getChildren().addAll(questionlabel);
         question.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
         markQuestion.getChildren().addAll(mark, question);

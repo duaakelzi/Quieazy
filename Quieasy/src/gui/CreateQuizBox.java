@@ -40,11 +40,11 @@ public class CreateQuizBox extends VBox {
 	private CreateQuizBox(){
 		
 		super();
-		//call fetchStudyPrograms
-		afterFetch(); //return arraylist
+		//call fetchStudyPrograms and present the data to user while waiting for their input
+		initializeCreateQuizFields(); //return arraylist
 	}
 	//for testing the sequence of client-server message sending
-	public void afterFetch(){
+	public void initializeCreateQuizFields(){
 		studyProgramDataArrayList = StudyProgramC.fetchAllStudyPrograms();
 		if(studyProgramDataArrayList != null) {
 			ArrayList<String> studyProgramNames = studyProgramDataArrayList.stream()

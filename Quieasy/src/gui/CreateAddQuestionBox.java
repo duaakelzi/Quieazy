@@ -334,7 +334,19 @@ public class CreateAddQuestionBox extends VBox {
             }
         });
         save.setFont(Font.font("Times New Roman", FontWeight.SEMI_BOLD, 16));
+
         Button savePublish = new Button("▶ SAVE & PUBLISH");
+        savePublish.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                //save the questions again -> might be new ones there? !!! do you need to check for existence?
+                QuestionC.persistNewQuestions(CreateQuizBox.getCreateQuizBox().getQuiz(), newQuestions);
+                //play the quiz
+                MainPane.getMainPane().getTabs().add(new Tab("Play", new PlayQuizBox(CreateQuizBox.getCreateQuizBox().getQuiz()))); //remove the PlayQuizTab
+
+            }
+        });
+
         savePublish.setFont(Font.font("Times New Roman", FontWeight.SEMI_BOLD, 16));
         savedbtn.getChildren().addAll(save, savePublish);
         return savedbtn;

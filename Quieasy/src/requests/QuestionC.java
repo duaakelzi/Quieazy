@@ -53,10 +53,17 @@ public class QuestionC {
     }
 
     //method to request all questions for given quiz. For now the received arraylist is not passed back to the gui from client decoder.
-    public static void fetchQuizQuestions(QuizData quiz) {
+    public static ArrayList<QuestionData> fetchQuizQuestions(QuizData quiz) {
         ClientAgent clientAgent = ClientAgent.getClientAgent();
         request.task = "FETCH_ALL_QUESTIONS";
         request.quizData = quiz;
-        clientAgent.sendAndWaitForResponse(request);
+        Message response = clientAgent.sendAndWaitForResponse(request);
+        if(response != null && response.status){
+            System.out.println("Questions retrieved successfully.");
+        }else if(response != null && (!response.status)){
+            //informed user that no SPs returned
+            System.out.println("Questions not retrieved.");
+        }
+        return response.questionData;
     }
 }

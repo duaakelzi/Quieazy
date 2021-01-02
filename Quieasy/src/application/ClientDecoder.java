@@ -3,7 +3,6 @@
 package application;
 
 import gui.*;
-import requests.StudyProgramC;
 import requests.UserC;
 import data.*;
 
@@ -62,7 +61,7 @@ public class ClientDecoder {
 			CreateQuizBox.getCreateQuizBox().setStudyProgramDataArrayList(receivedSPData);
 			System.out.printf("calling setSudyProgram..done");
 			System.out.println("calling afterFetch");
-			CreateQuizBox.getCreateQuizBox().afterFetch();
+			CreateQuizBox.getCreateQuizBox().initializeCreateQuizFields();
 			System.out.println("calling afterFetch..done");
 		}else if (message.task.equals("STUDY_PROGRAMS_FETCH_FAILED")) {
 			System.out.println("Study Programs fetch failed");

@@ -70,9 +70,9 @@ public class RetrieveObjects {
                     }
                     message.questionData.add(newQuestion);
                 }
-                message.task = "QUESTIONS_FETCH_OK";
+                message.status = true;
             }else{
-                message.task = "QUESTIONS_FETCH_FAILED";
+                message.status = false;
             }
             session.close();
         }catch(Exception e){

@@ -11,7 +11,8 @@ public class ServerDecoder {
     private static Message response;
     //can we get rid of the if-else??
     public static Message decode(Message message) {
-
+        //init response here
+        //set task here
         if (message.task.equals("LOG_IN")) {
 
             LoginData data = message.loginData;
@@ -80,7 +81,10 @@ public class ServerDecoder {
             return message;
         } else if (message.task.equals("FETCH_ALL_QUESTIONS")) {
             QuizData quiz = message.quizData;
-            return Request.retrieveQuestions(quiz.getId()); //all questions belonging to that quiz
+            response = new Message();
+            response = Request.retrieveQuestions(quiz.getId());
+            response.task = message.task;
+            return  response;
         }else if (message.task.equals("SAVE_RESULT")) {
             UserData userData = message.userData;
             QuizData quizData = message.quizData;
