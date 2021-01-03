@@ -101,7 +101,7 @@ public class RetrieveObjects {
                 message.task = "RESULTS_FETCH_OK";
                 for (int i = 0; i < results.size(); i++) {
                     ResultData newResult = new ResultData(results.get(i).getPoints(), results.get(i).getPassed());
-                    message.resultData.add(newResult);
+                    //message.resultData.add(newResult);
                 }
             }else{
                 message.task = "RESULTS_FETCH_FAILED"; //user might not have any results yet

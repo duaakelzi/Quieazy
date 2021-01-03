@@ -102,7 +102,7 @@ public class CreateObjects {
             session.save(ch4);
 
             System.out.println("create Question ");
-            Question question = new Question (questionText,5);
+            Question question = new Question (questionText,points);
 
             //retrieve user to assign it to the question later
             User userToAdd = session.getSession().createQuery("FROM User WHERE email = :email", User.class).setParameter("email", email).getSingleResult();
@@ -182,7 +182,7 @@ public class CreateObjects {
             //result needs user and quiz
             //retrieve quiz
             //this won't work if different quizzes with same name will exist
-            Quiz resultQuiz = session.getSession().createQuery("FROM Quiz WHERE name = :name", Quiz.class).setParameter("name", quizName).getSingleResult();
+            Quiz resultQuiz = session.getSession().createQuery("FROM Quiz WHERE quiz_Name = :name", Quiz.class).setParameter("name", quizName).getSingleResult();
             //retrieve user
             User resultUser = session.getSession().createQuery("FROM User WHERE email = :email", User.class).setParameter("email", userEmail).getSingleResult();
             //create result with all info

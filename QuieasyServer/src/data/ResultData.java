@@ -1,10 +1,22 @@
 package data;
 
-public class ResultData {
+import java.io.Serializable;
+
+public class ResultData implements Serializable {
     private int points;
     private boolean passed;
+    private int statistics;
     //c'tor
     public ResultData(){}
+
+    public int getStatistics() {
+        return statistics;
+    }
+
+    public void setStatistics(int statistics) {
+        this.statistics = statistics;
+    }
+
     // getters/setters
     public ResultData(int points, boolean passed) {
         this.points = points;

@@ -17,6 +17,6 @@ public class Message implements Serializable {
 	public LoginData loginData; // user email and password
 	public QuizData quizData;
 	public ArrayList<QuestionData> questionData = new ArrayList<>();
-	public ArrayList<ResultData> resultData = new ArrayList<>();
+	public ResultData resultData ;
 	public ArrayList<StudyProgramData> studyProgramData = new ArrayList<>();
 }

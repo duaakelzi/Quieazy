@@ -7,6 +7,7 @@ import java.util.ArrayList;
 public class QuestionData implements Serializable {
 
     private String question;
+    private int point;
     private ArrayList<ChoicesData> answers;
 
     public QuestionData(){}
@@ -17,6 +18,13 @@ public class QuestionData implements Serializable {
         this.answers = answers;
     }
 
+    public int getPoint() {
+        return point;
+    }
+
+    public void setPoints(int point) {
+        this.point = point;
+    }
 
     public String getQuestion() {  return question; }
 

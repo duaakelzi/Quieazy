@@ -14,7 +14,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
-import requests.QuestionC;
+import requests.CheckCorrectAnswerC;
 
 import java.util.ArrayList;
 
@@ -31,6 +31,7 @@ public class PlayQuizBox extends VBox {
     //missing: Quiz with its questionData and user info
     private QuizData quiz;
     private ArrayList<QuestionData> quizQuestions;
+    private String selectedAnswer[];
   //  private ArrayList<ChoicesData> questionChoices;
 
     //constructor*****
@@ -119,6 +120,7 @@ public class PlayQuizBox extends VBox {
         VBox answers = new VBox(20);
         answers.setPrefWidth(650);
         answersCheck = new CheckBox[4];
+        selectedAnswer =new String[quiz.getQuestions().size()];
         answers.setBackground(new Background(new BackgroundFill(Color.LIGHTCYAN, null, null)));
         answers.setPadding(new Insets(20, 10, 10, 140));
 
@@ -129,7 +131,13 @@ public class PlayQuizBox extends VBox {
             answer.selectedProperty().addListener(new ChangeListener<Boolean>() {
                 @Override
                 public void changed(ObservableValue<? extends Boolean> observableValue, Boolean old_value, Boolean new_val) {
-                    //what should happen here?
+                   boolean selected =answer.isSelected();
+
+
+                   if (selected){System.out.println("selected :"+answer.getText());
+                   selectedAnswer[questionPos]=answer.getText();;
+                   }
+                   else {{System.out.println("not selected :"+answer.getText());}}//what should happen here?
                 }
             });
         }
@@ -167,7 +175,7 @@ public class PlayQuizBox extends VBox {
         next.setOnAction(actionEvent -> {
             for(int i = 1; i< quiz.getQuestions().size(); i++) {
                 textMark.setText("Quiz: " + quiz.getName() + "\n" + "Question " + i + "\n" + "Quiz threshold: " + quiz.getThreshold()); // additional info: status (answered/not), points (out of total)
-                questionLabel.setText(quizQuestions.get(0).getQuestion());
+                questionLabel.setText(quizQuestions.get(i).getQuestion());
                 initiateAnswers(i);
             }
         });
@@ -182,6 +190,9 @@ public class PlayQuizBox extends VBox {
         ImageView submitImg = new ImageView(new Image("images/submit.png"));
         submit.setGraphic(submitImg);
         submit.setOnAction(e->{
+            CheckCorrectAnswerC ch=new CheckCorrectAnswerC();
+            System.out.println(selectedAnswer[0]);
+            ch.checkAnswers(quiz,selectedAnswer);
             //on button submit action
             // here local checking of correctly answered questions can take place, since client already has the data
             // the number of correctly answered questions will be sent to server, along with info on quiz&user

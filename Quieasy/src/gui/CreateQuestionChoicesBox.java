@@ -25,6 +25,7 @@ public class CreateQuestionChoicesBox extends VBox {
     private TextField fourthchoice;
     private RadioButton fourthradiobtn;
     private TextArea textQuestion;
+    private TextArea Textpoints;
     private QuestionData newQuestionAdd;
     private QuizData quiz = CreateQuizBox.getCreateQuizBox().getQuiz();
     private ArrayList<ChoicesData> choicesData;
@@ -37,8 +38,11 @@ public class CreateQuestionChoicesBox extends VBox {
         VBox answer = initiateChoices();
         // initiate saveButton
         HBox button = initiateSaveQuestionBtn();
-        this.getChildren().addAll(question, answer, button);
+        VBox points=initiatePoints();
+        this.getChildren().addAll(question, answer, button,points);
     }
+
+
 
     public static CreateQuestionChoicesBox getCreateQuestionChoicesBox(){
         if(createQuestionChoicesBox == null) createQuestionChoicesBox = new CreateQuestionChoicesBox();
@@ -65,6 +69,20 @@ public class CreateQuestionChoicesBox extends VBox {
 
         return questionVbox;
 
+    }
+    private VBox initiatePoints() {
+        VBox pointVbox = new VBox(10);
+        pointVbox.setPadding(new Insets(20,30, 10, 30));
+        Label pointlabel = new Label("points");
+        pointlabel.setFont(Font.font("Times New Roman", FontWeight.BOLD, 20));
+        Textpoints = new TextArea();
+        Textpoints.setPromptText("Enter the Question");
+        Textpoints.setPrefColumnCount(10);
+        Textpoints.setPrefHeight(100);
+        Textpoints.setPrefWidth(600);
+        pointVbox.getChildren().addAll(pointlabel, Textpoints);
+
+        return pointVbox;
     }
 
     private VBox initiateChoices(){
@@ -184,7 +202,7 @@ public class CreateQuestionChoicesBox extends VBox {
         choicesData.add(new ChoicesData(thirdchoice.getText(), thirdradiobtn.isSelected()));
         choicesData.add(new ChoicesData(fourthchoice.getText(), fourthradiobtn.isSelected()));
         //create questionData with necessary attributes
-        QuestionData newQuestion = new QuestionData(textQuestion.getText(), choicesData);
+        QuestionData newQuestion = new QuestionData(textQuestion.getText(), choicesData,Integer.parseInt(Textpoints.getText()));
 
         return newQuestion;
     }

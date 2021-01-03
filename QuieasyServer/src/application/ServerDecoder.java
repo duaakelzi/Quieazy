@@ -51,7 +51,7 @@ public class ServerDecoder {
             //go through array of new questions and make each persistent
             int i;
             for (i=0; i<questionData.size(); i++) {
-                Request.createQuestion(questionData.get(i).getQuestion(), 5,questionData.get(i).getAnswers(),quiz.getName(),"user@mail.com");
+                Request.createQuestion(questionData.get(i).getQuestion(), questionData.get(i).getPoint(),questionData.get(i).getAnswers(),quiz.getName(),"user@mail.com");
             }
 
             if (i != questionData.size()) {
@@ -88,21 +88,20 @@ public class ServerDecoder {
         }else if (message.task.equals("SAVE_RESULT")) {
             UserData userData = message.userData;
             QuizData quizData = message.quizData;
-            ArrayList<ResultData> resultData = message.resultData;
+            ResultData resultData = message.resultData;
 
             //go through array of results and make each persistent
-            int i;
-            for (i = 0; i < resultData.size(); i++) {
+
                 //ideally, we should be working with IDs here
                 //session closed after each call to persist. Might be interfering
-                Request.createResult(resultData.get(i).getPoints(), resultData.get(i).isPassed(), quizData.getName(), userData.getEmail());
-            }
+                Request.createResult(resultData.getPoints(), resultData.isPassed(), quizData.getName(), "user@mail.com");
 
-            if (i != resultData.size()) {
-                message.task = "CREATE_RESULT_FAILED";
-            }else {
-                message.task = "CREATE_RESULT_SUCCESSFUL";
-            }
+
+//            if (i != resultData.size()) {
+//                message.task = "CREATE_RESULT_FAILED";
+//            }else {
+//                message.task = "CREATE_RESULT_SUCCESSFUL";
+//            }
             return message;
         }else if (message.task.equals("FETCH_RESULTS")) {
             UserData userData = message.userData;

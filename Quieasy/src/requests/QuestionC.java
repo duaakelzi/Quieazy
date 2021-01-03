@@ -21,6 +21,7 @@ public class QuestionC {
 //        saveQuiestionsMsg.userData = new UserData(UserC.getCurrentUser().getFirstName(),
 //                                            UserC.getCurrentUser().getLastName(),
 //                                            UserC.getCurrentUser().getEmail());
+
         Message response = clientAgent.sendAndWaitForResponse(request);
         if(response != null && response.status){
             System.out.println("Questions saved successfully.");
