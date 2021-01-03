@@ -1,4 +1,5 @@
 // Decodes the message received from the server and forwards it to the concerned class for execution.
+// TO BE DEPRECATED. REASONS: see ClientAgent
 
 package application;
 
