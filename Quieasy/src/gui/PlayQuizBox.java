@@ -1,12 +1,12 @@
 package gui;
 
+import data.ChoicesData;
 import data.QuestionData;
 import data.QuizData;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
@@ -21,48 +21,55 @@ import java.util.ArrayList;
 public class PlayQuizBox extends VBox {
 
     private static PlayQuizBox playQuizBox;
-    private Label textmark;
-    private Label questionlabel;
+    private Label textMark;
+    private Label questionLabel;
     private CheckBox[] answersCheck;
     private Button submit;
     private Button skip;
+    private Button next;
     private Button cancel;
     //missing: Quiz with its questionData and user info
     private QuizData quiz;
     private ArrayList<QuestionData> quizQuestions;
+  //  private ArrayList<ChoicesData> questionChoices;
 
     //constructor*****
     public PlayQuizBox(QuizData quizToPlay) { //this shouldn't be empty but receive the quizData from the MyQuiz
         quiz = quizToPlay;
+        quizQuestions = quiz.getQuestions();
         //fetch all questions here
-        fetchQuestions(quizToPlay);
+      //  fetchQuestions(quizToPlay);
 
         // questions track with Pagination
-        HBox questionstrack = initiateQuestionTrack();
+        HBox questionsTrack = initiateQuestionTrack();
 
         //Question information mark and the number of question
         HBox markQuestion = initiateQuestionMarkandQuestion();
 
         // Answer layout
-        VBox answers = initiateAnswers();
+        VBox answers = initiateAnswers(0);
 
         //Buttons
         HBox buttons = initiateButtons();
 
-        this.getChildren().addAll(questionstrack, markQuestion, answers, buttons);
+        this.getChildren().addAll(questionsTrack, markQuestion, answers, buttons);
 
     }
 
-    private void fetchQuestions(QuizData quiz){
-        quizQuestions = QuestionC.fetchQuizQuestions(quiz);
-    }
-    //i believe, this one is the track to navigate among questions. it probably needs to be linked to the actual array of questions
-    // yes
+    //not needed because quiz already contains all data. Maybe needed when browser is available
+//    private void fetchQuestions(QuizData quiz){
+//        quizQuestions = QuestionC.fetchQuizQuestions(quiz);
+//    }
+
+
+
+    // the track to navigate among questions. linked to the actual array of questions
     public HBox initiateQuestionTrack(){
-        HBox questionstrack = new HBox(10);
+        //as soon as one of the arrows clicked (left or right), the text should change
+        HBox questionstrack = new HBox(quiz.getQuestions().size());
         questionstrack.setAlignment(Pos.CENTER);
         //questionstrack.setPadding(new Insets(10));
-        Pagination trackquestions = new Pagination(20);
+        Pagination trackquestions = new Pagination(quiz.getQuestions().size());
         trackquestions.getStyleClass().add(Pagination.STYLE_CLASS_BULLET);
         ProgressIndicator indicator = new ProgressIndicator(0.8);
         AnchorPane anchor = new AnchorPane();
@@ -75,8 +82,7 @@ public class PlayQuizBox extends VBox {
         return questionstrack;
     }
 
-    // i'm guessing, this method should display the questions and choices? if so, we should load/fetch questions before or as
-    // the first step
+    // this method should display the question and quiz info.
     public HBox initiateQuestionMarkandQuestion(){
         HBox markQuestion = new HBox(10);
         //markQuestion.setPadding(new Insets(10));
@@ -84,74 +90,92 @@ public class PlayQuizBox extends VBox {
         mark.setBackground(new Background(new BackgroundFill(Color.LIGHTSTEELBLUE, new CornerRadii(0), Insets.EMPTY)));
         mark.setPrefWidth(120);
         mark.setPadding(new Insets(10));
-        textmark = new Label();
-        textmark.setWrapText(true);
-        textmark.setFont(Font.font("Times New Roman", 17));
-        //....setText() create methods to populate with questions and call textmark attr from that method. analogously with questionLabel
-        textmark.setText(quizQuestions.get(0).getQuestion());
-        mark.getChildren().addAll(textmark);
+        textMark = new Label();
+        textMark.setWrapText(true);
+        textMark.setFont(Font.font("Times New Roman", 17));
+        //for first view only
+        textMark.setText("Quiz: " + quiz.getName() + "\n" + "Question 1" + "\n" + "Quiz threshold: " + quiz.getThreshold()); // additional info: status (answered/not), points (out of total)
+        mark.getChildren().addAll(textMark);
         mark.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
 
         HBox question = new HBox();
         question.setBackground(new Background(new BackgroundFill(Color.LIGHTSKYBLUE, null, null)));
         question.setPrefWidth(535);
         question.setPrefHeight(100);
-        questionlabel = new Label();
-        questionlabel.setPadding(new Insets(10));
-        questionlabel.setWrapText(true);
-        questionlabel.setFont(Font.font("Times New Roman", 20));
-        questionlabel.setText(quizQuestions.get(0).getQuestion());
-        question.getChildren().addAll(questionlabel);
+        questionLabel = new Label();
+        questionLabel.setPadding(new Insets(10));
+        questionLabel.setWrapText(true);
+        questionLabel.setFont(Font.font("Times New Roman", 20));
+        //for first view only
+        questionLabel.setText(quizQuestions.get(0).getQuestion());
+        question.getChildren().addAll(questionLabel);
         question.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
         markQuestion.getChildren().addAll(mark, question);
         return markQuestion;
     }
 
-    // i suppose, this one saves user choice? if yes, we need to have a way to save that input (in an array, i guess)
-    // user input from here would be checked with actual array with correct answers
-    public VBox initiateAnswers(){
+   // shows the choices for the question
+    public VBox initiateAnswers(int questionPos){
         VBox answers = new VBox(20);
         answers.setPrefWidth(650);
         answersCheck = new CheckBox[4];
         answers.setBackground(new Background(new BackgroundFill(Color.LIGHTCYAN, null, null)));
         answers.setPadding(new Insets(20, 10, 10, 140));
-        for(int i= 0; i < answersCheck.length; i++){ //are choices displayed here??
-            CheckBox answer = answersCheck[i] = initiateAnswer();
+
+        for(int i= 0; i < answersCheck.length; i++){
+            //for first view only
+            CheckBox answer = answersCheck[i] = showAnswer(quizQuestions.get(questionPos).getAnswers(), i);
             answers.getChildren().addAll(answer);
             answer.selectedProperty().addListener(new ChangeListener<Boolean>() {
                 @Override
                 public void changed(ObservableValue<? extends Boolean> observableValue, Boolean old_value, Boolean new_val) {
-
+                    //what should happen here?
                 }
             });
         }
-
-
         return answers;
     }
-    //not sure what this does
-    public CheckBox initiateAnswer(){
+
+    //depict the specific choice for the question
+    private CheckBox showAnswer(ArrayList<ChoicesData> questionChoices, int pos){
         CheckBox answer = new CheckBox();
         answer.setFont(Font.font("Times New Roman", 16));
+
+        answer.setText(questionChoices.get(pos).getChoiceDescription());
         return answer;
     }
 
 
-    public HBox initiateButtons(){
+    private HBox initiateButtons(){
         HBox buttons = new HBox(120);
         buttons.setPadding(new Insets(40));
         submit = initiateSubmitButton();
         skip = initiateSkipButton();
+        next = initiateNextButton();
         cancel = initiateCancelButton();
         buttons.setAlignment(Pos.CENTER);
-        buttons.getChildren().addAll(submit, skip, cancel);
+        buttons.getChildren().addAll(cancel, skip, next, submit);
         return buttons;
 
     }
-
+    //should change the fields with the next question
+    private Button initiateNextButton() {
+        next = new Button();
+        next.setBackground(new Background(new BackgroundFill(Color.LIGHTGRAY, new CornerRadii(0), Insets.EMPTY)));
+        next.setText("Next Question");
+        //so far doesn't work. same behavior expected of the questionsTrack
+        next.setOnAction(actionEvent -> {
+            for(int i = 1; i< quiz.getQuestions().size(); i++) {
+                textMark.setText("Quiz: " + quiz.getName() + "\n" + "Question " + i + "\n" + "Quiz threshold: " + quiz.getThreshold()); // additional info: status (answered/not), points (out of total)
+                questionLabel.setText(quizQuestions.get(0).getQuestion());
+                initiateAnswers(i);
+            }
+        });
+        return next;
+    }
     // method to finish quiz, save user input, check for correctness, send results to the server and display to user
     // also gateway to go back or repeat quiz
-    public Button initiateSubmitButton(){
+    private Button initiateSubmitButton(){
         submit = new Button();
         submit.setEffect(new DropShadow());
         submit.setBackground(new Background(new BackgroundFill(Color.LIGHTGREEN, new CornerRadii(0), Insets.EMPTY)));
