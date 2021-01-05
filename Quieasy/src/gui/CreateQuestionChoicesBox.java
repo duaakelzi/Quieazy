@@ -53,15 +53,30 @@ public class CreateQuestionChoicesBox extends VBox {
     //buttons
     private VBox initiateQuestion(){
         VBox questionVbox = new VBox(10);
+        HBox questionPointsLabel = new HBox(470);
         questionVbox.setPadding(new Insets(20,30, 10, 30));
         Label questionlabel = new Label("Question");
+        Label pointsLabel = new Label("Points");
+        pointsLabel.setFont(Font.font("Times New Roman", FontWeight.NORMAL, 16));
+        questionPointsLabel.getChildren().addAll(questionlabel, pointsLabel);
+        HBox questionPointsdata = new HBox(10);
         questionlabel.setFont(Font.font("Times New Roman", FontWeight.BOLD, 20));
         textQuestion = new TextArea();
         textQuestion.setPromptText("Enter the Question");
         textQuestion.setPrefColumnCount(10);
+        textQuestion.setWrapText(true);
         textQuestion.setPrefHeight(100);
         textQuestion.setPrefWidth(600);
-        questionVbox.getChildren().addAll(questionlabel, textQuestion);
+        Spinner<Integer> pointsSpinner = new Spinner<>();
+        pointsSpinner.setEditable(true);
+
+        SpinnerValueFactory <Integer> valueSpinner = new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 10000, 0);
+        valueSpinner.setWrapAround(true);
+
+        pointsSpinner.setValueFactory(valueSpinner);
+        questionPointsdata.getChildren().addAll(textQuestion, pointsSpinner);
+
+        questionVbox.getChildren().addAll(questionPointsLabel, questionPointsdata);
 
         return questionVbox;
 
@@ -115,8 +130,8 @@ public class CreateQuestionChoicesBox extends VBox {
 
     private HBox initiateSaveQuestionBtn(){
         HBox buttonHbox = new HBox();
-        buttonHbox.setPadding(new Insets(50, 30, 0, 490));
-        Button saveQ= new Button("ADD");
+        buttonHbox.setPadding(new Insets(50, 30, 0, 520));
+        Button saveQ= new Button(" + ADD ");
         saveQ.setFont(Font.font("Times New Roman", FontWeight.NORMAL, 16));
         saveQ.setOnAction(actionEvent -> {
                 indexEditQuestion = CreateAddQuestionBox.getCreateAddQuestionBox().indexSelecteditem();
