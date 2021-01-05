@@ -51,6 +51,7 @@ public class CheckCorrectAnswerC {
         }
         else { re.setPassed(false);}
         request.resultData=re;
-        Message response = clientAgent.sendAndWaitForResponse(request);
+        //Message response =
+        clientAgent.sendAndWaitForResponse(request);
     }
 }

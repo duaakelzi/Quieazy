@@ -190,14 +190,15 @@ public class PlayQuizBox extends VBox {
         ImageView submitImg = new ImageView(new Image("images/submit.png"));
         submit.setGraphic(submitImg);
         submit.setOnAction(e->{
-            CheckCorrectAnswerC ch=new CheckCorrectAnswerC();
-            System.out.println(selectedAnswer[0]);
-            ch.checkAnswers(quiz,selectedAnswer);
             //on button submit action
             // here local checking of correctly answered questions can take place, since client already has the data
             // the number of correctly answered questions will be sent to server, along with info on quiz&user
             // concurrently, user can be informed about the results of the played quiz
             // options to repeat or go back to QuizBrowser should be offered
+            // !! at least one question should be answered!!
+            CheckCorrectAnswerC ch=new CheckCorrectAnswerC();
+            System.out.println(selectedAnswer[0]);
+            ch.checkAnswers(quiz,selectedAnswer);
         });
         return submit;
     }
