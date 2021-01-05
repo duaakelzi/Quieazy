@@ -23,6 +23,8 @@ public class CreateQuestionBankBox extends VBox {
     public ListView<FilterDataQuestionBank> listQuestions = new ListView<>();
     public ObservableList<FilterDataQuestionBank> dataQuestionObservaleList = FXCollections.observableArrayList();
 
+    public  ObservableList<FilterDataQuestionBank> filterDataQuestionBankObservableList = FXCollections.observableArrayList();
+
 
     // test data this should be from database
     ArrayList<ChoicesData> q1answer = new ArrayList<>();
@@ -73,6 +75,8 @@ public class CreateQuestionBankBox extends VBox {
         }
 
 
+
+
     }
 
     //get the current instance ->Singleton
@@ -95,6 +99,39 @@ public class CreateQuestionBankBox extends VBox {
         searchKeyWords.setMinWidth(200);
         searchKeyWords.setPromptText("Filter");
         Button searchButton = new Button("➔");
+
+        //    FilteredList<FilterDataQuestionBank> filteredData = new FilteredList<>(dataQuestionObservaleList, s ->true);
+            searchButton.setOnAction(new EventHandler<ActionEvent>() {
+                @Override
+                public void handle(ActionEvent actionEvent) {
+
+                        String filterSearch = searchKeyWords.getText();
+                        if(filterSearch == null || filterSearch.length() == 0){
+
+                            System.out.println("nimic");
+                            listQuestions.getItems().clear();
+
+
+
+                        }else{
+                            listQuestions.getItems().clear();
+                           for(int i = 0; i < dataQuestionObservaleList.size(); i++){
+                               if(dataQuestionObservaleList.get(i).getQuestions().getQuestion().toLowerCase().contains((filterSearch).toLowerCase())){
+                                   System.out.println(dataQuestionObservaleList.get(i).getQuestions().getQuestion());
+                                   filterDataQuestionBankObservableList.add(dataQuestionObservaleList.get(i));
+                               }
+
+                           }
+
+
+
+
+                        }
+
+                }
+            });
+
+
         searchButton.setFont(Font.font(14));
         searchFieldHBox.getChildren().addAll(searchLabel, searchKeyWords, searchButton);
         return searchFieldHBox;
@@ -105,11 +142,12 @@ public class CreateQuestionBankBox extends VBox {
         //HBox listViewHBox = new HBox();
 
         StackPane pane = new StackPane();
-        listQuestions.setItems(dataQuestionObservaleList);
+        listQuestions.setItems(filterDataQuestionBankObservableList);
         listQuestions.setCellFactory(questionDataListView -> new FilteredData());
         pane.getChildren().addAll(listQuestions);
         listQuestions.setPrefWidth(660);
         listQuestions.setPrefHeight(310);
+
         return  pane;
     }
 
@@ -167,6 +205,7 @@ public class CreateQuestionBankBox extends VBox {
             studyProgram.setWrappingWidth(70);
             dataGrid.add(studyProgram, 4, 0);
 
+
         }
 
 
@@ -185,15 +224,8 @@ public class CreateQuestionBankBox extends VBox {
                             System.out.println(questionData.getQuestions().getQuestion());
 //                            //here save the chosen question to be added to Array Question ArrayList
 //                           // questionData.getQuestions().getQuestion();
-//                            if("+ADD".equals(addButton.getText())){
-//                                addButton.setText("-DEL");
-//                                System.out.println(questionData.getQuestions().getQuestion());
-//                            }else{
-//                                //remove question from ArrayList
-//                                addButton.setText("+ADD");
-//                                addButton.setTextFill(Color.FIREBRICK);
-//
-//                            }
+                            dataGrid.setBackground(new Background(new BackgroundFill(Color.LIGHTGREEN, CornerRadii.EMPTY, Insets.EMPTY)));
+
 
                         }
                     });
@@ -201,6 +233,7 @@ public class CreateQuestionBankBox extends VBox {
                         @Override
                         public void handle(ActionEvent actionEvent) {
                             System.out.println(questionData.getQuestions().getQuestion());
+                            dataGrid.setBackground(new Background(new BackgroundFill(Color.WHITE, CornerRadii.EMPTY, Insets.EMPTY)));
                         }
                     });
 
