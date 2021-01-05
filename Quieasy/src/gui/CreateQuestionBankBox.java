@@ -1,6 +1,11 @@
 package gui;
 
+import data.ChoicesData;
+import data.FilterDataQuestionBank;
 import data.QuestionData;
+import data.QuizData;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -9,23 +14,64 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
+import javafx.scene.text.Text;
 
+import java.util.ArrayList;
 
 public class CreateQuestionBankBox extends VBox {
     private static CreateQuestionBankBox createQuestionBankBox;
+    public ListView<FilterDataQuestionBank> listQuestions = new ListView<>();
+    public ObservableList<FilterDataQuestionBank> dataQuestionObservaleList = FXCollections.observableArrayList();
+
+
+    // test data this should be from database
+    ArrayList<ChoicesData> q1answer = new ArrayList<>();
+
+    QuestionData q1 = new QuestionData("An indirect question gives the substance of the question, adapted to the form of the sentence in which it is quoted. It depends on a verb or other expression of asking, doubting, knowing, or the like.", q1answer);
+    ArrayList<ChoicesData> q2answer = new ArrayList<>();
+    QuestionData q2 = new QuestionData("Question 2", q2answer);
+    ArrayList<ChoicesData> q3answer = new ArrayList<>();
+    QuestionData q3 = new QuestionData("An indirect question gives the substance of the question, adapted to the form of the sentence in which it is quoted. It depends on a verb or other expression of asking, doubting, knowing, or the like.", q3answer);
+    ArrayList<ChoicesData> q4answer = new ArrayList<>();
+    QuestionData q4 = new QuestionData("Question 4", q4answer);
+
+    ArrayList<QuestionData> questionDataArrayList = new ArrayList<>();
+
+    ArrayList<QuizData> quizData = new ArrayList<>();
+
 
     //constructor
     private CreateQuestionBankBox() {
 
         HBox searchfield = initiateSearchField();
 
-        HBox scrollPane = initiateScrollPane();
+        StackPane listViewData = initiateListViewData();
 
         HBox save = initiateSaveButton();
 
-       // VBox q = initiateFilterData();
+        this.getChildren().addAll(searchfield, listViewData, save);
+//****************************************************************************
 
-        this.getChildren().addAll(searchfield, scrollPane, save);
+
+        //data for testing replace with DB data
+        q1answer.add(new ChoicesData("1",true));
+        q1answer.add(new ChoicesData("2", false));
+        questionDataArrayList.add(q1);
+        questionDataArrayList.add(q2);
+        questionDataArrayList.add(q3);
+        questionDataArrayList.add(q4);
+
+        quizData.add(new QuizData("Program si CTS", "Course is Calculus","My name is Janea", 20, 60, questionDataArrayList));
+        quizData.add(new QuizData("ITF", "Programming 3", "Bourdau", 50, 60, questionDataArrayList));
+        for(int i =0; i < quizData.size(); i++){
+            for(int j =0; j < quizData.get(i).getQuestions().size(); j++) {
+                dataQuestionObservaleList.addAll(new FilterDataQuestionBank(quizData.get(i).getQuestions().get(j),
+                        quizData.get(i).getOwnerQuiz(),
+                        quizData.get(i).getProgram()));
+
+            }
+        }
+
 
     }
 
@@ -54,20 +100,17 @@ public class CreateQuestionBankBox extends VBox {
         return searchFieldHBox;
 
     }
+    // here is the method that call the class to fill data in Listview
+    private StackPane initiateListViewData(){
+        //HBox listViewHBox = new HBox();
 
-    private HBox initiateScrollPane(){
-        HBox scrolPaneHbox = new HBox();
-        ScrollPane scrollPane = new ScrollPane();
-        ListView<GridPane> list = new ListView<>();
-        for(int i= 0; i < 10; i++){
-            list.getItems().add(initiateFilterData());
-        }
-
-        list.setPrefWidth(660);
-        list.setPrefHeight(310);
-        scrollPane.setContent(list);
-        scrolPaneHbox.getChildren().addAll(scrollPane);
-        return  scrolPaneHbox;
+        StackPane pane = new StackPane();
+        listQuestions.setItems(dataQuestionObservaleList);
+        listQuestions.setCellFactory(questionDataListView -> new FilteredData());
+        pane.getChildren().addAll(listQuestions);
+        listQuestions.setPrefWidth(660);
+        listQuestions.setPrefHeight(310);
+        return  pane;
     }
 
     HBox initiateSaveButton(){
@@ -77,67 +120,110 @@ public class CreateQuestionBankBox extends VBox {
         saveHbox.getChildren().addAll(save);
         return saveHbox;
     }
+        //class that fills ListView with data
+    static class FilteredData extends ListCell<FilterDataQuestionBank> {
+       FilteredData filteredData;
+       GridPane dataGrid = new GridPane();
+       public Button addButton;
+       public Button delButton;
+       //index from ArrayList to add faster to add Question
+       Label indexHide = new Label();
+       Text question = new Text();
+       Text author = new Text();
+       Text studyProgram = new Text();
 
-    GridPane initiateFilterData(){
-        GridPane dataGrid = new GridPane();
-        dataGrid.setHgap(10);
-        dataGrid.setVgap(10);
+       //constructor
+        private FilteredData(){
 
 
-        Button addQuestion = new Button("+ ADD");
-        addQuestion.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent actionEvent) {
-                addQuestion.setBackground(new Background(new BackgroundFill(Color.LIGHTGREEN, null, null)));
-            }
-        });
-        addQuestion.setBackground(new Background(new BackgroundFill(Color.LIGHTCYAN, null, null)));
-        dataGrid.add(addQuestion, 0, 0);
+            dataGrid.setHgap(10);
+            dataGrid.setVgap(0);
 
-        TextArea question = new TextArea("There was a time when pub quizzes happened in… well, pubs." + "But with the pandemic going on, it has become more common to organise a virtual pub quiz " +
-                "on your choice of video chat for the evening (or in the day, we’re not judging you). Whether it’s  " +
-                "Google Hangouts, Zoom, Skype, or any other video call platforms, big brains are flexing around the " +
-                "internet and laughter ensues.");
-        question.setEditable(false);
-        question.setWrapText(true);
-//        question.setMaxWidth(400);
-        question.setMaxHeight(70);
-        dataGrid.add(question, 1,1,2,1);
-        Label author = new Label("CHen Li");
-        author.setMinWidth(70);
-        dataGrid.add(author, 3,0);
 
-        Label studyProgram = new Label("CTS");
-        studyProgram.setMinWidth(70);
-        dataGrid.add(studyProgram, 4, 0);
 
-//        VBox dataQuestionfiltered = new VBox(5);
-////        dataQuestionfiltered.setPrefWidth(600);
-////        dataQuestionfiltered.setPrefHeight(60);
-//        dataQuestionfiltered.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
-//        dataQuestionfiltered.setBackground(new Background(new BackgroundFill(Color.LIGHTCYAN, null, null)));
-//        HBox dataHBox = new HBox(15);
-//        dataHBox.setPrefWidth(600);
-//        dataHBox.setPrefHeight(50);
-//        CheckBox checkQuestion = new CheckBox();
-//        checkQuestion.setText(String.valueOf(1));
-//        TextArea question = new TextArea("Hew is meee stioopaaaabvbvnbvnbvnbvnbvbfghfghdfgcbbcvvvvvvvvvvvvxxhjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjerrrdsfggffffffffgffffffffffferrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrreeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeewwwwwwwwwwwwwwwwwwwwwwwwwwwww");
-//        question.setEditable(false);
-//        Label author = new Label("Chen lifggggggggggggggggggggggggggggggggggggggggggggggg");
-//        Label studyProgram = new Label("CTS");
-//        dataHBox.getChildren().addAll(checkQuestion, question, author,studyProgram);
+            addButton = new Button("+");
+            addButton.setMinWidth(30);
+            delButton = new Button("-");
+            delButton.setBackground(new Background(new BackgroundFill(Color.LIGHTGREY, null, null)));
+            delButton.setMinWidth(30);
+            addButton.setBackground(new Background(new BackgroundFill(Color.LIGHTCYAN, null, null)));
+
+
+
+
+            dataGrid.add(addButton, 0, 0);
+            dataGrid.add(delButton, 1, 0);
+
+//            indexHide.getId();
+//            indexHide.setVisible(true);
+//            dataGrid.add(indexHide, 0, 1);
+
+            question.setWrappingWidth(400);
+            dataGrid.add(question, 2,0);
+
+            author.setWrappingWidth(70);
+            dataGrid.add(author, 3,0);
+
+            studyProgram.setWrappingWidth(70);
+            dataGrid.add(studyProgram, 4, 0);
+
+        }
+
+
+        @Override
+        protected void updateItem(FilterDataQuestionBank questionData, boolean empty) {
+            super.updateItem(questionData, empty);
+            if (empty || questionData == null ) {
+                setGraphic(null);
+
+            }else {
+
+                if (dataGrid != null) {
+                    addButton.setOnAction(new EventHandler<ActionEvent>() {
+                        @Override
+                        public void handle(ActionEvent actionEvent) {
+                            System.out.println(questionData.getQuestions().getQuestion());
+//                            //here save the chosen question to be added to Array Question ArrayList
+//                           // questionData.getQuestions().getQuestion();
+//                            if("+ADD".equals(addButton.getText())){
+//                                addButton.setText("-DEL");
+//                                System.out.println(questionData.getQuestions().getQuestion());
+//                            }else{
+//                                //remove question from ArrayList
+//                                addButton.setText("+ADD");
+//                                addButton.setTextFill(Color.FIREBRICK);
 //
-//        Button viewMore = new Button(">> VIEW MORE");
-//        viewMore.setBackground(new Background(new BackgroundFill(Color.TRANSPARENT, null, null)));
-//
-//        dataQuestionfiltered.getChildren().addAll(dataHBox, viewMore);
+//                            }
 
-//        return dataQuestionfiltered;
+                        }
+                    });
+                    delButton.setOnAction(new EventHandler<ActionEvent>() {
+                        @Override
+                        public void handle(ActionEvent actionEvent) {
+                            System.out.println(questionData.getQuestions().getQuestion());
+                        }
+                    });
 
-        return dataGrid;
+                    question.setText(questionData.getQuestions().getQuestion());
+                    author.setText(questionData.getAuthor());
+                    studyProgram.setText(questionData.getStudyProgram());
+                    setGraphic(dataGrid);
+                }else{
+                    setGraphic(null);
+                }
+          }
+
+
+
+        }
+
 
     }
 
 
+
+
 }
+
+
 

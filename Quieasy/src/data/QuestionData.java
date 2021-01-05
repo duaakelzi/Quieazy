@@ -2,8 +2,10 @@ package data;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
 
-public class QuestionData implements Serializable {
+public class QuestionData implements Serializable{
 
     private String question;
     private ArrayList<ChoicesData> answers;
@@ -32,4 +34,5 @@ public class QuestionData implements Serializable {
         }
         return res;
     }
+
 }
