@@ -22,14 +22,14 @@ public class RegisterAction {
 
             if(query.list().size() > 0) {
                 System.out.println("user already exists [method]");
-                message.task = "EMAIL_IN_USE";
+                message.status = false; // register failed
             } else {
                 //user doesn't exist -> create one and inform the client
                 System.out.println("creating user [method]");
                 User newUser = new User(firstName, lastName, email, password);
                 session.save(newUser);
                 session.getTransaction().commit();
-                message.task = "LOGIN_OK";
+                message.status = true;
                 message.userData = new UserData(firstName, lastName, email);
             }
         }
@@ -37,7 +37,9 @@ public class RegisterAction {
         {
             // if the error message is "out of memory",
             // it probably means no database file is found
+            message.status = false;
             System.err.println(e.getMessage());
+
         }
         finally
         {

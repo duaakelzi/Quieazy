@@ -76,7 +76,7 @@ public class ClientAgent implements Runnable {
 			}
 
 		} catch (Exception e) {
-			System.out.printf("Error occured in ClientAgent run. Exiting..");
+			System.out.printf("Error occurred in ClientAgent run. Exiting..");
 			System.out.println(e.getMessage());
 		}
 

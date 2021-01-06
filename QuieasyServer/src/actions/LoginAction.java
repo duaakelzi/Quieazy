@@ -24,11 +24,10 @@ public class LoginAction {
 
             if(password.equals(userToRetrieve.getPassword())) {
                 System.out.println("login successful [method]");
-                message.task = "LOGIN_OK";
+                message.status = true;
                 message.userData = new UserData(userToRetrieve.getFirstName(), userToRetrieve.getLastName(), email);
-                return message;
             }else {
-                message.task = "login failed";
+                message.status = false;
             }
             session.getTransaction().commit();
             System.out.println("User retrieval for login done");
@@ -39,6 +38,7 @@ public class LoginAction {
             // if the error message is "out of memory",
             // it probably means no database file is found
             System.err.println(e.getMessage());
+            message.status = false;
         }
         finally
         {

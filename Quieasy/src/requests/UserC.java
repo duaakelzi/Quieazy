@@ -6,10 +6,16 @@ import application.ClientAgent;
 import data.Message;
 import data.RegisterData;
 import data.LoginData;
+import data.UserData;
+import gui.Login;
+import gui.PrimeScene;
+import gui.Register;
 
 public class UserC {
 	
 	private static UserC userC;
+	private static Message request;
+	private static Message response;
 	
 	// user data
 	private String firstName;
@@ -38,24 +44,49 @@ public class UserC {
 	public static void register(String firstName, String lastName, String email, String password) {
 		
 		ClientAgent clientAgent = ClientAgent.getClientAgent();
-		Message message = new Message();
-		message.task = "REGISTER";
-		message.registerData = new RegisterData(firstName, lastName, email, password);
-		clientAgent.sendAndWaitForResponse(message);
+		request = new Message();
+		request.task = "REGISTER";
+		request.registerData = new RegisterData(firstName, lastName, email, password);
+
+		response = new Message();
+		response = clientAgent.sendAndWaitForResponse(request);
+		if (response != null && response.status) {
+			//this leads to direct login, whereas user should first be informed that registration
+			// was successful and be redirected to the login page again??
+			Register.clear();
+
+			// show dash board
+			PrimeScene.home();
+		}else if (response != null && (!response.status)){
+			Register.emailInUse();
+		}
 		
 	}
 	
 	// log user in
 	public static void login(String email, String password) {
-		
+
 		ClientAgent clientAgent = ClientAgent.getClientAgent();
-		Message message = new Message();
-		message.task = "LOG_IN";
-		message.loginData = new LoginData(email, password);
-		clientAgent.sendAndWaitForResponse(message);
-		
+		request = new Message();
+		request.task = "LOG_IN";
+		request.loginData = new LoginData(email, password);
+
+		response = new Message();
+		response = clientAgent.sendAndWaitForResponse(request);
+		if (response != null && response.status) {
+			UserC.getUser(response.userData.getFirstName(), response.userData.getLastName(), response.userData.getEmail());
+
+			// clear user inputs
+			Login.clear();
+
+			// show dash board
+			PrimeScene.home();
+
+		} else if (response != null && (!response.status)) { // user entered incorrect email or password
+			Login.fail();
+		}
 	}
-	
+
 	// log user out
 	public static void logout() {
 		userC = null;
