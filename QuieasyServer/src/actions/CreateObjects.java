@@ -108,9 +108,13 @@ public class CreateObjects {
             User userToAdd = session.getSession().createQuery("FROM User WHERE email = :email", User.class).setParameter("email", email).getSingleResult();
             Quiz quizToAdd =session.getSession().createQuery("from Quiz where quiz_Name =: quizName",Quiz.class).setParameter("quizName",quizName).getSingleResult();
 
-            Set<Question> questionUserSet= new HashSet<Question>();
+
+            Set<Question> questionQuizSet= new HashSet<>();
+            questionQuizSet=quizToAdd.getQuestion();
+            Set<Question> questionUserSet=new HashSet<>();
+            Set<Quiz> quiz= new HashSet<>();
+            questionQuizSet.add(question);
             questionUserSet.add(question);
-            Set<Quiz> quiz= new HashSet<Quiz>();
             quiz.add(quizToAdd);
             userToAdd.setQuestion(questionUserSet);
             quizToAdd.setQuestion(questionUserSet);
