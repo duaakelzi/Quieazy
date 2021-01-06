@@ -1,10 +1,11 @@
 package gui;
 
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
@@ -12,6 +13,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
+import javafx.util.Duration;
 
 public class PlayQuizBox extends VBox {
 
@@ -22,6 +25,15 @@ public class PlayQuizBox extends VBox {
     private Button submit;
     private Button skip;
     private Button cancel;
+
+    //private Integer seconds;
+    private Label timer;
+    private TilePane tilePaneTImer;
+    Integer min = 0; //here get the ttime from DB -1 because the second is starting with 59
+    private Integer sec = 59;
+    Label minutes;
+    Label dot;
+    Label seconds;
     //constructor*****
     public PlayQuizBox() {
 
@@ -70,17 +82,33 @@ public class PlayQuizBox extends VBox {
     public HBox initiateQuestionMarkandQuestion(){
         HBox markQuestion = new HBox(10);
         //markQuestion.setPadding(new Insets(10));
-        VBox mark = new VBox();
+        VBox mark = new VBox(5);
         mark.setBackground(new Background(new BackgroundFill(Color.LIGHTSTEELBLUE, new CornerRadii(0), Insets.EMPTY)));
         mark.setPrefWidth(120);
         mark.setPadding(new Insets(10));
-        textmark = new Label();
+        textmark = new Label("Text");
         textmark.setWrapText(true);
         textmark.setFont(Font.font("Times New Roman", 17));
-        mark.getChildren().addAll(textmark);
+       // mark.getChildren().addAll(textmark);
         mark.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
+         //timer
+        tilePaneTImer = new TilePane();
+        minutes = new Label();
+        dot = new Label();
+        seconds = new Label();
+        minutes.setFont(Font.font("Constantia", FontWeight.SEMI_BOLD, 20));
+        dot.setFont(Font.font("Constantia",FontWeight.SEMI_BOLD, 20));
+        seconds.setFont(Font.font("Constantia",FontWeight.SEMI_BOLD, 20));
+        minutes.setTextFill(Color.BLACK);
+        dot.setTextFill(Color.BLACK);
+        seconds.setTextFill(Color.BLACK);
+
+        tilePaneTImer.getChildren().addAll(minutes,dot, seconds);
+        countDownTimerQuiz();
 
 
+
+        mark.getChildren().addAll(textmark,tilePaneTImer);
         HBox question = new HBox();
         question.setBackground(new Background(new BackgroundFill(Color.LIGHTSKYBLUE, null, null)));
         question.setPrefWidth(535);
@@ -165,6 +193,46 @@ public class PlayQuizBox extends VBox {
         cancel.setEffect(new DropShadow());
         return cancel;
     }
+
+   private void countDownTimerQuiz(){
+
+       Timeline time = new Timeline();
+       time.setCycleCount(Timeline.INDEFINITE);
+     //  time.stop();
+
+       KeyFrame frame = new KeyFrame(Duration.seconds(1), actionEvent -> {
+           if(sec != 0){
+               sec--;
+               minutes.setText(String.format("%02d", min));
+               dot.setText(":");
+               seconds.setText(String.format("%02d", sec));
+           }else{
+               if(min <= 3){
+                   minutes.setTextFill(Color.FIREBRICK);
+                   dot.setTextFill(Color.FIREBRICK);
+                   seconds.setTextFill(Color.FIREBRICK);
+               }
+               min--;
+               sec = 59;
+               minutes.setText(String.format("%02d", min));
+               seconds.setText(String.format("%02d", sec));
+           }
+           if(sec <=0 && min <=0){
+               time.stop();
+               Alert alert = new Alert(Alert.AlertType.WARNING);
+               alert.setHeaderText("TIME's UP");
+               alert.show();
+               minutes.setText("TIME'");
+               dot.setText("s");
+               seconds.setText(" UP");
+           }
+
+
+
+       });
+       time.getKeyFrames().add(frame);
+       time.playFromStart();
+   }
 
 
 
