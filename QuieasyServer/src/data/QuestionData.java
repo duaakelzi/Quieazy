@@ -13,9 +13,10 @@ public class QuestionData implements Serializable {
     public QuestionData(){}
 
     //called in CreateQuestionChoicesBox.createnewQuestion
-    public QuestionData(String question, ArrayList<ChoicesData> answers) {
+    public QuestionData(String question, ArrayList<ChoicesData> answers,int point) {
         this.question = question;
         this.answers = answers;
+        this.point=point;
     }
 
     public int getPoint() {

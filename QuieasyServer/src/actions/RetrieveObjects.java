@@ -3,6 +3,7 @@ package actions;
 import data.*;
 import domain.*;
 import org.hibernate.Session;
+import org.hibernate.query.Query;
 import persistence.HibernateUtil;
 
 import java.util.ArrayList;
@@ -69,6 +70,7 @@ public class RetrieveObjects {
                         newQuestion.getAnswers().add(choice);
                     }
                     message.questionData.add(newQuestion);
+
                 }
                 message.status = true;
             }else{
@@ -166,4 +168,51 @@ public class RetrieveObjects {
         System.out.println("Message " + message.task + " will be sent");
         return message;
     }
+
+    public static Message retrieveExistingQuestions(String text,String quiz) { //used to be List<Quiz>
+        System.out.println("retrieving existing filtered Questions ");
+        Message message = new Message();
+        try {
+            Query queryQuiz = session.getSession().createQuery("FROM Quiz WHERE quiz_Name = :quiz ");
+            queryQuiz.setParameter("quiz", quiz);
+            Quiz quizToSearch=(Quiz)queryQuiz.list().get(0);
+            Long QuizId =quizToSearch.getId();
+
+            ArrayList<QuestionData>questionData=new ArrayList<QuestionData>();
+            List<Question> questionList = session.getSession().createQuery("from Question where questionText= :text ").list();
+            for (int i=0;i<questionList.size();i++)
+            {
+                questionData.get(i).setQuestion(questionList.get(i).getQuestionText());
+
+            }
+            if(questionList.size()>0) {
+                System.out.println("Questions retrieved. Done ");
+                message.task = "FETCH_OK";
+                // message.questionData.setAllQuestions(questionList);
+            }else{
+                message.task = "FETCH_FAILED";
+            }
+            session.close();
+        }catch(Exception e)
+        {
+            // if the error message is "out of memory",
+            // it probably means no database file is found
+            System.err.println(e.getMessage());
+        }
+        finally
+        {
+            try
+            {
+                if(session != null)
+                    session.close();
+            }
+            catch(Exception e)
+            {
+                // connection close failed.
+                System.err.println(e.getMessage());
+            }
+        }
+        return message;
+    }
 }
+

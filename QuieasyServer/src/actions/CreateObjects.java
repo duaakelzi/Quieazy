@@ -106,11 +106,17 @@ public class CreateObjects {
 
             //retrieve user to assign it to the question later
             User userToAdd = session.getSession().createQuery("FROM User WHERE email = :email", User.class).setParameter("email", email).getSingleResult();
+            Quiz quizToAdd =session.getSession().createQuery("from Quiz where quiz_Name =: quizName",Quiz.class).setParameter("quizName",quizName).getSingleResult();
 
             Set<Question> questionUserSet= new HashSet<Question>();
             questionUserSet.add(question);
+            Set<Quiz> quiz= new HashSet<Quiz>();
+            quiz.add(quizToAdd);
             userToAdd.setQuestion(questionUserSet);
+            quizToAdd.setQuestion(questionUserSet);
             question.setUser(userToAdd);
+            question.setQuizzes(quiz);
+
 
             //choices question
             Set <QuestionChoice> qch =new HashSet<QuestionChoice>();
