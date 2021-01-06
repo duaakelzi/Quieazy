@@ -6,26 +6,23 @@ import java.util.ArrayList;
 public class QuestionData implements Serializable {
 
     private String question;
-    private int point;
+    private int points;
     private ArrayList<ChoicesData> answers;
 
     public QuestionData(){}
 
-    //called in CreateQuestionChoicesBox.createnewQuestion
-    public QuestionData(String question, ArrayList<ChoicesData> answers,int point) {
+    public QuestionData(String question, ArrayList<ChoicesData> answers,int points) {
         this.question = question;
         this.answers = answers;
-        this.point=point;
-
-
+        this.points = points;
     }
 
-    public int getPoint() {
-        return point;
+    public int getPoints() {
+        return points;
     }
 
-    public void setPoint(int point) {
-        this.point = point;
+    public void setPoints(int points) {
+        this.points = points;
     }
 
     public String getQuestion() {  return question;  }

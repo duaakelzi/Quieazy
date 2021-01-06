@@ -57,7 +57,7 @@ public class ServerDecoder {
             //go through array of new questions and make each persistent
             int i;
             for (i=0; i<questionData.size(); i++) {
-                Request.createQuestion(questionData.get(i).getQuestion(), questionData.get(i).getPoint(),questionData.get(i).getAnswers(),quiz.getName(),"user@mail.com");
+                Request.createQuestion(questionData.get(i).getQuestion(), questionData.get(i).getPoints(),questionData.get(i).getAnswers(),quiz.getName(),"user@mail.com");
             }
 
             if (i != questionData.size()) {

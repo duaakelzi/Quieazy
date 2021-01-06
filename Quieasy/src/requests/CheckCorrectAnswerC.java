@@ -34,7 +34,7 @@ public class CheckCorrectAnswerC {
         }
         for (int m = 0; m  < questions.size(); m++) {
             if (SelectedAnswer[m] == correctAnswers[m]) {
-                result += questions.get(m).getPoint();
+                result += questions.get(m).getPoints();
                 System.out.println("res "  +result);
             }
 

@@ -7,43 +7,36 @@ import java.util.ArrayList;
 public class QuestionData implements Serializable {
 
     private String question;
-    private int point;
+    private int points;
     private ArrayList<ChoicesData> answers;
 
     public QuestionData(){}
 
-    //called in CreateQuestionChoicesBox.createnewQuestion
-    public QuestionData(String question, ArrayList<ChoicesData> answers) {
+    public QuestionData(String question, ArrayList<ChoicesData> answers,int points) {
         this.question = question;
         this.answers = answers;
+        this.points = points;
     }
 
-    public int getPoint() {
-        return point;
+    public int getPoints() {
+        return points;
     }
 
-    public void setPoints(int point) {
-        this.point = point;
+    public void setPoints(int points) {
+        this.points = points;
     }
 
-    public String getQuestion() {  return question; }
+    public String getQuestion() {  return question;  }
 
-    public ArrayList<ChoicesData> getAnswers() { return answers; }
+    public ArrayList<ChoicesData> getAnswers() {   return answers;  }
 
-    public void setQuestion(String question){
-        this.question = question;
-    }
+    public void setQuestion(String question){ this.question = question; }
 
-    public void setAnswers(ArrayList<ChoicesData> answers) {
-        this.answers = answers;
-    }
-
-    //temporary print statement => to be improved
-    //method to check if Question from client is passed with Choices
+    public void setAnswers(ArrayList<ChoicesData> choicesData) { this.answers = choicesData;}
     public String printAnswers() {
         String res = "";
         for(int i = 0; i < this.answers.size();i++) {
-            res += " Choice: " + answers.get(i).getChoiceDescription();
+            res += "Choice: " + answers.get(i).getChoiceDescription();
         }
         return res;
     }
