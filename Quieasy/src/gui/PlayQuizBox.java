@@ -193,6 +193,7 @@ public class PlayQuizBox extends VBox {
                 double progres = (indexQuestion*1.0)/quizQuestions.size();
                 indicator.setProgress(progres);
                 if (indexQuestion==quizQuestions.size()){indexQuestion=0;}
+                else{
 
                     this.textMark.setText("Question " + (indexQuestion + 1) + "\n Point :" + quizQuestions.get(indexQuestion).getPoints());
 
@@ -200,6 +201,21 @@ public class PlayQuizBox extends VBox {
                     for (int i = 0; i < 4; i++) {
                         answersCheck[i].setText(quizQuestions.get(indexQuestion).getAnswers().get(i).getChoiceDescription());
                         answersCheck[i].setSelected(false);
+                        RadioButton r=answersCheck[i];
+                        r.selectedProperty().addListener(new ChangeListener<Boolean>() {
+                            @Override
+                            public void changed(ObservableValue<? extends Boolean> observableValue, Boolean old_value, Boolean new_val) {
+                                boolean selected =r.isSelected();
+
+
+                                if (selected){System.out.println("selected :"+r.getText());
+                                    selectedAnswer[indexQuestion]=r.getText();;
+                                }
+                                else {{System.out.println("not selected :"+r.getText());}}//what should happen here?
+                            }
+                        });
+                    }
+
                     }
 
 
@@ -240,7 +256,11 @@ public class PlayQuizBox extends VBox {
             // !! at least one question should be answered!!
             CheckCorrectAnswerC ch=new CheckCorrectAnswerC();
             System.out.println(selectedAnswer[0]);
-            ch.checkAnswers(quiz,selectedAnswer);
+            boolean i=ch.checkAnswers(quiz,selectedAnswer);
+            System.out.println("play Result"+i);
+            MainPane.getMainPane().getTabs().add(new Tab("result",new CreateQuizResultBox(i)));
+            CreateAddQuestionTab.getCreateAddQuestionTab().closeTab();
+
         });
         return submit;
     }

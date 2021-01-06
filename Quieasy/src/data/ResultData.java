@@ -9,7 +9,10 @@ public class ResultData implements Serializable {
     //c'tor
     public ResultData(){}
     // getters/setters
-
+    public ResultData(int points, boolean passed) {
+        this.points = points;
+        this.passed = passed;
+    }
     public int getStatistics() { return statistics; }
 
     public void setStatistics(int statistics) { this.statistics = statistics; }
