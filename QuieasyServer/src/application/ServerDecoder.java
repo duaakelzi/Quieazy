@@ -13,16 +13,22 @@ public class ServerDecoder {
     public static Message decode(Message message) {
         //init response here
         //set task here
+        response = new Message();
+
         if (message.task.equals("LOG_IN")) {
 
             LoginData data = message.loginData;
-            return Request.login(data.email, data.password);
+            response = Request.login(data.getEmail(), data.getPassword());
+            response.task = message.task;
+            return response;
 
         } else if (message.task.equals("REGISTER")) {
 
-            data.RegisterData data = message.registerData;
+            RegisterData data = message.registerData;
 
-            return Request.register(data.firstName, data.lastName, data.email, data.password);
+            response =  Request.register(data.getFirstName(), data.getLastName(), data.getEmail(), data.getPassword());
+            response.task = message.task;
+            return response;
 
         } else if (message.task.equals("CREATE_QUIZ")) {
             data.QuizData quiz = message.quizData;
@@ -51,7 +57,7 @@ public class ServerDecoder {
             //go through array of new questions and make each persistent
             int i;
             for (i=0; i<questionData.size(); i++) {
-                Request.createQuestion(questionData.get(i).getQuestion(), questionData.get(i).getPoint(),questionData.get(i).getAnswers(),quiz.getName(),"user@mail.com");
+                Request.createQuestion(questionData.get(i).getQuestion(), questionData.get(i).getPoints(),questionData.get(i).getAnswers(),quiz.getName(),"user@mail.com");
             }
 
             if (i != questionData.size()) {

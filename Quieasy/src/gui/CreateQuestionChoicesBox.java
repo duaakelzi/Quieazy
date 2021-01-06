@@ -16,6 +16,7 @@ import java.util.ArrayList;
 public class CreateQuestionChoicesBox extends VBox {
 
     private static CreateQuestionChoicesBox createQuestionChoicesBox;
+    private SpinnerValueFactory <Integer> valueSpinner;
     private TextField firstchoice;
     private RadioButton firstradiobtn;
     private TextField secondchoice;
@@ -25,7 +26,6 @@ public class CreateQuestionChoicesBox extends VBox {
     private TextField fourthchoice;
     private RadioButton fourthradiobtn;
     private TextArea textQuestion;
-    private TextArea Textpoints;
     private QuestionData newQuestionAdd;
     private QuizData quiz = CreateQuizBox.getCreateQuizBox().getQuiz();
     private ArrayList<ChoicesData> choicesData;
@@ -33,13 +33,12 @@ public class CreateQuestionChoicesBox extends VBox {
     //c'tor
     private CreateQuestionChoicesBox(){
         // initiate the Question area
-        VBox question = initiateQuestion();
+        VBox question = initiateQuestionPointsFields();
         // initiate the answer field with radiobutton
         VBox answer = initiateChoices();
         // initiate saveButton
         HBox button = initiateSaveQuestionBtn();
-        VBox points=initiatePoints();
-        this.getChildren().addAll(question, answer, button,points);
+        this.getChildren().addAll(question, answer, button);
     }
 
 
@@ -54,37 +53,42 @@ public class CreateQuestionChoicesBox extends VBox {
         return newQuestionAdd;
     }
 
-    //buttons
-    private VBox initiateQuestion(){
+    //launches and takes input for questionText and points
+    private VBox initiateQuestionPointsFields(){
         VBox questionVbox = new VBox(10);
-        questionVbox.setPadding(new Insets(20,30, 10, 30));
         Label questionlabel = new Label("Question");
         questionlabel.setFont(Font.font("Times New Roman", FontWeight.BOLD, 20));
         textQuestion = new TextArea();
         textQuestion.setPromptText("Enter the Question");
         textQuestion.setPrefColumnCount(10);
+        textQuestion.setWrapText(true);
         textQuestion.setPrefHeight(100);
         textQuestion.setPrefWidth(600);
-        questionVbox.getChildren().addAll(questionlabel, textQuestion);
+
+        HBox questionPointsLabel = new HBox(470);
+        questionVbox.setPadding(new Insets(20,30, 10, 30));
+
+        Label pointsLabel = new Label("Points");
+        pointsLabel.setFont(Font.font("Times New Roman", FontWeight.NORMAL, 16));
+        questionPointsLabel.getChildren().addAll(questionlabel, pointsLabel);
+        HBox questionPointsdata = new HBox(10);
+        Spinner<Integer> pointsSpinner = new Spinner<>();
+        pointsSpinner.setEditable(true);
+
+        valueSpinner = new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 10000, 0);
+        valueSpinner.setWrapAround(true);
+
+
+        pointsSpinner.setValueFactory(valueSpinner);
+        questionPointsdata.getChildren().addAll(textQuestion, pointsSpinner);
+
+        questionVbox.getChildren().addAll(questionPointsLabel, questionPointsdata);
 
         return questionVbox;
 
     }
-    private VBox initiatePoints() {
-        VBox pointVbox = new VBox(10);
-        pointVbox.setPadding(new Insets(20,30, 10, 30));
-        Label pointlabel = new Label("points");
-        pointlabel.setFont(Font.font("Times New Roman", FontWeight.BOLD, 20));
-        Textpoints = new TextArea();
-        Textpoints.setPromptText("Enter the Question");
-        Textpoints.setPrefColumnCount(10);
-        Textpoints.setPrefHeight(100);
-        Textpoints.setPrefWidth(600);
-        pointVbox.getChildren().addAll(pointlabel, Textpoints);
 
-        return pointVbox;
-    }
-
+    //responsible for questionChoices
     private VBox initiateChoices(){
         VBox choices = new VBox(10);
         choices.setPadding(new Insets(10,30,0,30));
@@ -131,6 +135,7 @@ public class CreateQuestionChoicesBox extends VBox {
         return choices;
     }
 
+    //make calls to add new question to the array of questions which will be made persistent in CreateAddQuestoinBox
     private HBox initiateSaveQuestionBtn(){
         HBox buttonHbox = new HBox();
         buttonHbox.setPadding(new Insets(50, 30, 0, 490));
@@ -145,11 +150,10 @@ public class CreateQuestionChoicesBox extends VBox {
                }else {
                    //create new question and add to the tableView
                    newQuestionAdd = createNewQuestion();
-                   //add the newly-created question to the list of newQuestions
-                   //not sure this works:
+                   //add the newly-created question to the list of newQuestions (for further persistence)
                    CreateAddQuestionBox.getNewQuestions().add(newQuestionAdd);
                    System.out.println("Size of array of new questions after adding: " + CreateAddQuestionBox.getNewQuestions().size());
-                   //add to allQuestions
+                   //add to allQuestions where imported questions are integrated
                    quiz.getQuestions().add(newQuestionAdd);
                    int index = quiz.getQuestions().indexOf(newQuestionAdd);
                    CreateAddQuestionBox.getCreateAddQuestionBox().fillTableObservableListWithQuestion();
@@ -164,7 +168,7 @@ public class CreateQuestionChoicesBox extends VBox {
         return buttonHbox;
     }
 
-
+    //to adjust chosen questionChoices
     public void editQuestion(int index){
         textQuestion.setText(quiz.getQuestions().get(index).getQuestion());
         firstchoice.setText(quiz.getQuestions().get(index).getAnswers().get(0).getChoiceDescription());
@@ -193,7 +197,7 @@ public class CreateQuestionChoicesBox extends VBox {
         fourthradiobtn.setSelected(false);
     }
 
-    //this one serves only the purpose of creating a question,
+    //this one serves only the purpose of initializing a question on client side,
     // not yet making it persistent
     private QuestionData createNewQuestion(){
         choicesData = new ArrayList<>();
@@ -202,8 +206,7 @@ public class CreateQuestionChoicesBox extends VBox {
         choicesData.add(new ChoicesData(thirdchoice.getText(), thirdradiobtn.isSelected()));
         choicesData.add(new ChoicesData(fourthchoice.getText(), fourthradiobtn.isSelected()));
         //create questionData with necessary attributes
-        QuestionData newQuestion = new QuestionData(textQuestion.getText(), choicesData,Integer.parseInt(Textpoints.getText()));
-
+        QuestionData newQuestion = new QuestionData(textQuestion.getText(), choicesData,valueSpinner.getValue());
         return newQuestion;
     }
 

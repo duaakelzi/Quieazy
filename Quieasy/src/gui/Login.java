@@ -56,7 +56,7 @@ public class Login extends VBox{
 		loginButton.setOnAction(new EventHandler<ActionEvent>() {
 			 
 		    public void handle(ActionEvent e) {
-		        
+		        //use userdata here, maybe
 		    	UserC.login(email.getText(), password.getText());
 
 		    }

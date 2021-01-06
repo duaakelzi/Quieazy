@@ -118,7 +118,7 @@ public class Register extends VBox{
 		password1.setText("");
 		password2.setText("");
 		msg.setFill(Color.FIREBRICK);
-		msg.setText("Email already in use!");
+		msg.setText("Registration failed.");
 		
 	}
 	
