@@ -123,36 +123,18 @@ public class PlayQuizBox extends VBox {
         selectedAnswer =new String[quiz.getQuestions().size()];
         answers.setBackground(new Background(new BackgroundFill(Color.LIGHTCYAN, null, null)));
         answers.setPadding(new Insets(20, 10, 10, 140));
-
-        for(int i= 0; i < answersCheck.length; i++){
-            //for first view only
-            CheckBox answer = answersCheck[i] = showAnswer(quizQuestions.get(questionPos).getAnswers(), i);
-            answers.getChildren().addAll(answer);
-            answer.selectedProperty().addListener(new ChangeListener<Boolean>() {
-                @Override
-                public void changed(ObservableValue<? extends Boolean> observableValue, Boolean old_value, Boolean new_val) {
-                   boolean selected =answer.isSelected();
-
-
-                   if (selected){System.out.println("selected :"+answer.getText());
-                   selectedAnswer[questionPos]=answer.getText();;
-                   }
-                   else {{System.out.println("not selected :"+answer.getText());}}//what should happen here?
-                }
-            });
-        }
+        setAnswers(answersCheck.length, questionPos);
+        answers.getChildren().addAll(answersCheck);
         return answers;
     }
 
-    //depict the specific choice for the question
-    private CheckBox showAnswer(ArrayList<ChoicesData> questionChoices, int pos){
-        CheckBox answer = new CheckBox();
-        answer.setFont(Font.font("Times New Roman", 16));
-
-        answer.setText(questionChoices.get(pos).getChoiceDescription());
-        return answer;
+    private void setAnswers(int size, int questionPos){
+        for(int i= 0; i < answersCheck.length; i++){
+            //for first view only
+            answersCheck[i] = new CheckBox();
+            answersCheck[i].setText(quizQuestions.get(questionPos).getAnswers().get(i).getChoiceDescription());
+        }
     }
-
 
     private HBox initiateButtons(){
         HBox buttons = new HBox(120);
@@ -171,12 +153,12 @@ public class PlayQuizBox extends VBox {
         next = new Button();
         next.setBackground(new Background(new BackgroundFill(Color.LIGHTGRAY, new CornerRadii(0), Insets.EMPTY)));
         next.setText("Next Question");
-        //so far doesn't work. same behavior expected of the questionsTrack
+        //same behavior expected of the questionsTrack
         next.setOnAction(actionEvent -> {
             for(int i = 1; i< quiz.getQuestions().size(); i++) {
                 textMark.setText("Quiz: " + quiz.getName() + "\n" + "Question " + i + "\n" + "Quiz threshold: " + quiz.getThreshold()); // additional info: status (answered/not), points (out of total)
                 questionLabel.setText(quizQuestions.get(i).getQuestion());
-                initiateAnswers(i);
+                setAnswers(quizQuestions.get(i).getAnswers().size(), i);
             }
         });
         return next;

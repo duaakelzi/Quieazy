@@ -10,12 +10,13 @@ import java.util.Iterator;
 import java.util.List;
 
 public class RetrieveObjects {
-    static Session session = HibernateUtil.getSessionFactory().openSession();
+    static Session session;
     public static Message message = new Message();
 
     public static Message retrieveQuizzes(String email) { //used to be List<Quiz>
         System.out.println("retrieving all Quizzes ");
         try {
+            session = HibernateUtil.getSessionFactory().openSession();
             List<Quiz> quizList = session.getSession().createQuery("from Quiz", Quiz.class).list();
             if(quizList.size()>0) {
                 System.out.println("Quizzes retrieved. Done ");
@@ -50,7 +51,8 @@ public class RetrieveObjects {
     public static Message retrieveQuestions(Long quizID) { //used to be List<Quiz>
         System.out.println("retrieving all Questions ");
         try {
-            List<Question> questions = session.getSession().createQuery("from Question", Question.class).list();
+            session = HibernateUtil.getSessionFactory().openSession();
+            List<Question> questions = session.getSession().createQuery("from Question where ", Question.class).list();
             if(questions.size()>0) {
                 System.out.println("Questions retrieved.");
                 for (int i = 0; i < questions.size(); i++) {
@@ -79,6 +81,8 @@ public class RetrieveObjects {
             // if the error message is "out of memory",
             // it probably means no database file is found
             System.err.println(e.getMessage());
+            System.out.println("Error in retrieval encountered");
+            message.status = false;
         }finally{
             try{
                 if(session != null)
