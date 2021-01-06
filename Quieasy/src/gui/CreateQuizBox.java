@@ -17,6 +17,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.util.Callback;
+import requests.QuizC;
 
 import java.util.ArrayList;
 import java.util.stream.Collectors;
@@ -285,7 +286,7 @@ public class CreateQuizBox extends VBox {
 						Double.parseDouble(textThreshold.getText()),
 						Integer.parseInt(textTime.getText()),
 						new ArrayList<QuestionData>());
-				//QuizC.createNewQuiz(quiz); // it is not connected to DB
+				QuizC.createNewQuiz(quiz); // it is not connected to DB
 
 				MainPane.getMainPane().getTabs().add(CreateAddQuestionTab.getCreateAddQuestionTab());
 				CreateQuizTab.getCreateQuizTab().closeTab();

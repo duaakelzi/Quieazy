@@ -108,7 +108,7 @@ public class CreateQuestionBankBox extends VBox {
                         String filterSearch = searchKeyWords.getText();
                         if(filterSearch == null || filterSearch.length() == 0){
 
-                            System.out.println("nimic");
+                            System.out.println("nothing");
                             listQuestions.getItems().clear();
 
 
