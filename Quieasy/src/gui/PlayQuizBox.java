@@ -190,6 +190,8 @@ public class PlayQuizBox extends VBox {
             try {
 
                 indexQuestion++;
+                double progres = (indexQuestion*1.0)/quizQuestions.size();
+                indicator.setProgress(progres);
                 if (indexQuestion==quizQuestions.size()){indexQuestion=0;}
 
                     this.textMark.setText("Question " + (indexQuestion + 1) + "\n Point :" + quizQuestions.get(indexQuestion).getPoints());
@@ -199,7 +201,7 @@ public class PlayQuizBox extends VBox {
                         answersCheck[i].setText(quizQuestions.get(indexQuestion).getAnswers().get(i).getChoiceDescription());
                         answersCheck[i].setSelected(false);
                     }
-                    indicator.setProgress(Double.valueOf(indexQuestion*100.0/quizQuestions.size()));
+
 
 
 
@@ -207,7 +209,7 @@ public class PlayQuizBox extends VBox {
 
 
             }catch (IndexOutOfBoundsException e){
-
+                System.out.println(" I am out of boundary");
 
             }
 
