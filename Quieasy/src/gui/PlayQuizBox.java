@@ -33,6 +33,8 @@ public class PlayQuizBox extends VBox {
     private ArrayList<QuestionData> quizQuestions;
     private String selectedAnswer[];
     private static int indexQuestion = 0;
+    private ToggleGroup group;
+    ProgressIndicator indicator;
   //  private ArrayList<ChoicesData> questionChoices;
 
     //constructor*****
@@ -49,7 +51,7 @@ public class PlayQuizBox extends VBox {
         HBox markQuestion = initiateQuestionMarkandQuestion();
 
         // Answer layout
-        VBox answers = initiateAnswers(indexQuestion);
+        VBox answers = initiateAnswers();
 
         //Buttons
         HBox buttons = initiateButtons();
@@ -73,7 +75,7 @@ public class PlayQuizBox extends VBox {
         //questionstrack.setPadding(new Insets(10));
         Pagination trackquestions = new Pagination(quiz.getQuestions().size());
         trackquestions.getStyleClass().add(Pagination.STYLE_CLASS_BULLET);
-        ProgressIndicator indicator = new ProgressIndicator(0.8);
+         indicator = new ProgressIndicator(0.0);
         AnchorPane anchor = new AnchorPane();
         AnchorPane.setTopAnchor(trackquestions, 10.0);
         AnchorPane.setRightAnchor(trackquestions, 10.0);
@@ -110,31 +112,33 @@ public class PlayQuizBox extends VBox {
 
         questionText.setFont(Font.font("Times New Roman", 20));
         //for first view only
-        questionText.setText(quizQuestions.get(0).getQuestion());
+        initiateDataPlayQuiz(indexQuestion);
         question.getChildren().addAll(questionText);
         question.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
         markQuestion.getChildren().addAll(mark, question);
 
-        initiateDataPlayQuiz(indexQuestion);
+
         return markQuestion;
     }
 
    // shows the choices for the question
-    public VBox initiateAnswers(int questionPos){
+    public VBox initiateAnswers(){
         VBox answers = new VBox(20);
-        final ToggleGroup group = new ToggleGroup();
+         group = new ToggleGroup();
         answers.setPrefWidth(650);
         answersCheck = new RadioButton[4];
         selectedAnswer =new String[quiz.getQuestions().size()];
         answers.setBackground(new Background(new BackgroundFill(Color.LIGHTCYAN, null, null)));
         answers.setPadding(new Insets(20, 10, 10, 140));
 
-        for(int i= 0; i < quizQuestions.get(questionPos).getAnswers().size(); i++){
+        for(int i= 0; i < quizQuestions.get(indexQuestion).getAnswers().size(); i++){
             //for first view only
-            RadioButton answer = answersCheck[i] = showAnswer(quizQuestions.get(questionPos).getAnswers(), i);
-            System.out.println(quizQuestions.get(questionPos).getAnswers().get(i).getChoiceDescription()); //test
+            RadioButton answer = showAnswer(quizQuestions.get(indexQuestion).getAnswers(), i);
+            answersCheck[i]=answer;
+            System.out.println(answer.getText());
+            System.out.println(quizQuestions.get(indexQuestion).getAnswers().get(i).getChoiceDescription()); //test
             answersCheck[i].setToggleGroup(group);
-            answers.getChildren().addAll(answer);
+            answers.getChildren().addAll(answersCheck[i]);
             answer.selectedProperty().addListener(new ChangeListener<Boolean>() {
                 @Override
                 public void changed(ObservableValue<? extends Boolean> observableValue, Boolean old_value, Boolean new_val) {
@@ -142,7 +146,7 @@ public class PlayQuizBox extends VBox {
 
 
                    if (selected){System.out.println("selected :"+answer.getText());
-                   selectedAnswer[questionPos]=answer.getText();;
+                   selectedAnswer[indexQuestion]=answer.getText();;
                    }
                    else {{System.out.println("not selected :"+answer.getText());}}//what should happen here?
                 }
@@ -157,6 +161,7 @@ public class PlayQuizBox extends VBox {
         answer.setFont(Font.font("Times New Roman", 16));
 
         answer.setText(questionChoices.get(pos).getChoiceDescription());
+        System.out.println("show"+questionChoices.get(pos).getChoiceDescription());
         return answer;
     }
 
@@ -181,18 +186,28 @@ public class PlayQuizBox extends VBox {
         next.setEffect(new DropShadow());
         //so far doesn't work. same behavior expected of the questionsTrack
         next.setOnAction(actionEvent -> {
-            indexQuestion++;
+
             try {
-                this.textMark.setText("Question " + (indexQuestion + 1) + "\n Point :" + quizQuestions.get(indexQuestion).getPoints());
 
-                this.questionText.setText(quizQuestions.get(indexQuestion).getQuestion());
+                indexQuestion++;
+                if (indexQuestion==quizQuestions.size()){indexQuestion=0;}
 
-                initiateAnswers(indexQuestion);
+                    this.textMark.setText("Question " + (indexQuestion + 1) + "\n Point :" + quizQuestions.get(indexQuestion).getPoints());
+
+                    this.questionText.setText(quizQuestions.get(indexQuestion).getQuestion());
+                    for (int i = 0; i < 4; i++) {
+                        answersCheck[i].setText(quizQuestions.get(indexQuestion).getAnswers().get(i).getChoiceDescription());
+                        answersCheck[i].setSelected(false);
+                    }
+                    indicator.setProgress(Double.valueOf(indexQuestion*100.0/quizQuestions.size()));
+
+
+
 
 
 
             }catch (IndexOutOfBoundsException e){
-                indexQuestion=0;
+
 
             }
 
