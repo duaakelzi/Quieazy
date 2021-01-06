@@ -14,6 +14,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
+import javafx.scene.text.Text;
 import requests.CheckCorrectAnswerC;
 
 import java.util.ArrayList;
@@ -22,24 +23,26 @@ public class PlayQuizBox extends VBox {
 
     private static PlayQuizBox playQuizBox;
     private Label textMark;
-    private Label questionLabel;
-    private CheckBox[] answersCheck;
+    private Text questionText;
+    private RadioButton[] answersCheck;
     private Button submit;
-    private Button skip;
     private Button next;
     private Button cancel;
     //missing: Quiz with its questionData and user info
     private QuizData quiz;
     private ArrayList<QuestionData> quizQuestions;
     private String selectedAnswer[];
-  //  private ArrayList<ChoicesData> questionChoices;
+    private static int indexQuestion = 0;
+    private ToggleGroup group;
+    ProgressIndicator indicator;
+    //  private ArrayList<ChoicesData> questionChoices;
 
     //constructor*****
     public PlayQuizBox(QuizData quizToPlay) { //this shouldn't be empty but receive the quizData from the MyQuiz
         quiz = quizToPlay;
         quizQuestions = quiz.getQuestions();
         //fetch all questions here
-      //  fetchQuestions(quizToPlay);
+        //  fetchQuestions(quizToPlay);
 
         // questions track with Pagination
         HBox questionsTrack = initiateQuestionTrack();
@@ -48,7 +51,7 @@ public class PlayQuizBox extends VBox {
         HBox markQuestion = initiateQuestionMarkandQuestion();
 
         // Answer layout
-        VBox answers = initiateAnswers(0);
+        VBox answers = initiateAnswers();
 
         //Buttons
         HBox buttons = initiateButtons();
@@ -72,7 +75,7 @@ public class PlayQuizBox extends VBox {
         //questionstrack.setPadding(new Insets(10));
         Pagination trackquestions = new Pagination(quiz.getQuestions().size());
         trackquestions.getStyleClass().add(Pagination.STYLE_CLASS_BULLET);
-        ProgressIndicator indicator = new ProgressIndicator(0.8);
+        indicator = new ProgressIndicator(0.0);
         AnchorPane anchor = new AnchorPane();
         AnchorPane.setTopAnchor(trackquestions, 10.0);
         AnchorPane.setRightAnchor(trackquestions, 10.0);
@@ -94,8 +97,9 @@ public class PlayQuizBox extends VBox {
         textMark = new Label();
         textMark.setWrapText(true);
         textMark.setFont(Font.font("Times New Roman", 17));
+
         //for first view only
-        textMark.setText("Quiz: " + quiz.getName() + "\n" + "Question 1" + "\n" + "Quiz threshold: " + quiz.getThreshold()); // additional info: status (answered/not), points (out of total)
+        //textMark.setText("Question " + (indexQuestion+1) +  "\n Quiz points: " + quizQuestions.get(indexQuestion).getPoints()); // additional info: status (answered/not), points (out of total)
         mark.getChildren().addAll(textMark);
         mark.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
 
@@ -103,63 +107,117 @@ public class PlayQuizBox extends VBox {
         question.setBackground(new Background(new BackgroundFill(Color.LIGHTSKYBLUE, null, null)));
         question.setPrefWidth(535);
         question.setPrefHeight(100);
-        questionLabel = new Label();
-        questionLabel.setPadding(new Insets(10));
-        questionLabel.setWrapText(true);
-        questionLabel.setFont(Font.font("Times New Roman", 20));
+        questionText = new Text();
+        questionText.setWrappingWidth(535);
+
+        questionText.setFont(Font.font("Times New Roman", 20));
         //for first view only
-        questionLabel.setText(quizQuestions.get(0).getQuestion());
-        question.getChildren().addAll(questionLabel);
+        initiateDataPlayQuiz(indexQuestion);
+        question.getChildren().addAll(questionText);
         question.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
         markQuestion.getChildren().addAll(mark, question);
+
+
         return markQuestion;
     }
 
-   // shows the choices for the question
-    public VBox initiateAnswers(int questionPos){
+    // shows the choices for the question
+    public VBox initiateAnswers(){
         VBox answers = new VBox(20);
+        group = new ToggleGroup();
         answers.setPrefWidth(650);
-        answersCheck = new CheckBox[4];
+        answersCheck = new RadioButton[4];
         selectedAnswer =new String[quiz.getQuestions().size()];
         answers.setBackground(new Background(new BackgroundFill(Color.LIGHTCYAN, null, null)));
         answers.setPadding(new Insets(20, 10, 10, 140));
-        setAnswers(answersCheck.length, questionPos);
-        answers.getChildren().addAll(answersCheck);
+
+        for(int i= 0; i < quizQuestions.get(indexQuestion).getAnswers().size(); i++){
+            //for first view only
+            RadioButton answer = showAnswer(quizQuestions.get(indexQuestion).getAnswers(), i);
+            answersCheck[i]=answer;
+            System.out.println(answer.getText());
+            System.out.println(quizQuestions.get(indexQuestion).getAnswers().get(i).getChoiceDescription()); //test
+            answersCheck[i].setToggleGroup(group);
+            answers.getChildren().addAll(answersCheck[i]);
+            answer.selectedProperty().addListener(new ChangeListener<Boolean>() {
+                @Override
+                public void changed(ObservableValue<? extends Boolean> observableValue, Boolean old_value, Boolean new_val) {
+                    boolean selected =answer.isSelected();
+
+
+                    if (selected){System.out.println("selected :"+answer.getText());
+                        selectedAnswer[indexQuestion]=answer.getText();;
+                    }
+                    else {{System.out.println("not selected :"+answer.getText());}}//what should happen here?
+                }
+            });
+        }
         return answers;
     }
 
-    private void setAnswers(int size, int questionPos){
-        for(int i= 0; i < answersCheck.length; i++){
-            //for first view only
-            answersCheck[i] = new CheckBox();
-            answersCheck[i].setText(quizQuestions.get(questionPos).getAnswers().get(i).getChoiceDescription());
-        }
+    //depict the specific choice for the question
+    private RadioButton showAnswer(ArrayList<ChoicesData> questionChoices, int pos){
+        RadioButton answer = new RadioButton();
+        answer.setFont(Font.font("Times New Roman", 16));
+
+        answer.setText(questionChoices.get(pos).getChoiceDescription());
+        System.out.println("show"+questionChoices.get(pos).getChoiceDescription());
+        return answer;
     }
+
 
     private HBox initiateButtons(){
         HBox buttons = new HBox(120);
         buttons.setPadding(new Insets(40));
         submit = initiateSubmitButton();
-        skip = initiateSkipButton();
         next = initiateNextButton();
         cancel = initiateCancelButton();
         buttons.setAlignment(Pos.CENTER);
-        buttons.getChildren().addAll(cancel, skip, next, submit);
+        buttons.getChildren().addAll(cancel, next, submit);
         return buttons;
 
     }
     //should change the fields with the next question
     private Button initiateNextButton() {
         next = new Button();
-        next.setBackground(new Background(new BackgroundFill(Color.LIGHTGRAY, new CornerRadii(0), Insets.EMPTY)));
-        next.setText("Next Question");
-        //same behavior expected of the questionsTrack
+        next.setBackground(new Background(new BackgroundFill(Color.YELLOW,null, null)));
+        ImageView skipimg = new ImageView(new Image("images/skip.png"));
+        next.setGraphic(skipimg);
+        next.setEffect(new DropShadow());
+        //so far doesn't work. same behavior expected of the questionsTrack
         next.setOnAction(actionEvent -> {
-            for(int i = 1; i< quiz.getQuestions().size(); i++) {
-                textMark.setText("Quiz: " + quiz.getName() + "\n" + "Question " + i + "\n" + "Quiz threshold: " + quiz.getThreshold()); // additional info: status (answered/not), points (out of total)
-                questionLabel.setText(quizQuestions.get(i).getQuestion());
-                setAnswers(quizQuestions.get(i).getAnswers().size(), i);
+
+            try {
+
+                indexQuestion++;
+                if (indexQuestion==quizQuestions.size()){indexQuestion=0;}
+
+                this.textMark.setText("Question " + (indexQuestion + 1) + "\n Point :" + quizQuestions.get(indexQuestion).getPoints());
+
+                this.questionText.setText(quizQuestions.get(indexQuestion).getQuestion());
+                for (int i = 0; i < 4; i++) {
+                    answersCheck[i].setText(quizQuestions.get(indexQuestion).getAnswers().get(i).getChoiceDescription());
+                    answersCheck[i].setSelected(false);
+                }
+                indicator.setProgress(Double.valueOf(indexQuestion*100.0/quizQuestions.size()));
+
+
+
+
+
+
+            }catch (IndexOutOfBoundsException e){
+
+
             }
+
+
+
+//            for(int i = 1; i< quiz.getQuestions().size(); i++) {
+//                textMark.setText("Quiz: " + quiz.getName() + "\n" + "Question " + i + "\n" + "Quiz threshold: " + quiz.getThreshold()); // additional info: status (answered/not), points (out of total)
+//                questionText.setText(quizQuestions.get(i).getQuestion());
+//                initiateAnswers(i);
+//            }
         });
         return next;
     }
@@ -184,19 +242,7 @@ public class PlayQuizBox extends VBox {
         });
         return submit;
     }
-    public Button initiateSkipButton(){
-        skip = new Button();
-        skip.setBackground(new Background(new BackgroundFill(Color.YELLOW,null, null)));
-        ImageView skipimg = new ImageView(new Image("images/skip.png"));
-        skip.setGraphic(skipimg);
-        skip.setEffect(new DropShadow());
-        skip.setOnAction(e->{
-            //on button skip action
-            // all questions skipped will have no user choice saved. hence, they will be marked as "wrong" by the system, when submit button is clicked
-            // !! it should be possible to change choice before user clicked submit!!
-        });
-        return skip;
-    }
+
     public Button initiateCancelButton(){
         cancel = new Button();
         cancel.setBackground(new Background(new BackgroundFill(Color.LIGHTCORAL, null, null)));
@@ -204,6 +250,13 @@ public class PlayQuizBox extends VBox {
         cancel.setGraphic(cancelimg);
         cancel.setEffect(new DropShadow());
         return cancel;
+    }
+
+    private void initiateDataPlayQuiz(int pos){
+
+        this.textMark.setText("Question " + (pos+1) + "\n Points: " + quizQuestions.get(pos).getPoints());
+        this.questionText.setText(quizQuestions.get(pos).getQuestion());
+
     }
 
 
