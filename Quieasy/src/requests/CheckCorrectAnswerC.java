@@ -6,40 +6,66 @@ import data.*;
 import java.util.ArrayList;
 
 public class CheckCorrectAnswerC {
+    private int result=0;
+    private  Message request = new Message();
+    ArrayList<ChoicesData> answers;
+
+    public int getResult() {
+        return result;
+    }
+
+    public void setResult(int result) {
+        this.result = result;
+    }
+
+    String [] correctAnswers;
     public CheckCorrectAnswerC() {
     }
 
-    private  Message request = new Message();
-    ArrayList<ChoicesData> answers;
-    String [] correctAnswers;
-    int result=0;
-    public void checkAnswers(QuizData quiz,String [] SelectedAnswer) {
+
+
+    public boolean checkAnswers(QuizData quiz,String [] SelectedAnswer) {
         ClientAgent clientAgent = ClientAgent.getClientAgent();
         ArrayList<QuestionData> questions;
         answers = new ArrayList<ChoicesData>();
 
-        System.out.println("quizResult"+quiz.getName());
-        questions = quiz.getQuestions();
-        correctAnswers = new String[questions.size()];
-        for (int i = 0; i < questions.size(); i++) {
-            answers = questions.get(i).getAnswers();
-        }
-        for (int l = 0; l < correctAnswers.length; l++) {
-            for (int j = 0; j < answers.size(); j++) {
-                if (answers.get(j).isCorrect()) {
-                    correctAnswers[l] = answers.get(j).getChoiceDescription();
-                }
 
-            }
-        }
+        System.out.println("quizResult"+quiz.getName());
+       // System.out.println("select"+SelectedAnswer[2]);
+
+        questions = quiz.getQuestions();
+        questions.get(0).getAnswers();
+        boolean correctres[]=new boolean[questions.size()];
+        correctAnswers = new String[questions.size()];
+        for (int i = 0; i < questions.size(); i++)
+            for (int j=0;j<questions.get(i).getAnswers().size();j++){
+                if(questions.get(i).getAnswers().get(j).isCorrect())
+               answers.add(questions.get(i).getAnswers().get(j));
+
+                 }
+
+for (int i=0;i<answers.size();i++)
+{
+    System.out.println("answer "+answers.get(i).getChoiceDescription());
+    correctAnswers[i] = answers.get(i).getChoiceDescription();
+}
+
+
+
         for (int m = 0; m  < questions.size(); m++) {
             if (SelectedAnswer[m] == correctAnswers[m]) {
+                correctres[m]=true;
                 result += questions.get(m).getPoints();
                 System.out.println("res "  +result);
             }
+            else
+                {
+                    correctres[m]=false;
+                }
 
 
         }
+        //this.setResult(result);
         request.task = "SAVE_RESULT";
         request.quizData=quiz;
         ResultData re=new ResultData();
@@ -47,11 +73,19 @@ public class CheckCorrectAnswerC {
         if (result > quiz.getThreshold())
         {
             re.setPassed(true);
+            request.resultData=re;
+            Message response =  clientAgent.sendAndWaitForResponse(request);
+            return true;
 
         }
-        else { re.setPassed(false);}
-        request.resultData=re;
-        //Message response =
-        clientAgent.sendAndWaitForResponse(request);
+        else
+            { re.setPassed(false);
+                request.resultData=re;
+                Message response =  clientAgent.sendAndWaitForResponse(request);
+            return false;
+             }
+
+
     }
+
 }

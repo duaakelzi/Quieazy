@@ -104,22 +104,23 @@ public class CreateObjects {
             System.out.println("create Question ");
             Question question = new Question (questionText,points);
 
+
             //retrieve user to assign it to the question later
             User userToAdd = session.getSession().createQuery("FROM User WHERE email = :email", User.class).setParameter("email", email).getSingleResult();
             Quiz quizToAdd =session.getSession().createQuery("from Quiz where quiz_Name =: quizName",Quiz.class).setParameter("quizName",quizName).getSingleResult();
 
 
-            Set<Question> questionQuizSet= new HashSet<>();
-            questionQuizSet=quizToAdd.getQuestion();
+            Set<Question> questionQuizSet=quizToAdd.getQuestion();
             Set<Question> questionUserSet=new HashSet<>();
-            Set<Quiz> quiz= new HashSet<>();
+            System.out.println(questionQuizSet.toString());
             questionQuizSet.add(question);
             questionUserSet.add(question);
-            quiz.add(quizToAdd);
+
             userToAdd.setQuestion(questionUserSet);
-            quizToAdd.setQuestion(questionUserSet);
+            quizToAdd.setQuestion(questionQuizSet);
             question.setUser(userToAdd);
-            question.setQuizzes(quiz);//used to be quizzes
+            question.addQuiz(quizToAdd);
+            session.save(quizToAdd);
 
 
             //choices question
@@ -151,6 +152,7 @@ public class CreateObjects {
             question.setQuestionChoices(qch);
 
             session.save(question);
+
             session.getTransaction().commit();
             message.status = true;
             //return choiceslist too
