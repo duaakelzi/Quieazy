@@ -17,6 +17,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.util.Callback;
+import requests.QuestionC;
 import requests.QuizC;
 import requests.StudyProgramC;
 
@@ -45,6 +46,11 @@ public class CreateQuizBox extends VBox {
 	}
 	//for testing the sequence of client-server message sending
 	public void initializeCreateQuizFields(){
+//		QuizData quizForTest = new QuizData();
+//		quizForTest.setId(Long.valueOf(1));
+//		quizForTest.setName("Java");
+//		quizForTest.setThreshold(60);
+//		QuestionC.fetchQuizQuestions(quizForTest);
 		studyProgramDataArrayList = StudyProgramC.fetchAllStudyPrograms();
 		if(studyProgramDataArrayList != null) {
 			ArrayList<String> studyProgramNames = studyProgramDataArrayList.stream()

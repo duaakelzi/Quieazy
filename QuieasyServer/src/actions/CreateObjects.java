@@ -119,7 +119,7 @@ public class CreateObjects {
             userToAdd.setQuestion(questionUserSet);
             quizToAdd.setQuestion(questionUserSet);
             question.setUser(userToAdd);
-            question.setQuizzes(quiz);
+            question.setQuizzes(quiz);//used to be quizzes
 
 
             //choices question

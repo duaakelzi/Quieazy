@@ -12,11 +12,12 @@ import java.util.List;
 
 public class RetrieveObjects {
     static Session session;
-    public static Message message = new Message();
+    public static Message message;
 
     public static Message retrieveQuizzes(String email) { //used to be List<Quiz>
         System.out.println("retrieving all Quizzes ");
         try {
+            message = new Message();
             session = HibernateUtil.getSessionFactory().openSession();
             List<Quiz> quizList = session.getSession().createQuery("from Quiz", Quiz.class).list();
             if(quizList.size()>0) {
@@ -52,8 +53,11 @@ public class RetrieveObjects {
     public static Message retrieveQuestions(Long quizID) { //used to be List<Quiz>
         System.out.println("retrieving all Questions ");
         try {
+            message = new Message();
             session = HibernateUtil.getSessionFactory().openSession();
-            List<Question> questions = session.getSession().createQuery("from Question where ", Question.class).list();
+            Query query = session.getSession().createQuery("from Question join Quiz q where q.id = :id").setParameter("id", quizID);
+      //      List<Question> questions = session.getSession().createQuery("from Question join Quiz q where q.id = :id_quiz", Question.class).setParameter("id_quiz", quizID).list();
+            List<Question> questions = query.list();
             if(questions.size()>0) {
                 System.out.println("Questions retrieved.");
                 for (int i = 0; i < questions.size(); i++) {
