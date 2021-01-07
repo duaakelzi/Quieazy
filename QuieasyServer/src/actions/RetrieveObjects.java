@@ -105,6 +105,8 @@ public class RetrieveObjects {
     public static Message retrieveResults(String userEmail) {
         System.out.println("retrieving all Results ");
         try {
+            message = new Message();
+            session = HibernateUtil.getSessionFactory().openSession();
             List<Result> results = session.getSession().createQuery("from Result", Result.class).list();
             if(results.size()>0) {
                 System.out.println("Results retrieved. Done ");
@@ -137,6 +139,8 @@ public class RetrieveObjects {
     public static Message retrieveSP() {
         System.out.println("Retrieving study programs.");
         try {
+            message = new Message();
+            session = HibernateUtil.getSessionFactory().openSession();
             List<StudyProgram> studyPrograms = session.getSession().createQuery("from StudyProgram", StudyProgram.class).list();
             if(studyPrograms.size()>0) {
                 System.out.println("Results retrieved. ");
@@ -173,14 +177,15 @@ public class RetrieveObjects {
                 System.err.println(e.getMessage());
             }
         }
-        System.out.println("Message " + message.task + " will be sent");
+        System.out.println("Message status " + message.status + " will be sent");
         return message;
     }
 
     public static Message retrieveExistingQuestions(String text,String quiz) { //used to be List<Quiz>
         System.out.println("retrieving existing filtered Questions ");
-        Message message = new Message();
         try {
+            message = new Message();
+            session = HibernateUtil.getSessionFactory().openSession();
             Query queryQuiz = session.getSession().createQuery("FROM Quiz WHERE quiz_Name = :quiz ");
             queryQuiz.setParameter("quiz", quiz);
             Quiz quizToSearch=(Quiz)queryQuiz.list().get(0);
