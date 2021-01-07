@@ -3,6 +3,8 @@ package gui;
 import data.ChoicesData;
 import data.QuestionData;
 import data.QuizData;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.geometry.Insets;
@@ -14,7 +16,9 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
+import javafx.util.Duration;
 import requests.CheckCorrectAnswerC;
 
 import java.util.ArrayList;
@@ -24,6 +28,12 @@ public class PlayQuizBox extends VBox {
     private static PlayQuizBox playQuizBox;
     private Label textMark;
     private Text questionText;
+    private Label minutes;
+    private Label dot;
+    private Label seconds;
+    private TilePane tilePaneTImer;
+    Integer min = 3; //here get the ttime from DB -1 because the second is starting with 59
+    private Integer sec = 59;
     private RadioButton[] answersCheck;
     private Button submit;
     private Button next;
@@ -98,9 +108,25 @@ public class PlayQuizBox extends VBox {
         textMark.setWrapText(true);
         textMark.setFont(Font.font("Times New Roman", 17));
 
+        //timer
+        tilePaneTImer = new TilePane();
+        minutes = new Label();
+        dot = new Label();
+        seconds = new Label();
+        minutes.setFont(Font.font("Constantia", FontWeight.SEMI_BOLD, 20));
+        dot.setFont(Font.font("Constantia",FontWeight.SEMI_BOLD, 20));
+        seconds.setFont(Font.font("Constantia",FontWeight.SEMI_BOLD, 20));
+        minutes.setTextFill(Color.BLACK);
+        dot.setTextFill(Color.BLACK);
+        seconds.setTextFill(Color.BLACK);
+
+        tilePaneTImer.getChildren().addAll(minutes,dot, seconds);
+        countDownTimerQuiz();
+
+
         //for first view only
         //textMark.setText("Question " + (indexQuestion+1) +  "\n Quiz points: " + quizQuestions.get(indexQuestion).getPoints()); // additional info: status (answered/not), points (out of total)
-        mark.getChildren().addAll(textMark);
+        mark.getChildren().addAll(textMark, tilePaneTImer);
         mark.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
 
         HBox question = new HBox();
@@ -272,6 +298,48 @@ public class PlayQuizBox extends VBox {
         this.textMark.setText("Question " + (pos+1) + "\n Points: " + quizQuestions.get(pos).getPoints());
         this.questionText.setText(quizQuestions.get(pos).getQuestion());
 
+    }
+
+
+    private void countDownTimerQuiz(){
+
+        Timeline time = new Timeline();
+        time.setCycleCount(Timeline.INDEFINITE);
+        min = quiz.getTimer()-1;
+        //  time.stop();
+
+        KeyFrame frame = new KeyFrame(Duration.seconds(1), actionEvent -> {
+            if(sec != 0){
+                sec--;
+                minutes.setText(String.format("%02d", min));
+                dot.setText(":");
+                seconds.setText(String.format("%02d", sec));
+            }else{
+                if(min <= 3){
+                    minutes.setTextFill(Color.FIREBRICK);
+                    dot.setTextFill(Color.FIREBRICK);
+                    seconds.setTextFill(Color.FIREBRICK);
+                }
+                min--;
+                sec = 59;
+                minutes.setText(String.format("%02d", min));
+                seconds.setText(String.format("%02d", sec));
+            }
+            if(sec <=0 && min <=0){
+                time.stop();
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.setHeaderText("TIME's UP");
+                alert.show();
+                minutes.setText("TIME'");
+                dot.setText("s");
+                seconds.setText(" UP");
+            }
+
+
+
+        });
+        time.getKeyFrames().add(frame);
+        time.playFromStart();
     }
 
 
