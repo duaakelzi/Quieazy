@@ -17,6 +17,8 @@ import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class CreateQuestionBankBox extends VBox {
     private static CreateQuestionBankBox createQuestionBankBox;
@@ -24,6 +26,11 @@ public class CreateQuestionBankBox extends VBox {
     public ObservableList<FilterDataQuestionBank> dataQuestionObservaleList = FXCollections.observableArrayList();
 
     public  ObservableList<FilterDataQuestionBank> filterDataQuestionBankObservableList = FXCollections.observableArrayList();
+
+    List<String> inputSearchText;
+    List<String> questionsDB;
+
+
 
 
     // test data this should be from database
@@ -106,22 +113,22 @@ public class CreateQuestionBankBox extends VBox {
                 public void handle(ActionEvent actionEvent) {
 
                         String filterSearch = searchKeyWords.getText();
+                        inputSearchText = Arrays.asList(filterSearch.toLowerCase().split(" "));
+                        
                         if(filterSearch == null || filterSearch.length() == 0){
 
                             System.out.println("nothing");
                             listQuestions.getItems().clear();
-
-
-
                         }else{
                             listQuestions.getItems().clear();
-                           for(int i = 0; i < dataQuestionObservaleList.size(); i++){
-                               if(dataQuestionObservaleList.get(i).getQuestions().getQuestion().toLowerCase().contains((filterSearch).toLowerCase())){
-                                   System.out.println(dataQuestionObservaleList.get(i).getQuestions().getQuestion());
-                                   filterDataQuestionBankObservableList.add(dataQuestionObservaleList.get(i));
-                               }
+                            for (FilterDataQuestionBank filterDataQuestionBank : dataQuestionObservaleList) {
+                                questionsDB = Arrays.asList(filterDataQuestionBank.getQuestions().getQuestion().toLowerCase().split("[\\s.,:;]+"));
+                                if (questionsDB.containsAll(inputSearchText)){
+                                    filterDataQuestionBankObservableList.add(filterDataQuestionBank);
 
-                           }
+
+                                }
+                            }
 
 
 
