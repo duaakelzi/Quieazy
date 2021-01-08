@@ -9,6 +9,7 @@ public class CheckCorrectAnswerC {
     private int result=0;
     private  Message request = new Message();
     ArrayList<ChoicesData> answers;
+    ResultData re=new ResultData();
 
     public int getResult() {
         return result;
@@ -24,7 +25,7 @@ public class CheckCorrectAnswerC {
 
 
 
-    public boolean checkAnswers(QuizData quiz,String [] SelectedAnswer) {
+    public Message checkAnswers(QuizData quiz,String [] SelectedAnswer) {
         ClientAgent clientAgent = ClientAgent.getClientAgent();
         ArrayList<QuestionData> questions;
         answers = new ArrayList<ChoicesData>();
@@ -32,6 +33,7 @@ public class CheckCorrectAnswerC {
 
         System.out.println("quizResult"+quiz.getName());
        // System.out.println("select"+SelectedAnswer[2]);
+
 
         questions = quiz.getQuestions();
         questions.get(0).getAnswers();
@@ -57,35 +59,39 @@ for (int i=0;i<answers.size();i++)
                 correctres[m]=true;
                 result += questions.get(m).getPoints();
                 System.out.println("res "  +result);
+
             }
             else
                 {
                     correctres[m]=false;
                 }
 
+        re.setCorrectAnswers(correctres);
 
         }
         //this.setResult(result);
         request.task = "SAVE_RESULT";
         request.quizData=quiz;
-        ResultData re=new ResultData();
+
         re.setStatistics(result);
         if (result > quiz.getThreshold())
         {
             re.setPassed(true);
             request.resultData=re;
-            Message response =  clientAgent.sendAndWaitForResponse(request);
-            return true;
-
         }
         else
             { re.setPassed(false);
                 request.resultData=re;
-                Message response =  clientAgent.sendAndWaitForResponse(request);
-            return false;
              }
-
-
+        Message response =  clientAgent.sendAndWaitForResponse(request);
+        if(response != null && response.status){
+            System.out.println("Result Saved successfully.");
+        }else if(response != null && (!response.status)){
+            //informed user that no SPs returned
+            System.out.println("Result not saved.");
+        }
+        return request;
     }
+
 
 }

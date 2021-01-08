@@ -6,6 +6,18 @@ public class ResultData implements Serializable {
     private int points;
     private boolean passed;
     private int statistics;
+
+    private boolean []correctAnswers;
+
+
+    public boolean[] getCorrectAnswers() {
+        return correctAnswers;
+    }
+
+    public void setCorrectAnswers(boolean[] correctAnswers) {
+        this.correctAnswers = correctAnswers;
+    }
+
     //c'tor
     public ResultData(){}
     // getters/setters
