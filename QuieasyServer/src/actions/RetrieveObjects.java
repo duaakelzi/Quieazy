@@ -19,19 +19,30 @@ public class RetrieveObjects {
         try {
             message = new Message();
             session = HibernateUtil.getSessionFactory().openSession();
-            List<Quiz> quizList = session.getSession().createQuery("from Quiz", Quiz.class).list();
+            //retrieve user so that we get the id info
+            User user = session.getSession().createQuery("FROM User WHERE email = :email", User.class).setParameter("email", email).getSingleResult();
+            //available for the user only?
+            List<Quiz> quizList = session.getSession().createQuery("FROM Quiz WHERE id_user = :id_user", Quiz.class).setParameter("id_user", user.getUserID()).list();
+
             if(quizList.size()>0) {
-                System.out.println("Quizzes retrieved. Done ");
-                message.task = "QUIZ_FETCH_OK";
-               // message.quizlist.setAllQuizzes(quizList);
+                System.out.println("Quizzes retrieved. ");
+                //convert List of Quiz into QuizData and add to the message
+                for(Quiz q : quizList) {
+                    QuizData fetchedQuiz = new QuizData(q.getCourse().getCourseName(), q.getQuiz_Name(), q.getThreshold(), q.getTimer());
+                    message.allQuizzes.add(fetchedQuiz);
+                }
+                message.status = true;
+                System.out.println("Size of the Array in RetrieveQuizzes(): " + message.allQuizzes.size());
             }else{
-                message.task = "QUIZ_FETCH_FAILED";
+                System.out.println("No quizzes for that user ");
+                message.status = false;
             }
             session.close();
         }catch(Exception e)
         {
             // if the error message is "out of memory",
             // it probably means no database file is found
+            System.out.println("Error fetching quizzes. ");
             System.err.println(e.getMessage());
         }
         finally
@@ -50,32 +61,58 @@ public class RetrieveObjects {
         return message;
     }
 
+    // seems this method won't need to be used. keep for the timebeing
+    private static QuizData convertQuizToQuizData(Quiz quiz) {
+        ArrayList<QuestionData> quizDataQuestionArray = new ArrayList<>();
+        //first convert the set of questions into array of questionData
+        for(Question q : quiz.getQuestion()) {
+            QuestionData newQuestion = convertQuestionToQuestionData(q);
+            quizDataQuestionArray.add(newQuestion);
+        }
+
+        QuizData newQuiz = new QuizData(quiz.getCourse().getCourseName(), quiz.getQuiz_Name(), quiz.getThreshold(), quiz.getTimer(), quizDataQuestionArray);
+        return newQuiz;
+    }
+
+    private static QuestionData convertQuestionToQuestionData(Question question) {
+        QuestionData newQuestion = new QuestionData();
+        newQuestion.setQuestion(question.getQuestionText());
+
+        for(QuestionChoice qc : question.getQuestionChoices()) {
+            ChoicesData choice = new ChoicesData(qc.getChoices().getChoiceDescription(), qc.isCorrect());
+            newQuestion.getAnswers().add(choice);
+        }
+        return newQuestion;
+    }
+
     public static Message retrieveQuestions(Long quizID) { //used to be List<Quiz>
         System.out.println("retrieving all Questions ");
         try {
             message = new Message();
             session = HibernateUtil.getSessionFactory().openSession();
-            Query query = session.getSession().createQuery("from Question join Quiz q where q.id = :id").setParameter("id", quizID);
+            Query query = session.getSession().createQuery("FROM Question JOIN Quiz q WHERE q.id = :id").setParameter("id", quizID);
       //      List<Question> questions = session.getSession().createQuery("from Question join Quiz q where q.id = :id_quiz", Question.class).setParameter("id_quiz", quizID).list();
             List<Question> questions = query.list();
             if(questions.size()>0) {
                 System.out.println("Questions retrieved.");
-                for (int i = 0; i < questions.size(); i++) {
-                    //translate the question into QuestionData, by
-                    // creating one and adding choices with all info to it
-                    QuestionData newQuestion = new QuestionData();
-                    newQuestion.setQuestion(questions.get(i).getQuestionText());
-                    for (Iterator<QuestionChoice> it = questions.get(i).getQuestionChoices().iterator(); it.hasNext(); ) {
-                        QuestionChoice newQC = it.next();
-                        ChoicesData choice = new ChoicesData();
-                        choice.setChoiceDescription(newQC.getChoices().getChoiceDescription());
-                        //check if this works as expected ==> not sure about use of primaryKey
-                        QuestionChoice qc = session.getSession().createQuery("from QuestionChoice where primaryKey = :primaryKey", QuestionChoice.class)
-                                .setParameter("primaryKey", newQC.getPrimaryKey()).getSingleResult();
-                        choice.setCorrect(qc.isCorrect());
-                        newQuestion.getAnswers().add(choice);
-                    }
-                    message.questionData.add(newQuestion);
+                for(Question q: questions) {
+                    QuestionData newQuestionData = convertQuestionToQuestionData(q);
+//                for (int i = 0; i < questions.size(); i++) {
+//                    //translate the question into QuestionData, by
+//                    // creating one and adding choices with all info to it
+//                    QuestionData newQuestion = new QuestionData();
+//                    newQuestion.setQuestion(questions.get(i).getQuestionText());
+//                    for (Iterator<QuestionChoice> it = questions.get(i).getQuestionChoices().iterator(); it.hasNext(); ) {
+//                        QuestionChoice newQC = it.next();
+//                        ChoicesData choice = new ChoicesData();
+//                        choice.setChoiceDescription(newQC.getChoices().getChoiceDescription());
+//                        //why am i doing this here? shouldn't the iterator have it already?
+//                        QuestionChoice qc = session.getSession().createQuery("from QuestionChoice where primaryKey = :primaryKey", QuestionChoice.class)
+//                                .setParameter("primaryKey", newQC.getPrimaryKey()).getSingleResult();
+//                        choice.setCorrect(qc.isCorrect());
+//                        newQuestion.getAnswers().add(choice);
+//                    }
+                    message.questionData.add(newQuestionData);
 
                 }
                 message.status = true;

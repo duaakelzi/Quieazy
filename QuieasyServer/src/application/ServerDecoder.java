@@ -31,9 +31,9 @@ public class ServerDecoder {
             return response;
 
         } else if (message.task.equals("CREATE_QUIZ")) {
-            data.QuizData quiz = message.quizData;
-            data.UserData userData = message.userData;
-            response = Request.createQuiz(quiz.getName(), quiz.getThreshold(), false, "user@mail.com", quiz.getCourse(),quiz.getTimer()); //should i return quiz data immediately?
+            QuizData quiz = message.quizData;
+            UserData userData = message.userData;
+            response = Request.createQuiz(quiz.getName(), quiz.getThreshold(), false, userData.getEmail(), quiz.getCourse(),quiz.getTimer()); //should i return quiz data immediately?
             response.task = message.task;
             return response;
         } else if (message.task.equals("UPDATE_QUIZ")) {
@@ -46,7 +46,11 @@ public class ServerDecoder {
 
         } else if (message.task.equals("FETCH_ALL_QUIZZES")) {
             UserData userData = message.userData;
-            return Request.retrieveQuizzes(userData.getEmail());
+            response = new Message();
+            response = Request.retrieveQuizzes(userData.getEmail());
+            System.out.println("Size of the Array of Quizzes in Decoder: " + response.allQuizzes.size());
+            response.task = message.task;
+            return response;
 
         } else if (message.task.equals("CREATE_QUESTIONS")) {
             System.out.println("server: create questions method entered >> ");

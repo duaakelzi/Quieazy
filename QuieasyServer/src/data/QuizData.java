@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 public class QuizData implements Serializable {
     private Long id;
-    private String program;
+   // private String program;
     private String course;
     private String name;
     private double threshold;
@@ -18,8 +18,10 @@ public class QuizData implements Serializable {
 
     }
 
-    public QuizData(String program, String course, String name, double threshold, int timer, ArrayList<QuestionData> questions) {
-        this.program = program;
+    // studyprogram removed from the constructor of QuizData, because we don't need it:
+    // if a course that holds the quiz, belongs to one or two programs, makes no difference for the quiz
+    public QuizData(String course, String name, double threshold, int timer, ArrayList<QuestionData> questions) {
+       // this.program = program;
         this.course = course;
         this.name = name;
         this.threshold = threshold;
@@ -27,6 +29,15 @@ public class QuizData implements Serializable {
         this.questions = questions;
         //firstName = UserC.getCurrentUser().getFirstName();
         //lastName = UserC.getCurrentUser().getLastName();
+    }
+
+    // because fetchAllQuizzes doesn't need the questions yet
+    public QuizData(String course, String name, double threshold, int timer) {
+        // this.program = program;
+        this.course = course;
+        this.name = name;
+        this.threshold = threshold;
+        this.timer = timer;
     }
 
     public String getName() {
@@ -41,13 +52,13 @@ public class QuizData implements Serializable {
         this.id = id;
     }
 
-    public String getProgram() {
-        return program;
-    }
-
-    public void setProgram(String program) {
-        this.program = program;
-    }
+//    public String getProgram() {
+//        return program;
+//    }
+//
+//    public void setProgram(String program) {
+//        this.program = program;
+//    }
 
     public String getCourse() {
         return course;
@@ -92,4 +103,14 @@ public class QuizData implements Serializable {
         return firstName +" " + lastName;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        QuizData quizToCompare = (QuizData) o;
+        //String course, String name, double threshold, int timer)
+        return (course.equals(quizToCompare.getCourse()) &&
+                name.equals(quizToCompare.getName()) &&
+                threshold == quizToCompare.threshold &&
+                timer == quizToCompare.getTimer()
+        );
+    }
 }

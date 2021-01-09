@@ -15,7 +15,7 @@ public class CreateObjects {
     public static Session session;
     public static Message message = new Message();
 
-    public static Message CreateQuiz(String name,double threshold,boolean isPublic,int timer,  String email,String course)
+    public static Message CreateQuiz(String name,double threshold,boolean isPublic,int timer, String email,String course)
     {
         try {
         session = HibernateUtil.getSessionFactory().openSession();
@@ -32,35 +32,31 @@ public class CreateObjects {
         Course courseToAdd=(Course)queryCourse.list().get(0);
         Long CourseId =courseToAdd.getId();
 
-        Query queryQuiz = session.getSession().createQuery("FROM Quiz WHERE quiz_Name = :name  and id= :id");
-
-
+        Query queryQuiz = session.getSession().createQuery("FROM Quiz WHERE quiz_Name = :name AND id= :id");
             queryQuiz.setParameter("name", name);
             queryQuiz.setParameter("id", CourseId);
 
-        if(queryQuiz.list().size() > 0)
-        { System.out.println("Quiz already exists [method]");
-            message.status = false;}
-        //add author
-
-        else{
-        Quiz quiz =new Quiz(name,threshold,false,false,timer);
-        Set<Quiz> quizUserSet= new HashSet<Quiz>();
-        quizUserSet.add(quiz);
-        quiz.setCourse(courseToAdd);
+        if(queryQuiz.list().size() > 0) {
+            System.out.println("Quiz already exists [method]");
+            message.status = false;
+        } else{
+            Quiz quiz =new Quiz(name,threshold,false,false,timer);
+            Set<Quiz> quizUserSet= new HashSet<Quiz>();
+            quizUserSet.add(quiz);
+            quiz.setCourse(courseToAdd);
             courseToAdd.setQuiz(quizUserSet);
-        userToAdd.setQuiz(quizUserSet);
-        quiz.setUser(userToAdd);
+            userToAdd.setQuiz(quizUserSet);
+            quiz.setUser(userToAdd);
 
-        session.save(quiz);
-        session.getTransaction().commit();
-        message.status = true;
-            //message.quizlist = new QuizData(quiz.getQuiz_Name(), quiz.isPublic(),quiz.getThreshold(),quiz.getCourse().getCourseName());}
+            session.save(quiz);
+            session.getTransaction().commit();
+            message.status = true;
         }
         }catch(Exception e) {
                 // if the error message is "out of memory",
                 // it probably means no database file is found
                 System.err.println(e.getMessage());
+                message.status = false;
             }
         finally
             {

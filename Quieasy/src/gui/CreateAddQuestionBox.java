@@ -17,6 +17,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.util.Callback;
+import requests.UserC;
 
 import java.util.ArrayList;
 
@@ -354,7 +355,7 @@ public class CreateAddQuestionBox extends VBox {
 
 
     public void saveQuiz(){
-        QuizC.createNewQuiz(CreateQuizBox.getCreateQuizBox().getQuiz());
+        QuizC.createNewQuiz(CreateQuizBox.getCreateQuizBox().getQuiz(), UserC.getCurrentUser());
     } //why is this outside CreateQuiz??
 
     public int indexSelecteditem(){
