@@ -42,6 +42,7 @@ public class StudyProgramRequestsTest {
 
     @AfterClass
     public void tearDown() throws Exception {
+        //add destruction related calls
         System.out.println("Values destroyed");
     }
 }
