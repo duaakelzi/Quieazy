@@ -1,6 +1,7 @@
 package gui;
 
 import data.ChoicesData;
+import data.Message;
 import data.QuestionData;
 import data.QuizData;
 import javafx.animation.KeyFrame;
@@ -171,10 +172,19 @@ public class PlayQuizBox extends VBox {
                     boolean selected =answer.isSelected();
 
 
+<<<<<<< HEAD
                     if (selected){System.out.println("selected :"+answer.getText());
                         selectedAnswer[indexQuestion]=answer.getText();;
                     }
                     else {{System.out.println("not selected :"+answer.getText());}}//what should happen here?
+=======
+                   if (selected){System.out.println("selected :"+answer.getText());
+                   selectedAnswer[indexQuestion]=answer.getText();
+                   }
+                   else {System.out.println("not selected :"+answer.getText());
+                       selectedAnswer[indexQuestion] =" ";
+                   }//what should happen here?
+>>>>>>> 6dc8f148f753c9b47e845ad2a3a3b9e329bd2520
                 }
             });
         }
@@ -275,9 +285,9 @@ public class PlayQuizBox extends VBox {
             // !! at least one question should be answered!!
             CheckCorrectAnswerC ch=new CheckCorrectAnswerC();
             System.out.println(selectedAnswer[0]);
-            boolean i=ch.checkAnswers(quiz,selectedAnswer);
-            System.out.println("play Result"+i);
-            MainPane.getMainPane().getTabs().add(new Tab("result",new CreateQuizResultBox(i)));
+            Message resultData =ch.checkAnswers(quiz,selectedAnswer);
+            System.out.println("play Result");
+            MainPane.getMainPane().getTabs().add(new Tab("result",new CreateQuizResultBox(resultData)));
             CreateAddQuestionTab.getCreateAddQuestionTab().closeTab();
 
         });
