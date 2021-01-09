@@ -11,7 +11,7 @@ import gui.Login;
 import gui.PrimeScene;
 import gui.Register;
 
-public class UserC {
+public class UserRequests {
 	
 	private static UserData user;
 	private static Message request;
@@ -59,7 +59,7 @@ public class UserC {
 		response = new Message();
 		response = clientAgent.sendAndWaitForResponse(request);
 		if (response != null && response.status) {
-			UserC.getUser(response.userData.getFirstName(), response.userData.getLastName(), response.userData.getEmail());
+			UserRequests.getUser(response.userData.getFirstName(), response.userData.getLastName(), response.userData.getEmail());
 
 			// clear user inputs
 			Login.clear();

@@ -5,7 +5,7 @@ package gui;
 import javafx.scene.text.*;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
-import requests.UserC;
+import requests.UserRequests;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -57,7 +57,7 @@ public class Login extends VBox{
 			 
 		    public void handle(ActionEvent e) {
 		        //use userdata here, maybe
-		    	UserC.login(email.getText(), password.getText());
+		    	UserRequests.login(email.getText(), password.getText());
 
 		    }
 		    

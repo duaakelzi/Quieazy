@@ -38,10 +38,10 @@ public class Request {
         JDBC.connectMySQL();
         return UpdateObjects.updateQuiz(name,threshold,false,course);
     }
-    public static Message deleteQuiz(Long id, String course) {
+    public static Message deleteQuiz(String quizName, String course) {
         // create a database connection
         JDBC.connectMySQL();
-        return DeleteObjects.deleteQuiz(id,course);
+        return DeleteObjects.deleteQuiz(quizName,course);
     }
     //retrieve all quizzes for user
     public static Message retrieveQuizzes(String email) {

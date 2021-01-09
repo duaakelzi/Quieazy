@@ -2,7 +2,7 @@
 
 package gui;
 
-import requests.UserC;
+import requests.UserRequests;
 
 import javafx.scene.layout.VBox;
 import javafx.scene.control.Button;
@@ -43,7 +43,7 @@ public class Menu extends VBox {
 			 
 		    public void handle(ActionEvent e) {
 		    	
-		    	UserC.logout();
+		    	UserRequests.logout();
 		    	PrimeScene.login();
 		    }
 		    

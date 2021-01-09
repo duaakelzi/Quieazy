@@ -17,9 +17,9 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.util.Callback;
-import requests.QuizC;
-import requests.StudyProgramC;
-import requests.UserC;
+import requests.QuizRequests;
+import requests.StudyProgramRequests;
+import requests.UserRequests;
 
 import java.util.ArrayList;
 import java.util.stream.Collectors;
@@ -51,7 +51,7 @@ public class CreateQuizBox extends VBox {
 //		quizForTest.setName("Java");
 //		quizForTest.setThreshold(60);
 //		QuestionC.fetchQuizQuestions(quizForTest);
-		studyProgramDataArrayList = StudyProgramC.fetchAllStudyPrograms();
+		studyProgramDataArrayList = StudyProgramRequests.fetchAllStudyPrograms();
 		if(studyProgramDataArrayList != null) {
 			ArrayList<String> studyProgramNames = studyProgramDataArrayList.stream()
 					.map(StudyProgramData::getStudyprogram)
@@ -95,7 +95,7 @@ public class CreateQuizBox extends VBox {
 	public static void showSuccessful(){
 		// let the user know that the server has successfully saved a list of quizes to persistence
 		System.out.println("Quiz successfully created. "); //should be on UI, not console
-		QuizC.fetchAllQuizzes(UserC.getCurrentUser()); //for testing, to see if the method works
+		QuizRequests.fetchAllQuizzes(UserRequests.getCurrentUser()); //for testing, to see if the method works
 	}
 	public static void showFailed(){
 		// let the user know server has failed saving the list of quizzes to persistence
@@ -279,7 +279,7 @@ public class CreateQuizBox extends VBox {
 						Double.parseDouble(textThreshold.getText()),
 						Integer.parseInt(textTime.getText()),
 						new ArrayList<QuestionData>());
-				if(QuizC.createNewQuiz(quiz, UserC.getCurrentUser())) {
+				if(QuizRequests.createNewQuiz(quiz, UserRequests.getCurrentUser())) {
 					CreateQuizBox.showSuccessful();
 				} else {
 					CreateQuizBox.showFailed();

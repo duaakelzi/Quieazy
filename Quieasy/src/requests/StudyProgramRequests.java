@@ -6,7 +6,7 @@ import data.StudyProgramData;
 
 import java.util.ArrayList;
 
-public class StudyProgramC {
+public class StudyProgramRequests {
     private static Message request = new Message();
 
     public static ArrayList<StudyProgramData> fetchAllStudyPrograms(){

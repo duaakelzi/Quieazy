@@ -8,9 +8,10 @@ import gui.CreateQuizBox;
 
 import java.util.ArrayList;
 
-public class QuizC {
+public class QuizRequests {
     private static Message request;
     private static Message response;
+
     public static Boolean createNewQuiz(QuizData newQuizData, UserData user){
         ClientAgent clientAgent = ClientAgent.getClientAgent();
         request = new Message();
@@ -20,21 +21,12 @@ public class QuizC {
         request.userData = user;
 
         //first time you make an empty quiz persistent
-    //    request.quizData = new QuizData(newQuizData.getCourse(),newQuizData.getName(),newQuizData.getThreshold(),newQuizData.getTimer(),newQuizData.getQuestions());
         request.quizData = newQuizData;
         try {
             response = clientAgent.sendAndWaitForResponse(request);
         }catch (Exception e) {
             System.out.println("Create quiz exception. " + e.getMessage());
         }
-
-//        if(response != null && response.status){
-//           CreateQuizBox.showSuccessful();
-//
-//        }else if(response != null && (!response.status)){
-//            //informed user that no SPs returned
-//            CreateQuizBox.showFailed();
-//        }
         return response.status;
     }
 
@@ -52,6 +44,15 @@ public class QuizC {
            System.out.println("Fetch quizzes failed.");
        }
        return response.allQuizzes;
+   }
+
+   public static boolean deleteQuiz(QuizData quiz) {
+       ClientAgent clientAgent = ClientAgent.getClientAgent();
+       request = new Message();
+       request.task = "DELETE_QUIZ";
+       request.quizData = quiz;
+       response = clientAgent.sendAndWaitForResponse(request);
+       return response.status;
    }
 
 }

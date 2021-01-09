@@ -6,7 +6,7 @@ import data.QuizData;
 
 import java.util.ArrayList;
 
-public class QuestionC {
+public class QuestionRequests {
     // private UserData ownerQuiz;
     private static Message request = new Message();
 

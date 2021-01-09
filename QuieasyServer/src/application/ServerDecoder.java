@@ -23,9 +23,7 @@ public class ServerDecoder {
             return response;
 
         } else if (message.task.equals("REGISTER")) {
-
             RegisterData data = message.registerData;
-
             response =  Request.register(data.getFirstName(), data.getLastName(), data.getEmail(), data.getPassword());
             response.task = message.task;
             return response;
@@ -33,22 +31,23 @@ public class ServerDecoder {
         } else if (message.task.equals("CREATE_QUIZ")) {
             QuizData quiz = message.quizData;
             UserData userData = message.userData;
+            response = new Message();
             response = Request.createQuiz(quiz.getName(), quiz.getThreshold(), false, userData.getEmail(), quiz.getCourse(),quiz.getTimer()); //should i return quiz data immediately?
             response.task = message.task;
             return response;
         } else if (message.task.equals("UPDATE_QUIZ")) {
             data.QuizData quiz = message.quizData;
-
             return Request.updateQuiz( quiz.getName(), quiz.getThreshold(), false, quiz.getCourse());
         } else if (message.task.equals("DELETE_QUIZ")) {
             QuizData quiz = message.quizData;
-            return Request.deleteQuiz(quiz.getId(), quiz.getCourse());
-
+            response = new Message();
+            response = Request.deleteQuiz(quiz.getName(), quiz.getCourse());
+            response.task = message.task;
+            return response;
         } else if (message.task.equals("FETCH_ALL_QUIZZES")) {
             UserData userData = message.userData;
             response = new Message();
             response = Request.retrieveQuizzes(userData.getEmail());
-            System.out.println("Size of the Array of Quizzes in Decoder: " + response.allQuizzes.size());
             response.task = message.task;
             return response;
 
