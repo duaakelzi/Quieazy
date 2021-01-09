@@ -31,4 +31,12 @@ public class ChoicesData implements Serializable {
     public void setCorrect(boolean correct) {
         isCorrect = correct;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        ChoicesData choiceToCompare = (ChoicesData) o;
+        //(String choiceDescription, boolean isCorrect)
+        return (choiceDescription.equals(choiceToCompare.getChoiceDescription()) &&
+                isCorrect == choiceToCompare.isCorrect());
+    }
 }

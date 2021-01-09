@@ -61,57 +61,17 @@ public class RetrieveObjects {
         return message;
     }
 
-    // seems this method won't need to be used. keep for the timebeing
-    private static QuizData convertQuizToQuizData(Quiz quiz) {
-        ArrayList<QuestionData> quizDataQuestionArray = new ArrayList<>();
-        //first convert the set of questions into array of questionData
-        for(Question q : quiz.getQuestion()) {
-            QuestionData newQuestion = convertQuestionToQuestionData(q);
-            quizDataQuestionArray.add(newQuestion);
-        }
-
-        QuizData newQuiz = new QuizData(quiz.getCourse().getCourseName(), quiz.getQuiz_Name(), quiz.getThreshold(), quiz.getTimer(), quizDataQuestionArray);
-        return newQuiz;
-    }
-
-    private static QuestionData convertQuestionToQuestionData(Question question) {
-        QuestionData newQuestion = new QuestionData();
-        newQuestion.setQuestion(question.getQuestionText());
-
-        for(QuestionChoice qc : question.getQuestionChoices()) {
-            ChoicesData choice = new ChoicesData(qc.getChoices().getChoiceDescription(), qc.isCorrect());
-            newQuestion.getAnswers().add(choice);
-        }
-        return newQuestion;
-    }
-
     public static Message retrieveQuestions(Long quizID) { //used to be List<Quiz>
         System.out.println("retrieving all Questions ");
         try {
             message = new Message();
             session = HibernateUtil.getSessionFactory().openSession();
             Query query = session.getSession().createQuery("FROM Question JOIN Quiz q WHERE q.id = :id").setParameter("id", quizID);
-      //      List<Question> questions = session.getSession().createQuery("from Question join Quiz q where q.id = :id_quiz", Question.class).setParameter("id_quiz", quizID).list();
             List<Question> questions = query.list();
             if(questions.size()>0) {
                 System.out.println("Questions retrieved.");
                 for(Question q: questions) {
-                    QuestionData newQuestionData = convertQuestionToQuestionData(q);
-//                for (int i = 0; i < questions.size(); i++) {
-//                    //translate the question into QuestionData, by
-//                    // creating one and adding choices with all info to it
-//                    QuestionData newQuestion = new QuestionData();
-//                    newQuestion.setQuestion(questions.get(i).getQuestionText());
-//                    for (Iterator<QuestionChoice> it = questions.get(i).getQuestionChoices().iterator(); it.hasNext(); ) {
-//                        QuestionChoice newQC = it.next();
-//                        ChoicesData choice = new ChoicesData();
-//                        choice.setChoiceDescription(newQC.getChoices().getChoiceDescription());
-//                        //why am i doing this here? shouldn't the iterator have it already?
-//                        QuestionChoice qc = session.getSession().createQuery("from QuestionChoice where primaryKey = :primaryKey", QuestionChoice.class)
-//                                .setParameter("primaryKey", newQC.getPrimaryKey()).getSingleResult();
-//                        choice.setCorrect(qc.isCorrect());
-//                        newQuestion.getAnswers().add(choice);
-//                    }
+                    QuestionData newQuestionData = Converter.convertQuestionToQuestionData(q);
                     message.questionData.add(newQuestionData);
 
                 }

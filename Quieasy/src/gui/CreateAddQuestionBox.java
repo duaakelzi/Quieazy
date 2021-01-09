@@ -327,7 +327,7 @@ public class CreateAddQuestionBox extends VBox {
                 //savequiz();
                 //make the new questions persistent
                 //if successful, let user know? (for Ion to decide)
-                QuestionRequests.persistNewQuestions(CreateQuizBox.getCreateQuizBox().getQuiz(), newQuestions);
+                QuestionRequests.persistNewQuestions(UserRequests.getCurrentUser(), CreateQuizBox.getCreateQuizBox().getQuiz(), newQuestions);
                 //update edited questions
               //  QuestionC.updateEditedQuestions(updatedQuestions);
                 //update relationships of old questions
@@ -341,7 +341,7 @@ public class CreateAddQuestionBox extends VBox {
             @Override
             public void handle(ActionEvent actionEvent) {
                 //save the questions again -> might be new ones there? !!! do you need to check for existence?
-                QuestionRequests.persistNewQuestions(CreateQuizBox.getCreateQuizBox().getQuiz(), newQuestions);
+                QuestionRequests.persistNewQuestions(UserRequests.getCurrentUser(), CreateQuizBox.getCreateQuizBox().getQuiz(), newQuestions);
                 //play the quiz
                 MainPane.getMainPane().getTabs().add(new Tab("Play", new PlayQuizBox(CreateQuizBox.getCreateQuizBox().getQuiz()))); //remove the PlayQuizTab
 

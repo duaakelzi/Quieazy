@@ -42,8 +42,9 @@ public class QuieasyServerThread extends Thread {
 					out.flush();
 					System.out.println("Response " + "\"" + messageBack.task + "\"" + " sent!");
 					
+				}else{
+					System.out.println("server message null");
 				}
-				else{System.out.println("server message null");}
 			}
         } catch (IOException e) {
             e.printStackTrace();

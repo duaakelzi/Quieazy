@@ -8,6 +8,7 @@ public class QuestionData implements Serializable {
     private String question;
     private int points;
     private ArrayList<ChoicesData> answers;
+    private Long id;
 
     public QuestionData(){}
 
@@ -32,11 +33,23 @@ public class QuestionData implements Serializable {
     public void setQuestion(String question){ this.question = question; }
 
     public void setAnswers(ArrayList<ChoicesData> choicesData) { this.answers = choicesData;}
+    public void setId (Long id) { this.id = id; }
+    public Long getId() {return this.id;}
+
     public String printAnswers() {
         String res = "";
         for(int i = 0; i < this.answers.size();i++) {
             res += "Choice: " + answers.get(i).getChoiceDescription();
         }
         return res;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        QuestionData questionToCompare = (QuestionData) o;
+        //String question, ArrayList<ChoicesData> answers,int points
+        return (question.equals(questionToCompare.getQuestion()) &&
+                answers.equals(questionToCompare.getAnswers()) &&
+                points == questionToCompare.getPoints());
     }
 }

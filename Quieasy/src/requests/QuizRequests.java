@@ -12,7 +12,7 @@ public class QuizRequests {
     private static Message request;
     private static Message response;
 
-    public static Boolean createNewQuiz(QuizData newQuizData, UserData user){
+    public static long createNewQuiz(QuizData newQuizData, UserData user){
         ClientAgent clientAgent = ClientAgent.getClientAgent();
         request = new Message();
         request.task = "CREATE_QUIZ";
@@ -24,10 +24,13 @@ public class QuizRequests {
         request.quizData = newQuizData;
         try {
             response = clientAgent.sendAndWaitForResponse(request);
+            if(response.status){
+                return response.quizData.getId();
+            }
         }catch (Exception e) {
             System.out.println("Create quiz exception. " + e.getMessage());
         }
-        return response.status;
+        return 0;
     }
 
    public static ArrayList<QuizData> fetchAllQuizzes(UserData user){

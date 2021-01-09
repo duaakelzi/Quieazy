@@ -76,6 +76,8 @@ public class Question  {
 	    public void addQuiz(Quiz quiz) {
 	    	 this.quiz.add(quiz);
 	     }
+	    public void deleteQuiz(Quiz quiz) {this.quiz.remove(quiz);}
+
 
 	//owning for Questions
 	@OneToMany(mappedBy = "primaryKey.question", cascade = CascadeType.ALL)

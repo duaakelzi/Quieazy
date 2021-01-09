@@ -105,10 +105,10 @@ public class Quiz  {
     {
         this.question.add(question);
     }
+    public void deleteQuestion(Question question) { this.question.remove(question);}
 
     @ManyToOne
     @JoinColumn(name = "id_user")
-
     public User getUser() {
         return user;
     }

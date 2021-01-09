@@ -5,34 +5,37 @@ import java.util.ArrayList;
 
 public class QuizData implements Serializable {
     private Long id;
- //   private String program;
     private String course;
     private String name;
     private double threshold;
     private int timer;
     private ArrayList<QuestionData> questions;
-    private String firstName;
-    private String lastName;
 
-    public QuizData() {
-
+    public QuizData() { }
+    // fetchQuestions requires quizID
+    public QuizData(Long id, String course, String name, double threshold, int timer) {
+        this.id = id;
+        this.course = course;
+        this.name = name;
+        this.threshold = threshold;
+        this.timer = timer;
     }
     // studyprogram removed from the constructor of QuizData, because we don't need it:
     // if a course that holds the quiz, belongs to one or two programs, makes no difference for the quiz
+    //  only one course with same name allowed per SP
+    // SP with same course content will have different names (German/English)
     public QuizData(String course, String name, double threshold, int timer, ArrayList<QuestionData> questions) {
- //       this.program = program;
         this.course = course;
         this.name = name;
         this.threshold = threshold;
         this.timer = timer;
         this.questions = questions;
-        //firstName = UserC.getCurrentUser().getFirstName();
-        //lastName = UserC.getCurrentUser().getLastName();
     }
+
+
 
     // because fetchAllQuizzes doesn't need the questions yet
     public QuizData(String course, String name, double threshold, int timer) {
-        // this.program = program;
         this.course = course;
         this.name = name;
         this.threshold = threshold;
@@ -51,14 +54,6 @@ public class QuizData implements Serializable {
         this.id = id;
     }
 
-//    public String getProgram() {
-//        return program;
-//    }
-//
-//    public void setProgram(String program) {
-//        this.program = program;
-//    }
-
     public String getCourse() {
         return course;
     }
@@ -66,7 +61,6 @@ public class QuizData implements Serializable {
     public void setCourse(String course) {
         this.course = course;
     }
-
 
     public void setName(String name) {
         this.name = name;
@@ -96,10 +90,6 @@ public class QuizData implements Serializable {
 
     public ArrayList<QuestionData> getQuestions() {
         return questions;
-    }
-
-    public String getOwnerQuiz() {
-        return firstName + " " + lastName;
     }
 
     @Override

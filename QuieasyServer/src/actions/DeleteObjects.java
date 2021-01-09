@@ -58,8 +58,8 @@ public class DeleteObjects {
             session = HibernateUtil.getSessionFactory().openSession();
             session.beginTransaction();
             Question questionToDelete = session.getSession().createQuery("FROM Question WHERE id = :id ", Question.class).setParameter("id", questionID).getSingleResult();
+            //does it handle orphan removal?
             message = new Message();
-
             if (questionToDelete == null) {
                 message.status = false;
             }else {

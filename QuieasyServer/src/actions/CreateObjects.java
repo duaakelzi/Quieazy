@@ -2,18 +2,21 @@ package actions;
 
 import data.ChoicesData;
 import data.Message;
+import data.QuestionData;
+import data.QuizData;
 import domain.*;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 import persistence.HibernateUtil;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
 public class CreateObjects {
     public static Session session;
-    public static Message message = new Message();
+    public static Message message;
 
     public static Message CreateQuiz(String name,double threshold,boolean isPublic,int timer, String email,String course)
     {
@@ -36,6 +39,8 @@ public class CreateObjects {
             queryQuiz.setParameter("name", name);
             queryQuiz.setParameter("id", CourseId);
 
+        message = new Message();
+
         if(queryQuiz.list().size() > 0) {
             System.out.println("Quiz already exists [method]");
             message.status = false;
@@ -50,6 +55,10 @@ public class CreateObjects {
 
             session.save(quiz);
             session.getTransaction().commit();
+            QuizData quizToSendBack = Converter.convertQuizToQuizData(quiz);
+            quizToSendBack.setId(quiz.getId());
+            System.out.println("quiz id set.");
+            message.quizData = quizToSendBack;
             message.status = true;
         }
         }catch(Exception e) {
@@ -148,13 +157,17 @@ public class CreateObjects {
             question.setQuestionChoices(qch);
 
             session.save(question);
-
             session.getTransaction().commit();
+            message = new Message();
             message.status = true;
-            //return choiceslist too
-         //  message.questionData = new QuestionData(question.getId(), question.getQuestionText(), (ArrayList) question.getQuestionChoices(), question.getPoints(),  question.getUser()); //the rest should already be on the client side??
-        //    message.questionData = new ArrayList<>();
-       //     message.questionData.add(new QuestionData(question.getQuestionText(), (ArrayList) question.getQuestionChoices())); //the rest should already be on the client side??
+
+            message.questionData = new ArrayList<>();
+            QuestionData questionToReturn = Converter.convertQuestionToQuestionData(question);
+            System.out.println("question converted.");
+            questionToReturn.setId(question.getId());
+            System.out.println("question id set.");
+            message.questionData.add(questionToReturn);
+            System.out.println("question added to message.");
         }
         catch(Exception e)
         {
@@ -175,6 +188,7 @@ public class CreateObjects {
             {
                 // connection close failed.
                 System.err.println(e.getMessage());
+
             }
         }
         session.close();
@@ -200,11 +214,13 @@ public class CreateObjects {
 
             session.save(newResult);
             session.getTransaction().commit();
-            message.task = "RESULT_CREATED";
+            message = new Message();
+            message.status = true;
         }catch(Exception e) {
             // if the error message is "out of memory",
             // it probably means no database file is found
             System.err.println(e.getMessage());
+            message.status = false;
         }finally{
             try{
                 if(session != null)
