@@ -279,7 +279,7 @@ public class CreateQuizBox extends VBox {
 						Double.parseDouble(textThreshold.getText()),
 						Integer.parseInt(textTime.getText()),
 						new ArrayList<QuestionData>());
-				if(QuizRequests.createNewQuiz(quiz, UserRequests.getCurrentUser()) >0) {
+				if(QuizRequests.createNewQuiz(quiz, UserRequests.getCurrentUser())) {
 					CreateQuizBox.showSuccessful();
 				} else {
 					CreateQuizBox.showFailed();

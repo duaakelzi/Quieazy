@@ -65,13 +65,14 @@ public class Question  {
 	
 	
 	 @ManyToMany( mappedBy = "question")
-	    public Set<Quiz> getQuizzes() {
-	        return this.quiz;
-	    }
-
-	    public void setQuizzes(Set<Quiz> quiz) {
-	        this.quiz = quiz;
-	    }
+	 public Set<Quiz> getQuiz() {
+		 return this.quiz;
+	 }
+	//    public Set<Quiz> getQuizzes() {      return this.quiz;    }
+	public void setQuiz(Set<Quiz> quiz) {
+		this.quiz = quiz;
+	}
+	//    public void setQuizzes(Set<Quiz> quiz) { 	        this.quiz = quiz; 	    }
 	
 	    public void addQuiz(Quiz quiz) {
 	    	 this.quiz.add(quiz);

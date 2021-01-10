@@ -57,10 +57,10 @@ public class Request {
     }
 
     /* Quiestion related */
-    public static Message retrieveQuestions(Long quizID) {
+    public static Message retrieveQuestions(String courseName, String quizName) {
         // create a database connection
         JDBC.connectMySQL();
-        return RetrieveObjects.retrieveQuestions(quizID);
+        return RetrieveObjects.retrieveQuestions(courseName, quizName);
     }
 
     public static Message createQuestion(String questionText, int points, List<ChoicesData> questionChoicesList, String quizName,String email) {

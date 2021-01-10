@@ -16,6 +16,7 @@ public class Converter {
         newQuestion.setQuestion(question.getQuestionText());
 
         for(QuestionChoice qc : question.getQuestionChoices()) {
+            System.out.println("convert question method loop entered.");
             ChoicesData choice = new ChoicesData(qc.getChoices().getChoiceDescription(), qc.isCorrect());
             newQuestion.getAnswers().add(choice);
         }

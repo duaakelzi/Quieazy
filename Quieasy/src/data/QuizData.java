@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 public class QuizData implements Serializable {
-    private Long id;
     private String course;
     private String name;
     private double threshold;
@@ -12,14 +11,7 @@ public class QuizData implements Serializable {
     private ArrayList<QuestionData> questions;
 
     public QuizData() { }
-    // fetchQuestions requires quizID
-    public QuizData(Long id, String course, String name, double threshold, int timer) {
-        this.id = id;
-        this.course = course;
-        this.name = name;
-        this.threshold = threshold;
-        this.timer = timer;
-    }
+
     // studyprogram removed from the constructor of QuizData, because we don't need it:
     // if a course that holds the quiz, belongs to one or two programs, makes no difference for the quiz
     //  only one course with same name allowed per SP
@@ -32,8 +24,6 @@ public class QuizData implements Serializable {
         this.questions = questions;
     }
 
-
-
     // because fetchAllQuizzes doesn't need the questions yet
     public QuizData(String course, String name, double threshold, int timer) {
         this.course = course;
@@ -44,14 +34,6 @@ public class QuizData implements Serializable {
 
     public String getName() {
         return name;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getCourse() {

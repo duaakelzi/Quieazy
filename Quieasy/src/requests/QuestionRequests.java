@@ -6,13 +6,13 @@ import java.util.ArrayList;
 
 public class QuestionRequests {
     // private UserData ownerQuiz;
-    private static Message request = new Message();
+    private static Message request;
 
     //this method should: 1) persist new questions; 2) ask the message to add questions to quiz 3) maybe update quiz to add
     // new questions there on class level
     public static boolean persistNewQuestions(UserData user, QuizData quiz, ArrayList<QuestionData> questionsToPersist) {
         ClientAgent clientAgent = ClientAgent.getClientAgent();
-
+        request = new Message();
         request.task = "CREATE_QUESTIONS";
         request.quizData = quiz;
         request.questionData = questionsToPersist;
@@ -22,6 +22,7 @@ public class QuestionRequests {
             int i = 0;
             for(QuestionData q : questionsToPersist) {
                 q.setId(response.questionData.get(i).getId());
+                System.out.println("question id set (client side).");
                 i++;
             }
         }
@@ -31,7 +32,7 @@ public class QuestionRequests {
     //only text or choices were updated, not the relationships
     public static void updateEditedQuestions(ArrayList<QuestionData> questionsToUpdate){
         ClientAgent clientAgent = ClientAgent.getClientAgent();
-
+        request = new Message();
         request.task = "SAVE_QUESTION_EDITS";
         request.questionData = questionsToUpdate;
 
@@ -40,7 +41,7 @@ public class QuestionRequests {
     //update the relationships of the existing,old questions
     public static void addOldQuestions(QuizData quiz, ArrayList<QuestionData> questionsToAdd) {
         ClientAgent clientAgent = ClientAgent.getClientAgent();
-
+        request = new Message();
         request.task = "ADD_OLD_QUESTIONS";
         request.quizData = quiz;
         request.questionData = questionsToAdd;
@@ -53,6 +54,7 @@ public class QuestionRequests {
     //method to request all questions for given quiz. For now the received arraylist is not passed back to the gui from client decoder.
     public static ArrayList<QuestionData> fetchQuizQuestions(QuizData quiz) {
         ClientAgent clientAgent = ClientAgent.getClientAgent();
+        request = new Message();
         request.task = "FETCH_ALL_QUESTIONS";
         request.quizData = quiz;
         Message response = clientAgent.sendAndWaitForResponse(request);
@@ -67,7 +69,7 @@ public class QuestionRequests {
 
     public static boolean deleteQuestions(QuizData quiz, ArrayList<QuestionData> questions) {
         ClientAgent clientAgent = ClientAgent.getClientAgent();
-
+        request = new Message();
         request.task = "DELETE_QUESTIONS";
         request.quizData = quiz;
         request.questionData = questions;

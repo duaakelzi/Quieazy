@@ -7,7 +7,7 @@ public class QuestionData implements Serializable {
 
     private String question;
     private int points;
-    private ArrayList<ChoicesData> answers;
+    private ArrayList<ChoicesData> answers = new ArrayList<>();
     private Long id;
 
     public QuestionData(){}

@@ -34,7 +34,7 @@ public class ServerDecoder {
             QuizData quiz = message.quizData;
             UserData userData = message.userData;
             response = new Message();
-            response = Request.createQuiz(quiz.getName(), quiz.getThreshold(), false, userData.getEmail(), quiz.getCourse(),quiz.getTimer()); //returning QuizData with Id
+            response = Request.createQuiz(quiz.getName(), quiz.getThreshold(), false, userData.getEmail(), quiz.getCourse(),quiz.getTimer());
             response.task = message.task;
             return response;
         } else if (message.task.equals("UPDATE_QUIZ")) {
@@ -98,10 +98,10 @@ public class ServerDecoder {
         } else if (message.task.equals("FETCH_ALL_QUESTIONS")) {
             //Long id, String course, String name, double threshold, int timer
             //enforce use of a specific contructor (with ID)
-            QuizData quiz = new QuizData(message.quizData.getId(), message.quizData.getCourse(), message.quizData.getName(), message.quizData.getThreshold(), message.quizData.getTimer());
+            QuizData quiz = message.quizData;
            // quiz.setId(quiz.getId());
             response = new Message();
-            response = Request.retrieveQuestions(quiz.getId()); //for this, all quizzes should have an id saved
+            response = Request.retrieveQuestions(quiz.getCourse(), quiz.getName()); //for this, all quizzes should have an id saved
             response.task = message.task;
             return  response;
         }else if (message.task.equals("SAVE_RESULT")) {

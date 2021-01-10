@@ -61,19 +61,40 @@ public class RetrieveObjects {
         return message;
     }
 
-    public static Message retrieveQuestions(Long quizID) { //used to be List<Quiz>
+    public static Message retrieveQuestions(String courseName, String quizName) { //used to be List<Quiz>
         System.out.println("retrieving all Questions ");
         try {
             message = new Message();
             session = HibernateUtil.getSessionFactory().openSession();
-            Query query = session.getSession().createQuery("FROM Question JOIN Quiz q WHERE q.id = :id").setParameter("id", quizID);
-            List<Question> questions = query.list();
+
+            List<Object> queryQuiz = session.getSession().createQuery("FROM Quiz q JOIN q.course c WHERE q.quiz_Name = :name AND c.courseName = :courseName")
+                    .setParameter("name", quizName).setParameter("courseName", courseName).list();
+            List<Object> result = (List<Object>) queryQuiz;
+            Quiz quiz = new Quiz();
+            //since casting throws assignment errors:
+            Iterator itr = result.iterator();
+            while(itr.hasNext()){
+                Object[] obj = (Object[]) itr.next();
+                quiz = (Quiz)obj[0];
+            }
+            System.out.println("quiz for question retrieved");
+
+            //this returns both quiz and question. find a better statement
+            Query query = session.getSession().createQuery("FROM Question que JOIN que.quiz q WHERE q.id = :id").setParameter("id", quiz.getId());
+            List<Object> questions = query.list();
+
             if(questions.size()>0) {
                 System.out.println("Questions retrieved.");
-                for(Question q: questions) {
-                    QuestionData newQuestionData = Converter.convertQuestionToQuestionData(q);
+                //understand why it's complaining when a normal iterator used?!
+                Question retrievedQuestion = new Question();
+                //since casting throws assignment errors:
+                itr = result.iterator();
+                while(itr.hasNext()){
+                    Object[] obj = (Object[]) itr.next();
+                    retrievedQuestion = (Question)obj[0];
+                    System.out.println("question conversion loop entered.");
+                    QuestionData newQuestionData = Converter.convertQuestionToQuestionData(retrievedQuestion);
                     message.questionData.add(newQuestionData);
-
                 }
                 message.status = true;
             }else{

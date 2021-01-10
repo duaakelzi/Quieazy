@@ -48,9 +48,7 @@ public class QuestionRequestsTest {
     @Test
     public void testBeforeAllSetup() {
         //first the quiz should be persisted, as it's not in the system
-        quizForTest.setId(QuizRequests.createNewQuiz(quizForTest, existingUser));
-        //make sure the quiz has an id as a result of the last transaction
-        assertNotSame(quizForTest.getId(), 0);
+        assertTrue(QuizRequests.createNewQuiz(quizForTest, existingUser));
         System.out.println("assertTrue for quiz creation passed");
 
         //check that the system behaves correctly when unknown question is requested
@@ -61,14 +59,14 @@ public class QuestionRequestsTest {
     @Test
     public void testFirstPersistNewQuestions() {
         //persist the question
-        assertTrue(QuestionRequests.persistNewQuestions(existingUser, quizForTest, tempArray));
+        Assert.assertTrue(QuestionRequests.persistNewQuestions(existingUser, quizForTest, tempArray));
         System.out.println("assertTrue for persisting the question passed.");
     }
 
     @Test
     public void testSecondFetchQuizQuestions() {
         //make sure the persisted question is found as expected by user
-        assertTrue(QuestionRequests.fetchQuizQuestions(quizForTest).contains(questionToPersist));
+        Assert.assertTrue(QuestionRequests.fetchQuizQuestions(quizForTest).contains(questionToPersist));
         System.out.println("assertTrue for fetch after persistence passed.");
     }
 

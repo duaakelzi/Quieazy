@@ -77,7 +77,7 @@ public class QuizRequestsTest {
 
     @Test
   //  Testing whether retrieved quizzes contain expected data
-    public  void testQuizContentOfFetchedQuizzes() {
+    public void testQuizContentOfFetchedQuizzes() {
             //SP: ComputerScience (id_sp = 1) contains Programming 1 (id_course = 1) which contains quiz java
             // existingUser should have access to CS, hence also to Prog 1
          //   tempArrayQuizzes1 = QuizC.fetchAllQuizzes(existingUser);
@@ -99,7 +99,7 @@ public class QuizRequestsTest {
 
     @Test
     //  Testing whether quiz deletion works
-    public  void testQuizDelete() {
+    public void testQuizDelete() {
         assertTrue(QuizRequests.deleteQuiz(nonAccessibleQuiz));
         System.out.println("assertTrue for deleteQuiz passed. Nonaccessible quiz deleted");
         assertSame(QuizRequests.fetchAllQuizzes(anotherUser).size(), 0);

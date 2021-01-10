@@ -21,46 +21,44 @@ public class CreateObjects {
     public static Message CreateQuiz(String name,double threshold,boolean isPublic,int timer, String email,String course)
     {
         try {
-        session = HibernateUtil.getSessionFactory().openSession();
-        System.out.println("create quiz ");
-        session.beginTransaction();
-        //create quiz
+            session = HibernateUtil.getSessionFactory().openSession();
+            System.out.println("create quiz ");
+            session.beginTransaction();
+            //create quiz
 
-        Query queryUser = session.getSession().createQuery("FROM User WHERE email = :email ");
-            queryUser.setParameter("email", email);
-        System.out.println("adding author [method]");
-        User userToAdd = (User)queryUser.list().get(0);
-        Query queryCourse = session.getSession().createQuery("FROM Course WHERE courseName = :courseName ");
-            queryCourse.setParameter("courseName", course);
-        Course courseToAdd=(Course)queryCourse.list().get(0);
-        Long CourseId =courseToAdd.getId();
+            User userToAdd = session.getSession().createQuery("FROM User WHERE email = :email", User.class).setParameter("email", email).getSingleResult();
+            System.out.println("quiz author retrieved");
+            Query queryCourse = session.getSession().createQuery("FROM Course WHERE courseName = :courseName ");
+                queryCourse.setParameter("courseName", course);
+            Course courseToAdd=(Course)queryCourse.list().get(0);
+            Long CourseId =courseToAdd.getId();
+            message = new Message();
 
-        Query queryQuiz = session.getSession().createQuery("FROM Quiz WHERE quiz_Name = :name AND id= :id");
+            Query queryQuiz = session.getSession().createQuery("FROM Quiz q JOIN q.course c WHERE q.quiz_Name = :name AND c.id= :id");
             queryQuiz.setParameter("name", name);
             queryQuiz.setParameter("id", CourseId);
 
-        message = new Message();
+            message = new Message();
 
-        if(queryQuiz.list().size() > 0) {
-            System.out.println("Quiz already exists [method]");
-            message.status = false;
-        } else{
-            Quiz quiz =new Quiz(name,threshold,false,false,timer);
-            Set<Quiz> quizUserSet= new HashSet<Quiz>();
-            quizUserSet.add(quiz);
-            quiz.setCourse(courseToAdd);
-            courseToAdd.setQuiz(quizUserSet);
-            userToAdd.setQuiz(quizUserSet);
-            quiz.setUser(userToAdd);
+            if(queryQuiz.list().size() > 0) {
+                System.out.println("Quiz already exists [method]");
+                message.status = false;
+                return message;
+            }
+                System.out.println("retrieval failed. Quiz doesn't exist yet");
 
-            session.save(quiz);
-            session.getTransaction().commit();
-            QuizData quizToSendBack = Converter.convertQuizToQuizData(quiz);
-            quizToSendBack.setId(quiz.getId());
-            System.out.println("quiz id set.");
-            message.quizData = quizToSendBack;
-            message.status = true;
-        }
+                Quiz quiz = new Quiz(name, threshold, false, false, timer);
+                Set<Quiz> quizUserSet = new HashSet<Quiz>();
+                quizUserSet.add(quiz);
+                quiz.setCourse(courseToAdd);
+                courseToAdd.setQuiz(quizUserSet);
+                userToAdd.setQuiz(quizUserSet);
+                quiz.setUser(userToAdd);
+
+                session.save(quiz);
+                session.getTransaction().commit();
+                message.status = true;
+
         }catch(Exception e) {
                 // if the error message is "out of memory",
                 // it probably means no database file is found
@@ -157,11 +155,13 @@ public class CreateObjects {
             question.setQuestionChoices(qch);
 
             session.save(question);
+            System.out.println("question persisted");
             session.getTransaction().commit();
             message = new Message();
             message.status = true;
 
             message.questionData = new ArrayList<>();
+            System.out.println("array list initialized.");
             QuestionData questionToReturn = Converter.convertQuestionToQuestionData(question);
             System.out.println("question converted.");
             questionToReturn.setId(question.getId());
