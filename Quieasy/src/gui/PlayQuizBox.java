@@ -171,20 +171,12 @@ public class PlayQuizBox extends VBox {
                 public void changed(ObservableValue<? extends Boolean> observableValue, Boolean old_value, Boolean new_val) {
                     boolean selected =answer.isSelected();
 
-
-<<<<<<< HEAD
-                    if (selected){System.out.println("selected :"+answer.getText());
-                        selectedAnswer[indexQuestion]=answer.getText();;
-                    }
-                    else {{System.out.println("not selected :"+answer.getText());}}//what should happen here?
-=======
                    if (selected){System.out.println("selected :"+answer.getText());
                    selectedAnswer[indexQuestion]=answer.getText();
                    }
                    else {System.out.println("not selected :"+answer.getText());
                        selectedAnswer[indexQuestion] =" ";
                    }//what should happen here?
->>>>>>> 6dc8f148f753c9b47e845ad2a3a3b9e329bd2520
                 }
             });
         }
