@@ -20,6 +20,7 @@ public class Converter {
             ChoicesData choice = new ChoicesData(qc.getChoices().getChoiceDescription(), qc.isCorrect());
             newQuestion.getAnswers().add(choice);
         }
+        newQuestion.setPoints(question.getPoints());
         return newQuestion;
     }
 

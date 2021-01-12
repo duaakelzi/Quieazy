@@ -66,6 +66,7 @@ public class ServerDecoder {
                 Message tempMsg = Request.createQuestion(q.getQuestion(), q.getPoints(),q.getAnswers(),quiz.getName(),user.getEmail());
                 response.status = tempMsg.status;
                 response.questionData.add(tempMsg.questionData.get(0));
+                count++;
             }
 
             if(count != questionData.size()) {
@@ -94,7 +95,7 @@ public class ServerDecoder {
                 response.status = false;
             }
             response.task = message.task;
-            return  response;
+            return response;
         } else if (message.task.equals("FETCH_ALL_QUESTIONS")) {
             //Long id, String course, String name, double threshold, int timer
             //enforce use of a specific contructor (with ID)

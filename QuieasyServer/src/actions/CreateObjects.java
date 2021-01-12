@@ -34,7 +34,7 @@ public class CreateObjects {
             Long CourseId =courseToAdd.getId();
             message = new Message();
 
-            Query queryQuiz = session.getSession().createQuery("FROM Quiz q JOIN q.course c WHERE q.quiz_Name = :name AND c.id= :id");
+            Query queryQuiz = session.getSession().createQuery("SELECT q FROM Quiz q JOIN q.course c WHERE q.quiz_Name = :name AND c.id= :id");
             queryQuiz.setParameter("name", name);
             queryQuiz.setParameter("id", CourseId);
 
@@ -110,8 +110,9 @@ public class CreateObjects {
 
             //retrieve user to assign it to the question later
             User userToAdd = session.getSession().createQuery("FROM User WHERE email = :email", User.class).setParameter("email", email).getSingleResult();
+            System.out.println("User found.");
             Quiz quizToAdd =session.getSession().createQuery("from Quiz where quiz_Name =: quizName",Quiz.class).setParameter("quizName",quizName).getSingleResult();
-
+            System.out.println("Quiz found.");
 
             Set<Question> questionQuizSet=quizToAdd.getQuestion();
             Set<Question> questionUserSet=new HashSet<>();

@@ -59,14 +59,15 @@ public class QuestionRequestsTest {
     @Test
     public void testFirstPersistNewQuestions() {
         //persist the question
-        Assert.assertTrue(QuestionRequests.persistNewQuestions(existingUser, quizForTest, tempArray));
+        assertTrue(QuestionRequests.persistNewQuestions(existingUser, quizForTest, tempArray));
         System.out.println("assertTrue for persisting the question passed.");
     }
 
     @Test
     public void testSecondFetchQuizQuestions() {
         //make sure the persisted question is found as expected by user
-        Assert.assertTrue(QuestionRequests.fetchQuizQuestions(quizForTest).contains(questionToPersist));
+        assertTrue(QuestionRequests.fetchQuizQuestions(quizForTest).contains(questionToPersist));
+        // public boolean equals(Object o) {
         System.out.println("assertTrue for fetch after persistence passed.");
     }
 

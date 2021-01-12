@@ -65,23 +65,22 @@ public class RetrieveObjects {
             message = new Message();
             session = HibernateUtil.getSessionFactory().openSession();
 
-            List<Object> queryQuiz = session.getSession().createQuery("FROM Quiz q JOIN q.course c WHERE q.quiz_Name = :name AND c.courseName = :courseName")
-                    .setParameter("name", quizName).setParameter("courseName", courseName).list();
-            List<Object> result = (List<Object>) queryQuiz;
-            Quiz quiz = new Quiz();
-            //since casting throws assignment errors:
-            Iterator itr = result.iterator();
-            while(itr.hasNext()){
-                Object[] obj = (Object[]) itr.next();
-                quiz = (Quiz)obj[0];
+            Quiz queryQuiz = session.getSession().createQuery("SELECT q FROM Quiz q JOIN q.course c WHERE q.quiz_Name = :name AND c.courseName = :courseName", Quiz.class)
+                    .setParameter("name", quizName).setParameter("courseName", courseName).getSingleResult();
+
+            if(queryQuiz == null) {
+                System.out.println("quiz for question doesn't exist.");
+                message.status = false;
+                return message;
             }
+
             System.out.println("quiz for question retrieved");
 
             String hql = "select  qu from Question qu " +
                     "JOIN qu.quiz t " +
                     "where t.id = :id";
             Query query = session.createQuery(hql);
-            query.setParameter("id", quiz.getId());
+            query.setParameter("id", queryQuiz.getId());
             List<Question> questions = query.list();
             //for testing
             System.out.println(questions.get(0).getId());
@@ -90,12 +89,8 @@ public class RetrieveObjects {
 
             //List<QuestionChoice> questionChoices = new ArrayList<>(questions.get(0).getQuestionChoices());
 
-
-
-
             if(questions.size()>0) {
                 System.out.println("Questions retrieved...");
-                    System.out.println("question conversion loop entered.");
                    QuestionData newQuestionData = Converter.convertQuestionToQuestionData(questions.get(0));
                    message.questionData.add(newQuestionData);
                 message.status = true;
