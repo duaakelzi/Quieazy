@@ -84,6 +84,14 @@ public class QuizData implements Serializable {
         }
     }
 
+    public void addSingleQuestion(QuestionData questionData ){
+        questions.add(questionData);
+    }
+
+    public void removeSingleQuestion(int index){
+        questions.remove(index);
+    }
+
     public ArrayList<QuestionData> getQuestions() {
         return questions;
     }

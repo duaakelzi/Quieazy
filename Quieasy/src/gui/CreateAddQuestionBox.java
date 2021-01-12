@@ -1,6 +1,7 @@
 package gui;
 
 import data.QuestionData;
+import data.QuizData;
 import requests.QuestionC;
 import requests.QuizC;
 import javafx.beans.property.ReadOnlyObjectWrapper;
@@ -25,19 +26,19 @@ public class CreateAddQuestionBox extends VBox {
 
         private static CreateAddQuestionBox createAddQuestionBox;
         private TableView<TableFillQuestions> tableViewListQuestions;
-        private ObservableList<TableFillQuestions> questionsToList; //not sure what this is for
+        private ObservableList<TableFillQuestions> questionsToList; //this hold the data in the tableListView to display in the table
         private TableColumn<TableFillQuestions, Integer> idCol;
         private ArrayList<QuestionData> allQuestions = CreateQuizBox.getCreateQuizBox().getQuiz().getQuestions(); //to list all questions
         private static ArrayList<QuestionData> newQuestions = new ArrayList<>(); //for new questions only
         private static ArrayList<QuestionData> oldQuestions = new ArrayList<>(); //for questions from the QuestionBank
         private TableFillQuestions selectedItem;
         private static ArrayList<QuestionData> updatedQuestions = new ArrayList<>(); //for those that only need updating
-
+        private QuizData quiz = CreateQuizBox.getCreateQuizBox().getQuiz();
         //constructor
         private CreateAddQuestionBox() {
             super();
             // initialize the buttons for adding questions
-            HBox buttons = initiateAddButton();
+            HBox buttons = initiateAddQuestionsButtons();
             // initialize the table where will be store the Question List
             // Sample data
             VBox listofQuestion = initiateListOfQuestions();
@@ -72,7 +73,7 @@ public class CreateAddQuestionBox extends VBox {
     }
 
     //to initiate creation of new questions
-    private HBox initiateAddButton(){
+    private HBox initiateAddQuestionsButtons(){
             HBox buttons = new HBox(230);
             buttons.setPadding(new Insets(20));
             Button newQuestion = new Button("➕ Question");
@@ -109,19 +110,14 @@ public class CreateAddQuestionBox extends VBox {
         secondCol.setMinWidth(60);
         secondCol.setCellValueFactory(new PropertyValueFactory<>("author"));
 
-
         setTableDesign();
-
         tableViewListQuestions.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
-
         tableViewListQuestions.getColumns().addAll(firstCol, secondCol);
-
         // add edit button
         addEditButtonstoListQuestion();
         // add delete button to list
         addDeleteButtonstoListQuestion();
         questionVbox.getChildren().addAll(tableViewListQuestions);
-
         return questionVbox;
     }
 
@@ -135,7 +131,7 @@ public class CreateAddQuestionBox extends VBox {
         //addedQuestiontoQuiz = questions.get(index);
         questionsToList = FXCollections.observableArrayList();
         for(int i = 0; i < allQuestions.size(); i++){
-            questionsToList.add(new TableFillQuestions(String.valueOf(i), allQuestions.get(i).getQuestion(), "Chen Li"));
+            questionsToList.add(new TableFillQuestions(String.valueOf(i), allQuestions.get(i).getQuestion(), quiz.getOwnerQuiz() ));
         }
            tableViewListQuestions.setItems(questionsToList);
            // tableViewListQuestions.setItems(questionsToList);
@@ -272,15 +268,10 @@ public class CreateAddQuestionBox extends VBox {
         private final SimpleStringProperty questionName;
         private final SimpleStringProperty author;
 
-
-
         private TableFillQuestions(String nr, String questionName, String author) {
             this.nr = new SimpleStringProperty(nr);
             this.questionName = new SimpleStringProperty(questionName);
             this.author = new SimpleStringProperty(author);
-
-
-
         }
 
         public String getNr() {
