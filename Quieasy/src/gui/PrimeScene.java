@@ -28,8 +28,7 @@ public class PrimeScene extends Scene {
 			
 			primeScene = new PrimeScene(Login.getLogin(),  Color.LAVENDER);
 			//primeScene = new PrimeScene(Home.getHome(),Color.LAVENDER);
-			QuizData quiz=new QuizData("Programming 1","Java",60,15);
-			QuestionRequests.fetchQuizQuestions(quiz);
+
 			
 		}
 		
