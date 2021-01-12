@@ -6,9 +6,7 @@ import org.hibernate.Session;
 import org.hibernate.query.Query;
 import persistence.HibernateUtil;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
 public class RetrieveObjects {
     static Session session;
@@ -79,25 +77,31 @@ public class RetrieveObjects {
             }
             System.out.println("quiz for question retrieved");
 
-            //this returns both quiz and question. find a better statement
-            Query query = session.getSession().createQuery("FROM Question que JOIN que.quiz q WHERE q.id = :id").setParameter("id", quiz.getId());
-            List<Object> questions = query.list();
+            String hql = "select  qu from Question qu " +
+                    "JOIN qu.quiz t " +
+                    "where t.id = :id";
+            Query query = session.createQuery(hql);
+            query.setParameter("id", quiz.getId());
+            List<Question> questions = query.list();
+            //for testing
+            System.out.println(questions.get(0).getId());
+            System.out.println(questions.get(0).getQuestionText());
+            System.out.println(questions.get(0).getPoints());
+
+            //List<QuestionChoice> questionChoices = new ArrayList<>(questions.get(0).getQuestionChoices());
+
+
+
 
             if(questions.size()>0) {
-                System.out.println("Questions retrieved.");
-                //understand why it's complaining when a normal iterator used?!
-                Question retrievedQuestion = new Question();
-                //since casting throws assignment errors:
-                itr = result.iterator();
-                while(itr.hasNext()){
-                    Object[] obj = (Object[]) itr.next();
-                    retrievedQuestion = (Question)obj[0];
+                System.out.println("Questions retrieved...");
                     System.out.println("question conversion loop entered.");
-                    QuestionData newQuestionData = Converter.convertQuestionToQuestionData(retrievedQuestion);
-                    message.questionData.add(newQuestionData);
-                }
+                   QuestionData newQuestionData = Converter.convertQuestionToQuestionData(questions.get(0));
+                   message.questionData.add(newQuestionData);
                 message.status = true;
-            }else{
+                }
+
+                else {
                 message.status = false;
             }
             session.close();
