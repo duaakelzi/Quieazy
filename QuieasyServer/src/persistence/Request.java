@@ -6,7 +6,9 @@ import actions.*;
 
 import data.ChoicesData;
 import data.Message;
+import data.QuestionData;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -38,10 +40,10 @@ public class Request {
         JDBC.connectMySQL();
         return UpdateObjects.updateQuiz(name,threshold,false,course);
     }
-    public static Message deleteQuiz(Long id, String course) {
+    public static Message deleteQuiz(String quizName, String course) {
         // create a database connection
         JDBC.connectMySQL();
-        return DeleteObjects.deleteQuiz(id,course);
+        return DeleteObjects.deleteQuiz(quizName,course);
     }
     //retrieve all quizzes for user
     public static Message retrieveQuizzes(String email) {
@@ -57,10 +59,10 @@ public class Request {
     }
 
     /* Quiestion related */
-    public static Message retrieveQuestions(Long quizID) {
+    public static Message retrieveQuestions(String courseName, String quizName) {
         // create a database connection
         JDBC.connectMySQL();
-        return RetrieveObjects.retrieveQuestions(quizID);
+        return RetrieveObjects.retrieveQuestions(courseName, quizName);
     }
 
     public static Message createQuestion(String questionText, int points, List<ChoicesData> questionChoicesList, String quizName,String email) {

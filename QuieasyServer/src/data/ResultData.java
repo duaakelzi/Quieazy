@@ -6,22 +6,29 @@ public class ResultData implements Serializable {
     private int points;
     private boolean passed;
     private int statistics;
+
+    private boolean []correctAnswers;
+
+
+    public boolean[] getCorrectAnswers() {
+        return correctAnswers;
+    }
+
+    public void setCorrectAnswers(boolean[] correctAnswers) {
+        this.correctAnswers = correctAnswers;
+    }
+
     //c'tor
     public ResultData(){}
-
-    public int getStatistics() {
-        return statistics;
-    }
-
-    public void setStatistics(int statistics) {
-        this.statistics = statistics;
-    }
-
     // getters/setters
     public ResultData(int points, boolean passed) {
         this.points = points;
         this.passed = passed;
     }
+    public int getStatistics() { return statistics; }
+
+    public void setStatistics(int statistics) { this.statistics = statistics; }
+
     public int getPoints() {
         return points;
     }

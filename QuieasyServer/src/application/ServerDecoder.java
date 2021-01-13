@@ -3,6 +3,8 @@
 package application;
 
 import data.*;
+import domain.Quiz;
+import domain.User;
 import persistence.Request;
 
 import java.util.ArrayList;
@@ -23,47 +25,52 @@ public class ServerDecoder {
             return response;
 
         } else if (message.task.equals("REGISTER")) {
-
             RegisterData data = message.registerData;
-
             response =  Request.register(data.getFirstName(), data.getLastName(), data.getEmail(), data.getPassword());
             response.task = message.task;
             return response;
 
         } else if (message.task.equals("CREATE_QUIZ")) {
-            data.QuizData quiz = message.quizData;
-            data.UserData userData = message.userData;
-            response = Request.createQuiz(quiz.getName(), quiz.getThreshold(), false, "user@mail.com", quiz.getCourse(),quiz.getTimer()); //should i return quiz data immediately?
+            QuizData quiz = message.quizData;
+            UserData userData = message.userData;
+            response = new Message();
+            response = Request.createQuiz(quiz.getName(), quiz.getThreshold(), false, userData.getEmail(), quiz.getCourse(),quiz.getTimer());
             response.task = message.task;
             return response;
         } else if (message.task.equals("UPDATE_QUIZ")) {
             data.QuizData quiz = message.quizData;
-
             return Request.updateQuiz( quiz.getName(), quiz.getThreshold(), false, quiz.getCourse());
         } else if (message.task.equals("DELETE_QUIZ")) {
             QuizData quiz = message.quizData;
-            return Request.deleteQuiz(quiz.getId(), quiz.getCourse());
-
+            response = new Message();
+            response = Request.deleteQuiz(quiz.getName(), quiz.getCourse());
+            response.task = message.task;
+            return response;
         } else if (message.task.equals("FETCH_ALL_QUIZZES")) {
             UserData userData = message.userData;
-            return Request.retrieveQuizzes(userData.getEmail());
+            response = new Message();
+            response = Request.retrieveQuizzes(userData.getEmail());
+            response.task = message.task;
+            return response;
 
         } else if (message.task.equals("CREATE_QUESTIONS")) {
             System.out.println("server: create questions method entered >> ");
             response = new Message();
             QuizData quiz = message.quizData;
             ArrayList<QuestionData> questionData = message.questionData;
+            UserData user = message.userData;
 
             //go through array of new questions and make each persistent
-            int i;
-            for (i=0; i<questionData.size(); i++) {
-                Request.createQuestion(questionData.get(i).getQuestion(), questionData.get(i).getPoints(),questionData.get(i).getAnswers(),quiz.getName(),"user@mail.com");
+            int count = 0;
+            for(QuestionData q : questionData) {
+                Message tempMsg = Request.createQuestion(q.getQuestion(), q.getPoints(),q.getAnswers(),quiz.getName(),user.getEmail());
+                response.status = tempMsg.status;
+                response.questionData.add(tempMsg.questionData.get(0));
+                count++;
             }
 
-            if (i != questionData.size()) {
+            if(count != questionData.size()) {
                 response.status = false;
-            }else {
-                response.status = true; //should i return quiz data immediately?
             }
             response.task = message.task;
             return response;
@@ -72,25 +79,32 @@ public class ServerDecoder {
             //to be added
         } else if (message.task.equals("ADD_OLD_QUESTIONS")) {
             //to be added
-        } else if (message.task.equals("DELETE_QUESTION")) {
+        } else if (message.task.equals("DELETE_QUESTIONS")) {
             QuizData quiz = message.quizData;
+            //check if deletes from breakout tables
             ArrayList<QuestionData> questionData = message.questionData;
-            int i;
-            for (i=0; i<questionData.size(); i++) {
-                Request.deleteQuestion((long)i);   //this is only to make the comp. happy. figure out if id's will be there
-            }
-            if (i != questionData.size()) {
-                message.task = "DELETE_QUESTIONS_FAILED";
-            }else {
-                message.task = "DELETE_QUESTIONS_SUCCESSFUL";
-            }
-            return message;
-        } else if (message.task.equals("FETCH_ALL_QUESTIONS")) {
-            QuizData quiz = message.quizData;
             response = new Message();
-            response = Request.retrieveQuestions(quiz.getId());
+            int count = 0;
+            for(QuestionData q : message.questionData) {
+                response = Request.deleteQuestion(q.getId());
+                if(response.status) {
+                    count++;
+                }
+            }
+            if(count != questionData.size()) {
+                response.status = false;
+            }
             response.task = message.task;
-            return  response;
+            return response;
+        } else if (message.task.equals("FETCH_ALL_QUESTIONS")) {
+            //Long id, String course, String name, double threshold, int timer
+            //enforce use of a specific contructor (with ID)
+            QuizData quiz = message.quizData;
+           // quiz.setId(quiz.getId());
+            response = new Message();
+            response = Request.retrieveQuestions(quiz.getCourse(), quiz.getName()); //for this, all quizzes should have an id saved
+            response.task = message.task;
+            return response;
         }else if (message.task.equals("SAVE_RESULT")) {
             UserData userData = message.userData;
             QuizData quizData = message.quizData;
@@ -102,12 +116,6 @@ public class ServerDecoder {
                 //session closed after each call to persist. Might be interfering
                 Request.createResult(resultData.getPoints(), resultData.isPassed(), quizData.getName(), "user@mail.com");
 
-
-//            if (i != resultData.size()) {
-//                message.task = "CREATE_RESULT_FAILED";
-//            }else {
-//                message.task = "CREATE_RESULT_SUCCESSFUL";
-//            }
             return message;
         }else if (message.task.equals("FETCH_RESULTS")) {
             UserData userData = message.userData;

@@ -18,4 +18,5 @@ public class Message implements Serializable {
     public ArrayList<QuestionData> questionData = new ArrayList<>();
     public ResultData resultData ;
     public ArrayList<StudyProgramData> studyProgramData = new ArrayList<>();
+    public ArrayList<QuizData> allQuizzes  = new ArrayList<>();;
 }

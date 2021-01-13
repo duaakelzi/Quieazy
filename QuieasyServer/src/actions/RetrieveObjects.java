@@ -6,30 +6,41 @@ import org.hibernate.Session;
 import org.hibernate.query.Query;
 import persistence.HibernateUtil;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
 public class RetrieveObjects {
-    static Session session = HibernateUtil.getSessionFactory().openSession();
-    public static Message message = new Message();
+    static Session session;
+    public static Message message;
 
     public static Message retrieveQuizzes(String email) { //used to be List<Quiz>
         System.out.println("retrieving all Quizzes ");
         try {
-            List<Quiz> quizList = session.getSession().createQuery("from Quiz", Quiz.class).list();
+            message = new Message();
+            session = HibernateUtil.getSessionFactory().openSession();
+            //retrieve user so that we get the id info
+            User user = session.getSession().createQuery("FROM User WHERE email = :email", User.class).setParameter("email", email).getSingleResult();
+            //available for the user only?
+            List<Quiz> quizList = session.getSession().createQuery("FROM Quiz WHERE id_user = :id_user", Quiz.class).setParameter("id_user", user.getUserID()).list();
+
             if(quizList.size()>0) {
-                System.out.println("Quizzes retrieved. Done ");
-                message.task = "QUIZ_FETCH_OK";
-               // message.quizlist.setAllQuizzes(quizList);
+                System.out.println("Quizzes retrieved. ");
+                //convert List of Quiz into QuizData and add to the message
+                for(Quiz q : quizList) {
+                    QuizData fetchedQuiz = new QuizData(q.getCourse().getCourseName(), q.getQuiz_Name(), q.getThreshold(), q.getTimer());
+                    message.allQuizzes.add(fetchedQuiz);
+                }
+                message.status = true;
+                System.out.println("Size of the Array in RetrieveQuizzes(): " + message.allQuizzes.size());
             }else{
-                message.task = "QUIZ_FETCH_FAILED";
+                System.out.println("No quizzes for that user ");
+                message.status = false;
             }
             session.close();
         }catch(Exception e)
         {
             // if the error message is "out of memory",
             // it probably means no database file is found
+            System.out.println("Error fetching quizzes. ");
             System.err.println(e.getMessage());
         }
         finally
@@ -48,32 +59,42 @@ public class RetrieveObjects {
         return message;
     }
 
-    public static Message retrieveQuestions(Long quizID) { //used to be List<Quiz>
+    public static Message retrieveQuestions(String courseName, String quizName) { //used to be List<Quiz>
         System.out.println("retrieving all Questions ");
         try {
-            List<Question> questions = session.getSession().createQuery("from Question", Question.class).list();
-            if(questions.size()>0) {
-                System.out.println("Questions retrieved.");
-                for (int i = 0; i < questions.size(); i++) {
-                    //translate the question into QuestionData, by
-                    // creating one and adding choices with all info to it
-                    QuestionData newQuestion = new QuestionData();
-                    newQuestion.setQuestion(questions.get(i).getQuestionText());
-                    for (Iterator<QuestionChoice> it = questions.get(i).getQuestionChoices().iterator(); it.hasNext(); ) {
-                        QuestionChoice newQC = it.next();
-                        ChoicesData choice = new ChoicesData();
-                        choice.setChoiceDescription(newQC.getChoices().getChoiceDescription());
-                        //check if this works as expected ==> not sure about use of primaryKey
-                        QuestionChoice qc = session.getSession().createQuery("from QuestionChoice where primaryKey = :primaryKey", QuestionChoice.class)
-                                .setParameter("primaryKey", newQC.getPrimaryKey()).getSingleResult();
-                        choice.setCorrect(qc.isCorrect());
-                        newQuestion.getAnswers().add(choice);
-                    }
-                    message.questionData.add(newQuestion);
+            message = new Message();
+            session = HibernateUtil.getSessionFactory().openSession();
 
-                }
+            Quiz queryQuiz = session.getSession().createQuery("SELECT q FROM Quiz q JOIN q.course c WHERE q.quiz_Name = :name AND c.courseName = :courseName", Quiz.class)
+                    .setParameter("name", quizName).setParameter("courseName", courseName).getSingleResult();
+
+            if(queryQuiz == null) {
+                System.out.println("quiz for question doesn't exist.");
+                message.status = false;
+                return message;
+            }
+
+            System.out.println("quiz for question retrieved");
+
+            String hql = "select  qu from Question qu " +
+                    "JOIN qu.quiz t " +
+                    "where t.id = :id";
+            Query query = session.createQuery(hql);
+            query.setParameter("id", queryQuiz.getId());
+            List<Question> questions = query.list();
+            //for testing
+            System.out.println(questions.get(0).getId());
+            System.out.println(questions.get(0).getQuestionText());
+            System.out.println(questions.get(0).getPoints());
+
+            //List<QuestionChoice> questionChoices = new ArrayList<>(questions.get(0).getQuestionChoices());
+
+            if(questions.size()>0) {
+                System.out.println("Questions retrieved...");
+                   QuestionData newQuestionData = Converter.convertQuestionToQuestionData(questions.get(0));
+                   message.questionData.add(newQuestionData);
                 message.status = true;
-            }else{
+                }else {
                 message.status = false;
             }
             session.close();
@@ -81,6 +102,8 @@ public class RetrieveObjects {
             // if the error message is "out of memory",
             // it probably means no database file is found
             System.err.println(e.getMessage());
+            System.out.println("Error in retrieval encountered");
+            message.status = false;
         }finally{
             try{
                 if(session != null)
@@ -97,6 +120,8 @@ public class RetrieveObjects {
     public static Message retrieveResults(String userEmail) {
         System.out.println("retrieving all Results ");
         try {
+            message = new Message();
+            session = HibernateUtil.getSessionFactory().openSession();
             List<Result> results = session.getSession().createQuery("from Result", Result.class).list();
             if(results.size()>0) {
                 System.out.println("Results retrieved. Done ");
@@ -129,6 +154,8 @@ public class RetrieveObjects {
     public static Message retrieveSP() {
         System.out.println("Retrieving study programs.");
         try {
+            message = new Message();
+            session = HibernateUtil.getSessionFactory().openSession();
             List<StudyProgram> studyPrograms = session.getSession().createQuery("from StudyProgram", StudyProgram.class).list();
             if(studyPrograms.size()>0) {
                 System.out.println("Results retrieved. ");
@@ -165,14 +192,15 @@ public class RetrieveObjects {
                 System.err.println(e.getMessage());
             }
         }
-        System.out.println("Message " + message.task + " will be sent");
+        System.out.println("Message status " + message.status + " will be sent");
         return message;
     }
 
     public static Message retrieveExistingQuestions(String text,String quiz) { //used to be List<Quiz>
         System.out.println("retrieving existing filtered Questions ");
-        Message message = new Message();
         try {
+            message = new Message();
+            session = HibernateUtil.getSessionFactory().openSession();
             Query queryQuiz = session.getSession().createQuery("FROM Quiz WHERE quiz_Name = :quiz ");
             queryQuiz.setParameter("quiz", quiz);
             Quiz quizToSearch=(Quiz)queryQuiz.list().get(0);

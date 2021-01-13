@@ -11,33 +11,18 @@ import gui.Login;
 import gui.PrimeScene;
 import gui.Register;
 
-public class UserC {
+public class UserRequests {
 	
-	private static UserC userC;
+	private static UserData user;
 	private static Message request;
 	private static Message response;
 	
-	// user data
-	private String firstName;
-	private String lastName;
-	private String email;
-	
-	// constructor can only be accessed from within
-	private UserC(String firstName, String lastName, String email) {
-		
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.email = email;
-		
-	}
-	
 	// Gets the current instance -> Singleton.
-	public static UserC getUser(String firstName, String lastName, String email) {
+	public static UserData getUser(String firstName, String lastName, String email) {
 		
-		if (userC == null) userC = new UserC(firstName, lastName, email);
+		if (user == null) user = new UserData(firstName, lastName, email);
 		
-		return userC;
-		
+		return user;
 	}
 	
 	// create a new account
@@ -74,7 +59,7 @@ public class UserC {
 		response = new Message();
 		response = clientAgent.sendAndWaitForResponse(request);
 		if (response != null && response.status) {
-			UserC.getUser(response.userData.getFirstName(), response.userData.getLastName(), response.userData.getEmail());
+			UserRequests.getUser(response.userData.getFirstName(), response.userData.getLastName(), response.userData.getEmail());
 
 			// clear user inputs
 			Login.clear();
@@ -89,23 +74,23 @@ public class UserC {
 
 	// log user out
 	public static void logout() {
-		userC = null;
+		user = null;
 	}
 
 	//get the current user
-	public static UserC getCurrentUser(){
-		return userC;
+	public static UserData getCurrentUser(){
+		return user;
 	}
 
 	public String getFirstName() {
-		return firstName;
+		return user.getFirstName();
 	}
 
 	public String getLastName() {
-		return lastName;
+		return user.getLastName();
 	}
 
 	public String getEmail() {
-		return email;
+		return user.getEmail();
 	}
 }

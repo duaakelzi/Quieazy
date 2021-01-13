@@ -1,8 +1,8 @@
 package gui;
 
 import data.QuestionData;
-import requests.QuestionC;
-import requests.QuizC;
+import requests.QuestionRequests;
+import requests.QuizRequests;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -17,6 +17,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.util.Callback;
+import requests.UserRequests;
 
 import java.util.ArrayList;
 
@@ -326,7 +327,7 @@ public class CreateAddQuestionBox extends VBox {
                 //savequiz();
                 //make the new questions persistent
                 //if successful, let user know? (for Ion to decide)
-                QuestionC.persistNewQuestions(CreateQuizBox.getCreateQuizBox().getQuiz(), newQuestions);
+                QuestionRequests.persistNewQuestions(UserRequests.getCurrentUser(), CreateQuizBox.getCreateQuizBox().getQuiz(), newQuestions);
                 //update edited questions
               //  QuestionC.updateEditedQuestions(updatedQuestions);
                 //update relationships of old questions
@@ -340,7 +341,7 @@ public class CreateAddQuestionBox extends VBox {
             @Override
             public void handle(ActionEvent actionEvent) {
                 //save the questions again -> might be new ones there? !!! do you need to check for existence?
-                QuestionC.persistNewQuestions(CreateQuizBox.getCreateQuizBox().getQuiz(), newQuestions);
+                QuestionRequests.persistNewQuestions(UserRequests.getCurrentUser(), CreateQuizBox.getCreateQuizBox().getQuiz(), newQuestions);
                 //play the quiz
                 //MainPane.getMainPane().getTabs().add(new Tab("Play", new PlayQuizBox(CreateQuizBox.getCreateQuizBox().getQuiz()))); //remove the PlayQuizTab !!! can not be removed tab because Chernet designed to be everything a tab controled by a singleton Object.
                 MainPane.getMainPane().getTabs().add(PlayQuizTab.getPlayQuizTab()); // it is opening the play quiz
@@ -354,7 +355,7 @@ public class CreateAddQuestionBox extends VBox {
 
 
     public void saveQuiz(){
-        QuizC.createNewQuiz(CreateQuizBox.getCreateQuizBox().getQuiz());
+        QuizRequests.createNewQuiz(CreateQuizBox.getCreateQuizBox().getQuiz(), UserRequests.getCurrentUser());
     } //why is this outside CreateQuiz??
 
     public int indexSelecteditem(){

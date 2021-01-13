@@ -91,10 +91,10 @@ public class Quiz  {
         this.timer = timer;
     }
 
-    @ManyToMany(
-    )
-    @JoinTable(name = "quiz_question", joinColumns = { @JoinColumn(name = "id_quiz") }, inverseJoinColumns = { @JoinColumn(name = "id_question") })
-
+    @ManyToMany( )
+    @JoinTable(name = "quiz_question",
+            joinColumns = { @JoinColumn(name = "id_quiz") },
+            inverseJoinColumns = { @JoinColumn(name = "id_question") })
     public Set<Question> getQuestion() {
         return this.question;
     }
@@ -105,10 +105,10 @@ public class Quiz  {
     {
         this.question.add(question);
     }
+    public void deleteQuestion(Question question) { this.question.remove(question);}
 
     @ManyToOne
     @JoinColumn(name = "id_user")
-
     public User getUser() {
         return user;
     }

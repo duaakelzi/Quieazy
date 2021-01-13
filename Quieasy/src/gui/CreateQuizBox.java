@@ -17,8 +17,9 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.util.Callback;
-import requests.QuizC;
-import requests.StudyProgramC;
+import requests.QuizRequests;
+import requests.StudyProgramRequests;
+import requests.UserRequests;
 
 import java.util.ArrayList;
 import java.util.stream.Collectors;
@@ -45,7 +46,12 @@ public class CreateQuizBox extends VBox {
 	}
 	//for testing the sequence of client-server message sending
 	public void initializeCreateQuizFields(){
-		studyProgramDataArrayList = StudyProgramC.fetchAllStudyPrograms();
+//		QuizData quizForTest = new QuizData();
+//		quizForTest.setId(Long.valueOf(1));
+//		quizForTest.setName("Java");
+//		quizForTest.setThreshold(60);
+//		QuestionC.fetchQuizQuestions(quizForTest);
+		studyProgramDataArrayList = StudyProgramRequests.fetchAllStudyPrograms();
 		if(studyProgramDataArrayList != null) {
 			ArrayList<String> studyProgramNames = studyProgramDataArrayList.stream()
 					.map(StudyProgramData::getStudyprogram)
@@ -89,26 +95,11 @@ public class CreateQuizBox extends VBox {
 	public static void showSuccessful(){
 		// let the user know that the server has successfully saved a list of quizes to persistence
 		System.out.println("Quiz successfully created. "); //should be on UI, not console
+		QuizRequests.fetchAllQuizzes(UserRequests.getCurrentUser()); //for testing, to see if the method works
 	}
 	public static void showFailed(){
-		// let the user know server has failed saving the list of quizes to persistence
+		// let the user know server has failed saving the list of quizzes to persistence
 		System.out.println("Quiz creation failed. "); //should be on UI, not console
-	}
-
-	//this seems not to be needed
-	public void createNewQuiz(){
-		//1 create Quiz object
-		//2.Quiz newQuiz = new Quiz; take from the Gui
-		// quiz= newQuiz;
-	}
-
-	public void createNewQuestion(){
-		//3.ask user to enter question for new Quiz
-		//4.for each question create a Question object
-		//5 add all question to quiz
-		//Question q = new Question();
-
-		//quiz.addQuestion(q);
 	}
 
 	public void saveNreQuiz(){
@@ -133,7 +124,7 @@ public class CreateQuizBox extends VBox {
 							.map(StudyProgramData::getCourses)
 							.collect(Collectors.toCollection(ArrayList::new)).get(0);
 					ArrayList<String> courseNames = courses.stream()
-							.map(CourseData::getCourses)
+							.map(CourseData::getCourse)
 							.collect(Collectors.toCollection(ArrayList::new));
 					courseComboBox.setItems(FXCollections.observableArrayList(courseNames));
 			}
@@ -284,12 +275,15 @@ public class CreateQuizBox extends VBox {
 				warning.setText("Fill all the fields marked with *");
 
 			}else{
-				quiz = new QuizData(studyProgramComboBox.getValue(),
-						courseComboBox.getValue(), textname.getText(),
+				quiz = new QuizData(courseComboBox.getValue(), textname.getText(),
 						Double.parseDouble(textThreshold.getText()),
 						Integer.parseInt(textTime.getText()),
 						new ArrayList<QuestionData>());
-				QuizC.createNewQuiz(quiz);
+				if(QuizRequests.createNewQuiz(quiz, UserRequests.getCurrentUser())) {
+					CreateQuizBox.showSuccessful();
+				} else {
+					CreateQuizBox.showFailed();
+				}
 
 				MainPane.getMainPane().getTabs().add(CreateAddQuestionTab.getCreateAddQuestionTab());
 				CreateQuizTab.getCreateQuizTab().closeTab();

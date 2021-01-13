@@ -2,65 +2,68 @@ package actions;
 
 import data.ChoicesData;
 import data.Message;
+import data.QuestionData;
+import data.QuizData;
 import domain.*;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 import persistence.HibernateUtil;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
 public class CreateObjects {
     public static Session session;
-    public static Message message = new Message();
+    public static Message message;
 
-    public static Message CreateQuiz(String name,double threshold,boolean isPublic,int timer,  String email,String course)
+    public static Message CreateQuiz(String name,double threshold,boolean isPublic,int timer, String email,String course)
     {
         try {
-        session = HibernateUtil.getSessionFactory().openSession();
-        System.out.println("create quiz ");
-        session.beginTransaction();
-        //create quiz
+            session = HibernateUtil.getSessionFactory().openSession();
+            System.out.println("create quiz ");
+            session.beginTransaction();
+            //create quiz
 
-        Query queryUser = session.getSession().createQuery("FROM User WHERE email = :email ");
-            queryUser.setParameter("email", email);
-        System.out.println("adding author [method]");
-        User userToAdd = (User)queryUser.list().get(0);
-        Query queryCourse = session.getSession().createQuery("FROM Course WHERE courseName = :courseName ");
-            queryCourse.setParameter("courseName", course);
-        Course courseToAdd=(Course)queryCourse.list().get(0);
-        Long CourseId =courseToAdd.getId();
+            User userToAdd = session.getSession().createQuery("FROM User WHERE email = :email", User.class).setParameter("email", email).getSingleResult();
+            System.out.println("quiz author retrieved");
+            Query queryCourse = session.getSession().createQuery("FROM Course WHERE courseName = :courseName ");
+                queryCourse.setParameter("courseName", course);
+            Course courseToAdd=(Course)queryCourse.list().get(0);
+            Long CourseId =courseToAdd.getId();
+            message = new Message();
 
-        Query queryQuiz = session.getSession().createQuery("FROM Quiz WHERE quiz_Name = :name  and id= :id");
-
-
+            Query queryQuiz = session.getSession().createQuery("SELECT q FROM Quiz q JOIN q.course c WHERE q.quiz_Name = :name AND c.id= :id");
             queryQuiz.setParameter("name", name);
             queryQuiz.setParameter("id", CourseId);
 
-        if(queryQuiz.list().size() > 0)
-        { System.out.println("Quiz already exists [method]");
-            message.status = false;}
-        //add author
+            message = new Message();
 
-        else{
-        Quiz quiz =new Quiz(name,threshold,false,false,timer);
-        Set<Quiz> quizUserSet= new HashSet<Quiz>();
-        quizUserSet.add(quiz);
-        quiz.setCourse(courseToAdd);
-            courseToAdd.setQuiz(quizUserSet);
-        userToAdd.setQuiz(quizUserSet);
-        quiz.setUser(userToAdd);
+            if(queryQuiz.list().size() > 0) {
+                System.out.println("Quiz already exists [method]");
+                message.status = false;
+                return message;
+            }
+                System.out.println("retrieval failed. Quiz doesn't exist yet");
 
-        session.save(quiz);
-        session.getTransaction().commit();
-        message.status = true;
-            //message.quizlist = new QuizData(quiz.getQuiz_Name(), quiz.isPublic(),quiz.getThreshold(),quiz.getCourse().getCourseName());}
-        }
+                Quiz quiz = new Quiz(name, threshold, false, false, timer);
+                Set<Quiz> quizUserSet = new HashSet<Quiz>();
+                quizUserSet.add(quiz);
+                quiz.setCourse(courseToAdd);
+                courseToAdd.setQuiz(quizUserSet);
+                userToAdd.setQuiz(quizUserSet);
+                quiz.setUser(userToAdd);
+
+                session.save(quiz);
+                session.getTransaction().commit();
+                message.status = true;
+
         }catch(Exception e) {
                 // if the error message is "out of memory",
                 // it probably means no database file is found
                 System.err.println(e.getMessage());
+                message.status = false;
             }
         finally
             {
@@ -107,19 +110,20 @@ public class CreateObjects {
 
             //retrieve user to assign it to the question later
             User userToAdd = session.getSession().createQuery("FROM User WHERE email = :email", User.class).setParameter("email", email).getSingleResult();
+            System.out.println("User found.");
             Quiz quizToAdd =session.getSession().createQuery("from Quiz where quiz_Name =: quizName",Quiz.class).setParameter("quizName",quizName).getSingleResult();
-
+            System.out.println("Quiz found.");
 
             Set<Question> questionQuizSet=quizToAdd.getQuestion();
             Set<Question> questionUserSet=new HashSet<>();
-System.out.println(questionQuizSet.toString());
+            System.out.println(questionQuizSet.toString());
             questionQuizSet.add(question);
             questionUserSet.add(question);
 
             userToAdd.setQuestion(questionUserSet);
             quizToAdd.setQuestion(questionQuizSet);
             question.setUser(userToAdd);
-
+            question.addQuiz(quizToAdd);
             session.save(quizToAdd);
 
 
@@ -152,13 +156,19 @@ System.out.println(questionQuizSet.toString());
             question.setQuestionChoices(qch);
 
             session.save(question);
-
+            System.out.println("question persisted");
             session.getTransaction().commit();
+            message = new Message();
             message.status = true;
-            //return choiceslist too
-         //  message.questionData = new QuestionData(question.getId(), question.getQuestionText(), (ArrayList) question.getQuestionChoices(), question.getPoints(),  question.getUser()); //the rest should already be on the client side??
-        //    message.questionData = new ArrayList<>();
-       //     message.questionData.add(new QuestionData(question.getQuestionText(), (ArrayList) question.getQuestionChoices())); //the rest should already be on the client side??
+
+            message.questionData = new ArrayList<>();
+            System.out.println("array list initialized.");
+            QuestionData questionToReturn = Converter.convertQuestionToQuestionData(question);
+            System.out.println("question converted.");
+            questionToReturn.setId(question.getId());
+            System.out.println("question id set.");
+            message.questionData.add(questionToReturn);
+            System.out.println("question added to message.");
         }
         catch(Exception e)
         {
@@ -179,6 +189,7 @@ System.out.println(questionQuizSet.toString());
             {
                 // connection close failed.
                 System.err.println(e.getMessage());
+
             }
         }
         session.close();
@@ -204,11 +215,13 @@ System.out.println(questionQuizSet.toString());
 
             session.save(newResult);
             session.getTransaction().commit();
-            message.task = "RESULT_CREATED";
+            message = new Message();
+            message.status = true;
         }catch(Exception e) {
             // if the error message is "out of memory",
             // it probably means no database file is found
             System.err.println(e.getMessage());
+            message.status = false;
         }finally{
             try{
                 if(session != null)

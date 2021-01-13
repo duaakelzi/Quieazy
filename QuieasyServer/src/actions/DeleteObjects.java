@@ -1,6 +1,9 @@
 package actions;
 
+import data.ChoicesData;
 import data.Message;
+import data.QuestionData;
+import domain.Choices;
 import domain.Course;
 import domain.Question;
 import domain.Quiz;
@@ -8,32 +11,35 @@ import org.hibernate.Session;
 import org.hibernate.query.Query;
 import persistence.HibernateUtil;
 
-public class DeleteObjects {
-    public static Session session = HibernateUtil.getSessionFactory().openSession();
-    public static Message message = new Message();
+import java.util.ArrayList;
+import java.util.List;
 
-    public static Message deleteQuiz(Long id, String course)
+public class DeleteObjects {
+    public static Session session;
+    public static Message message;
+
+    public static Message deleteQuiz(String quizName, String courseName)
     {
         try {
+            session = HibernateUtil.getSessionFactory().openSession();
             session.beginTransaction();
-            Query queryCourse = session.getSession().createQuery("FROM Course WHERE courseName = :courseName ");
-            queryCourse.setParameter("courseName", course);
-            Course courseToAdd = (Course) queryCourse.list().get(0);
-            Long CourseId = courseToAdd.getId();
-            Query queryQuiz = session.getSession().createQuery("FROM Quiz WHERE quiz_Name= :id ");
-            queryQuiz.setParameter("id", id);
-
-            Quiz quizToDelete = (Quiz) queryQuiz.list().get(0);
-            session.delete(quizToDelete);
-            session.getTransaction().commit();
-
-            message.task = "QUIZ_DELETED";
-    }
-        catch(Exception e)
+            Course course = session.getSession().createQuery("FROM Course WHERE course_name = :course", Course.class).setParameter("course", courseName).getSingleResult();
+            Quiz quizToDelete = session.getSession().createQuery("FROM Quiz WHERE quiz_name= :quiz AND id_course = :course", Quiz.class)
+                    .setParameter("quiz", quizName).setParameter("course", course.getId()).getSingleResult();
+            message = new Message();
+            if(quizToDelete == null){
+                message.status = false;
+            } else {
+                session.delete(quizToDelete);
+                session.getTransaction().commit();
+                message.status = true;
+            }
+    } catch(Exception e)
         {
             // if the error message is "out of memory",
             // it probably means no database file is found
             System.err.println(e.getMessage());
+            message.status = false;
         }
         finally
         {
@@ -55,14 +61,20 @@ public class DeleteObjects {
     public static Message deleteQuestion(Long questionID)
     {
         try {
+            session = HibernateUtil.getSessionFactory().openSession();
             session.beginTransaction();
-            Question questionToDelete = session.getSession().createQuery("FROM Question WHERE id = :id ", Question.class).setParameter("id", questionID).getSingleResult();
+            message = new Message();
+            Question questionToDelete = session.getSession().createQuery("SELECT q FROM Question q WHERE q.id = :id ", Question.class).setParameter("id", questionID).getSingleResult();
+            //tried a different approach: got in the loop
+//            List<Question> potentialQuestions = session.getSession().createQuery("SELECT q FROM Question q WHERE q.questionText = :text AND" +
+//                    "q.points = :points ").setParameter("text", questionText).setParameter("points", points).list();
+
             if (questionToDelete == null) {
-                message.task = "DELETE_FAILED";
+                message.status = false;
             }else {
                 session.delete(questionToDelete);
                 session.getTransaction().commit();
-                message.task = "DELETE_OK";
+                message.status = true;
             }
         }
         catch(Exception e)
@@ -70,6 +82,7 @@ public class DeleteObjects {
             // if the error message is "out of memory",
             // it probably means no database file is found
             System.err.println(e.getMessage());
+            message.status = false;
         }
         finally
         {

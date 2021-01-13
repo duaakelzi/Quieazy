@@ -58,9 +58,7 @@ public class ClientAgent implements Runnable {
 	// (-) Less and more complicated controls over data transmission between client-server.
 	// (-) Tight coupling of Client-Decoder with the UI.
 	public void run() {
-
 		try {
-
 			while (true) {
 				System.out.println("Run method entered.."); //for testing
 				Message message = (Message) in.readObject();
@@ -72,12 +70,12 @@ public class ClientAgent implements Runnable {
 					// call the method that would read the message task and see if it's relevant
 					System.out.println("Message task: " + message.task);// for testing only
 				}
-
 			}
 
 		} catch (Exception e) {
 			System.out.printf("Error occurred in ClientAgent run. Exiting..");
 			System.out.println(e.getMessage());
+			e.printStackTrace();
 		}
 
 	}

@@ -3,8 +3,10 @@
 
 package gui;
 
+import data.QuizData;
 import javafx.scene.*;
 import javafx.scene.paint.Color;
+import requests.QuestionRequests;
 
 public class PrimeScene extends Scene {
 	
@@ -24,8 +26,9 @@ public class PrimeScene extends Scene {
 		
 		if (primeScene == null) {
 			
-			//primeScene = new PrimeScene(Login.getLogin(), WIDTH, HEIGHT, Color.LAVENDER);
-			primeScene = new PrimeScene(Home.getHome(),Color.LAVENDER); 
+			primeScene = new PrimeScene(Login.getLogin(),  Color.LAVENDER);
+			//primeScene = new PrimeScene(Home.getHome(),Color.LAVENDER);
+
 			
 		}
 		
