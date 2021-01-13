@@ -100,7 +100,9 @@ public class CreateQuestionBankBox extends VBox {
         Button searchButton = new Button("➔");
         //    FilteredList<FilterDataQuestionBank> filteredData = new FilteredList<>(dataQuestionObservaleList, s ->true);
             searchButton.setOnAction(actionEvent -> {
+
                 if(listQuestions.getItems() != null){listQuestions.getItems().clear();}
+                if(dataQuestionObservaleList.size() == 0) {fillObservaleListWithData(allQuizesData);}// in case if new Quiz is added not to hold the data from previous selected quiz
                 if(filterDataQuestionBankObservableList.size() != 0){filterDataQuestionBankObservableList.clear();}
 
                     String filterSearch = searchKeyWords.getText();
@@ -172,6 +174,7 @@ public class CreateQuestionBankBox extends VBox {
         Button save = new Button("▼ SAVE QUESTION");
         save.setOnAction(actionEvent -> {
             CreateAddQuestionBox.getCreateAddQuestionBox().fillTableObservableListWithQuestion();
+            dataQuestionObservaleList.clear();
             filterDataQuestionBankObservableList.clear();
             searchKeyWords.clear();
             CreateQuestionBankTab.getCreateQuestionBankTab().closeTab();

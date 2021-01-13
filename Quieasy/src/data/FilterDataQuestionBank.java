@@ -77,9 +77,9 @@ private int indexQuestion;
         authorText.setText(author);
         studyProgramText.setText(studyProgram);
         indexQuizHide.setText(String.valueOf(indexQuiz));
-        //indexQuizHide.setVisible(false);
+        indexQuizHide.setVisible(false);
         indexQuestionHide.setText(String.valueOf(indexQuestion));
-        //indexQuestionHide.setVisible(false);
+        indexQuestionHide.setVisible(false);
     }
 
     public QuestionData getQuestions() {
@@ -128,39 +128,5 @@ private int indexQuestion;
     public GridPane getDataGrid() {
         return dataGrid;
     }
-    //    addButton.setOnAction(actionEvent -> {
-////                            //here save the chosen question to be added to Array Question ArrayList//
-//        dataGrid.setBackground(new Background(new BackgroundFill(Color.LIGHTGREEN, CornerRadii.EMPTY, Insets.EMPTY)));
-//        CreateQuestionBankBox.quiz.addSingleQuestion(CreateQuestionBankBox.allQuizesData
-//                .get(Integer.parseInt(indexQuizHide.getText()))
-//                .getQuestions().get(Integer.parseInt(indexQuestionHide.getText())));
-//        addButton.setDisable(true);
-//        delButton.setDisable(false);
-//
-//    });
-//                delButton.setOnAction(actionEvent -> {
-//        System.out.println(questionData.getQuestions().getQuestion());
-//        dataGrid.setBackground(new Background(new BackgroundFill(Color.WHITE, CornerRadii.EMPTY, Insets.EMPTY)));
-//        for(int i = 0; i < CreateQuestionBankBox.quiz.getQuestions().size(); i++){
-//            if(question.getText().equals(CreateQuestionBankBox.quiz.getQuestions().get(i).getQuestion())){
-//                CreateQuestionBankBox.quiz.removeSingleQuestion(i);
-//                addButton.setDisable(false);
-//                delButton.setDisable(true);
-//            }
-//        }
-//
-//    });
-//
-//
-//
-//                question.setText(questionData.getQuestions().getQuestion());
-//                author.setText(questionData.getAuthor());
-//                studyProgram.setText(questionData.getStudyProgram());
-//                indexQuizHide.setText(String.valueOf(questionData.getIndexQuiz()));
-//                indexQuizHide.setVisible(false);
-//                indexQuestionHide.setText(String.valueOf(questionData.getIndexQuestion()));
-//                indexQuestionHide.setVisible(false);
-//
-//    setGraphic(dataGrid);
 
 }
