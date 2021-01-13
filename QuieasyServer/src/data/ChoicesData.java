@@ -1,10 +1,12 @@
 package data;
 
 import java.io.Serializable;
+import java.lang.Comparable;
 
-public class ChoicesData implements Serializable {
+public class ChoicesData implements Serializable, Comparable {
     private String choiceDescription;
     private boolean isCorrect;
+    private int id;
     //c-tor
 
     public ChoicesData(){ }
@@ -32,11 +34,25 @@ public class ChoicesData implements Serializable {
         isCorrect = correct;
     }
 
-    @Override
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    @Override //can be changed with ids
     public boolean equals(Object o) {
         ChoicesData choiceToCompare = (ChoicesData) o;
         //(String choiceDescription, boolean isCorrect)
         return (choiceDescription.equals(choiceToCompare.getChoiceDescription()) &&
                 isCorrect == choiceToCompare.isCorrect());
+    }
+
+    @Override
+    public int compareTo(Object o) {
+        ChoicesData choiceToCompare = (ChoicesData) o;
+        return Integer.compare(id, choiceToCompare.getId());
     }
 }

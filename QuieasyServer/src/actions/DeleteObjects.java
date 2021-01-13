@@ -1,12 +1,18 @@
 package actions;
 
+import data.ChoicesData;
 import data.Message;
+import data.QuestionData;
+import domain.Choices;
 import domain.Course;
 import domain.Question;
 import domain.Quiz;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 import persistence.HibernateUtil;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class DeleteObjects {
     public static Session session;
@@ -59,7 +65,9 @@ public class DeleteObjects {
             session.beginTransaction();
             message = new Message();
             Question questionToDelete = session.getSession().createQuery("SELECT q FROM Question q WHERE q.id = :id ", Question.class).setParameter("id", questionID).getSingleResult();
-            //does it handle orphan removal?
+            //tried a different approach: got in the loop
+//            List<Question> potentialQuestions = session.getSession().createQuery("SELECT q FROM Question q WHERE q.questionText = :text AND" +
+//                    "q.points = :points ").setParameter("text", questionText).setParameter("points", points).list();
 
             if (questionToDelete == null) {
                 message.status = false;

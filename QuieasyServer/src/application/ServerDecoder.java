@@ -85,7 +85,7 @@ public class ServerDecoder {
             ArrayList<QuestionData> questionData = message.questionData;
             response = new Message();
             int count = 0;
-            for(QuestionData q : questionData) {
+            for(QuestionData q : message.questionData) {
                 response = Request.deleteQuestion(q.getId());
                 if(response.status) {
                     count++;
@@ -104,7 +104,7 @@ public class ServerDecoder {
             response = new Message();
             response = Request.retrieveQuestions(quiz.getCourse(), quiz.getName()); //for this, all quizzes should have an id saved
             response.task = message.task;
-            return  response;
+            return response;
         }else if (message.task.equals("SAVE_RESULT")) {
             UserData userData = message.userData;
             QuizData quizData = message.quizData;

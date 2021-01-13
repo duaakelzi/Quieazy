@@ -25,10 +25,11 @@ public class QuieasyServerThread extends Thread {
         ) {
         	
         	// Listen for incoming messages.
-        	Message message = null;
+      //  	Message message = null;
 
 			while(true) {
-				
+				Message message = new Message();
+
 				message = (Message) in.readObject();
 
 				if(message != null) {

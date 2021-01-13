@@ -94,9 +94,7 @@ public class RetrieveObjects {
                    QuestionData newQuestionData = Converter.convertQuestionToQuestionData(questions.get(0));
                    message.questionData.add(newQuestionData);
                 message.status = true;
-                }
-
-                else {
+                }else {
                 message.status = false;
             }
             session.close();

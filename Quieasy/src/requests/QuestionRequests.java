@@ -58,6 +58,7 @@ public class QuestionRequests {
         request.task = "FETCH_ALL_QUESTIONS";
         request.quizData = quiz;
         Message response = clientAgent.sendAndWaitForResponse(request);
+
         if(response != null && response.status){
             System.out.println("Questions retrieved successfully.");
         }else if(response != null && (!response.status)){
@@ -74,6 +75,7 @@ public class QuestionRequests {
         request.quizData = quiz;
         request.questionData = questions;
         Message response = clientAgent.sendAndWaitForResponse(request);
+        //can return null
         return response.status;
     }
 }
