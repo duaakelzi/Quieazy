@@ -21,12 +21,8 @@ public class CreateQuizTab extends Tab {
 
 	// Gets the current instance -> Singleton
 	public static CreateQuizTab getCreateQuizTab() {
-		
 		if (createQuizTab == null) createQuizTab = new CreateQuizTab();
-
-		
 		return createQuizTab;
-		
 	}
 
 	public void closeTab(){

@@ -343,8 +343,8 @@ public class CreateAddQuestionBox extends VBox {
                 //save the questions again -> might be new ones there? !!! do you need to check for existence?
                 QuestionRequests.persistNewQuestions(UserRequests.getCurrentUser(), CreateQuizBox.getCreateQuizBox().getQuiz(), newQuestions);
                 //play the quiz
-                MainPane.getMainPane().getTabs().add(new Tab("Play", new PlayQuizBox(CreateQuizBox.getCreateQuizBox().getQuiz()))); //remove the PlayQuizTab
-
+                //MainPane.getMainPane().getTabs().add(new Tab("Play", new PlayQuizBox(CreateQuizBox.getCreateQuizBox().getQuiz()))); //remove the PlayQuizTab !!! can not be removed tab because Chernet designed to be everything a tab controled by a singleton Object.
+                MainPane.getMainPane().getTabs().add(PlayQuizTab.getPlayQuizTab()); // it is opening the play quiz
             }
         });
 

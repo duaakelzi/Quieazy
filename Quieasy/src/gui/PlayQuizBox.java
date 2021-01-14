@@ -32,9 +32,8 @@ public class PlayQuizBox extends VBox {
     private Label minutes;
     private Label dot;
     private Label seconds;
-    private TilePane tilePaneTImer;
-    Integer min = 3; //here get the ttime from DB -1 because the second is starting with 59
-    private Integer sec = 59;
+    private Integer min; //here get the ttime from DB -1 because the second is starting with 59
+    private Integer sec;
     private RadioButton[] answersCheck;
     private Button submit;
     private Button next;
@@ -42,18 +41,21 @@ public class PlayQuizBox extends VBox {
     //missing: Quiz with its questionData and user info
     private QuizData quiz;
     private ArrayList<QuestionData> quizQuestions;
-    private String selectedAnswer[];
+    private String[] selectedAnswer;
     private static int indexQuestion = 0;
-    private ToggleGroup group;
     ProgressIndicator indicator;
-    //  private ArrayList<ChoicesData> questionChoices;
+    Pagination trackquestions;
+    private final int NUMBEROFCHOICES = 4;
+  //  private ArrayList<ChoicesData> questionChoices;
 
     //constructor*****
-    public PlayQuizBox(QuizData quizToPlay) { //this shouldn't be empty but receive the quizData from the MyQuiz
-        quiz = quizToPlay;
+    private PlayQuizBox() { //this shouldn't be empty but receive the quizData from the MyQuiz QuizData
+        // quizToPlay
+        quiz = CreateQuizBox.getCreateQuizBox().getQuiz();
+        //quiz = quizToPlay;
         quizQuestions = quiz.getQuestions();
         //fetch all questions here
-        //  fetchQuestions(quizToPlay);
+      //  fetchQuestions(quizToPlay);
 
         // questions track with Pagination
         HBox questionsTrack = initiateQuestionTrack();
@@ -68,7 +70,13 @@ public class PlayQuizBox extends VBox {
         HBox buttons = initiateButtons();
 
         this.getChildren().addAll(questionsTrack, markQuestion, answers, buttons);
+        fillQuestionChoicesWithdata(indexQuestion);
 
+    }
+
+    public static PlayQuizBox getPlayQuizBox() {
+        if(playQuizBox == null){ playQuizBox = new PlayQuizBox();}
+        return playQuizBox;
     }
 
     //not needed because quiz already contains all data. Maybe needed when browser is available
@@ -84,9 +92,18 @@ public class PlayQuizBox extends VBox {
         HBox questionstrack = new HBox(quiz.getQuestions().size());
         questionstrack.setAlignment(Pos.CENTER);
         //questionstrack.setPadding(new Insets(10));
-        Pagination trackquestions = new Pagination(quiz.getQuestions().size());
-        trackquestions.getStyleClass().add(Pagination.STYLE_CLASS_BULLET);
-        indicator = new ProgressIndicator(0.0);
+        trackquestions = new Pagination();
+        trackquestions.setPageCount(quiz.getQuestions().size());
+        trackquestions.setMaxPageIndicatorCount(10);
+       // trackquestions.getStyleClass().add(Pagination.STYLE_CLASS_BULLET);
+         indicator = new ProgressIndicator(0.0);
+         trackquestions.currentPageIndexProperty().addListener(new ChangeListener<Number>() {
+             @Override
+             public void changed(ObservableValue<? extends Number> observableValue, Number number, Number t1) {
+                 fillQuestionChoicesWithdata(observableValue.getValue().intValue());
+                 System.out.println("Observale " + observableValue.getValue().intValue() + " number: " + number + " t1 :" + t1);
+             }
+         });
         AnchorPane anchor = new AnchorPane();
         AnchorPane.setTopAnchor(trackquestions, 10.0);
         AnchorPane.setRightAnchor(trackquestions, 10.0);
@@ -108,9 +125,8 @@ public class PlayQuizBox extends VBox {
         textMark = new Label();
         textMark.setWrapText(true);
         textMark.setFont(Font.font("Times New Roman", 17));
-
         //timer
-        tilePaneTImer = new TilePane();
+        TilePane tilePaneTImer = new TilePane();
         minutes = new Label();
         dot = new Label();
         seconds = new Label();
@@ -136,48 +152,39 @@ public class PlayQuizBox extends VBox {
         question.setPrefHeight(100);
         questionText = new Text();
         questionText.setWrappingWidth(535);
-
         questionText.setFont(Font.font("Times New Roman", 20));
         //for first view only
-        initiateDataPlayQuiz(indexQuestion);
+        //initiateDataPlayQuiz(indexQuestion);
         question.getChildren().addAll(questionText);
         question.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
         markQuestion.getChildren().addAll(mark, question);
-
-
         return markQuestion;
     }
 
-    // shows the choices for the question
+   // shows the choices for the question
     public VBox initiateAnswers(){
         VBox answers = new VBox(20);
-        group = new ToggleGroup();
+        ToggleGroup group = new ToggleGroup();
         answers.setPrefWidth(650);
         answersCheck = new RadioButton[4];
         selectedAnswer =new String[quiz.getQuestions().size()];
         answers.setBackground(new Background(new BackgroundFill(Color.LIGHTCYAN, null, null)));
         answers.setPadding(new Insets(20, 10, 10, 140));
-
-        for(int i= 0; i < quizQuestions.get(indexQuestion).getAnswers().size(); i++){
+        for(int i= 0; i < NUMBEROFCHOICES; i++){
             //for first view only
-            RadioButton answer = showAnswer(quizQuestions.get(indexQuestion).getAnswers(), i);
+            RadioButton answer = new RadioButton();
             answersCheck[i]=answer;
-            System.out.println(answer.getText());
-            System.out.println(quizQuestions.get(indexQuestion).getAnswers().get(i).getChoiceDescription()); //test
+            answer.setFont(Font.font("Times New Roman", 16));
+//            System.out.println(answer.getText());
+//            System.out.println(quizQuestions.get(indexQuestion).getAnswers().get(i).getChoiceDescription()); //test
             answersCheck[i].setToggleGroup(group);
             answers.getChildren().addAll(answersCheck[i]);
-            answer.selectedProperty().addListener(new ChangeListener<Boolean>() {
-                @Override
-                public void changed(ObservableValue<? extends Boolean> observableValue, Boolean old_value, Boolean new_val) {
-                    boolean selected =answer.isSelected();
-
-                   if (selected){System.out.println("selected :"+answer.getText());
-                   selectedAnswer[indexQuestion]=answer.getText();
-                   }
-                   else {System.out.println("not selected :"+answer.getText());
-                       selectedAnswer[indexQuestion] =" ";
-                   }//what should happen here?
-                }
+            answer.selectedProperty().addListener((observableValue, old_value, new_val) -> {
+               boolean selected =answer.isSelected();
+               if (selected){System.out.println("selected :"+answer.getText());
+               selectedAnswer[indexQuestion]=answer.getText();;
+               }
+               else {{System.out.println("not selected :"+answer.getText());}}//what should happen here?
             });
         }
         return answers;
@@ -187,9 +194,8 @@ public class PlayQuizBox extends VBox {
     private RadioButton showAnswer(ArrayList<ChoicesData> questionChoices, int pos){
         RadioButton answer = new RadioButton();
         answer.setFont(Font.font("Times New Roman", 16));
-
         answer.setText(questionChoices.get(pos).getChoiceDescription());
-        System.out.println("show"+questionChoices.get(pos).getChoiceDescription());
+        //System.out.println("show"+questionChoices.get(pos).getChoiceDescription());
         return answer;
     }
 
@@ -214,49 +220,16 @@ public class PlayQuizBox extends VBox {
         next.setEffect(new DropShadow());
         //so far doesn't work. same behavior expected of the questionsTrack
         next.setOnAction(actionEvent -> {
-
-            try {
-
-                indexQuestion++;
-                double progres = (indexQuestion*1.0)/quizQuestions.size();
-                indicator.setProgress(progres);
-                if (indexQuestion==quizQuestions.size()){indexQuestion=0;}
-                else{
-                    this.textMark.setText("Question " + (indexQuestion + 1) + "\n Point :" + quizQuestions.get(indexQuestion).getPoints());
-
-                    this.questionText.setText(quizQuestions.get(indexQuestion).getQuestion());
-                    for (int i = 0; i < 4; i++) {
-                        answersCheck[i].setText(quizQuestions.get(indexQuestion).getAnswers().get(i).getChoiceDescription());
-                        answersCheck[i].setSelected(false);
-                        RadioButton r=answersCheck[i];
-                        r.selectedProperty().addListener(new ChangeListener<Boolean>() {
-                            @Override
-                            public void changed(ObservableValue<? extends Boolean> observableValue, Boolean old_value, Boolean new_val) {
-                                boolean selected =r.isSelected();
+                    indexQuestion++;
+                    fillQuestionChoicesWithdata(indexQuestion);
 
 
-                                if (selected){System.out.println("selected :"+r.getText());
-                                    selectedAnswer[indexQuestion]=r.getText();;
-                                }
-                                else {{System.out.println("not selected :"+r.getText());}}//what should happen here?
-                            }
-                        });
-                    }
 
-                    }
-
-                this.questionText.setText(quizQuestions.get(indexQuestion).getQuestion());
-                for (int i = 0; i < 4; i++) {
-                    answersCheck[i].setText(quizQuestions.get(indexQuestion).getAnswers().get(i).getChoiceDescription());
-                    answersCheck[i].setSelected(false);
-                }
-                indicator.setProgress(Double.valueOf(indexQuestion*100.0/quizQuestions.size()));
-
-            }catch (IndexOutOfBoundsException e){
-                System.out.println(" I am out of boundary");
-
-            }
-
+//            for(int i = 1; i< quiz.getQuestions().size(); i++) {
+//                textMark.setText("Quiz: " + quiz.getName() + "\n" + "Question " + i + "\n" + "Quiz threshold: " + quiz.getThreshold()); // additional info: status (answered/not), points (out of total)
+//                questionText.setText(quizQuestions.get(i).getQuestion());
+//                initiateAnswers(i);
+//            }
         });
         return next;
     }
@@ -277,9 +250,10 @@ public class PlayQuizBox extends VBox {
             // !! at least one question should be answered!!
             CheckCorrectAnswerC ch=new CheckCorrectAnswerC();
             System.out.println(selectedAnswer[0]);
-            Message resultData =ch.checkAnswers(quiz,selectedAnswer);
-            System.out.println("play Result");
-            MainPane.getMainPane().getTabs().add(new Tab("result",new CreateQuizResultBox(resultData)));
+            Message i=ch.checkAnswers(quiz,selectedAnswer);
+            System.out.println("play Result"+i);
+            MainPane.getMainPane().getTabs().add(QuizFinalResultTab.getQuizFinalResultTab());
+           // MainPane.getMainPane().getTabs().add(new Tab("result",new CreateQuizResultBox(i)));
             CreateAddQuestionTab.getCreateAddQuestionTab().closeTab();
 
         });
@@ -297,9 +271,44 @@ public class PlayQuizBox extends VBox {
 
     private void initiateDataPlayQuiz(int pos){
 
-        this.textMark.setText("Question " + (pos+1) + "\n Points: " + quizQuestions.get(pos).getPoints());
-        this.questionText.setText(quizQuestions.get(pos).getQuestion());
+            this.textMark.setText("Question " + (pos+1) + "\nPoints: " + quizQuestions.get(pos).getPoints());
+            this.questionText.setText(quizQuestions.get(pos).getQuestion());
 
+    }
+
+    private void fillQuestionChoicesWithdata(int indexofQuestion){
+        try {
+
+            double progres = (indexQuestion*1.0)/quizQuestions.size();
+            indicator.setProgress(progres);
+            if (indexQuestion==quizQuestions.size()){indexQuestion=0;}
+            else{
+
+                this.textMark.setText("Question " + (indexofQuestion+1) + "\nPoint : " + quizQuestions.get(indexofQuestion).getPoints());
+                trackquestions.setCurrentPageIndex(indexofQuestion);
+                this.questionText.setText(quizQuestions.get(indexofQuestion).getQuestion());
+                for (int i = 0; i < NUMBEROFCHOICES; i++) {
+                    answersCheck[i].setText(quizQuestions.get(indexofQuestion).getAnswers().get(i).getChoiceDescription());
+                    answersCheck[i].setSelected(false);
+                    RadioButton choicesOfQuestionsRadioButtons=answersCheck[i];
+                    choicesOfQuestionsRadioButtons.selectedProperty().addListener(new ChangeListener<Boolean>() {
+                        @Override
+                        public void changed(ObservableValue<? extends Boolean> observableValue, Boolean old_value, Boolean new_val) {
+                            boolean selected =choicesOfQuestionsRadioButtons.isSelected();
+                            if (selected){System.out.println("selected :"+choicesOfQuestionsRadioButtons.getText());
+                                selectedAnswer[indexQuestion]=choicesOfQuestionsRadioButtons.getText();;
+                            }
+                            else {{System.out.println("not selected :"+choicesOfQuestionsRadioButtons.getText());}}//what should happen here?
+                        }
+                    });
+                }
+
+            }
+
+        }catch (IndexOutOfBoundsException e){
+            System.out.println(" I am out of boundary");
+
+        }
     }
 
 
@@ -308,6 +317,7 @@ public class PlayQuizBox extends VBox {
         Timeline time = new Timeline();
         time.setCycleCount(Timeline.INDEFINITE);
         min = quiz.getTimer()-1;
+        sec = 59;
         //  time.stop();
 
         KeyFrame frame = new KeyFrame(Duration.seconds(1), actionEvent -> {
