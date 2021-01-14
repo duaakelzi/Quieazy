@@ -1,34 +1,32 @@
 # Quieazy
 Software Project Quiz App
 
+### Installation guide for Intellij
 
--Import the projects "Quieasy" and "QuieasyServer" to Eclipse.
+### Step 1: Import project
+The easiest is to import the project from git. To do so go to 
+_File > New > Project from Version Control_. Enter the URL: https://github.com/duaakelzi/Quieazy. The project should be imported with Quieasy and QuieasyServer modules under Quieazy project folder.
 
--To set the port for the server Right Click on the project "QuieasyServer" then:
- >Run As>Run Configurations
+### Step 2: Dependencies
+The project needs the following dependencies: 
+- **hibernate 5.4.*** and **mysql-connector 8.0.*** for the server,
+- **javafx 15.0.*** and **junit** (4) for the client.
 
-Now make sure "QuieasyServer" (embedded class file) is selected on the left.
-Click on the "Arguments" tab and enter 3000 in the "Program arguments" field.
-Click "Apply" and wait. "Close" when done.
+To add external libraries, go to _File > Project Structure > Libraries_. Click on _"+" -> Java_ and select the jars from your local PC. After modules were selected, make sure you _Apply_ your changes.
 
-Run the app "QieasyServer". You should see "Quieasy server running on port 3000" on the console output. Exit the app.
+### Step 3: Miscellaneous
+Make sure you gitignore the **.idea/*** ,  ***.log** ,   ***.class** files.
 
--Copy the folder "SQLite" to the root directory on your PC so that it is located at C:\SQLite
+The launching files are: **Quieasy>src>application>Quieasy** for client and **QuieasyServer>src>application>QuieasyServer** for the server. To set the port for the server, go to its run configurations and set it to 3000.
 
--Add the "sqlite-jdbc" driver to QuieasyServer Build Path as follows.
- Right Click on QuieasyServer->Build Path->Configure Build Path...->Add External Jar
- A file browser will open.
- Navigate to C:\SQLite\sqlite-jdbc-3.32.3.2 and select the file.
- Now click on "Apply and Close" and wait.
 
->> THAT IS ALL FOR THE SETUP <<
+> THAT IS ALL FOR THE SETUP <
 
-Now you can test the apps. Run "QuieasyServer" first.
-While the server is up and running start "Quieasy". You should see the "Log in" dialog.
+### Step 4: Run
+Now you can test the apps. To start, run the app "QuieasyServer" first. You should see "Quieasy server running on port 3000" on the console output. Then you can start the "Quieasy" app. You should see the "Log in" dialog.
+
 
 Try to login as username: user@example.com
                            password: 123
 
 Other login attempts should fail.
-
-git Reset 12/12 
