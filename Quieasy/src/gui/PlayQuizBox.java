@@ -252,7 +252,8 @@ public class PlayQuizBox extends VBox {
             System.out.println(selectedAnswer[0]);
             Message i=ch.checkAnswers(quiz,selectedAnswer);
             System.out.println("play Result"+i);
-            MainPane.getMainPane().getTabs().add(new Tab("result",new CreateQuizResultBox(i)));
+            MainPane.getMainPane().getTabs().add(QuizFinalResultTab.getQuizFinalResultTab());
+           // MainPane.getMainPane().getTabs().add(new Tab("result",new CreateQuizResultBox(i)));
             CreateAddQuestionTab.getCreateAddQuestionTab().closeTab();
 
         });

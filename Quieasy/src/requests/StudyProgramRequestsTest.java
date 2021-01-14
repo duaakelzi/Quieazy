@@ -2,10 +2,14 @@ package requests;
 
 import application.ClientAgent;
 import data.StudyProgramData;
-import org.junit.*;
-import static org.junit.Assert.*;
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
+import org.junit.Test;
 
 import java.util.ArrayList;
+
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 public class StudyProgramRequestsTest {
     private static StudyProgramData existingSP;
