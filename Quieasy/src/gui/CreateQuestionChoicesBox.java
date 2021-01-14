@@ -146,9 +146,12 @@ public class CreateQuestionChoicesBox extends VBox {
                    //not sure this works:
                    CreateAddQuestionBox.getNewQuestions().add(newQuestionAdd);
                    System.out.println("Size of array of new questions after adding: " + CreateAddQuestionBox.getNewQuestions().size());
-                   //add to allQuestions
-                   quiz.getQuestions().add(newQuestionAdd);
-                   int index = quiz.getQuestions().indexOf(newQuestionAdd);
+
+                   //add to the almighty question array which will be displayed to user
+                   CreateAddQuestionBox.getAllQuestions().add(newQuestionAdd);
+
+               //    quiz.getQuestions().add(newQuestionAdd);
+                   int index = CreateAddQuestionBox.getAllQuestions().indexOf(newQuestionAdd);
                    CreateAddQuestionBox.getCreateAddQuestionBox().fillTableObservableListWithQuestion();
                }
                 CreateQuestionChoicesTab.getCreateQuestionChoicesTab().closeTab();

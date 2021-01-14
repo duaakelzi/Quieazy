@@ -28,7 +28,7 @@ public class CreateAddQuestionBox extends VBox {
         private TableView<TableFillQuestions> tableViewListQuestions;
         private ObservableList<TableFillQuestions> questionsToList; //this hold the data in the tableListView to display in the table
         private TableColumn<TableFillQuestions, Integer> idCol;
-        private ArrayList<QuestionData> allQuestions = CreateQuizBox.getCreateQuizBox().getQuiz().getQuestions(); //to list all questions
+        private static ArrayList<QuestionData> allQuestions = new ArrayList<>(); //to list all questions
         private static ArrayList<QuestionData> newQuestions = new ArrayList<>(); //for new questions only
         private static ArrayList<QuestionData> oldQuestions = new ArrayList<>(); //for questions from the QuestionBank
         private TableFillQuestions selectedItem;
@@ -62,6 +62,14 @@ public class CreateAddQuestionBox extends VBox {
 
     public void setUpdatedQuestions(ArrayList<QuestionData> updatedQuestions) {
         this.updatedQuestions = updatedQuestions;
+    }
+
+    public static ArrayList<QuestionData> getAllQuestions() {
+        return allQuestions;
+    }
+
+    public void setAllQuestions(ArrayList<QuestionData> allQuestions) {
+        this.allQuestions = allQuestions;
     }
 
     //get the current instance ->Singleton
@@ -261,6 +269,10 @@ public class CreateAddQuestionBox extends VBox {
 
     }
 
+
+    public static ArrayList<QuestionData> getOldQuestions() {
+        return oldQuestions;
+    }
 
     // data model for list of Question in CreateQuestionBox
     public static class TableFillQuestions {

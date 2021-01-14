@@ -25,14 +25,14 @@ public class CreateQuestionBankBox extends VBox {
     public ObservableList<FilterDataQuestionBank> dataQuestionObservaleList; // contain data from all quizes ready to be filtered
     public ObservableList<FilterDataQuestionBank> filterDataQuestionBankObservableList; //contain filtered data only
     public static QuizData quiz;
-
     public List<String> inputSearchText;
     public List<String> questionsDB;
     private Label warrningNotFound;
     private TextField searchKeyWords;
 
-    public static ArrayList<QuizData> allQuizesData;
-
+//***************************** fetch data from DB here********************************** return questionData with question owner
+    public static ArrayList<QuestionData> allQuestionsData; //this holds all data from DB before beeing transformed in FilteredData Objects
+//***************************************************************************************
     // test data this should be from database
     ArrayList<ChoicesData> q1answer = new ArrayList<>();
     QuestionData q1 = new QuestionData("indirect question I need the Left hand list view too scroll all the way down. ... goal org.openjfx:javafx-maven-plugin:0.0.4:run (default-cli) on project Kochbuch: .", q1answer);
@@ -65,7 +65,7 @@ public class CreateQuestionBankBox extends VBox {
         quiz = CreateQuizBox.getCreateQuizBox().getQuiz();// new quiz created by user to be added the questions
 //****************************************************************************
 
-        allQuizesData = new ArrayList<>();
+        allQuestionsData = new ArrayList<>();
         //data for testing replace with DB data
         q1answer.add(new ChoicesData("1",true));
         q1answer.add(new ChoicesData("2", false));
@@ -73,9 +73,9 @@ public class CreateQuestionBankBox extends VBox {
         questionDataArrayList.add(q2);
         questionDataArrayList.add(q3);
         questionDataArrayList.add(q4);
-        allQuizesData.add(new QuizData("Program si CTS", "Course is Calculus","My name is Janea", 20, 60, questionDataArrayList));
-        allQuizesData.add(new QuizData("ITF", "Programming 3", "Bourdau", 50, 60, questionDataArrayList));
-        fillObservaleListWithData(allQuizesData);
+//        allQuizesData.add(new QuizData("Program si CTS", "Course is Calculus","My name is Janea", 20, 60, questionDataArrayList));
+//        allQuizesData.add(new QuizData("ITF", "Programming 3", "Bourdau", 50, 60, questionDataArrayList));
+        fillObservaleListWithData(allQuestionsData);
     }
 
     //get the current instance ->Singleton
@@ -102,7 +102,7 @@ public class CreateQuestionBankBox extends VBox {
             searchButton.setOnAction(actionEvent -> {
 
                 if(listQuestions.getItems() != null){listQuestions.getItems().clear();}
-                if(dataQuestionObservaleList.size() == 0) {fillObservaleListWithData(allQuizesData);}// in case if new Quiz is added not to hold the data from previous selected quiz
+                if(dataQuestionObservaleList.size() == 0) {fillObservaleListWithData(allQuestionsData);}// in case if new Quiz is added not to hold the data from previous selected quiz
                 if(filterDataQuestionBankObservableList.size() != 0){filterDataQuestionBankObservableList.clear();}
 
                     String filterSearch = searchKeyWords.getText();
@@ -173,6 +173,7 @@ public class CreateQuestionBankBox extends VBox {
         HBox saveHbox = new HBox();
         Button save = new Button("▼ SAVE QUESTION");
         save.setOnAction(actionEvent -> {
+
             CreateAddQuestionBox.getCreateAddQuestionBox().fillTableObservableListWithQuestion();
             dataQuestionObservaleList.clear();
             filterDataQuestionBankObservableList.clear();
@@ -186,16 +187,17 @@ public class CreateQuestionBankBox extends VBox {
     }
 
 
-    public void fillObservaleListWithData(ArrayList<QuizData> allQuizesData){
-        System.out.println("allQuizesDatafrom fillObservablewithData "+ allQuizesData.size());
-        System.out.println("allQuizesDataQuestions fillObservablewithData "+ allQuizesData.get(0).getQuestions().size() + " and " +allQuizesData.get(1).getQuestions().size());
-        for(int i = 0; i < allQuizesData.size(); i++){
-            for(int j = 0; j < allQuizesData.get(i).getQuestions().size(); j++) {
-                dataQuestionObservaleList.addAll(new FilterDataQuestionBank(allQuizesData.get(i).getQuestions().get(j),
-                        allQuizesData.get(i).getOwnerQuiz(),
-                        allQuizesData.get(i).getProgram(), i, j));
+    public void fillObservaleListWithData(ArrayList<QuestionData> allQuestionsData) {
+//        System.out.println("allQuizesDatafrom fillObservablewithData "+ allQuestionsData.size());
+//        System.out.println("allQuizesDataQuestions fillObservablewithData "+ allQuestionsData.get(0).getQuestions().size() + " and " +allQuestionsData.get(1).getQuestions().size());
+        for (int i = 0; i < allQuestionsData.size(); i++) {
 
-            }
+//                dataQuestionObservaleList.addAll(new FilterDataQuestionBank(allQuestionsData.get(i).getQuestion(),
+//                       // allQuestionsData.get(i).getOwner(),
+////                        i));// instead of study program put course
+////
+//
+//        }
         }
     }
 
@@ -220,9 +222,13 @@ public class CreateQuestionBankBox extends VBox {
                 questionData.getAddButton().setOnAction(actionEvent -> {
 //                            //here save the chosen question to be added to Array Question ArrayList//
                     questionData.getDataGrid().setBackground(new Background(new BackgroundFill(Color.LIGHTGREEN, CornerRadii.EMPTY, Insets.EMPTY)));
-                    CreateQuestionBankBox.quiz.addSingleQuestion(CreateQuestionBankBox.allQuizesData
-                            .get(Integer.parseInt(questionData.getIndexQuizHide().getText()))
-                            .getQuestions().get(Integer.parseInt(questionData.getIndexQuestionHide().getText())));
+                    // add imported question to oldQuestions method in the CreateAddQuestionBox
+                    CreateAddQuestionBox.getOldQuestions().add(questionData.getQuestions());
+//                    CreateQuestionBankBox.quiz.addSingleQuestion(CreateQuestionBankBox.allQuizesData
+//                            .get(Integer.parseInt(questionData.getIndexQuizHide().getText()))
+//                            .getQuestions().get(Integer.parseInt(questionData.getIndexQuestionHide().getText())));
+                    //add to the almighty question array which will be displayed to user
+                    CreateAddQuestionBox.getAllQuestions().add(questionData.getQuestions());
                     questionData.getAddButton().setDisable(true);
                     questionData.getDelButton().setDisable(false);
 
@@ -230,13 +236,18 @@ public class CreateQuestionBankBox extends VBox {
                 questionData.getDelButton().setOnAction(actionEvent -> {
                     System.out.println(questionData.getQuestions().getQuestion());
                     dataGrid.setBackground(new Background(new BackgroundFill(Color.WHITE, CornerRadii.EMPTY, Insets.EMPTY)));
-                    for(int i = 0; i < CreateQuestionBankBox.quiz.getQuestions().size(); i++){
-                        if(questionData.getQuestion().getText().equals(CreateQuestionBankBox.quiz.getQuestions().get(i).getQuestion())){
-                            CreateQuestionBankBox.quiz.removeSingleQuestion(i);
-                            questionData.getAddButton().setDisable(false);
-                            questionData.getDelButton().setDisable(true);
-                        }
-                    }
+                    // delete fro the temp array (indexOf(questionData.getId))
+                    CreateAddQuestionBox.getOldQuestions().remove(questionData.getQuestions());
+                    //remove from the almighty array of questions (not sure this works: should remove the question of this id)
+                    CreateAddQuestionBox.getAllQuestions().remove(questionData.getQuestions());// (allQuestionsData.get(indexOf(questionData.getQuestion()))));
+
+//                    for(int i = 0; i < CreateQuestionBankBox.quiz.getQuestions().size(); i++){
+//                        if(questionData.getQuestion().getText().equals(CreateQuestionBankBox.quiz.getQuestions().get(i).getQuestion())){
+//                            CreateQuestionBankBox.quiz.removeSingleQuestion(i);
+//                            questionData.getAddButton().setDisable(false);
+//                            questionData.getDelButton().setDisable(true);
+//                        }
+//                    }
 
                 });
 

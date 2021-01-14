@@ -29,6 +29,16 @@ public class QuizData implements Serializable {
         //lastName = UserC.getCurrentUser().getLastName();
     }
 
+    public QuizData(String program, String course, String name, double threshold, int timer) {
+        this.program = program;
+        this.course = course;
+        this.name = name;
+        this.threshold = threshold;
+        this.timer = timer;
+        //firstName = UserC.getCurrentUser().getFirstName();
+        //lastName = UserC.getCurrentUser().getLastName();
+    }
+
     public String getName() {
         return name;
     }

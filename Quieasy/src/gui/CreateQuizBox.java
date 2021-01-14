@@ -3,7 +3,6 @@
 package gui;
 
 import data.Course;
-import data.QuestionData;
 import data.QuizData;
 import data.StudyProgramHS;
 import javafx.collections.FXCollections;
@@ -284,8 +283,7 @@ public class CreateQuizBox extends VBox {
 				quiz = new QuizData(studyProgramComboBox.getValue(),
 						courseComboBox.getValue(), textname.getText(),
 						Double.parseDouble(textThreshold.getText()),
-						Integer.parseInt(textTime.getText()),
-						new ArrayList<QuestionData>());
+						Integer.parseInt(textTime.getText()));
 				QuizC.createNewQuiz(quiz); // it is not connected to DB
 
 				MainPane.getMainPane().getTabs().add(CreateAddQuestionTab.getCreateAddQuestionTab());
