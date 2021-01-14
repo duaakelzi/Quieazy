@@ -9,6 +9,11 @@ import data.*;
 public class ClientDecoder {
 	
 	// Decode and forward message to the appropriate class for execution.
+
+	/**
+	 *
+	 * @param message
+	 */
 	public static void decode(Message message) {
 		
 		if(message.task.equals("LOGIN_OK")) { // on successful login or account creation

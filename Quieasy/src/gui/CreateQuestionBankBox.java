@@ -96,7 +96,7 @@ public class CreateQuestionBankBox extends VBox {
         searchKeyWords = new TextField();
         searchKeyWords.setFont(Font.font("Times New Roman", FontWeight.NORMAL, 18));
         searchKeyWords.setMinWidth(400);
-        searchKeyWords.setPromptText("Filter");
+        searchKeyWords.setPromptText("Search");
         Button searchButton = new Button("➔");
         //    FilteredList<FilterDataQuestionBank> filteredData = new FilteredList<>(dataQuestionObservaleList, s ->true);
             searchButton.setOnAction(actionEvent -> {
