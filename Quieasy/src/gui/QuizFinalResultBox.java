@@ -1,5 +1,6 @@
 package gui;
 
+import javafx.geometry.Insets;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -30,14 +31,22 @@ public class QuizFinalResultBox extends VBox {
 
 
     private VBox passedQuiz(){
-        VBox congradulations = new VBox();
+        VBox passFailVBox = new VBox();
+        passFailVBox.setPadding(new Insets(0,0,0, 130));
         ImageView congradulation = new ImageView(new Image("images/congradulations.png"));
-        Label yourScore = new Label("YOUR SCORE: ");
-        yourScore.setFont(Font.font("Times New Roman", FontWeight.EXTRA_BOLD, 26));
-        yourScore.setTextFill(Color.FIREBRICK);
-        congradulations.getChildren().addAll(congradulation, yourScore);
+        passFailVBox.setPrefWidth(600);
+        ImageView failer = new ImageView(new Image("images/fail.png"));
+        Label yourScoreLabel = new Label("YOUR SCORE:  " + "99" +" points");
+        yourScoreLabel.setPadding(new Insets(0,0,0,20));
+        yourScoreLabel.setFont(Font.font("Times New Roman", FontWeight.EXTRA_BOLD, 26));
+        yourScoreLabel.setTextFill(Color.FIREBRICK);
+        if(72 >= CreateQuizBox.getCreateQuizBox().getQuiz().getThreshold()) {
+            passFailVBox.getChildren().addAll(congradulation, yourScoreLabel);
+        }else{
+            passFailVBox.getChildren().addAll(failer, yourScoreLabel);
+        }
 
-       return congradulations;
+       return passFailVBox;
     }
 //    ImageView submitImg = new ImageView(new Image("images/submit.png"));
 //        submit.setGraphic(submitImg);
