@@ -16,7 +16,7 @@ public class Quieasy extends Application {
 		
 		//connect to server
 		ClientAgent clientAgent = ClientAgent.getClientAgent();
-		
+
 		// start listening for incoming messages
 		(new Thread(clientAgent)).start();
 		

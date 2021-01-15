@@ -32,6 +32,16 @@ public class QuestionData implements Serializable {
 
     public void setQuestion(String question){ this.question = question; }
 
+    public String getCorrectAnswer(){
+        String answerCorrect = "";
+        for (ChoicesData answer : answers) {
+            if (answer.getIsCorrectAnswer()) {
+                answerCorrect = answer.getChoiceDescription();
+            }
+        }
+        return answerCorrect;
+    }
+
     public void setAnswers(ArrayList<ChoicesData> choicesData) { this.answers = choicesData;}
     public void setId (Long id) { this.id = id; }
     public Long getId() {return this.id;}

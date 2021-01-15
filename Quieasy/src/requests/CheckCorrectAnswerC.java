@@ -41,7 +41,7 @@ public class CheckCorrectAnswerC {
         correctAnswers = new String[questions.size()];
         for (int i = 0; i < questions.size(); i++)
             for (int j=0;j<questions.get(i).getAnswers().size();j++){
-                if(questions.get(i).getAnswers().get(j).isCorrect())
+                if(questions.get(i).getAnswers().get(j).getIsCorrectAnswer())
                answers.add(questions.get(i).getAnswers().get(j));
 
                  }

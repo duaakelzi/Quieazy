@@ -19,10 +19,12 @@ public class ChoicesData implements Serializable, Comparable  {
         return choiceDescription;
     }
 
-    public boolean isCorrect() {
+
+    public boolean getIsCorrectAnswer() {
         return isCorrect;
 
     }
+
 
     public void setChoiceDescription(String choiceDescription){
         this.choiceDescription = choiceDescription;
@@ -44,7 +46,7 @@ public class ChoicesData implements Serializable, Comparable  {
         ChoicesData choiceToCompare = (ChoicesData) o; //choices appear to have changed order
         //(String choiceDescription, boolean isCorrect)
         return (choiceDescription.equals(choiceToCompare.getChoiceDescription()) &&
-                isCorrect == choiceToCompare.isCorrect());
+                isCorrect == choiceToCompare.getIsCorrectAnswer());
     }
     @Override
     public int compareTo(Object o) {
