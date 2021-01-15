@@ -172,16 +172,16 @@ public class CreateQuestionChoicesBox extends VBox {
     public void editQuestion(int index){
         textQuestion.setText(quiz.getQuestions().get(index).getQuestion());
         firstchoice.setText(quiz.getQuestions().get(index).getAnswers().get(0).getChoiceDescription());
-        firstradiobtn.setSelected(quiz.getQuestions().get(index).getAnswers().get(0).getIsCorrectAnswer());
+        firstradiobtn.setSelected(quiz.getQuestions().get(index).getAnswers().get(0).isCorrect());
 
         secondchoice.setText(quiz.getQuestions().get(index).getAnswers().get(1).getChoiceDescription());
-        secondradiobtn.setSelected(quiz.getQuestions().get(index).getAnswers().get(1).getIsCorrectAnswer());
+        secondradiobtn.setSelected(quiz.getQuestions().get(index).getAnswers().get(1).isCorrect());
 
         thirdchoice.setText(quiz.getQuestions().get(index).getAnswers().get(2).getChoiceDescription());
-        thirdradiobtn.setSelected(quiz.getQuestions().get(index).getAnswers().get(2).getIsCorrectAnswer());
+        thirdradiobtn.setSelected(quiz.getQuestions().get(index).getAnswers().get(2).isCorrect());
 
         fourthchoice.setText(quiz.getQuestions().get(index).getAnswers().get(3).getChoiceDescription());
-        fourthradiobtn.setSelected(quiz.getQuestions().get(index).getAnswers().get(3).getIsCorrectAnswer());
+        fourthradiobtn.setSelected(quiz.getQuestions().get(index).getAnswers().get(3).isCorrect());
 
     }
 

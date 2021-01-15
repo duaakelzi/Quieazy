@@ -159,7 +159,7 @@ public class CreateObjects {
             System.out.println("question persisted");
             session.getTransaction().commit();
             message = new Message();
-            message.status = true;
+
 
             message.questionData = new ArrayList<>();
             System.out.println("array list initialized.");
@@ -169,6 +169,7 @@ public class CreateObjects {
             System.out.println("question id set.");
             message.questionData.add(questionToReturn);
             System.out.println("question added to message.");
+            message.status = true;
         }
         catch(Exception e)
         {

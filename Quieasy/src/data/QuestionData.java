@@ -35,7 +35,7 @@ public class QuestionData implements Serializable {
     public String getCorrectAnswer(){
         String answerCorrect = "";
         for (ChoicesData answer : answers) {
-            if (answer.getIsCorrectAnswer()) {
+            if (answer.isCorrect()) {
                 answerCorrect = answer.getChoiceDescription();
             }
         }
