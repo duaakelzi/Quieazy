@@ -352,8 +352,6 @@ public class CreateAddQuestionBox extends VBox {
         savedbtn.getChildren().addAll(save, savePublish);
         return savedbtn;
     }
-
-
     public void saveQuiz(){
         QuizRequests.createNewQuiz(CreateQuizBox.getCreateQuizBox().getQuiz(), UserRequests.getCurrentUser());
     } //why is this outside CreateQuiz??

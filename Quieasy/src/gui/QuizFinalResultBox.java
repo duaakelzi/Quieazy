@@ -39,6 +39,7 @@ public class QuizFinalResultBox extends VBox {
         initiateResultQuestionsAnswer();
         saveQuizButton();
         this.getChildren().addAll(passFailVBox, gridPaneResult, cancelSaveButtons);
+        fillResultAnsweredQuestions(indexOfQuestion);
     }
 
     public static QuizFinalResultBox getQuizFinalResultBox() {
