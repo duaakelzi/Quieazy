@@ -283,7 +283,7 @@ public class PlayQuizBox extends VBox {
             double progres = (indexQuestion * 1.0) / quizQuestions.size();
             indicator.setProgress(progres);
             if (indexQuestion == quizQuestions.size()) {
-                //indexQuestion = 0;
+                indexQuestion = 0;
                 submit.setDisable(false);
                 submit.setBackground(new Background(new BackgroundFill(Color.YELLOWGREEN, new CornerRadii(0), Insets.EMPTY)));
             } else {

@@ -36,7 +36,7 @@ public class QuizFinalResultBox extends VBox {
 
         passedFailQuiz();
         initiateResultQuestionsAnswer();
-        saveQuizButton();
+        finishQuizButton();
         this.getChildren().addAll(passFailVBox, gridPaneResult, finishHBox);
         fillResultAnsweredQuestions(indexOfQuestion);
     }
@@ -179,10 +179,11 @@ public class QuizFinalResultBox extends VBox {
         answerUser.setText(userSelectionAnswer);
     }
 
-    private void saveQuizButton(){
-        finishHBox = new HBox(480);
-        finishHBox.setPadding(new Insets(10,0,0,20));
+    private void finishQuizButton(){
+        finishHBox = new HBox();
+        finishHBox.setPadding(new Insets(10,0,0,500));
         finishQuizButton = new Button("Finish");
+        finishQuizButton.setFont(Font.font("Times New Roman", FontWeight.EXTRA_BOLD, 18));
         finishQuizButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
