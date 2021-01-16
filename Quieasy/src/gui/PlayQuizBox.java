@@ -21,6 +21,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
+import requests.CheckCorrectAnswerC;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -287,9 +288,9 @@ public class PlayQuizBox extends VBox {
             // concurrently, user can be informed about the results of the played quiz
             // options to repeat or go back to QuizBrowser should be offered
             // !! at least one question should be answered!!
-//            CheckCorrectAnswerC ch=new CheckCorrectAnswerC();
+              CheckCorrectAnswerC ch=new CheckCorrectAnswerC();
 //            //System.out.println(selectedAnswer[0]);
-//            Message i=ch.checkAnswers(quiz,selectedAnswer);
+               ch.checkAnswers(quiz);
             // System.out.println("play Result"+i);
             MainPane.getMainPane().getTabs().add(QuizFinalResultTab.getQuizFinalResultTab());
             // MainPane.getMainPane().getTabs().add(new Tab("result",new CreateQuizResultBox(i)));
