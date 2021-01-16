@@ -114,9 +114,11 @@ public class ServerDecoder {
 
                 //ideally, we should be working with IDs here
                 //session closed after each call to persist. Might be interfering
-                Request.createResult(resultData.getPoints(), resultData.isPassed(), quizData.getName(), "user@mail.com");
+              response = new Message();
+              response= Request.createResult(resultData.getPoints(), resultData.isPassed(), quizData.getName(), userData.getEmail());
+              response.task = message.task;
 
-            return message;
+            return response;
         }else if (message.task.equals("FETCH_RESULTS")) {
             UserData userData = message.userData;
             return Request.retrieveResults(userData.getEmail());

@@ -21,6 +21,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
+import requests.CheckCorrectAnswerC;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -259,6 +260,8 @@ public class PlayQuizBox extends VBox {
             cancel.setDisable(true);
             next.setBackground(new Background(new BackgroundFill(Color.GREY, new CornerRadii(0), Insets.EMPTY)));
             cancel.setBackground(new Background(new BackgroundFill(Color.GREY, new CornerRadii(0), Insets.EMPTY)));
+            CheckCorrectAnswerC ch=new CheckCorrectAnswerC();
+            ch.checkAnswers(quiz);
             MainPane.getMainPane().getTabs().add(QuizFinalResultTab.getQuizFinalResultTab());
             // MainPane.getMainPane().getTabs().add(new Tab("result",new CreateQuizResultBox(i)));
 

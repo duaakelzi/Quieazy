@@ -21,8 +21,9 @@ public class CheckCorrectAnswerC {
         //this.setResult(result);
         request.task = "SAVE_RESULT";
         request.quizData=quiz;
+        request.userData=UserRequests.getCurrentUser();
 
-        re.setPoints(result);
+        re.setPoints((int) PlayQuizBox.getPlayQuizBox().calculationUserPoints());
         if ((PlayQuizBox.getPlayQuizBox().calculationUserPoints()/PlayQuizBox.getPlayQuizBox().calculationTotalQuizPoints())*100 > quiz.getThreshold())
         {
             re.setPassed(true);
