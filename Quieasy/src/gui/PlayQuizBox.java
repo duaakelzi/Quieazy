@@ -34,28 +34,26 @@ public class PlayQuizBox extends VBox {
     private Label minutes;
     private Label dot;
     private Label seconds;
-    private Integer min; //here get the ttime from DB -1 because the second is starting with 59
+    private Integer min;
     private Integer sec;
-    private RadioButton[] answersCheck;
     private Button submit;
     private Button next;
     private Button cancel;
     //missing: Quiz with its questionData and user info
     public QuizData quiz;
     public ArrayList<QuestionData> quizQuestions;
-    private String[] selectedAnswer;
     private static int indexQuestion = 0;
     private ProgressIndicator indicator;
     private Pagination trackquestions;
-    private final int NUMBEROFCHOICES = 4;
     private RadioButton choice_1;
     private RadioButton choice_2;
     private RadioButton choice_3;
     private RadioButton choice_4;
     private ToggleGroup groupOfAnswers;
-    private VBox answers;
-    public Map<String, String> selectedAnswerUser = new HashMap<>();
+    private final VBox answers;
+    public Map<String, String> selectedAnswerUser;
     //  private ArrayList<ChoicesData> questionChoices;
+    private Timeline time;
 
     //constructor*****
     private PlayQuizBox() { //this shouldn't be empty but receive the quizData from the MyQuiz QuizData
@@ -63,8 +61,8 @@ public class PlayQuizBox extends VBox {
         quiz = CreateQuizBox.getCreateQuizBox().getQuiz();
         //quiz = quizToPlay;
         quizQuestions = quiz.getQuestions();
-        //fetch all questions here
-        //  fetchQuestions(quizToPlay);
+
+
 
         // questions track with Pagination
         HBox questionsTrack = initiateQuestionTrack();
@@ -79,7 +77,9 @@ public class PlayQuizBox extends VBox {
         HBox buttons = initiateButtons();
 
         this.getChildren().addAll(questionsTrack, markQuestion, answers, buttons);
+        selectedAnswerUser = new HashMap<>();
         fillQuestionChoicesWithdata(indexQuestion);
+
 
     }
 
@@ -89,13 +89,6 @@ public class PlayQuizBox extends VBox {
         }
         return playQuizBox;
     }
-
-    //not needed because quiz already contains all data. Maybe needed when browser is available
-//    private void fetchQuestions(QuizData quiz){
-//        quizQuestions = QuestionC.fetchQuizQuestions(quiz);
-//    }
-
-
     // the track to navigate among questions. linked to the actual array of questions
     public HBox initiateQuestionTrack() {
         //as soon as one of the arrows clicked (left or right), the text should change
@@ -112,12 +105,6 @@ public class PlayQuizBox extends VBox {
             public void changed(ObservableValue<? extends Number> observableValue, Number number, Number t1) {
                 cleanChoicesSelection();
                 fillQuestionChoicesWithdata(observableValue.getValue().intValue());
-//                 if(checkChoicesIfSelected()){
-////                     String selectionUser = selectedAnswerUser.get(quizQuestions.get(observableValue.getValue().intValue()));
-////                     System.out.println("What user have been selected" +selectionUser);
-//
-//                 }
-               // System.out.println("Observale " + observableValue.getValue().intValue() + " number: " + number + " t1 :" + t1);
             }
         });
         AnchorPane anchor = new AnchorPane();
@@ -182,13 +169,7 @@ public class PlayQuizBox extends VBox {
         // selectedAnswer =new String[quiz.getQuestions().size()];
         answers.setBackground(new Background(new BackgroundFill(Color.LIGHTCYAN, null, null)));
         answers.setPadding(new Insets(20, 10, 10, 140));
-        // for(int i= 0; i < NUMBEROFCHOICES; i++){
-        //for first view only
-        // RadioButton answer = new RadioButton();
-        //answersCheck[i]=answer;
-        // answer.setFont(Font.font("Times New Roman", 16));
-//            System.out.println(answer.getText());
-//            System.out.println(quizQuestions.get(indexQuestion).getAnswers().get(i).getChoiceDescription()); //test
+
         choice_1 = new RadioButton();
         choice_2 = new RadioButton();
         choice_3 = new RadioButton();
@@ -202,14 +183,6 @@ public class PlayQuizBox extends VBox {
         choice_3.setFont(Font.font("Times New Roman", 16));
         choice_4.setFont(Font.font("Times New Roman", 16));
         answers.getChildren().addAll(choice_1, choice_2, choice_3, choice_4);
-//            answer.selectedProperty().addListener((observableValue, old_value, new_val) -> {
-//               boolean selected =answer.isSelected();
-//               if (selected){System.out.println("selected :"+answer.getText());
-//               selectedAnswer[indexQuestion]=answer.getText();;
-//               }
-//               else {{System.out.println("not selected :"+answer.getText());}}//what should happen here?
-//            });
-        //  }
         return answers;
     }
 
@@ -239,7 +212,7 @@ public class PlayQuizBox extends VBox {
     private Button initiateNextButton() {
         next = new Button();
         next.setBackground(new Background(new BackgroundFill(Color.YELLOW, null, null)));
-        ImageView skipimg = new ImageView(new Image("images/skip.png"));
+        ImageView skipimg = new ImageView(new Image("images/next.png"));
         next.setGraphic(skipimg);
         next.setEffect(new DropShadow());
         //so far doesn't work. same behavior expected of the questionsTrack
@@ -253,19 +226,11 @@ public class PlayQuizBox extends VBox {
 
 
             } else {
-
                 answers.setBorder(new Border(new BorderStroke(Color.FIREBRICK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
                 PauseTransition pause = new PauseTransition(Duration.seconds(3));
                 pause.setOnFinished(actionEvent1 -> answers.setBorder(null));
                 pause.play();
             }
-
-
-//            for(int i = 1; i< quiz.getQuestions().size(); i++) {
-//                textMark.setText("Quiz: " + quiz.getName() + "\n" + "Question " + i + "\n" + "Quiz threshold: " + quiz.getThreshold()); // additional info: status (answered/not), points (out of total)
-//                questionText.setText(quizQuestions.get(i).getQuestion());
-//                initiateAnswers(i);
-//            }
         });
 
         return next;
@@ -275,25 +240,28 @@ public class PlayQuizBox extends VBox {
     // also gateway to go back or repeat quiz
     private Button initiateSubmitButton() {
         submit = new Button();
+        submit.setDisable(true);
         submit.setEffect(new DropShadow());
-        submit.setBackground(new Background(new BackgroundFill(Color.LIGHTGREEN, new CornerRadii(0), Insets.EMPTY)));
+        submit.setBackground(new Background(new BackgroundFill(Color.GREY, new CornerRadii(0), Insets.EMPTY)));
         ImageView submitImg = new ImageView(new Image("images/submit.png"));
         submit.setGraphic(submitImg);
         submit.setOnAction(e -> {
-            selectedAnswerUser.forEach((key, value) -> System.out.println(key + " the answer from " + value));
+            //selectedAnswerUser.forEach((key, value) -> System.out.println(key + " the answer from " + value));
             //on button submit action
             // here local checking of correctly answered questions can take place, since client already has the data
             // the number of correctly answered questions will be sent to server, along with info on quiz&user
             // concurrently, user can be informed about the results of the played quiz
             // options to repeat or go back to QuizBrowser should be offered
             // !! at least one question should be answered!!
-//            CheckCorrectAnswerC ch=new CheckCorrectAnswerC();
-//            //System.out.println(selectedAnswer[0]);
-//            Message i=ch.checkAnswers(quiz,selectedAnswer);
             // System.out.println("play Result"+i);
+            time.stop();
+            next.setDisable(true);
+            cancel.setDisable(true);
+            next.setBackground(new Background(new BackgroundFill(Color.GREY, new CornerRadii(0), Insets.EMPTY)));
+            cancel.setBackground(new Background(new BackgroundFill(Color.GREY, new CornerRadii(0), Insets.EMPTY)));
             MainPane.getMainPane().getTabs().add(QuizFinalResultTab.getQuizFinalResultTab());
             // MainPane.getMainPane().getTabs().add(new Tab("result",new CreateQuizResultBox(i)));
-            CreateAddQuestionTab.getCreateAddQuestionTab().closeTab();
+
 
         });
         return submit;
@@ -305,6 +273,7 @@ public class PlayQuizBox extends VBox {
         ImageView cancelimg = new ImageView(new Image("images/cancelicon.png"));
         cancel.setGraphic(cancelimg);
         cancel.setEffect(new DropShadow());
+        cancel.setOnAction(actionEvent -> PlayQuizTab.getPlayQuizTab().closeTab());
         return cancel;
     }
 
@@ -314,7 +283,9 @@ public class PlayQuizBox extends VBox {
             double progres = (indexQuestion * 1.0) / quizQuestions.size();
             indicator.setProgress(progres);
             if (indexQuestion == quizQuestions.size()) {
-                indexQuestion = 0;
+                //indexQuestion = 0;
+                submit.setDisable(false);
+                submit.setBackground(new Background(new BackgroundFill(Color.YELLOWGREEN, new CornerRadii(0), Insets.EMPTY)));
             } else {
 
                 this.textMark.setText("Question " + (indexofQuestion + 1) + "\nPoint : " + quizQuestions.get(indexofQuestion).getPoints());
@@ -361,23 +332,6 @@ public class PlayQuizBox extends VBox {
 
                     }
                 });
-
-//                for (int i = 0; i < NUMBEROFCHOICES; i++) {
-//                    answersCheck[i].setText(quizQuestions.get(indexofQuestion).getAnswers().get(i).getChoiceDescription());
-//                    answersCheck[i].setSelected(false);
-//                    RadioButton choicesOfQuestionsRadioButtons=answersCheck[i];
-//                    choicesOfQuestionsRadioButtons.selectedProperty().addListener(new ChangeListener<Boolean>() {
-//                        @Override
-//                        public void changed(ObservableValue<? extends Boolean> observableValue, Boolean old_value, Boolean new_val) {
-//                            boolean selected =choicesOfQuestionsRadioButtons.isSelected();
-//                            if (selected){System.out.println("selected :"+choicesOfQuestionsRadioButtons.getText());
-//                                selectedAnswer[indexQuestion]=choicesOfQuestionsRadioButtons.getText();;
-//                            }
-//                            else {{System.out.println("not selected :"+choicesOfQuestionsRadioButtons.getText());}}//what should happen here?
-//                        }
-//                    });
-//                }
-
             }
 
         } catch (IndexOutOfBoundsException e) {
@@ -420,7 +374,7 @@ public class PlayQuizBox extends VBox {
 
     private void countDownTimerQuiz() {
 
-        Timeline time = new Timeline();
+        time = new Timeline();
         time.setCycleCount(Timeline.INDEFINITE);
         min = quiz.getTimer() - 1;
         sec = 59;

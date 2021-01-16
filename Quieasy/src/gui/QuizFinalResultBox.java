@@ -18,8 +18,6 @@ public class QuizFinalResultBox extends VBox {
     private static QuizFinalResultBox quizFinalResultBox;
     private VBox passFailVBox;
     private GridPane gridPaneResult;
-    private ImageView imageCorrect;
-    private ImageView imageIncorrect;
     private Label points;
     private Text question;
     private Text answerUser;
@@ -28,17 +26,18 @@ public class QuizFinalResultBox extends VBox {
     private Button back;
     private HBox pointsHbox;
     private Button cancelResults;
-    private Button saveQuiz;
-    private HBox cancelSaveButtons;
+    private Button finishQuizButton;
+    private HBox finishHBox;
     private static int indexOfQuestion = 0;
     private Label questionNR;
+    private Label checkAnswer;
 
     private QuizFinalResultBox(){
 
         passedFailQuiz();
         initiateResultQuestionsAnswer();
         saveQuizButton();
-        this.getChildren().addAll(passFailVBox, gridPaneResult, cancelSaveButtons);
+        this.getChildren().addAll(passFailVBox, gridPaneResult, finishHBox);
         fillResultAnsweredQuestions(indexOfQuestion);
     }
 
@@ -54,18 +53,21 @@ public class QuizFinalResultBox extends VBox {
         double totalPoints = PlayQuizBox.getPlayQuizBox().calculationTotalQuizPoints();
         double userPoints = PlayQuizBox.getPlayQuizBox().calculationUserPoints();
         passFailVBox = new VBox();
-        passFailVBox.setPadding(new Insets(0,0,0, 130));
+        passFailVBox.setPadding(new Insets(0,0,10, 130));
         ImageView congradulation = new ImageView(new Image("images/congradulations.png"));
         passFailVBox.setPrefWidth(600);
         ImageView failer = new ImageView(new Image("images/fail.png"));
-        Label yourScoreLabel = new Label("YOUR SCORE:  " + userPoints +" points");
+        Label yourScoreLabel = new Label("YOUR SCORE:  " + userPoints + " / " + totalPoints +" points" + "\n\tReview Your Choices");
+
         yourScoreLabel.setPadding(new Insets(0,0,0,20));
         yourScoreLabel.setFont(Font.font("Times New Roman", FontWeight.EXTRA_BOLD, 26));
-        yourScoreLabel.setTextFill(Color.FIREBRICK);
+
         if((userPoints/totalPoints)*100>= CreateQuizBox.getCreateQuizBox().getQuiz().getThreshold()) {
             passFailVBox.getChildren().addAll(congradulation, yourScoreLabel);
+            yourScoreLabel.setTextFill(Color.GREEN);
         }else{
             passFailVBox.getChildren().addAll(failer, yourScoreLabel);
+            yourScoreLabel.setTextFill(Color.FIREBRICK);
         }
 
     }
@@ -74,9 +76,8 @@ public class QuizFinalResultBox extends VBox {
         gridPaneResult = new GridPane();
         gridPaneResult.setHgap(5);
         gridPaneResult.setVgap(10);
-        gridPaneResult.setGridLinesVisible(false);
         pointsHbox = new HBox(200);
-        points = new Label("+5");
+        points = new Label();
         points.setFont(Font.font("Currier", FontWeight.EXTRA_BOLD, 16));
         pointsHbox.setBackground(new Background(new BackgroundFill(Color.LIGHTGREEN, null, null)));
         questionNR = new Label();
@@ -89,10 +90,19 @@ public class QuizFinalResultBox extends VBox {
             @Override
             public void handle (ActionEvent actionEvent) {
                 try {
-                    indexOfQuestion--;
-                    fillResultAnsweredQuestions(indexOfQuestion);
-                } catch (IllegalArgumentException exception){
+                   // next.setDisable(false);
+                    --indexOfQuestion;
+
+                    if(indexOfQuestion >=0) {
+
+                        fillResultAnsweredQuestions(indexOfQuestion);
+                    }else {
+                       indexOfQuestion = 0;
+
+                    }
+                } catch (Exception exception){
                     System.out.println("Quiz from the begining");
+
                 }
             }
 
@@ -104,9 +114,14 @@ public class QuizFinalResultBox extends VBox {
             @Override
             public void handle(ActionEvent actionEvent) {
                 try {
-                    indexOfQuestion++;
-                    fillResultAnsweredQuestions(indexOfQuestion);
-                } catch (IllegalArgumentException exception){
+
+                    ++indexOfQuestion;
+                    if(indexOfQuestion < PlayQuizBox.getPlayQuizBox().quizQuestions.size()) {
+                        fillResultAnsweredQuestions(indexOfQuestion);
+                    }else{
+                        indexOfQuestion = PlayQuizBox.getPlayQuizBox().quizQuestions.size()-1;
+                    }
+                } catch (Exception exception){
                     System.out.println("At the end of Quiz");
                 }
 
@@ -115,13 +130,12 @@ public class QuizFinalResultBox extends VBox {
         // next.setMinWidth(70);
         HBox questionHbox = new HBox();
         questionHbox.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
+        questionHbox.setBackground(new Background(new BackgroundFill(Color.LIGHTSKYBLUE, null, null)));
         question = new Text();
         question.setWrappingWidth(550);
         questionHbox.getChildren().add(question);
         questionHbox.setPrefSize(600, 70);
-        ImageView correctAnswerQuiz = new ImageView(new Image("images/correctAnswerQuiz.jpg"));
-        imageCorrect = new ImageView(new Image("images/correctAnswer.png"));
-        imageIncorrect = new ImageView(new Image("images/incorrectAnswer.jpg"));
+        Label correctAnswerQuiz = new Label("✔");
         answerUser = new Text();
         answerUser.setWrappingWidth(550);
         correctAnswer = new Text();
@@ -136,21 +150,26 @@ public class QuizFinalResultBox extends VBox {
         gridPaneResult.add(correctAnswer, 1, 2);
         gridPaneResult.add(correctAnswerQuiz,0, 2 );
         gridPaneResult.add(answerUser, 1, 3);
+        checkAnswer = new Label();
+        gridPaneResult.add(checkAnswer, 0, 3);
     }
 
     private void fillResultAnsweredQuestions(int index) {
         String correctAnswerOfQuestion = PlayQuizBox.getPlayQuizBox().quizQuestions.get(index).getCorrectAnswer();
         String userSelectionAnswer = PlayQuizBox.getPlayQuizBox().selectedAnswerUser.get(PlayQuizBox.getPlayQuizBox().quizQuestions.get(index).getQuestion());
-        questionNR.setText("<< Question " + index + 1 + " >>");
+        questionNR.setText("<< Question " + (index + 1) + "/" + PlayQuizBox.getPlayQuizBox().quizQuestions.size() + " >>");
         if (correctAnswerOfQuestion.equals(userSelectionAnswer)) {
             points.setText("+ " + PlayQuizBox.getPlayQuizBox().quizQuestions.get(index).getPoints());
             pointsHbox.setBackground(new Background(new BackgroundFill(Color.LIGHTGREEN, null, null)));
-            gridPaneResult.add(imageCorrect, 0, 3);
+            checkAnswer.setText("✔");
+            checkAnswer.setTextFill(Color.GREEN);
+
         } else {
             points.setText("+ 0");
             pointsHbox.setBackground(new Background(new BackgroundFill(Color.LIGHTCORAL, null, null)));
+            checkAnswer.setText("✗");
+            checkAnswer.setTextFill(Color.FIREBRICK);
 
-            gridPaneResult.add(imageIncorrect, 0, 3);
             //back.setDisable(true);
 
         }
@@ -161,11 +180,17 @@ public class QuizFinalResultBox extends VBox {
     }
 
     private void saveQuizButton(){
-        cancelSaveButtons = new HBox(480);
-        cancelSaveButtons.setPadding(new Insets(10,0,0,20));
-        cancelResults = new Button("CANCEL");
-        saveQuiz = new Button("SAVE RESULTS");
-        cancelSaveButtons.getChildren().addAll(cancelResults, saveQuiz);
+        finishHBox = new HBox(480);
+        finishHBox.setPadding(new Insets(10,0,0,20));
+        finishQuizButton = new Button("Finish");
+        finishQuizButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                PlayQuizTab.getPlayQuizTab().closeTab();
+                QuizFinalResultTab.getQuizFinalResultTab().closeTab();
+            }
+        });
+        finishHBox.getChildren().addAll(finishQuizButton);
 
     }
 
