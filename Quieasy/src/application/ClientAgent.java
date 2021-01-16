@@ -3,14 +3,15 @@
 
 package application;
 
-import java.io.*;
-import java.net.*;
-import java.security.MessageDigest;
-import java.util.Iterator;
+import data.Message;
+
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.net.Socket;
+import java.net.UnknownHostException;
 import java.util.LinkedList;
 import java.util.Queue;
-
-import data.Message;
 
 public class ClientAgent implements Runnable {
 
@@ -83,7 +84,7 @@ public class ClientAgent implements Runnable {
 	// Gets the current instance -> Singleton.
 	public static ClientAgent getClientAgent() {
 
-		if (clientAgent == null) clientAgent = new ClientAgent();
+		if (clientAgent == null){ clientAgent = new ClientAgent();}
 
 		return clientAgent;
 
