@@ -7,6 +7,7 @@ import data.QuizData;
 import javafx.scene.*;
 import javafx.scene.paint.Color;
 import requests.QuestionRequests;
+import requests.QuizRequests;
 
 public class PrimeScene extends Scene {
 	
@@ -16,7 +17,7 @@ public class PrimeScene extends Scene {
 	private static final double HEIGHT = 500;
 	
 	// constructor can only be accessed from within
-	private PrimeScene(Parent root, Color color) {
+	public PrimeScene(Parent root, Color color) {
 		super(root,WIDTH, HEIGHT, color);
 		
 	}
@@ -28,6 +29,9 @@ public class PrimeScene extends Scene {
 			
 			primeScene = new PrimeScene(Login.getLogin(),  Color.LAVENDER);
 			//primeScene = new PrimeScene(Home.getHome(),Color.LAVENDER);
+
+
+
 
 			
 		}

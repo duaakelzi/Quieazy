@@ -46,13 +46,18 @@ public class ServerDecoder {
             response = Request.deleteQuiz(quiz.getName(), quiz.getCourse());
             response.task = message.task;
             return response;
-        } else if (message.task.equals("FETCH_ALL_QUIZZES")) {
+        } else if (message.task.equals("FETCH_ALL_USER_QUIZZES")) {
             UserData userData = message.userData;
             response = new Message();
-            response = Request.retrieveQuizzes(userData.getEmail());
+            response = Request.retrieveUserQuizzes(userData.getEmail());
             response.task = message.task;
             return response;
+        } else if (message.task.equals("FETCH_ALL_QUIZZES")) {
 
+            response = new Message();
+            response = Request.retrieveQuizzes();
+            response.task = message.task;
+            return response;
         } else if (message.task.equals("CREATE_QUESTIONS")) {
             System.out.println("server: create questions method entered >> ");
             response = new Message();

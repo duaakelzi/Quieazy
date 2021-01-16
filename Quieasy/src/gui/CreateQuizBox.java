@@ -95,7 +95,7 @@ public class CreateQuizBox extends VBox {
 	public static void showSuccessful(){
 		// let the user know that the server has successfully saved a list of quizes to persistence
 		System.out.println("Quiz successfully created. "); //should be on UI, not console
-		QuizRequests.fetchAllQuizzes(UserRequests.getCurrentUser()); //for testing, to see if the method works
+		QuizRequests.fetchAllUserQuizzes(UserRequests.getCurrentUser()); //for testing, to see if the method works
 	}
 	public static void showFailed(){
 		// let the user know server has failed saving the list of quizzes to persistence
@@ -278,7 +278,7 @@ public class CreateQuizBox extends VBox {
 				quiz = new QuizData(courseComboBox.getValue(), textname.getText(),
 						Double.parseDouble(textThreshold.getText()),
 						Integer.parseInt(textTime.getText()),
-						new ArrayList<QuestionData>());
+						new ArrayList<QuestionData>(),UserRequests.getCurrentUser());
 				if(QuizRequests.createNewQuiz(quiz, UserRequests.getCurrentUser())) {
 					CreateQuizBox.showSuccessful();
 				} else {

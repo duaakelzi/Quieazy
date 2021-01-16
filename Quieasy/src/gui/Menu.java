@@ -66,6 +66,12 @@ public class Menu extends VBox {
 			//	MainPane.getMainPane().getTabs().add(PlayQuizTab.getPlayQuizTab());
 			}
 		});
+		myQuizButton.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent actionEvent) {
+					MainPane.getMainPane().getTabs().add(PlayQuizTab.getPlayQuizTab());
+			}
+		});
 		
 	}
 

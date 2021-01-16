@@ -22,6 +22,7 @@ import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
 import requests.CheckCorrectAnswerC;
+import requests.QuizRequests;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -55,12 +56,15 @@ public class PlayQuizBox extends VBox {
     public Map<String, String> selectedAnswerUser;
     //  private ArrayList<ChoicesData> questionChoices;
     private Timeline time;
+    public ArrayList<QuizData> allQuizzes  = new ArrayList<>();;
 
     //constructor*****
     private PlayQuizBox() { //this shouldn't be empty but receive the quizData from the MyQuiz QuizData
         // quizToPlay
         quiz = CreateQuizBox.getCreateQuizBox().getQuiz();
         //quiz = quizToPlay;
+       // allQuizzes= QuizRequests.fetchAllQuizzes();
+       // quiz=allQuizzes.get(6);
         quizQuestions = quiz.getQuestions();
 
 
@@ -263,6 +267,8 @@ public class PlayQuizBox extends VBox {
             CheckCorrectAnswerC ch=new CheckCorrectAnswerC();
             ch.checkAnswers(quiz);
             MainPane.getMainPane().getTabs().add(QuizFinalResultTab.getQuizFinalResultTab());
+             //better here if you pass the same quiz to the finalresultTab in the situation not created but played from th db
+            //MainPane.getMainPane().getTabs().add(QuizFinalResultTab.getQuizFinalResultTab(quiz));
             // MainPane.getMainPane().getTabs().add(new Tab("result",new CreateQuizResultBox(i)));
 
 

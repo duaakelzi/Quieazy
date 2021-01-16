@@ -26,10 +26,10 @@ public class QuizRequests {
         return response.status;
     }
 
-   public static ArrayList<QuizData> fetchAllQuizzes(UserData user){
+   public static ArrayList<QuizData> fetchAllUserQuizzes(UserData user){
        ClientAgent clientAgent = ClientAgent.getClientAgent();
        request = new Message();
-       request.task = "FETCH_ALL_QUIZZES";
+       request.task = "FETCH_ALL_USER_QUIZZES";
        request.userData = user;
        response = clientAgent.sendAndWaitForResponse(request);
        if(response != null && response.status){
@@ -50,5 +50,22 @@ public class QuizRequests {
        response = clientAgent.sendAndWaitForResponse(request);
        return response.status;
    }
+    public static ArrayList<QuizData> fetchAllQuizzes(){
+        ClientAgent clientAgent = ClientAgent.getClientAgent();
+        request = new Message();
+        request.task = "FETCH_ALL_QUIZZES";
 
+        response = clientAgent.sendAndWaitForResponse(request);
+        System.out.println(response.allQuizzes.get(0).getName());
+        System.out.println(response.allQuizzes.get(0).getQuestions().get(0).getQuestion());
+        System.out.println(response.allQuizzes.get(0).getQuestions().get(0).getAnswers().get(0).getChoiceDescription());
+        if(response != null && response.status){
+            System.out.println("Fetch quizzes successful.");
+            return response.allQuizzes;
+        }else if(response != null && (!response.status)){
+            //informed user that no SPs returned
+            System.out.println("Fetch quizzes failed.");
+        }
+        return response.allQuizzes;
+    }
 }

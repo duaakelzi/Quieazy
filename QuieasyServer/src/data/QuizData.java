@@ -8,17 +8,27 @@ public class QuizData implements Serializable {
     private String name;
     private double threshold;
     private int timer;
+    private UserData user;
     private ArrayList<QuestionData> questions;
+
+    public UserData getUser() {
+        return user;
+    }
+
+    public void setUser(UserData user) {
+        this.user = user;
+    }
 
     public QuizData() {  }
     // studyprogram removed from the constructor of QuizData, because we don't need it:
     // if a course that holds the quiz, belongs to one or two programs, makes no difference for the quiz
-    public QuizData(String course, String name, double threshold, int timer, ArrayList<QuestionData> questions) {
+    public QuizData(String course, String name, double threshold, int timer, ArrayList<QuestionData> questions, UserData user) {
         this.course = course;
         this.name = name;
         this.threshold = threshold;
         this.timer = timer;
         this.questions = questions;
+        this.user=user;
     }
 
     // because fetchAllQuizzes doesn't need the questions yet

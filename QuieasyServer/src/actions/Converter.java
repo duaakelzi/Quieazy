@@ -3,6 +3,7 @@ package actions;
 import data.ChoicesData;
 import data.QuestionData;
 import data.QuizData;
+import data.UserData;
 import domain.Choices;
 import domain.Question;
 import domain.QuestionChoice;
@@ -42,8 +43,10 @@ public class Converter {
             QuestionData newQuestion = Converter.convertQuestionToQuestionData(q);
             quizDataQuestionArray.add(newQuestion);
         }
+        UserData user=new UserData(quiz.getUser().getFirstName(),quiz.getUser().getLastName(),quiz.getUser().getEmail());
 
-        QuizData newQuiz = new QuizData(quiz.getCourse().getCourseName(), quiz.getQuiz_Name(), quiz.getThreshold(), quiz.getTimer(), quizDataQuestionArray);
+        QuizData newQuiz = new QuizData(quiz.getCourse().getCourseName(), quiz.getQuiz_Name(), quiz.getThreshold(), quiz.getTimer(), quizDataQuestionArray,user);
+
         return newQuiz;
     }
 }
