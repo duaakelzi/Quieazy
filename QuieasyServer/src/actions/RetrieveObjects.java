@@ -70,7 +70,6 @@ public class RetrieveObjects {
                 System.out.println("Quizzes retrieved. ");
                 //convert List of Quiz into QuizData and add to the message
                 for(Quiz q : quizList) {
-
                     QuizData fetchedQuiz=Converter.convertQuizToQuizData(q);
 
                     //System.out.println("quiz: "+fetchedQuiz.getName());

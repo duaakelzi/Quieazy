@@ -31,7 +31,7 @@ public class QuizData implements Serializable {
         this.user=user;
     }
 
-    // because fetchAllQuizzes doesn't need the questions yet
+    // because fetchAllUserQuizzes doesn't need the questions yet
     public QuizData(String course, String name, double threshold, int timer) {
         // this.program = program;
         this.course = course;
@@ -44,14 +44,6 @@ public class QuizData implements Serializable {
     public String getName() {
         return name;
     }
-
-//    public String getProgram() {
-//        return program;
-//    }
-//
-//    public void setProgram(String program) {
-//        this.program = program;
-//    }
 
     public String getCourse() {
         return course;

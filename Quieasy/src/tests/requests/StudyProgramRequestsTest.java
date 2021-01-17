@@ -17,12 +17,13 @@ public class StudyProgramRequestsTest {
     private static ClientAgent tempClient;
 
     @BeforeClass
-    public void setUp() throws Exception {
+    public static void setUp() throws Exception {
         existingSP = new StudyProgramData();
         existingSP.setStudyprogram("Computer Science");
 
         notExistingSP  = new StudyProgramData();
         notExistingSP.setStudyprogram("Political Ecology");
+
         tempClient = ClientAgent.getClientAgent();
         (new Thread(tempClient)).start();
     }
@@ -31,22 +32,18 @@ public class StudyProgramRequestsTest {
     //Testing whether FetchStudyPrograms works
     public void testFetchAllStudyPrograms() {
         ArrayList<StudyProgramData> tempSPArray = StudyProgramRequests.fetchAllStudyPrograms();
-
-        try{
-            assertFalse(String.valueOf(tempSPArray.contains(notExistingSP)), true); // used to be true
+            assertFalse(tempSPArray.contains(notExistingSP)); // used to be true
             System.out.println("assertFalse passed");
 
-            assertTrue(String.valueOf(tempSPArray.contains(existingSP)), true);
+            assertTrue(tempSPArray.contains(existingSP));
             System.out.println("assertTrue passed");
-        }catch (AssertionError ae) {
-            System.out.println("Assertion caught error." + ae.getMessage());
-        }
 
     }
 
     @AfterClass
-    public void tearDown() throws Exception {
+    public static void tearDown() throws Exception {
         //add destruction related calls
+        existingSP = null; notExistingSP = null;
         System.out.println("Values destroyed");
     }
 }

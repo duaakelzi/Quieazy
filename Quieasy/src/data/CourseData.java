@@ -17,4 +17,11 @@ public class CourseData implements Serializable {
     public String getCourse() {
         return course;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        CourseData courseToCompare = (CourseData) o;
+        //String course
+        return (course.equals(courseToCompare.getCourse()));
+    }
 }

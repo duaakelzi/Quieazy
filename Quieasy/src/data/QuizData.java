@@ -8,9 +8,6 @@ public class QuizData implements Serializable {
     private String name;
     private double threshold;
     private int timer;
-
-
-
     private UserData user;
     private ArrayList<QuestionData> questions;
 
@@ -29,7 +26,7 @@ public class QuizData implements Serializable {
         this.user=user;
     }
 
-    // because fetchAllQuizzes doesn't need the questions yet
+    // because fetchAllUserQuizzes doesn't need the questions yet
     public QuizData(String course, String name, double threshold, int timer) {
         this.course = course;
         this.name = name;

@@ -16,6 +16,7 @@ public class StudyProgramRequests {
         ArrayList<StudyProgramData> returnedSP = new ArrayList<>();
         Message response = clientAgent.sendAndWaitForResponse(request);
         if(response != null && response.status){
+            System.out.println("SPs found");
             returnedSP = response.studyProgramData;
         }else if(response != null && (!response.status)){
             //informed user that no SPs returned

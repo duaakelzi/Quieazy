@@ -45,7 +45,7 @@ public class Converter {
         }
         UserData user=new UserData(quiz.getUser().getFirstName(),quiz.getUser().getLastName(),quiz.getUser().getEmail());
 
-        QuizData newQuiz = new QuizData(quiz.getCourse().getCourseName(), quiz.getQuiz_Name(), quiz.getThreshold(), quiz.getTimer(), quizDataQuestionArray,user);
+        QuizData newQuiz = new QuizData(quiz.getCourse().getCourseName(), quiz.getQuiz_Name(), quiz.getThreshold(), quiz.getTimer(), quizDataQuestionArray, user);
 
         return newQuiz;
     }
