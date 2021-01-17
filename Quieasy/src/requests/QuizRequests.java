@@ -56,9 +56,10 @@ public class QuizRequests {
         request.task = "FETCH_ALL_QUIZZES";
 
         response = clientAgent.sendAndWaitForResponse(request);
-        System.out.println(response.allQuizzes.get(0).getName());
-        System.out.println(response.allQuizzes.get(0).getQuestions().get(0).getQuestion());
-        System.out.println(response.allQuizzes.get(0).getQuestions().get(0).getAnswers().get(0).getChoiceDescription());
+//        System.out.println(response.allQuizzes.get(0).getName());
+//        System.out.println(response.allQuizzes.get(0).getQuestions().get(0).getQuestion());
+//        System.out.println(response.allQuizzes.get(0).getQuestions().get(0).getAnswers().get(0).getChoiceDescription());
+//        System.out.println(response.allQuizzes.get(0).getUser());
         if(response != null && response.status){
             System.out.println("Fetch quizzes successful.");
             return response.allQuizzes;
