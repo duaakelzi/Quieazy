@@ -102,5 +102,10 @@ public class Request {
         JDBC.connectMySQL();
         return RetrieveObjects.retrieveResults(userEmail);
     }
+
+    public static Message retrieveAllQuestions() {
+        JDBC.connectMySQL();
+        return RetrieveObjects.retrieveAllQuestions();
+    }
 }
 

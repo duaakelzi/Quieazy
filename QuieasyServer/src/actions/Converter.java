@@ -26,7 +26,9 @@ public class Converter {
         }
         Collections.sort(newQuestion.getAnswers());
         System.out.println("choices sorted according to IDs.");
+        UserData user=new UserData(question.getUser().getFirstName(),question.getUser().getLastName(),question.getUser().getEmail());
         newQuestion.setPoints(question.getPoints());
+        newQuestion.setUser(user);
         return newQuestion;
     }
 

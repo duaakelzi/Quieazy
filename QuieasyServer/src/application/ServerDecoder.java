@@ -110,6 +110,12 @@ public class ServerDecoder {
             response = Request.retrieveQuestions(quiz.getCourse(), quiz.getName()); //for this, all quizzes should have an id saved
             response.task = message.task;
             return response;
+        } else if (message.task.equals("FETCH_ALL_EXISTING_QUESTIONS")) {
+
+            response = new Message();
+            response = Request.retrieveAllQuestions(); //for this, all quizzes should have an id saved
+            response.task = message.task;
+            return response;
         }else if (message.task.equals("SAVE_RESULT")) {
             UserData userData = message.userData;
             QuizData quizData = message.quizData;

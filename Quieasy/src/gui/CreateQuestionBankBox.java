@@ -13,6 +13,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.util.Duration;
+import requests.QuestionRequests;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -65,7 +66,8 @@ public class CreateQuestionBankBox extends VBox {
         quiz = CreateQuizBox.getCreateQuizBox().getQuiz();// new quiz created by user to be added the questions
 //****************************************************************************
 
-        allQuestionsData = new ArrayList<>();
+        allQuestionsData = QuestionRequests.fetchAllQuestions();
+        System.out.println(allQuestionsData.get(0).getQuestion());
 
         fillObservaleListWithData(allQuestionsData);
     }

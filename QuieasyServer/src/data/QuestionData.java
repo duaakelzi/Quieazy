@@ -10,6 +10,7 @@ public class QuestionData implements Serializable {
     private int points;
     private ArrayList<ChoicesData> answers = new ArrayList<>();
     private Long id;
+    private UserData user;
 
     public QuestionData(){}
 
@@ -17,6 +18,22 @@ public class QuestionData implements Serializable {
         this.question = question;
         this.answers = answers;
         this.points = points;
+    }
+
+    public QuestionData(String question, int points, ArrayList<ChoicesData> answers, Long id, UserData user) {
+        this.question = question;
+        this.points = points;
+        this.answers = answers;
+        this.id = id;
+        this.user = user;
+    }
+
+    public UserData getUser() {
+        return user;
+    }
+
+    public void setUser(UserData user) {
+        this.user = user;
     }
 
     public int getPoints() {

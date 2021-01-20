@@ -67,7 +67,21 @@ public class QuestionRequests {
         }
         return response.questionData;
     }
+    public static ArrayList<QuestionData> fetchAllQuestions() {
+        ClientAgent clientAgent = ClientAgent.getClientAgent();
+        request = new Message();
+        request.task = "FETCH_ALL_EXISTING_QUESTIONS";
+        ;
+        Message response = clientAgent.sendAndWaitForResponse(request);
 
+        if(response != null && response.status){
+            System.out.println("Questions retrieved successfully.");
+        }else if(response != null && (!response.status)){
+            //informed user that no SPs returned
+            System.out.println("Questions not retrieved.");
+        }
+        return response.questionData;
+    }
     public static boolean deleteQuestions(QuizData quiz, ArrayList<QuestionData> questions) {
         ClientAgent clientAgent = ClientAgent.getClientAgent();
         request = new Message();

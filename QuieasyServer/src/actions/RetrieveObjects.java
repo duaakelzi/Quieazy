@@ -293,5 +293,55 @@ public class RetrieveObjects {
     }
 
 
+    public static Message retrieveAllQuestions() {
+        System.out.println("retrieving all Questions ");
+        try {
+            message = new Message();
+            session = HibernateUtil.getSessionFactory().openSession();
+            List<Question> questionList = session.getSession().createQuery("FROM Question ", Question.class).list();
+            if(questionList.size()>0) {
+                System.out.println("Quizzes retrieved. ");
+                //convert List of Quiz into QuizData and add to the message
+                for(Question q : questionList) {
+                   QuestionData fetchedQuestion=Converter.convertQuestionToQuestionData(q);
+
+                    //System.out.println("quiz: "+fetchedQuiz.getName());
+                    //System.out.println("course: "+fetchedQuiz.getCourse());
+                    //System.out.println("author: "+fetchedQuiz.getUser().getFirstName()+fetchedQuiz.getUser().getLastName());
+
+                    message.questionData.add(fetchedQuestion);
+                }
+
+
+
+                message.status = true;
+                System.out.println("Size of the Array in RetrieveQuestions(): " + message.questionData.size());
+            }else{
+                System.out.println("No questions found ");
+                message.status = false;
+            }
+            session.close();
+        }catch(Exception e)
+        {
+            // if the error message is "out of memory",
+            // it probably means no database file is found
+            System.out.println("Error fetching quizzes. ");
+            System.err.println(e.getMessage());
+        }
+        finally
+        {
+            try
+            {
+                if(session != null)
+                    session.close();
+            }
+            catch(Exception e)
+            {
+                // connection close failed.
+                System.err.println(e.getMessage());
+            }
+        }
+        return message;
+    }
 }
 
