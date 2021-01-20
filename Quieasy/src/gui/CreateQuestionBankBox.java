@@ -193,7 +193,7 @@ public class CreateQuestionBankBox extends VBox {
         for (int i = 0; i < allQuestionsData.size(); i++) {
 
 //                dataQuestionObservaleList.addAll(new FilterDataQuestionBank(allQuestionsData.get(i).getQuestion(),
-//                       // allQuestionsData.get(i).getOwner(),
+//                        allQuestionsData.get(i).getOwner()
 ////                        i));// instead of study program put course
 ////
 //

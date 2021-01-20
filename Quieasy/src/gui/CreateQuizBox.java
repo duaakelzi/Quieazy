@@ -103,7 +103,7 @@ public class CreateQuizBox extends VBox {
 	 * Message displayed if the Quiz was successful created, representing that the newest created Quiz is saved on DB
 	 */
 	public static void showSuccessful(){
-		QuizRequests.fetchAllQuizzes(UserRequests.getCurrentUser()); //for testing, to see if the method works
+		QuizRequests.fetchAllQuizzes(); //for testing, to see if the method works
 	}
 
 	/**
@@ -308,7 +308,7 @@ public class CreateQuizBox extends VBox {
 				quiz = new QuizData(courseComboBox.getValue(), nameText.getText(),
 						Double.parseDouble(thresholdText.getText()),
 						Integer.parseInt(timeText.getText()),
-						new ArrayList<QuestionData>());
+						new ArrayList<QuestionData>(),UserRequests.getCurrentUser());
 				if(QuizRequests.createNewQuiz(quiz, UserRequests.getCurrentUser())) {
 					CreateQuizBox.showSuccessful();
 				} else {
