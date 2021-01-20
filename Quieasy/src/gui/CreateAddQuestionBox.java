@@ -1,8 +1,6 @@
 package gui;
 
 import data.QuestionData;
-import requests.QuestionRequests;
-import requests.QuizRequests;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -17,54 +15,81 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.util.Callback;
+import requests.QuestionRequests;
 import requests.UserRequests;
 
 import java.util.ArrayList;
 
 
 public class CreateAddQuestionBox extends VBox {
-
+    /**
+     * CreateAddQuestionBox class give to the user the way either to crate his own Questions or to import from already in use Questions from another Quizzes
+     */
         private static CreateAddQuestionBox createAddQuestionBox;
         private TableView<TableFillQuestions> tableViewListQuestions;
-        private ObservableList<TableFillQuestions> questionsToList; //not sure what this is for
+        private ObservableList<TableFillQuestions> questionsToList;
         private TableColumn<TableFillQuestions, Integer> idCol;
-        private ArrayList<QuestionData> allQuestions = CreateQuizBox.getCreateQuizBox().getQuiz().getQuestions(); //to list all questions
+        private static ArrayList<QuestionData> allQuestions = new ArrayList<>(); //to list all questions
         private static ArrayList<QuestionData> newQuestions = new ArrayList<>(); //for new questions only
         private static ArrayList<QuestionData> oldQuestions = new ArrayList<>(); //for questions from the QuestionBank
         private TableFillQuestions selectedItem;
-        private static ArrayList<QuestionData> updatedQuestions = new ArrayList<>(); //for those that only need updating
+        private static ArrayList<QuestionData> updatedQuestions = new ArrayList<>();
+        private HBox buttonsAddImportHBox;
+        private VBox listofQuestion;
+        private HBox savebtn;
 
-        //constructor
+    /**
+     * Constructor that create:
+     * 1 Add Question Button
+     * 2 Import Question Button
+     * 3.Display the lists of Questions that form the Quiz
+     * 4.Save and Publish button to save the Question in the already new created Quiz
+     */
         private CreateAddQuestionBox() {
             super();
-            // initialize the buttons for adding questions
-            HBox buttons = initiateAddButton();
-            // initialize the table where will be store the Question List
-            // Sample data
-            VBox listofQuestion = initiateListOfQuestions();
-            HBox savebtn = initiateSaveBtns();
-
-            this.getChildren().addAll(buttons, listofQuestion, savebtn);
+            initiateAddButton();
+            initiateListOfQuestions();
+            initiateSaveBtns();
+            this.getChildren().addAll(buttonsAddImportHBox, listofQuestion, savebtn);
         }
 
-    //getter/setter
+    /**
+     * Getter for new Question
+     * @return the list of question created by user
+     */
     public static ArrayList<QuestionData> getNewQuestions() {
         return newQuestions;
     }
 
-    public void setNewQuestions(ArrayList<QuestionData> newQuestions) {
-        this.newQuestions = newQuestions;
-    }
-
+    /**
+     * Getter for the UpdatedQuestion after being edited
+     * @return the list of questions after some questions have been updated
+     */
     public static ArrayList<QuestionData> getUpdatedQuestions() {
         return updatedQuestions;
     }
 
-    public void setUpdatedQuestions(ArrayList<QuestionData> updatedQuestions) {
-        this.updatedQuestions = updatedQuestions;
+    /**
+     * Getter for all Questions
+     * @return all Questions- old(from Question Bank) and new(created by ownser of Quiz) Question
+     */
+    public static ArrayList<QuestionData> getAllQuestions() {
+        return allQuestions;
     }
 
-    //get the current instance ->Singleton
+    /**
+     * Getter to get old question to the newst created Quiz
+     * @return existed question in DB into new Quiz
+     */
+    public static ArrayList<QuestionData> getOldQuestions() {
+        return oldQuestions;
+    }
+
+
+    /**
+     * CreateAddQuestionBox is a singleton that is created only once to add question avoinding the error that the user is selecting again
+     * @return the view where user can insert the Question in the new Quiz
+     */
     public static CreateAddQuestionBox getCreateAddQuestionBox(){
             if(createAddQuestionBox == null){
                 createAddQuestionBox = new CreateAddQuestionBox();
@@ -72,10 +97,12 @@ public class CreateAddQuestionBox extends VBox {
             return createAddQuestionBox;
     }
 
-    //to initiate creation of new questions
-    private HBox initiateAddButton(){
-            HBox buttons = new HBox(230);
-            buttons.setPadding(new Insets(20));
+    /**
+     * Create Add Question that leads to another windows where user can create a new Question
+     */
+    private void initiateAddButton(){
+            buttonsAddImportHBox = new HBox(230);
+            buttonsAddImportHBox.setPadding(new Insets(20));
             Button newQuestion = new Button("➕ Question");
             newQuestion.setOnAction(actionEvent -> {
                 System.out.println("Size of array of new questions before adding: " + newQuestions.size()); //temporary check
@@ -90,57 +117,65 @@ public class CreateAddQuestionBox extends VBox {
             });
             importQuestion.setMinWidth(200);
             importQuestion.setFont(Font.font("Times New Roman", FontWeight.NORMAL, 16));
-            buttons.getChildren().addAll(newQuestion, importQuestion);
-            return buttons;
+            buttonsAddImportHBox.getChildren().addAll(newQuestion, importQuestion);
     }
 
-    private VBox initiateListOfQuestions(){
-        VBox  questionVbox = new VBox();
-        questionVbox.setSpacing(50);
-        questionVbox.setPadding(new Insets(10, 25, 0, 20));
+    /**
+     * The Questions are displayed to the user in the tableView
+     * The row of the list holds the Question, the owner and 2 buttons: edit and remove
+     * Edit Button give possibility to user to modify the question from list
+     * Remove Button give the option to remove the question from listtable and from Quiz
+     */
+    private void initiateListOfQuestions(){
+        listofQuestion = new VBox();
+        listofQuestion.setSpacing(50);
+        listofQuestion.setPadding(new Insets(10, 25, 0, 20));
         tableViewListQuestions = new TableView<TableFillQuestions>();
-
-        addNrColumn(); // nr column
-
+        addNrColumn();
         TableColumn <TableFillQuestions, String> firstCol = new TableColumn<>("Question Name");
         firstCol.setMinWidth(290);
         firstCol.setCellValueFactory(new PropertyValueFactory<>("questionName"));
-
         TableColumn<TableFillQuestions, String> secondCol = new TableColumn<>("Author");
         secondCol.setMinWidth(60);
         secondCol.setCellValueFactory(new PropertyValueFactory<>("author"));
-
-
         setTableDesign();
-
         tableViewListQuestions.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
-
         tableViewListQuestions.getColumns().addAll(firstCol, secondCol);
-
-        // add edit button
+        // add edit button to list
         addEditButtonstoListQuestion();
         // add delete button to list
         addDeleteButtonstoListQuestion();
-        questionVbox.getChildren().addAll(tableViewListQuestions);
+        listofQuestion.getChildren().addAll(tableViewListQuestions);
 
-        return questionVbox;
     }
 
+    /**
+     * Setting the desired deisgne of the tableView
+     */
     private void setTableDesign(){
         tableViewListQuestions.setEditable(false);
         tableViewListQuestions.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
     }
-    // fill table row with data from added Question
+
+    /**
+     * The Table is filled with the questions
+     * FXCollections is used to hold the questions what are in the list
+     * If the user edit or delete the observableArrayList is updated not needs to iterate throw to display
+     */
     public void fillTableObservableListWithQuestion(){
 
-        //addedQuestiontoQuiz = questions.get(index);
         questionsToList = FXCollections.observableArrayList();
         for(int i = 0; i < allQuestions.size(); i++){
             questionsToList.add(new TableFillQuestions(String.valueOf(i), allQuestions.get(i).getQuestion(), "Chen Li"));
         }
            tableViewListQuestions.setItems(questionsToList);
-           // tableViewListQuestions.setItems(questionsToList);
+
     }
+
+    /**
+     * Numbering each question in the table using the factory Pattern
+     * Each row is filled up with a number if the question exists otherwise the rows remain empty
+     */
     private void addNrColumn(){
             idCol = new TableColumn<>("#");
             idCol.setMinWidth(25);
@@ -166,6 +201,10 @@ public class CreateAddQuestionBox extends VBox {
 
     }
 
+    /**
+     * Every row in the table holds an Edit Button that gives to the user possibility to edit the question added to the Quiz
+     * TableCell factory as a pattern is used
+     */
     private void addEditButtonstoListQuestion(){
          // insert edit button in the fourth colomn
         TableColumn<TableFillQuestions, Void> fourthCol = new TableColumn<>("EDIT");
@@ -215,6 +254,10 @@ public class CreateAddQuestionBox extends VBox {
 
     }
 
+    /**
+     * Delete Button as part of the question added is provided in case if the user when to delete the Question from the Quiz
+     * TableCell Factory pattern is used
+     */
     private void addDeleteButtonstoListQuestion(){
         // insert delete button in the last colomn
         TableColumn<TableFillQuestions, Void> lastCol = new TableColumn<>("REMOVE");
@@ -265,25 +308,30 @@ public class CreateAddQuestionBox extends VBox {
         tableViewListQuestions.getColumns().add(lastCol);
 
     }
-
-
-    // data model for list of Question in CreateQuestionBox
+    /**
+     * Subclass of CreateAddQuestion to Quiz that model which data should be shown in the table of questions
+     */
     public static class TableFillQuestions {
         private final SimpleStringProperty nr;
         private final SimpleStringProperty questionName;
         private final SimpleStringProperty author;
 
 
-
+        /**
+         * Constructor of data of wich row should hold a number, question and an author
+         * @param nr of the row, updated by Factory Cell
+         * @param questionName si the question added to the Quiz
+         * @param author of the added Question to the Quiz
+         */
         private TableFillQuestions(String nr, String questionName, String author) {
             this.nr = new SimpleStringProperty(nr);
             this.questionName = new SimpleStringProperty(questionName);
             this.author = new SimpleStringProperty(author);
-
-
-
         }
 
+        /**
+         * Getter ans Seter for model data for displaying in the tableList
+         */
         public String getNr() {
             return nr.get();
         }
@@ -315,22 +363,21 @@ public class CreateAddQuestionBox extends VBox {
 
     }
 
-    //makes calls to save Questions and Quiz
-    private HBox initiateSaveBtns(){
-        HBox savedbtn = new HBox(360);
-        savedbtn.setPadding(new Insets(30,10,30,30));
+    /**
+     * Creates 2 buttons:
+     * Save - to save the Quiz and it is visible only for owner
+     * Save and Publish to save and to be visible to another users
+     * @return Save, Save and Publish buttons to user
+     */
+    private void initiateSaveBtns(){
+        savebtn = new HBox(360);
+        savebtn.setPadding(new Insets(30,10,30,30));
         Button save = new Button("▼ SAVE");
         //calls to make the array of questions persistent
         save.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                //savequiz();
-                //make the new questions persistent
-                //if successful, let user know? (for Ion to decide)
                 QuestionRequests.persistNewQuestions(UserRequests.getCurrentUser(), CreateQuizBox.getCreateQuizBox().getQuiz(), newQuestions);
-                //update edited questions
-              //  QuestionC.updateEditedQuestions(updatedQuestions);
-                //update relationships of old questions
 
             }
         });
@@ -338,20 +385,14 @@ public class CreateAddQuestionBox extends VBox {
 
         Button savePublish = new Button("▶ SAVE & PUBLISH");
         savePublish.setOnAction(actionEvent -> {
-            //save the questions again -> might be new ones there? !!! do you need to check for existence?
             QuestionRequests.persistNewQuestions(UserRequests.getCurrentUser(), CreateQuizBox.getCreateQuizBox().getQuiz(), newQuestions);
-            //play the quiz
-            //MainPane.getMainPane().getTabs().add(new Tab("Play", new PlayQuizBox(CreateQuizBox.getCreateQuizBox().getQuiz()))); //remove the PlayQuizTab !!! can not be removed tab because Chernet designed to be everything a tab controled by a singleton Object.
-            MainPane.getMainPane().getTabs().add(PlayQuizTab.getPlayQuizTab()); // it is opening the play quiz
+            MainPane.getMainPane().getTabs().add(PlayQuizTab.getPlayQuizTab());
         });
 
         savePublish.setFont(Font.font("Times New Roman", FontWeight.SEMI_BOLD, 16));
-        savedbtn.getChildren().addAll(save, savePublish);
-        return savedbtn;
+        savebtn.getChildren().addAll(save, savePublish);
+
     }
-    public void saveQuiz(){
-        QuizRequests.createNewQuiz(CreateQuizBox.getCreateQuizBox().getQuiz(), UserRequests.getCurrentUser());
-    } //why is this outside CreateQuiz??
 
     public int indexSelecteditem(){
         return tableViewListQuestions.getSelectionModel().getSelectedIndex();

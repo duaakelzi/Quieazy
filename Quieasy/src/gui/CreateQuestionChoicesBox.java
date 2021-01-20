@@ -9,11 +9,14 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
-
 import java.util.ArrayList;
 
-
 public class CreateQuestionChoicesBox extends VBox {
+    /**
+     * CreateQuestionChoicesBox class create the field where user can introduce the question with choices,
+     * The window of Question Choices is opened either added new Question or is triggered by edited new Question from ListTable
+     * The class holds a Text field of Question, 4 Choices with 4RadioButtons to select the correct answer and the save Button
+     */
 
     private static CreateQuestionChoicesBox createQuestionChoicesBox;
     private SpinnerValueFactory <Integer> valueSpinner;
@@ -27,35 +30,41 @@ public class CreateQuestionChoicesBox extends VBox {
     private RadioButton fourthradiobtn;
     private TextArea textQuestion;
     private QuestionData newQuestionAdd;
-    private QuizData quiz = CreateQuizBox.getCreateQuizBox().getQuiz();
+    private final QuizData quiz = CreateQuizBox.getCreateQuizBox().getQuiz();
     private ArrayList<ChoicesData> choicesData;
     private int indexEditQuestion;
-    //c'tor
+    private VBox questionVbox;
+    private VBox choices;
+    private HBox buttonHBox;
+
+    /**
+     * Constructor that initiates the Questiontext Field, 4 answer with Radio Button and save Button
+     */
     private CreateQuestionChoicesBox(){
         // initiate the Question area
-        VBox question = initiateQuestionPointsFields();
+        initiateQuestionPointsFields();
         // initiate the answer field with radiobutton
-        VBox answer = initiateChoices();
+        initiateChoices();
         // initiate saveButton
-        HBox button = initiateSaveQuestionBtn();
-        this.getChildren().addAll(question, answer, button);
+        initiateSaveQuestionBtn();
+        this.getChildren().addAll(questionVbox, choices, buttonHBox);
     }
 
-
+    /**
+     * Singleton objects that holds that View of Question is created once
+     * @return the Window of Question with Answers field to insert or edit Question
+     */
 
     public static CreateQuestionChoicesBox getCreateQuestionChoicesBox(){
         if(createQuestionChoicesBox == null) createQuestionChoicesBox = new CreateQuestionChoicesBox();
         return createQuestionChoicesBox;
     }
 
-    //getter and setter
-    public QuestionData getNewQuestionAdd() {
-        return newQuestionAdd;
-    }
-
-    //launches and takes input for questionText and points
-    private VBox initiateQuestionPointsFields(){
-        VBox questionVbox = new VBox(10);
+    /**
+     * Create the Question Text Field with a spinner that holds the points to specific question
+     */
+    private void initiateQuestionPointsFields(){
+        questionVbox = new VBox(10);
         Label questionlabel = new Label("Question");
         questionlabel.setFont(Font.font("Times New Roman", FontWeight.BOLD, 20));
         textQuestion = new TextArea();
@@ -64,33 +73,28 @@ public class CreateQuestionChoicesBox extends VBox {
         textQuestion.setWrapText(true);
         textQuestion.setPrefHeight(100);
         textQuestion.setPrefWidth(600);
-
         HBox questionPointsLabel = new HBox(470);
         questionVbox.setPadding(new Insets(20,30, 10, 30));
-
         Label pointsLabel = new Label("Points");
         pointsLabel.setFont(Font.font("Times New Roman", FontWeight.NORMAL, 16));
         questionPointsLabel.getChildren().addAll(questionlabel, pointsLabel);
         HBox questionPointsdata = new HBox(10);
         Spinner<Integer> pointsSpinner = new Spinner<>();
         pointsSpinner.setEditable(true);
-
         valueSpinner = new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 10000, 0);
         valueSpinner.setWrapAround(true);
-
-
         pointsSpinner.setValueFactory(valueSpinner);
         questionPointsdata.getChildren().addAll(textQuestion, pointsSpinner);
-
         questionVbox.getChildren().addAll(questionPointsLabel, questionPointsdata);
-
-        return questionVbox;
 
     }
 
-    //responsible for questionChoices
-    private VBox initiateChoices(){
-        VBox choices = new VBox(10);
+    /**
+     * Create 4 text field with radio Button to insert the choices for Question and to select the correct Question
+     * @return VBox that holds all the Nodes input the choices and correct answer
+     */
+    private void initiateChoices(){
+        choices = new VBox(10);
         choices.setPadding(new Insets(10,30,0,30));
         HBox labelchoice = new HBox(470);
         Label choicelabel = new Label("Choices");
@@ -98,7 +102,7 @@ public class CreateQuestionChoicesBox extends VBox {
         Label correctlabel = new Label("Correct");
         correctlabel.setFont(Font.font("Times New Roman", FontWeight.NORMAL, 16));
         labelchoice.getChildren().addAll(choicelabel, correctlabel);
-        // first field of answer with radio buttom
+        // first field of answer with radio bottom
         HBox fistanswer = new HBox(150);
         firstchoice = new TextField();
         firstchoice.setPromptText("Enter the 1 st answer");
@@ -106,7 +110,7 @@ public class CreateQuestionChoicesBox extends VBox {
         firstradiobtn = new RadioButton();
         fistanswer.getChildren().addAll(firstchoice, firstradiobtn);
 
-        //second field of answer with radio buttom
+        //second field of answer with radio bottom
         HBox secondanswer = new HBox(150);
         secondchoice = new TextField();
         secondchoice.setPromptText("Enter the 2nd answer");
@@ -114,7 +118,7 @@ public class CreateQuestionChoicesBox extends VBox {
         secondradiobtn = new RadioButton();
         secondanswer.getChildren().addAll(secondchoice, secondradiobtn);
 
-        //third field of answer with radio buttom
+        //third field of answer with radio bottom
         HBox thirdanswer = new HBox(150);
         thirdchoice = new TextField();
         thirdchoice.setPromptText("Enter the 3rd answer");
@@ -122,7 +126,7 @@ public class CreateQuestionChoicesBox extends VBox {
         thirdradiobtn = new RadioButton();
         thirdanswer.getChildren().addAll(thirdchoice, thirdradiobtn);
 
-        // fourth field of answer with radio buttom
+        // fourth field of answer with radio bottom
         HBox fourthanswer = new HBox(150);
         fourthchoice = new TextField();
         fourthchoice.setPromptText("Enter the 4th answer");
@@ -132,13 +136,17 @@ public class CreateQuestionChoicesBox extends VBox {
 
         choices.getChildren().addAll(labelchoice,fistanswer, secondanswer, thirdanswer, fourthanswer);
 
-        return choices;
+
     }
 
-    //make calls to add new question to the array of questions which will be made persistent in CreateAddQuestoinBox
-    private HBox initiateSaveQuestionBtn(){
-        HBox buttonHbox = new HBox();
-        buttonHbox.setPadding(new Insets(50, 30, 0, 490));
+    /**
+     * Create Save Button
+     * 1. Save the new Question if the Question doen't exist
+     * 2 Save the changes of the edit Question if the answer is the list
+     */
+    private void initiateSaveQuestionBtn(){
+        buttonHBox = new HBox();
+        buttonHBox.setPadding(new Insets(50, 30, 0, 490));
         Button saveQ= new Button("ADD");
         saveQ.setFont(Font.font("Times New Roman", FontWeight.NORMAL, 16));
         saveQ.setOnAction(actionEvent -> {
@@ -159,16 +167,16 @@ public class CreateQuestionChoicesBox extends VBox {
                    CreateAddQuestionBox.getCreateAddQuestionBox().fillTableObservableListWithQuestion();
                }
                 CreateQuestionChoicesTab.getCreateQuestionChoicesTab().closeTab();
-                //CreateAddQuestionBox.getCreateAddQuestionBox().getTableViewListQuestions().getSelectionModel().clearSelection(); // clear all the selection
                 sanitizeInputs();
 
         });
-        buttonHbox.getChildren().addAll(saveQ);
-
-        return buttonHbox;
+        buttonHBox.getChildren().addAll(saveQ);
     }
 
-    //to adjust chosen questionChoices
+    /**
+     * Fill in the Text field and choices when the user edit the Question from the table of questions
+     * @param index of the question in the list
+     */
     public void editQuestion(int index){
         textQuestion.setText(quiz.getQuestions().get(index).getQuestion());
         firstchoice.setText(quiz.getQuestions().get(index).getAnswers().get(0).getChoiceDescription());
@@ -185,6 +193,9 @@ public class CreateQuestionChoicesBox extends VBox {
 
     }
 
+    /**
+     * Sanitizing the inputs after editing or inserting a new Question when the tab is closed
+     */
     private void sanitizeInputs(){
         textQuestion.clear();
         firstchoice.clear();
@@ -197,8 +208,10 @@ public class CreateQuestionChoicesBox extends VBox {
         fourthradiobtn.setSelected(false);
     }
 
-    //this one serves only the purpose of initializing a question on client side,
-    // not yet making it persistent
+    /**
+     * Create a new Question from inserted data from user
+     * @return the new Question
+     */
     private QuestionData createNewQuestion(){
         choicesData = new ArrayList<>();
         choicesData.add(new ChoicesData(firstchoice.getText(), firstradiobtn.isSelected()));
@@ -210,6 +223,10 @@ public class CreateQuestionChoicesBox extends VBox {
         return newQuestion;
     }
 
+    /**
+     * Save the edited Question in the table List
+     * @param index is the position of question in the list
+     */
     private void saveEditedQuestion(int index){
         quiz.getQuestions().get(index).setQuestion(textQuestion.getText());
         choicesData.get(0).setChoiceDescription(firstchoice.getText());

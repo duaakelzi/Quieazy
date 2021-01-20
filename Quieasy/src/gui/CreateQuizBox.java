@@ -25,91 +25,101 @@ import java.util.ArrayList;
 import java.util.stream.Collectors;
 
 public class CreateQuizBox extends VBox {
-
+	/**
+	 * CreateQuizBox class holds the Study Programs, Course, Name of the Quiz, Threshold, Count Down Timer input field that are
+	 * collected from User to create an empty Quiz. At this point an empty Quiz is created that belongs to the user without questions.
+	 */
 	private static CreateQuizBox createQuizBox;
-	private Button createButton;
-	private TextField textThreshold;
-	private TextField textname;
+	private TextField thresholdText;
+	private TextField nameText;
 	private ComboBox<String> courseComboBox;
 	private ComboBox<String> studyProgramComboBox;
-	private TextField textTime;
-	private  Label warning;
+	private TextField timeText;
+	private Label warningLabel;
 	private ArrayList<StudyProgramData> studyProgramDataArrayList = new ArrayList<>();
 	private QuizData quiz;
-	private ObservableList<String> studyProgramHSObservList;
-	// constructor can only be accessed from within
+	private HBox studyProgram;
+	private HBox courses;
+	private HBox nameQuiz;
+	private HBox thresholdQuiz;
+	private HBox timeLimit;
+	private HBox warningMessage;
+	private HBox createButtons;
+
+	/**
+	 * Constructor of CreateQuizBox initialize the following member variable of the class:
+	 * 1. First ComboBox dropdown the list of available Study Programs of THU
+	 * 2. Second ComboBox lists the courses that belongs to the above chosen Study program
+	 * 3. Name of the Quiz is inserted by user
+	 * 4  Threshold - a field that accept a number input representing the percentage of correct answers to pass the Quiz
+	 * 5. Timer - a time limit bound while the user can answers to the questions
+	 */
 	private CreateQuizBox(){
 		
 		super();
 		//call fetchStudyPrograms and present the data to user while waiting for their input
 		initializeCreateQuizFields(); //return arraylist
 	}
-	//for testing the sequence of client-server message sending
-	public void initializeCreateQuizFields(){
-//		QuizData quizForTest = new QuizData();
-//		quizForTest.setId(Long.valueOf(1));
-//		quizForTest.setName("Java");
-//		quizForTest.setThreshold(60);
-//		QuestionC.fetchQuizQuestions(quizForTest);
+
+	/**
+	 * Initializes the JavaFX field to set up a new Quiz
+	 */
+	private void initializeCreateQuizFields(){
 		studyProgramDataArrayList = StudyProgramRequests.fetchAllStudyPrograms();
 		if(studyProgramDataArrayList != null) {
 			ArrayList<String> studyProgramNames = studyProgramDataArrayList.stream()
 					.map(StudyProgramData::getStudyprogram)
 					.collect(Collectors.toCollection(ArrayList::new));
-			studyProgramHSObservList = FXCollections.observableArrayList(studyProgramNames);
-
-			// study program selection
-			HBox studyProgram = initiateStudyProgram(studyProgramHSObservList);
-			//courses selection
-			//ObservableList<String> course = FXCollections.observableArrayList("SOFE", "Calculus", "C++", "WebEngineering");
-			HBox courses = initiateCourse();
-			//give a name to Quiz
-			HBox nameQuiz = initiateNameQuiz();
-
-			// give a passed grade to Quiz
-			HBox thresholdQuiz = initiateTreshold();
-			HBox timeLimit = initiateTimeLimit();
-			HBox warningMessage = initiatewarning();
-			HBox createButton = initiateBotton();
-			this.getChildren().addAll(studyProgram, courses, nameQuiz, thresholdQuiz, timeLimit, warningMessage, createButton);
+			ObservableList<String> studyProgramHSObservList = FXCollections.observableArrayList(studyProgramNames);
+			initiateStudyProgram(studyProgramHSObservList);
+			initiateCourse();
+			initiateNameQuiz();
+			initiateTreshold();
+			initiateTimeLimit();
+			initiatewarning();
+			initiateBotton();
+			this.getChildren().addAll(studyProgram, courses, nameQuiz, thresholdQuiz, timeLimit, warningMessage, createButtons);
 		}
 	}
+
+	/**
+	 * Getter for Study Program
+	 * @return ArrayList of all study programs
+	 */
 	public ArrayList<StudyProgramData> getStudyProgramDataArrayList() {
 		return studyProgramDataArrayList;
 	}
 
-	public void setStudyProgramDataArrayList(ArrayList<StudyProgramData> studyProgramDataArrayList) {
-		this.studyProgramDataArrayList = studyProgramDataArrayList;
-	}
-
-
-	// Gets the current instance -> Singleton
+	/**
+	 * Singleton Object of CreateQuizBox Scene, is considered that the user can create a single Quiz at time
+	 * @return the Window with all fields to create a Quiz
+	 */
 	public static CreateQuizBox getCreateQuizBox() {
-		
 		if (createQuizBox == null) createQuizBox = new CreateQuizBox();
-		
 		return createQuizBox;
-		
 	}
 
+	/**
+	 * Message displayed if the Quiz was successful created, representing that the newest created Quiz is saved on DB
+	 */
 	public static void showSuccessful(){
-		// let the user know that the server has successfully saved a list of quizes to persistence
-		System.out.println("Quiz successfully created. "); //should be on UI, not console
 		QuizRequests.fetchAllQuizzes(UserRequests.getCurrentUser()); //for testing, to see if the method works
 	}
+
+	/**
+	 * Failure Mesage on GUI when the Quiz was failed to be saved on DB
+	 */
 	public static void showFailed(){
 		// let the user know server has failed saving the list of quizzes to persistence
 		System.out.println("Quiz creation failed. "); //should be on UI, not console
 	}
 
-	public void saveNreQuiz(){
-		//6 call QuizC.createNewQuiz with the new Quiz object
-		//QuizC.createNewQuiz(quiz);
-	}
-
-
-	public HBox initiateStudyProgram(ObservableList<String>studyProgramHS) {
-		HBox studyProgram = new HBox(30);
+	/**
+	 * Creating COmboBox of Study Program with Study Programs from DB
+	 * @param studyProgramHS
+	 */
+	public void initiateStudyProgram(ObservableList<String>studyProgramHS) {
+		studyProgram = new HBox(30);
 		studyProgram.setPadding(new Insets(30));
 		Label labelStudyProgram = new Label("Study Program*");
 		labelStudyProgram.setFont(Font.font("Times New Roman", FontWeight.EXTRA_BOLD, 20));
@@ -131,18 +141,20 @@ public class CreateQuizBox extends VBox {
 		});
 
 		studyProgramComboBox.setItems(studyProgramHS);
-		//set the size of text of item in the buttom cell
+		//setting the appearance of text of item in the buttom cell
 		settingsComboBox(studyProgramComboBox);
-
 		studyProgramComboBox.setMinHeight(30);
 		studyProgramComboBox.setMinWidth(400);
 		studyProgram.getChildren().addAll(labelStudyProgram, studyProgramComboBox);
-		return studyProgram;
-
 	}
-	public HBox initiateCourse(){
-		HBox course = new HBox(100);
-		course.setPadding(new Insets(0, 30, 0, 30));
+
+	/**
+	 * Creating ComboBox of Courses, the list of courses are dependent of Study Program selection
+	 * Courses list from spinner are filled up in the moment of selection of a Study Program
+	 */
+	public void initiateCourse(){
+		courses = new HBox(100);
+		courses.setPadding(new Insets(0, 30, 0, 30));
 		Label labelcourse = new Label("Course*");
 		labelcourse.setFont(Font.font("Times New Roman", FontWeight.EXTRA_BOLD, 20));
 		courseComboBox = new ComboBox<>();
@@ -150,10 +162,13 @@ public class CreateQuizBox extends VBox {
 		settingsComboBox(courseComboBox);
 		courseComboBox.setMinHeight(30);
 		courseComboBox.setMinWidth(400);
-		course.getChildren().addAll(labelcourse, courseComboBox);
-		return course;
+		courses.getChildren().addAll(labelcourse, courseComboBox);
 	}
 
+	/**
+	 * Settings for ComboBox appearance of the dropdown list using the design pattern Factory from java Library
+	 * @param combobox is passed as parameter to change the design of the ComboBox
+	 */
 	private void settingsComboBox(ComboBox<String> combobox){
 		combobox.setButtonCell(new ListCell<>() {
 			@Override
@@ -169,7 +184,7 @@ public class CreateQuizBox extends VBox {
 				}
 			}
 		});
-		//set the size and font for CumboBox List of item
+		//setting the size and font for CumboBox List of item
 		combobox.setCellFactory(new Callback<>() {
 			@Override
 			public ListCell<String> call(ListView<String> stringListView) {
@@ -194,90 +209,105 @@ public class CreateQuizBox extends VBox {
 
 	}
 
-	public HBox initiateNameQuiz(){
-		HBox nameQuiz = new HBox(110);
+	/**
+	 * Create the input field text that represents for User the Name of the Quiz
+	 */
+	public void initiateNameQuiz(){
+		nameQuiz = new HBox(110);
 		nameQuiz.setPadding(new Insets(30));
 		Label labelName = new Label("Name*");
 		labelName.setFont(Font.font("Times New Roman", FontWeight.EXTRA_BOLD, 20));
-		textname = new TextField();
-		textname.setFont(Font.font("Times New Roman", FontWeight.NORMAL, 18));
-		textname.setPromptText("Name of the Quiz*");
-		textname.setMinWidth(400);
-		textname.setMinHeight(30);
-		nameQuiz.getChildren().addAll(labelName, textname);
-
-		return nameQuiz;	
+		nameText = new TextField();
+		nameText.setFont(Font.font("Times New Roman", FontWeight.NORMAL, 18));
+		nameText.setPromptText("Name of the Quiz*");
+		nameText.setMinWidth(400);
+		nameText.setMinHeight(30);
+		nameQuiz.getChildren().addAll(labelName, nameText);
 	}
-	public HBox initiateTreshold(){
-		HBox thresholdQuiz = new HBox(72);
+
+	/**
+	 * Create an input Text field that accepts only 2 digits units that represents the pass boundary for Quiz
+	 * if the user doesn't introduce nothing 80% is selected as a default value when the any key from keyboard is pressed
+	 */
+	public void initiateTreshold(){
+		thresholdQuiz = new HBox(72);
 		thresholdQuiz.setPadding(new Insets(0, 30, 0, 30));
 		Label labelThreshold = new Label("Threshold*");
 		labelThreshold.setFont(Font.font("Times New Roman", FontWeight.EXTRA_BOLD, 20));
-		textThreshold = new TextField();
-		textThreshold.setFont(Font.font("Times New Roman", FontWeight.NORMAL, 18));
-		textThreshold.setPromptText("80 %");
-		textThreshold.setMinWidth(100);
-		textThreshold.setMinHeight(30);
-		textThreshold.textProperty().addListener((observableValue, oldValue, newValue) -> {
+		thresholdText = new TextField();
+		thresholdText.setFont(Font.font("Times New Roman", FontWeight.NORMAL, 18));
+		thresholdText.setPromptText("80 %");
+		thresholdText.setMinWidth(100);
+		thresholdText.setMinHeight(30);
+		thresholdText.textProperty().addListener((observableValue, oldValue, newValue) -> {
 			if(!newValue.matches("\\d{0,2}([\\.]\\d{0,2})?")) {
-				textThreshold.setText("80.00");
-			}else{}
+				thresholdText.setText("80.00");
+			}
 		});
-		thresholdQuiz.getChildren().addAll(labelThreshold, textThreshold);
-		return thresholdQuiz;
+		thresholdQuiz.getChildren().addAll(labelThreshold, thresholdText);
 
 	}
-	// add try catch error empty entry
-	public HBox initiateTimeLimit(){
-		HBox timeLimit = new HBox(70);
+
+	/**
+	 * Create the field that accepts 3 digits, that represents the timer for the Quiz
+	 * if the user doesn't insert a value a 15 min is settled as a default value on the press any key from the keyboard
+	 */
+	public void initiateTimeLimit(){
+		timeLimit = new HBox(70);
 		Label labelTime = new Label("Time limit*");
 		labelTime.setFont(Font.font("Times New Roman", FontWeight.EXTRA_BOLD, 20));
 		timeLimit.setPadding(new Insets(30));
-		textTime = new TextField();
+		timeText = new TextField();
 
-		textTime.setFont(Font.font("Times New Roman", FontWeight.NORMAL, 18));
-		textTime.setMinWidth(100);
-		textTime.setPromptText("15 minutes");
+		timeText.setFont(Font.font("Times New Roman", FontWeight.NORMAL, 18));
+		timeText.setMinWidth(100);
+		timeText.setPromptText("15 minutes");
 
-		textTime.textProperty().addListener((observableValue, oldValue, newValue) -> {
+		timeText.textProperty().addListener((observableValue, oldValue, newValue) -> {
 			if(!newValue.matches("\\d{0,3}")){
-				textTime.setText("15");
+				timeText.setText("15");
 			}else{
 
 			}
 		});
-				timeLimit.getChildren().addAll(labelTime, textTime);
-
-		return timeLimit;
-	}
-	public HBox initiatewarning(){
-		HBox warningText = new HBox();
-		warningText.setPadding(new Insets(0,0,0,200));
-		warning = new Label();
-		warning.setTextFill(Color.FIREBRICK);
-		warningText.getChildren().add(warning);
-		return warningText;
+				timeLimit.getChildren().addAll(labelTime, timeText);
 	}
 
-	public HBox initiateBotton(){
-		HBox buttonsubmit = new HBox();
-		buttonsubmit.setPadding(new Insets(40, 30, 0, 500));
-		createButton = new Button("➦ Create Quiz");
+	/**
+	 * Create the Warning message
+	 * In the case if not all the mandatory fields with the sigh * not selected a warning message is displayed to the User
+	 */
+	public void initiatewarning(){
+		warningMessage = new HBox();
+		warningMessage.setPadding(new Insets(0,0,0,200));
+		warningLabel = new Label();
+		warningLabel.setTextFill(Color.FIREBRICK);
+		warningMessage.getChildren().add(warningLabel);
+	}
+
+	/**
+	 * Create Quiz Button that check if all the mandatory fields are filled in case of successfully check the Quiz is created
+	 */
+	public void initiateBotton(){
+		createButtons = new HBox();
+		createButtons.setPadding(new Insets(40, 30, 0, 500));
+		Button createButton = new Button("➦ Create Quiz");
 		createButton.setFont(Font.font("Times New Roman", FontWeight.NORMAL, 16));
-		buttonsubmit.getChildren().addAll(createButton);
+		createButtons.getChildren().addAll(createButton);
 		createButton.setOnAction(actionEvent -> {
 			if(studyProgramComboBox.getValue()==null     || courseComboBox.getValue() == null
-														 || textname.getText().isEmpty()
-														 || textThreshold.getText().isEmpty()
-														 || textTime.getText().isEmpty()) {
+														 || nameText.getText().isEmpty()
+														 || thresholdText.getText().isEmpty()
+
+														 || timeText.getText().isEmpty()) {
 
 
-				warning.setText("Fill all the fields marked with *");
+				warningLabel.setText("Fill all the fields marked with *");
 
 			}else{
-				quiz = new QuizData(courseComboBox.getValue(), textname.getText(),
-						Double.parseDouble(textThreshold.getText()),
-						Integer.parseInt(textTime.getText()),
+				quiz = new QuizData(courseComboBox.getValue(), nameText.getText(),
+						Double.parseDouble(thresholdText.getText()),
+						Integer.parseInt(timeText.getText()),
 						new ArrayList<QuestionData>());
 				if(QuizRequests.createNewQuiz(quiz, UserRequests.getCurrentUser())) {
 					CreateQuizBox.showSuccessful();
@@ -288,7 +318,6 @@ public class CreateQuizBox extends VBox {
 				MainPane.getMainPane().getTabs().add(CreateAddQuestionTab.getCreateAddQuestionTab());
 				CreateQuizTab.getCreateQuizTab().closeTab();
 				 sanitizeInputs();
-				// create the object Quiz here
 
 
 
@@ -297,7 +326,7 @@ public class CreateQuizBox extends VBox {
 
 
 
-		return buttonsubmit;
+
 
 	}
 
@@ -305,10 +334,13 @@ public class CreateQuizBox extends VBox {
 		return quiz;
 	}
 
+	/**
+	 * Sanitizing the input field from the previous created Quiz
+	 */
 	private void sanitizeInputs(){
-		textname.clear();
-		textThreshold.clear();
-		textTime.clear();
+		nameText.clear();
+		thresholdText.clear();
+		timeText.clear();
 
 	}
 
