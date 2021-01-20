@@ -26,7 +26,7 @@ The launching files are: **Quieasy>src>application>Quieasy** for client and **Qu
 Now you can test the apps. To start, run the app "QuieasyServer" first. You should see "Quieasy server running on port 3000" on the console output. Then you can start the "Quieasy" app. You should see the "Log in" dialog.
 
 
-Try to login as username: user@example.com
+Try to login as username: user@mail.com
                            password: 123
 
 Other login attempts should fail.
