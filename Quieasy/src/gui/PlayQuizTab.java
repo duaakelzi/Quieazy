@@ -1,5 +1,6 @@
 package gui;
 
+import guib.QuizBrowser;
 import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.scene.control.Tab;
@@ -10,8 +11,20 @@ public class PlayQuizTab extends Tab{
 
     private static PlayQuizTab playQuizTab;
     // constructor can only be accessed from within
-    public PlayQuizTab() {
+    private PlayQuizTab() {
+
         super("PLAY ►", PlayQuizBox.getPlayQuizBox());
+
+        this.setOnClosed(new EventHandler<Event>() {
+            @Override
+            public void handle(Event t) {
+
+                PlayQuizTab.reset();
+
+            }
+
+        });
+
     }
 
 
@@ -35,13 +48,19 @@ public class PlayQuizTab extends Tab{
                 tab.getTabPane().getTabs().remove(tab);
 
 
-
             }
+
+            PlayQuizTab.reset(); // ADDED BY CHERNET
 
         }
 
+        public static void reset(){
 
+            QuizBrowser.setQuizToPlay(null);
+            PlayQuizBox.reset();
+            playQuizTab = null;
 
+        }
 
     }
 

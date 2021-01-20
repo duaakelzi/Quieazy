@@ -1,6 +1,9 @@
 package guib;
 
 import data.QuizData;
+import gui.MainPane;
+import gui.PlayQuizTab;
+
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -54,8 +57,33 @@ public class QuizSnippet extends VBox {
 			 
 		    public void handle(ActionEvent e) {
 		        
-		    	// launch "Play Quiz" from here
-				// use the QuizData variable "quiz" in this class to pass to the quiz player class
+		    	// launch "Play Quiz" from here.
+				if(QuizBrowser.getQuizToPlay() != null){
+
+					if(!quiz.equals(QuizBrowser.getQuizToPlay())){
+
+						// close the current tab first
+						MainPane.getMainPane().getTabs().remove(PlayQuizTab.getPlayQuizTab());
+						PlayQuizTab.reset();
+						//
+
+						QuizBrowser.setQuizToPlay(quiz);
+						MainPane.getMainPane().getTabs().add(PlayQuizTab.getPlayQuizTab());
+						MainPane.getMainPane().getSelectionModel().select(PlayQuizTab.getPlayQuizTab());
+
+					}else{
+
+						MainPane.getMainPane().getSelectionModel().select(PlayQuizTab.getPlayQuizTab());
+
+					}
+
+				}else{
+
+					QuizBrowser.setQuizToPlay(quiz);
+					MainPane.getMainPane().getTabs().add(PlayQuizTab.getPlayQuizTab());
+					MainPane.getMainPane().getSelectionModel().select(PlayQuizTab.getPlayQuizTab());
+
+				}
 		    	
 		    }
 		    

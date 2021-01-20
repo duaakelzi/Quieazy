@@ -18,7 +18,6 @@ public class Menu extends VBox {
 
 	private static Button profileButton = new Button("Profile");
 	private static Button createQuizButton = new Button("Create Quiz");
-	private static Button myQuizButton = new Button("My Quiz");
 	private static Button notifButton = new Button("Notifications");
 	private static Button settingsButton = new Button("Settings");
 	private static Button helpButton = new Button("Help");
@@ -30,13 +29,12 @@ public class Menu extends VBox {
 		this.setPadding(new Insets(15, 12, 15, 12));
 		profileButton.setPrefSize(BTN_WIDTH, BTN_HEIGHT);
 		createQuizButton.setPrefSize(BTN_WIDTH, BTN_HEIGHT);
-		myQuizButton.setPrefSize(BTN_WIDTH, BTN_HEIGHT);
 		notifButton.setPrefSize(BTN_WIDTH, BTN_HEIGHT);
 		settingsButton.setPrefSize(BTN_WIDTH, BTN_HEIGHT);
 		helpButton.setPrefSize(BTN_WIDTH, BTN_HEIGHT);
 		logoutButton.setPrefSize(BTN_WIDTH, BTN_HEIGHT);
 
-		this.getChildren().addAll(profileButton, createQuizButton, myQuizButton, notifButton, settingsButton, helpButton,logoutButton);
+		this.getChildren().addAll(profileButton, createQuizButton, notifButton, settingsButton, helpButton,logoutButton);
 
 		logoutButton.setOnAction(new EventHandler<ActionEvent>() {
 
@@ -58,15 +56,6 @@ public class Menu extends VBox {
 			}
 
 		});
-
-		/*
-		myQuizButton.setOnAction(new EventHandler<ActionEvent>() {
-			@Override
-			public void handle(ActionEvent actionEvent) {
-				MainPane.getMainPane().getTabs().add(PlayQuizTab.getPlayQuizTab());
-			}
-		});
-		*/
 
 	}
 

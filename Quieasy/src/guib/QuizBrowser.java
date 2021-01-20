@@ -2,12 +2,16 @@
 
 package guib;
 
+import data.QuizData;
+
 import javafx.geometry.Insets;
 import javafx.scene.layout.VBox;
 
 public class QuizBrowser extends VBox {
 	
 	private static QuizBrowser quizBrowser;
+
+	private static QuizData quizToPlay = null; // store the quiz selected to play here
 	
 	// constructor can only be accessed from within
 	private QuizBrowser() {
@@ -33,13 +37,16 @@ public class QuizBrowser extends VBox {
 		
 	}
 
-	/*
-	public static void load() {
-		
-		QuizBrowser.instance().getChildren().addAll(FilterBar.instance(), ResultBox.instance());
-		
-		FilterBar.filter();
-		
+	public static void setQuizToPlay(QuizData quiz){
+
+		quizToPlay = quiz;
+
 	}
-	*/
+
+	public static QuizData getQuizToPlay(){
+
+		return quizToPlay;
+
+	}
+
 }
