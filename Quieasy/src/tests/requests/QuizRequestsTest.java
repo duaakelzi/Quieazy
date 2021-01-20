@@ -59,15 +59,15 @@ public class QuizRequestsTest {
     public void testFetchAllQuizzes() {
         try {
             // no quizzes should be found for fake user -> size 0
-            assertEquals(QuizRequests.fetchAllQuizzes(fakeUser).size(), 0);
+            assertEquals(QuizRequests.fetchAllUserQuizzes(fakeUser).size(), 0);
             System.out.println("Fetch for fake user: assertEquals 0 passed");
 
             // quizzes for existing and another user > 0
-            tempArrayQuizzes1 = QuizRequests.fetchAllQuizzes(existingUser); //this works when calling the method from another class
+            tempArrayQuizzes1 = QuizRequests.fetchAllUserQuizzes(existingUser); //this works when calling the method from another class
             assertNotSame(tempArrayQuizzes1.size(), 0);
             System.out.println("Fetch for existing user: assertNotSame as 0 for existingUser  passed");
 
-            tempArrayQuizzes2 = QuizRequests.fetchAllQuizzes(anotherUser); //this works when calling the method from another class
+            tempArrayQuizzes2 = QuizRequests.fetchAllUserQuizzes(anotherUser); //this works when calling the method from another class
             assertNotSame(tempArrayQuizzes2.size(), 0);
             System.out.println("Fetch for another user: assertNotSame as 0 for anotherUser  passed");
         }catch (AssertionError ae) {
@@ -102,7 +102,7 @@ public class QuizRequestsTest {
     public void testQuizDelete() {
         assertTrue(QuizRequests.deleteQuiz(nonAccessibleQuiz));
         System.out.println("assertTrue for deleteQuiz passed. Nonaccessible quiz deleted");
-        assertSame(QuizRequests.fetchAllQuizzes(anotherUser).size(), 0);
+        assertSame(QuizRequests.fetchAllUserQuizzes(anotherUser).size(), 0);
         System.out.println("assertSame for Nonaccessible quiz passed. Array size 0");
     }
     @AfterClass

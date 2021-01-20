@@ -3,21 +3,20 @@
 
 package gui;
 
-import data.QuizData;
-import javafx.scene.*;
-import javafx.scene.paint.Color;
-import requests.QuestionRequests;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 
 public class PrimeScene extends Scene {
 	
 	private static PrimeScene primeScene;
 	
-	private static final double WIDTH = 800;
-	private static final double HEIGHT = 500;
+	private static final double WIDTH = 900;
+	private static final double HEIGHT = 600;
 	
 	// constructor can only be accessed from within
-	private PrimeScene(Parent root, Color color) {
-		super(root,WIDTH, HEIGHT, color);
+	private PrimeScene(Parent root, double width, double height) {
+
+		super(root, width, height);
 		
 	}
 	
@@ -25,11 +24,9 @@ public class PrimeScene extends Scene {
 	public static PrimeScene getPrimeScene() {
 		
 		if (primeScene == null) {
-			
-			primeScene = new PrimeScene(Login.getLogin(),  Color.LAVENDER);
-			//primeScene = new PrimeScene(Home.getHome(),Color.LAVENDER);
 
-			
+			primeScene = new PrimeScene(Login.getLogin(), WIDTH, HEIGHT);
+
 		}
 		
 		return primeScene;
@@ -57,6 +54,4 @@ public class PrimeScene extends Scene {
 		
 	}
 
-
-	
 }

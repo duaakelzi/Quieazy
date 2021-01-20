@@ -46,13 +46,18 @@ public class ServerDecoder {
             response = Request.deleteQuiz(quiz.getName(), quiz.getCourse());
             response.task = message.task;
             return response;
-        } else if (message.task.equals("FETCH_ALL_QUIZZES")) {
+        } else if (message.task.equals("FETCH_ALL_USER_QUIZZES")) {
             UserData userData = message.userData;
             response = new Message();
-            response = Request.retrieveQuizzes(userData.getEmail());
+            response = Request.retrieveUserQuizzes(userData.getEmail());
             response.task = message.task;
             return response;
+        } else if (message.task.equals("FETCH_ALL_QUIZZES")) {
 
+            response = new Message();
+            response = Request.retrieveQuizzes();
+            response.task = message.task;
+            return response;
         } else if (message.task.equals("CREATE_QUESTIONS")) {
             System.out.println("server: create questions method entered >> ");
             response = new Message();
@@ -114,9 +119,11 @@ public class ServerDecoder {
 
                 //ideally, we should be working with IDs here
                 //session closed after each call to persist. Might be interfering
-                Request.createResult(resultData.getPoints(), resultData.isPassed(), quizData.getName(), "user@mail.com");
+              response = new Message();
+              response= Request.createResult(resultData.getPoints(), resultData.isPassed(), quizData.getName(), userData.getEmail());
+              response.task = message.task;
 
-            return message;
+            return response;
         }else if (message.task.equals("FETCH_RESULTS")) {
             UserData userData = message.userData;
             return Request.retrieveResults(userData.getEmail());

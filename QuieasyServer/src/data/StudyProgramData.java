@@ -29,4 +29,10 @@ public class StudyProgramData implements Serializable {
     public void setCourses(ArrayList<CourseData> courses) {
         this.courses = courses;
     }
+    @Override
+    public boolean equals(Object o) {
+        StudyProgramData spToCompare = (StudyProgramData) o;
+        //String studyprogram, ArrayList<CourseData> courses
+        return (studyprogram.equals(spToCompare.getStudyprogram()));
+    }
 }

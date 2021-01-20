@@ -46,10 +46,16 @@ public class Request {
         return DeleteObjects.deleteQuiz(quizName,course);
     }
     //retrieve all quizzes for user
-    public static Message retrieveQuizzes(String email) {
+    public static Message retrieveUserQuizzes(String email) {
         // create a database connection
         JDBC.connectMySQL();
-        return RetrieveObjects.retrieveQuizzes(email);
+        return RetrieveObjects.retrieveUserQuizzes(email);
+    }
+    //retrieve all quizzes
+    public static Message retrieveQuizzes() {
+        // create a database connection
+        JDBC.connectMySQL();
+        return RetrieveObjects.retrieveQuizzes();
     }
 
     public static Message retrieveStudyPrograms(){

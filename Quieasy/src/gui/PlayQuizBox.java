@@ -4,6 +4,7 @@ package gui;
 import data.ChoicesData;
 import data.QuestionData;
 import data.QuizData;
+import guib.QuizBrowser;
 import javafx.animation.KeyFrame;
 import javafx.animation.PauseTransition;
 import javafx.animation.Timeline;
@@ -21,6 +22,8 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
+import requests.CheckCorrectAnswerC;
+import requests.QuizRequests;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -54,15 +57,17 @@ public class PlayQuizBox extends VBox {
     public Map<String, String> selectedAnswerUser;
     //  private ArrayList<ChoicesData> questionChoices;
     private Timeline time;
+    public ArrayList<QuizData> allQuizzes  = new ArrayList<>();;
 
     //constructor*****
     private PlayQuizBox() { //this shouldn't be empty but receive the quizData from the MyQuiz QuizData
         // quizToPlay
-        quiz = CreateQuizBox.getCreateQuizBox().getQuiz();
+        //quiz = CreateQuizBox.getCreateQuizBox().getQuiz();
+        quiz = QuizBrowser.getQuizToPlay(); // CHERNET: get the quiz from QuizBrowser
         //quiz = quizToPlay;
+       // allQuizzes= QuizRequests.fetchAllQuizzes();
+       // quiz=allQuizzes.get(6);
         quizQuestions = quiz.getQuestions();
-
-
 
         // questions track with Pagination
         HBox questionsTrack = initiateQuestionTrack();
@@ -80,7 +85,6 @@ public class PlayQuizBox extends VBox {
         selectedAnswerUser = new HashMap<>();
         fillQuestionChoicesWithdata(indexQuestion);
 
-
     }
 
     public static PlayQuizBox getPlayQuizBox() {
@@ -89,6 +93,15 @@ public class PlayQuizBox extends VBox {
         }
         return playQuizBox;
     }
+
+    // reset the quiz player
+    public static void reset(){
+
+        playQuizBox = null;
+        indexQuestion = 0;
+
+    }
+
     // the track to navigate among questions. linked to the actual array of questions
     public HBox initiateQuestionTrack() {
         //as soon as one of the arrows clicked (left or right), the text should change
@@ -259,7 +272,11 @@ public class PlayQuizBox extends VBox {
             cancel.setDisable(true);
             next.setBackground(new Background(new BackgroundFill(Color.GREY, new CornerRadii(0), Insets.EMPTY)));
             cancel.setBackground(new Background(new BackgroundFill(Color.GREY, new CornerRadii(0), Insets.EMPTY)));
+            CheckCorrectAnswerC ch=new CheckCorrectAnswerC();
+            ch.checkAnswers(quiz);
             MainPane.getMainPane().getTabs().add(QuizFinalResultTab.getQuizFinalResultTab());
+             //better here if you pass the same quiz to the finalresultTab in the situation not created but played from th db
+            //MainPane.getMainPane().getTabs().add(QuizFinalResultTab.getQuizFinalResultTab(quiz));
             // MainPane.getMainPane().getTabs().add(new Tab("result",new CreateQuizResultBox(i)));
 
 
@@ -361,6 +378,9 @@ public class PlayQuizBox extends VBox {
             }
         }
         return countPoints;
+    }
+    public double returnThreshold(){
+        return quiz.getThreshold();
     }
 
     public double calculationTotalQuizPoints(){

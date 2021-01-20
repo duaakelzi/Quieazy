@@ -62,7 +62,7 @@ public class QuizFinalResultBox extends VBox {
         yourScoreLabel.setPadding(new Insets(0,0,0,20));
         yourScoreLabel.setFont(Font.font("Times New Roman", FontWeight.EXTRA_BOLD, 26));
 
-        if((userPoints/totalPoints)*100>= CreateQuizBox.getCreateQuizBox().getQuiz().getThreshold()) {
+        if((userPoints/totalPoints)*100>= PlayQuizBox.getPlayQuizBox().returnThreshold()) {
             passFailVBox.getChildren().addAll(congradulation, yourScoreLabel);
             yourScoreLabel.setTextFill(Color.GREEN);
         }else{

@@ -2,6 +2,7 @@
 
 package gui;
 
+import guib.QuizBrowserTab;
 import javafx.scene.control.TabPane;
 
 public class MainPane extends TabPane{
@@ -12,7 +13,9 @@ public class MainPane extends TabPane{
 	private MainPane() {
 		
 		super();
-		
+		this.getTabs().add(QuizBrowserTab.instance());
+		this.getSelectionModel().select(QuizBrowserTab.instance());
+
 	}
 	
 	// Gets the current instance -> Singleton
@@ -24,6 +27,4 @@ public class MainPane extends TabPane{
 		
 	}
 
-
-	
 }

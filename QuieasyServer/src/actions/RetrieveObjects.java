@@ -12,8 +12,8 @@ public class RetrieveObjects {
     static Session session;
     public static Message message;
 
-    public static Message retrieveQuizzes(String email) { //used to be List<Quiz>
-        System.out.println("retrieving all Quizzes ");
+    public static Message retrieveUserQuizzes(String email) { //used to be List<Quiz>
+        System.out.println("retrieving all user Quizzes ");
         try {
             message = new Message();
             session = HibernateUtil.getSessionFactory().openSession();
@@ -27,6 +27,55 @@ public class RetrieveObjects {
                 //convert List of Quiz into QuizData and add to the message
                 for(Quiz q : quizList) {
                     QuizData fetchedQuiz = new QuizData(q.getCourse().getCourseName(), q.getQuiz_Name(), q.getThreshold(), q.getTimer());
+                    message.allQuizzes.add(fetchedQuiz);
+                }
+                message.status = true;
+                System.out.println("Size of the Array in RetrieveQuizzes(): " + message.allQuizzes.size());
+            }else{
+                System.out.println("No quizzes for that user ");
+                message.status = false;
+            }
+            session.close();
+        }catch(Exception e)
+        {
+            // if the error message is "out of memory",
+            // it probably means no database file is found
+            System.out.println("Error fetching quizzes. ");
+            System.err.println(e.getMessage());
+        }
+        finally
+        {
+            try
+            {
+                if(session != null)
+                    session.close();
+            }
+            catch(Exception e)
+            {
+                // connection close failed.
+                System.err.println(e.getMessage());
+            }
+        }
+        return message;
+    }
+    public static Message retrieveQuizzes() {
+        System.out.println("retrieving all Quizzes ");
+        try {
+            message = new Message();
+            session = HibernateUtil.getSessionFactory().openSession();
+            //available for the user only?
+            List<Quiz> quizList = session.getSession().createQuery("FROM Quiz ", Quiz.class).list();
+
+            if(quizList.size()>0) {
+                System.out.println("Quizzes retrieved. ");
+                //convert List of Quiz into QuizData and add to the message
+                for(Quiz q : quizList) {
+                    QuizData fetchedQuiz=Converter.convertQuizToQuizData(q);
+
+                    //System.out.println("quiz: "+fetchedQuiz.getName());
+                    //System.out.println("course: "+fetchedQuiz.getCourse());
+                   //System.out.println("author: "+fetchedQuiz.getUser().getFirstName()+fetchedQuiz.getUser().getLastName());
+
                     message.allQuizzes.add(fetchedQuiz);
                 }
                 message.status = true;
@@ -242,5 +291,7 @@ public class RetrieveObjects {
         }
         return message;
     }
+
+
 }
 

@@ -8,6 +8,7 @@ public class QuizData implements Serializable {
     private String name;
     private double threshold;
     private int timer;
+    private UserData user;
     private ArrayList<QuestionData> questions;
 
     public QuizData() { }
@@ -16,15 +17,16 @@ public class QuizData implements Serializable {
     // if a course that holds the quiz, belongs to one or two programs, makes no difference for the quiz
     //  only one course with same name allowed per SP
     // SP with same course content will have different names (German/English)
-    public QuizData(String course, String name, double threshold, int timer, ArrayList<QuestionData> questions) {
+    public QuizData(String course, String name, double threshold, int timer, ArrayList<QuestionData> questions,UserData user) {
         this.course = course;
         this.name = name;
         this.threshold = threshold;
         this.timer = timer;
         this.questions = questions;
+        this.user=user;
     }
 
-    // because fetchAllQuizzes doesn't need the questions yet
+    // because fetchAllUserQuizzes doesn't need the questions yet
     public QuizData(String course, String name, double threshold, int timer) {
         this.course = course;
         this.name = name;
@@ -63,6 +65,9 @@ public class QuizData implements Serializable {
     public void setTimer(int timer) {
         this.timer = timer;
     }
+    public UserData getUser() { return user; }
+
+    public void setUser(UserData user) { this.user = user; }
 
     public void addQuestions(ArrayList<QuestionData> q) {
         for(int i=0; i<q.size(); i++) {

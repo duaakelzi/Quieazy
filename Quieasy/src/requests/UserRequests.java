@@ -8,8 +8,10 @@ import data.RegisterData;
 import data.LoginData;
 import data.UserData;
 import gui.Login;
+import gui.PlayQuizBox;
 import gui.PrimeScene;
 import gui.Register;
+import javafx.scene.paint.Color;
 
 public class UserRequests {
 	
@@ -66,6 +68,7 @@ public class UserRequests {
 
 			// show dash board
 			PrimeScene.home();
+
 
 		} else if (response != null && (!response.status)) { // user entered incorrect email or password
 			Login.fail();
