@@ -379,6 +379,9 @@ public class PlayQuizBox extends VBox {
         }
         return countPoints;
     }
+    public double returnThreshold(){
+        return quiz.getThreshold();
+    }
 
     public double calculationTotalQuizPoints(){
         double countTotal = 0.0;
