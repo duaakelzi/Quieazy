@@ -21,7 +21,7 @@ public class ClientAgent implements Runnable {
 	private ObjectOutputStream out = null;
 	private ObjectInputStream in = null;
 	private Queue<Message> messageQueue = new LinkedList<>(); //maybe another DT would be more suitable; thread-safe and what happens with irrelevant messages (they might be waiting for another task to be picked up)?
-	private final int MAX_RETRIES = 30;
+	private final int MAX_RETRIES = 40;
 
 	// constructor can only be accessed from within
 	private ClientAgent() {

@@ -163,6 +163,7 @@ public class CreateQuestionChoicesBox extends VBox {
                    System.out.println("Size of array of new questions after adding: " + CreateAddQuestionBox.getNewQuestions().size());
                    //add to allQuestions where imported questions are integrated
                    quiz.getQuestions().add(newQuestionAdd);
+                   CreateAddQuestionBox.getAllQuestions().add(newQuestionAdd);
                    int index = quiz.getQuestions().indexOf(newQuestionAdd);
                    CreateAddQuestionBox.getCreateAddQuestionBox().fillTableObservableListWithQuestion();
                }
