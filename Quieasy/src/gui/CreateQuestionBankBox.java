@@ -42,7 +42,7 @@ public class CreateQuestionBankBox extends VBox {
     //***************************** fetch data from DB here********************************** return questionData with question owner
     public static ArrayList<QuestionData> allQuestionsData; //this holds all data from DB before beeing transformed in FilteredData Objects
     //***************************************************************************************
-    // test data this should be from database
+
 
     ArrayList<QuestionData> questionDataArrayList = new ArrayList<>();
 
@@ -67,7 +67,7 @@ public class CreateQuestionBankBox extends VBox {
 //****************************************************************************
 
         allQuestionsData = QuestionRequests.fetchAllQuestions();
-        System.out.println(allQuestionsData.get(0).getQuestion());
+
 
         fillObservaleListWithData(allQuestionsData);
     }
@@ -194,25 +194,28 @@ public class CreateQuestionBankBox extends VBox {
     public void fillObservaleListWithData(ArrayList<QuestionData> allQuestionsData) {
         for (int i = 0; i < allQuestionsData.size(); i++) {
 
-//                dataQuestionObservaleList.addAll(new FilterDataQuestionBank(allQuestionsData.get(i).getQuestion(),
-//                        allQuestionsData.get(i).getOwner()
-////                        i));// instead of study program put course
-////
-//
-//        }
+                dataQuestionObservaleList.addAll(new FilterDataQuestionBank(allQuestionsData.get(i),
+                                                                            allQuestionsData.get(i).getUser().getFirstName(),
+                                                                            allQuestionsData.get(i).getUser().getLastName()));
+
+
+
+
+
+        }
         }
     }
 
     /**
      * Inner Class that fill List View with filtered questions
      */
-    public static class FilteredData extends ListCell<FilterDataQuestionBank> {
+    class FilteredData extends ListCell<FilterDataQuestionBank> {
         //FilteredData filteredData;
 
         private GridPane dataGrid;
 
         //constructor
-        private FilteredData(){
+        FilteredData(){
             dataGrid = new GridPane();
         }
 
@@ -273,4 +276,4 @@ public class CreateQuestionBankBox extends VBox {
 
 
 
-}
+

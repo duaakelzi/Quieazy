@@ -23,7 +23,6 @@ import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
 import requests.CheckCorrectAnswerC;
-import requests.QuizRequests;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -398,8 +397,6 @@ public class PlayQuizBox extends VBox {
         time.setCycleCount(Timeline.INDEFINITE);
         min = quiz.getTimer() - 1;
         sec = 59;
-        //  time.stop();
-
         KeyFrame frame = new KeyFrame(Duration.seconds(1), actionEvent -> {
             if (sec != 0) {
                 sec--;

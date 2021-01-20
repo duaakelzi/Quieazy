@@ -13,20 +13,19 @@ import javafx.scene.text.TextAlignment;
 public class FilterDataQuestionBank {
 
     private QuestionData questions;
-
     private String author;
-
     private final GridPane dataGrid;
     private final Button addButton;
     private final Button delButton;
     //index from ArrayList to add faster to add Question
-
     private final Text question;
     private final Text questionAuthor;
 
 
 
-    public FilterDataQuestionBank(QuestionData questions, String author, int indexQuestion, int questionID) {
+
+    public FilterDataQuestionBank(QuestionData questions, String firstName, String lastName) {
+        this.author = firstName + " " + lastName;
         dataGrid = new GridPane();
         question = new Text();
         questionAuthor = new Text();
@@ -55,7 +54,7 @@ public class FilterDataQuestionBank {
         // studyProgram.setWrappingWidth(75);
 
         this.questions = questions;
-        this.author = author;
+        this.author = firstName + " " + lastName;
 
 
         question.setText(questions.getQuestion());

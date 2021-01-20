@@ -30,7 +30,7 @@ public class CreateQuestionChoicesBox extends VBox {
     private RadioButton fourthradiobtn;
     private TextArea textQuestion;
     private QuestionData newQuestionAdd;
-    private final QuizData quiz = CreateQuizBox.getCreateQuizBox().getQuiz();
+    private final QuizData quiz;
     private ArrayList<ChoicesData> choicesData;
     private int indexEditQuestion;
     private VBox questionVbox;
@@ -48,6 +48,7 @@ public class CreateQuestionChoicesBox extends VBox {
         // initiate saveButton
         initiateSaveQuestionBtn();
         this.getChildren().addAll(questionVbox, choices, buttonHBox);
+        quiz = CreateQuizBox.getCreateQuizBox().getQuiz();
     }
 
     /**

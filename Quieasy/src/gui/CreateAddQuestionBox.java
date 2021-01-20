@@ -27,13 +27,11 @@ public class CreateAddQuestionBox extends VBox {
      */
         private static CreateAddQuestionBox createAddQuestionBox;
         private TableView<TableFillQuestions> tableViewListQuestions;
-        private ObservableList<TableFillQuestions> questionsToList;
-        private TableColumn<TableFillQuestions, Integer> idCol;
-        private static ArrayList<QuestionData> allQuestions = new ArrayList<>(); //to list all questions
-        private static ArrayList<QuestionData> newQuestions = new ArrayList<>(); //for new questions only
-        private static ArrayList<QuestionData> oldQuestions = new ArrayList<>(); //for questions from the QuestionBank
+        private static ArrayList<QuestionData> allQuestions; //to list all questions
+        private static ArrayList<QuestionData> newQuestions; //for new questions only
+        private static ArrayList<QuestionData> oldQuestions; //for questions from the QuestionBank
         private TableFillQuestions selectedItem;
-        private static ArrayList<QuestionData> updatedQuestions = new ArrayList<>();
+        private static ArrayList<QuestionData> updatedQuestions;
         private HBox buttonsAddImportHBox;
         private VBox listofQuestion;
         private HBox savebtn;
@@ -51,6 +49,10 @@ public class CreateAddQuestionBox extends VBox {
             initiateListOfQuestions();
             initiateSaveBtns();
             this.getChildren().addAll(buttonsAddImportHBox, listofQuestion, savebtn);
+            allQuestions = new ArrayList<>(); //to list all questions
+            newQuestions = new ArrayList<>(); //for new questions only
+            oldQuestions = new ArrayList<>(); //for questions from the QuestionBank
+            updatedQuestions = new ArrayList<>();
         }
 
     /**
@@ -163,13 +165,12 @@ public class CreateAddQuestionBox extends VBox {
      * If the user edit or delete the observableArrayList is updated not needs to iterate throw to display
      */
     public void fillTableObservableListWithQuestion(){
-
-        questionsToList = FXCollections.observableArrayList();
+        ObservableList<TableFillQuestions> questionsToList = FXCollections.observableArrayList();
         for(int i = 0; i < allQuestions.size(); i++){
-            questionsToList.add(new TableFillQuestions(String.valueOf(i), allQuestions.get(i).getQuestion(), "Chen Li"));
+            questionsToList.add(new TableFillQuestions(String.valueOf(i), allQuestions.get(i).getQuestion(),
+                    allQuestions.get(i).getUser().getFirstName()+ " " + allQuestions.get(i).getUser().getLastName()));
         }
            tableViewListQuestions.setItems(questionsToList);
-
     }
 
     /**
@@ -177,7 +178,7 @@ public class CreateAddQuestionBox extends VBox {
      * Each row is filled up with a number if the question exists otherwise the rows remain empty
      */
     private void addNrColumn(){
-            idCol = new TableColumn<>("#");
+        TableColumn<TableFillQuestions, Integer> idCol = new TableColumn<>("#");
             idCol.setMinWidth(25);
             idCol.setMaxWidth(25);
             idCol.setCellValueFactory(data -> new ReadOnlyObjectWrapper<>(Integer.parseInt(data.getValue().getNr())));
@@ -250,8 +251,6 @@ public class CreateAddQuestionBox extends VBox {
         };
         fourthCol.setCellFactory(editbtnFactory);
         tableViewListQuestions.getColumns().add(fourthCol);
-
-
     }
 
     /**
