@@ -9,6 +9,8 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
+import requests.UserRequests;
+
 import java.util.ArrayList;
 
 public class CreateQuestionChoicesBox extends VBox {
@@ -159,11 +161,12 @@ public class CreateQuestionChoicesBox extends VBox {
                }else {
                    //create new question and add to the tableView
                    newQuestionAdd = createNewQuestion();
+                   newQuestionAdd.setUser(UserRequests.getCurrentUser());
                    //add the newly-created question to the list of newQuestions (for further persistence)
                    CreateAddQuestionBox.getNewQuestions().add(newQuestionAdd);
                    System.out.println("Size of array of new questions after adding: " + CreateAddQuestionBox.getNewQuestions().size());
                    //add to allQuestions where imported questions are integrated
-                   quiz.getQuestions().add(newQuestionAdd);
+             //      quiz.getQuestions().add(newQuestionAdd);
                    CreateAddQuestionBox.getAllQuestions().add(newQuestionAdd);
                    int index = quiz.getQuestions().indexOf(newQuestionAdd);
                    CreateAddQuestionBox.getCreateAddQuestionBox().fillTableObservableListWithQuestion();

@@ -103,7 +103,7 @@ public class CreateQuizBox extends VBox {
 	 * Message displayed if the Quiz was successful created, representing that the newest created Quiz is saved on DB
 	 */
 	public static void showSuccessful(){
-		QuizRequests.fetchAllQuizzes(); //for testing, to see if the method works
+	//	QuizRequests.fetchAllQuizzes(); //for testing, to see if the method works
 	}
 
 	/**
