@@ -12,12 +12,13 @@ import requests.UserRequests;
 
 import java.util.ArrayList;
 
+/**
+ * CreateQuestionChoicesBox class create the field where user can introduce the question with choices,
+ * The window of Question Choices is opened either added new Question or is triggered by edited new Question from ListTable
+ * The class holds a Text field of Question, 4 Choices with 4RadioButtons to select the correct answer and the save Button
+ */
 public class CreateQuestionChoicesBox extends VBox {
-    /**
-     * CreateQuestionChoicesBox class create the field where user can introduce the question with choices,
-     * The window of Question Choices is opened either added new Question or is triggered by edited new Question from ListTable
-     * The class holds a Text field of Question, 4 Choices with 4RadioButtons to select the correct answer and the save Button
-     */
+
     private static CreateQuestionChoicesBox createQuestionChoicesBox;
     private final ArrayList<QuestionData> questionNewQuiz;
     private SpinnerValueFactory<Integer> valueSpinner;

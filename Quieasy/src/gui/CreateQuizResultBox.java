@@ -11,15 +11,15 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 
-
+/**
+ * CreateQuizResultBox class display the final results after a Quiz has been completed
+ * 1.a) A Congratulation message if the accumulated points passed the threshold
+ * 1.b) A encouragement message if the Quiz was failed obtaining less correct answers that thresholds requires
+ * 2.A message about accumulated points from total points available
+ * 4.Review the answered questions by comparing with correct result     *
+ */
 public class CreateQuizResultBox extends VBox {
-    /**
-     * CreateQuizResultBox class display the final results after a Quiz has been completed
-     * 1.a) A Congratulation message if the accumulated points passed the threshold
-     * 1.b) A encouragement message if the Quiz was failed obtaining less correct answers that thresholds requires
-     * 2.A message about accumulated points from total points available
-     * 4.Review the answered questions by comparing with correct result     *
-     */
+
     private static CreateQuizResultBox quizFinalResultBox;
     private static int indexOfQuestion;
     private VBox passFailVBox;

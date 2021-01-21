@@ -23,7 +23,9 @@ public class ClientAgent implements Runnable {
 	private Queue<Message> messageQueue = new LinkedList<>(); //maybe another DT would be more suitable; thread-safe and what happens with irrelevant messages (they might be waiting for another task to be picked up)?
 	private final int MAX_RETRIES = 40;
 
-	// constructor can only be accessed from within
+	/**
+	 * Constructor
+	 */
 	private ClientAgent() {
 
 		String hostName = "localhost"; // server host
@@ -81,7 +83,10 @@ public class ClientAgent implements Runnable {
 
 	}
 
-	// Gets the current instance -> Singleton.
+	/**
+	 * Gets the current instance -> Singleton.
+	 * @return this
+	 */
 	public static ClientAgent getClientAgent() {
 
 		if (clientAgent == null){ clientAgent = new ClientAgent();}
@@ -90,13 +95,20 @@ public class ClientAgent implements Runnable {
 
 	}
 
-	//user request sent here and processed further in private methods until relevant response returned
+	/**
+	 * user request sent here and processed further in private methods until relevant response returned
+	 * @param message
+	 * @return message or null
+	 */
 	public Message sendAndWaitForResponse(Message message) {
 		send(message);
 		return waitForResponse(message); //either relevant message or null
 	}
 
-	// Send messages
+	/**
+	 * Send messages
+	 * @param message
+	 */
 	private void send(Message message) {
 
 		try {
@@ -111,7 +123,12 @@ public class ClientAgent implements Runnable {
 
 		}
 	}
-	//call receiveResponse() until the relevant response is there or the max_retries is reached
+
+	/**
+	 * call receiveResponse() until the relevant response is there or the max_retries is reached
+	 * @param request
+	 * @return
+	 */
 	private Message waitForResponse(Message request){
 
 		Message result = null;
@@ -128,7 +145,11 @@ public class ClientAgent implements Runnable {
 		return result;
 	}
 
-	//checks the queue and see if message is relevant
+	/**
+	 * checks the queue and see if message is relevant
+	 * @param request
+	 * @return
+	 */
 	private Message receiveResponse(Message request) {
 		//check if relevant messages there
 		Message result = null;

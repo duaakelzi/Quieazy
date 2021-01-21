@@ -18,13 +18,14 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * CreateQuestionBank class represent a filter that gets all Questions from DB
+ * and passing throw the filter matching the key words introduced by user and are ready to be added to the Quiz
+ * Class holds a Text field holds the key words of user and a ListView of questions that have been selected
+ */
 public class CreateQuestionBankBox extends VBox {
-    public static ArrayList<QuestionData> allQuestionsData; //this holds all data from DB before beeing transformed in FilteredData Objects
-    /**
-     * CreateQuestionBank class represent a filter that gets all Questions from DB
-     * and passing throw the filter matching the key words introduced by user and are ready to be added to the Quiz
-     * Class holds a Text field holds the key words of user and a ListView of questions that have been selected
-     */
+    //this holds all data from DB before beeing transformed in FilteredData Objects
+    public static ArrayList<QuestionData> allQuestionsData;
     private static CreateQuestionBankBox createQuestionBankBox;
     private final ListView<FilterDataQuestionBank> listQuestions = new ListView<>();
     private final ObservableList<FilterDataQuestionBank> dataQuestionObservaleList; // contain data from all quizzes ready to be filtered

@@ -24,14 +24,15 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * PLay Quiz View display in the top of the page the progress and the pagination of Questions
+ * Following by the QUestion Nr, points of that question and the count down timer of the Quiz
+ * Question field that holds the Questions of the Quiz
+ * Answers with radioButtons inviting the user to select a choice
+ * Button to cancel the Quiz, Button next to the Question, Submit Button after the Quiz is completed to go to the results
+ */
 public class PlayQuizBox extends VBox {
-    /**
-     * PLay Quiz View display in the top of the page the progress and the pagination of Questions
-     * Following by the QUestion Nr, points of that question and the count down timer of the Quiz
-     * Question field that holds the Questions of the Quiz
-     * Answers with radioButtons inviting the user to select a choice
-     * Button to cancel the Quiz, Button next to the Question, Submit Button after the Quiz is completed to go to the results
-     */
+
     private static PlayQuizBox playQuizBox;
     private static int indexQuestion = 0;
     public QuizData quiz;

@@ -8,7 +8,6 @@ public class CreateAddQuestionTab extends Tab {
 
     private static CreateAddQuestionTab createAddQuestionTab;
 
-
     /**
      * Constructor that create the tab that holds the Add Question window
      */

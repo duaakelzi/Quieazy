@@ -10,10 +10,11 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 
+/**
+ * Filtered data to be displayed in the ListView after the filter selected the matching key words given by user
+ */
 public class FilterDataQuestionBank {
-    /**
-     * Filtered data to be displayed in the ListView after the filter selected the matching key words given by user
-     */
+
     private final QuestionData questions;
     private final GridPane dataGrid;
     private final Button addButton;

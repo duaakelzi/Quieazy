@@ -20,11 +20,12 @@ import requests.UserRequests;
 
 import java.util.ArrayList;
 
+/**
+ * CreateAddQuestionBox class give to the user the way either to crate his own Questions or to import from already in use Questions from another Quizzes
+ */
 
 public class CreateAddQuestionBox extends VBox {
-    /**
-     * CreateAddQuestionBox class give to the user the way either to crate his own Questions or to import from already in use Questions from another Quizzes
-     */
+
     private static CreateAddQuestionBox createAddQuestionBox;
     private static ArrayList<QuestionData> allQuestions; //to list all questions
     private static ArrayList<QuestionData> newQuestions; //for new questions only
@@ -368,7 +369,7 @@ public class CreateAddQuestionBox extends VBox {
         }
 
         /**
-         * Getter ans Setter for model data for displaying in the tableList
+         * Getter and Setter for model data for displaying in the tableList
          */
         public String getNr() {
             return nr.get();
