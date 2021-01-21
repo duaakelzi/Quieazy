@@ -1,7 +1,10 @@
 package data;
 
 import java.io.Serializable;
-
+/**
+ * this class CourseData holds all the information for the course to be sent using messages
+ * with constructor and all getter and setter
+ */
 public class CourseData implements Serializable {
     private String course;
 

@@ -4,6 +4,10 @@ package data;
 
 import java.io.Serializable;
 
+/**
+ * this class RegisterData holds the information that we need to register a new user
+ * with constructor and all getter and setter
+ */
 public class RegisterData implements Serializable {
 	
 	// variables to store data

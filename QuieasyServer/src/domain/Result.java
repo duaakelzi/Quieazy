@@ -1,7 +1,9 @@
 package domain;
 
 import javax.persistence.*;
-
+/**
+ * this is a mapping class to a table result with all needed attributes and methods(getter and setter) and relationships
+ */
 @Entity
 @Table(name="result")
 public class Result {

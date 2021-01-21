@@ -18,6 +18,11 @@ public class CreateObjects {
     public static Session session;
     public static Message message;
 
+    /**
+     * in this method we persist a new Quiz in the DB after we got a request to do this
+     * using Hibernate Framework
+     * then return a response back to the user to tell him if the creation done or not
+     */
     public static Message CreateQuiz(String name,double threshold,boolean isPublic,int timer, String email,String course)
     {
         try {
@@ -82,7 +87,11 @@ public class CreateObjects {
         return message;
     }
 
-
+    /**
+     * in this method we persist a new Questions with its specific Choices in the DB
+     * and link it with the newly created Quiz using Hibernate Framework
+     * then return a response back to the user to tell him if the creation done or not
+     */
     public static Message CreateQuestion(String questionText, int points, List<ChoicesData> questionChoicesList, String quizName,String email)
     {
         try {
@@ -196,7 +205,10 @@ public class CreateObjects {
         session.close();
         return message;
     }
-
+    /**
+     * this method is called after the user has finished playing the quiz
+     * to persist his/her final Results in the DB
+     */
 //int points, boolean isPassed, String userEmail
     public static Message createResult(int points, boolean isPassed, String quizName, String userEmail) {
         try {

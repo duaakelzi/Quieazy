@@ -12,6 +12,10 @@ public class RetrieveObjects {
     static Session session;
     public static Message message;
 
+    /**
+     * this method to retrieve all Quizzes for a specific given user from the DB using Hibernate Framework
+     * then send the message response that is holding the ArrayList of the requested Quizzes back to the client
+     */
     public static Message retrieveUserQuizzes(String email) { //used to be List<Quiz>
         System.out.println("retrieving all user Quizzes ");
         try {
@@ -58,6 +62,10 @@ public class RetrieveObjects {
         }
         return message;
     }
+    /**
+     * this method to request all Quizzes from the DB
+     * then send the message response that is holding the ArrayList of the requested Quizzes back to the client
+     */
     public static Message retrieveQuizzes() {
         System.out.println("retrieving all Quizzes ");
         try {
@@ -107,6 +115,10 @@ public class RetrieveObjects {
         }
         return message;
     }
+    /**
+     * this method to request all Questions that are belonging to a specific course from the DB
+     * then send the message response that is holding the ArrayList of the requested Questions back to the client
+     */
 
     public static Message retrieveQuestions(String courseName, String quizName) { //used to be List<Quiz>
         System.out.println("retrieving all Questions ");
@@ -165,6 +177,7 @@ public class RetrieveObjects {
         return message;
     }
 
+
     //retrieveResults(userEmail);
     public static Message retrieveResults(String userEmail) {
         System.out.println("retrieving all Results ");
@@ -199,6 +212,10 @@ public class RetrieveObjects {
         }
         return message;
     }
+    /**
+     * this method to request all Questions that are belonging to a specific course from the DB
+     * then send the message response that is holding the ArrayList of the requested Questions back to the client
+     */
 
     public static Message retrieveSP() {
         System.out.println("Retrieving study programs.");
@@ -245,54 +262,11 @@ public class RetrieveObjects {
         return message;
     }
 
-    public static Message retrieveExistingQuestions(String text,String quiz) { //used to be List<Quiz>
-        System.out.println("retrieving existing filtered Questions ");
-        try {
-            message = new Message();
-            session = HibernateUtil.getSessionFactory().openSession();
-            Query queryQuiz = session.getSession().createQuery("FROM Quiz WHERE quiz_Name = :quiz ");
-            queryQuiz.setParameter("quiz", quiz);
-            Quiz quizToSearch=(Quiz)queryQuiz.list().get(0);
-            Long QuizId =quizToSearch.getId();
 
-            ArrayList<QuestionData>questionData=new ArrayList<QuestionData>();
-            List<Question> questionList = session.getSession().createQuery("from Question where questionText= :text ").list();
-            for (int i=0;i<questionList.size();i++)
-            {
-                questionData.get(i).setQuestion(questionList.get(i).getQuestionText());
-
-            }
-            if(questionList.size()>0) {
-                System.out.println("Questions retrieved. Done ");
-                message.task = "FETCH_OK";
-                // message.questionData.setAllQuestions(questionList);
-            }else{
-                message.task = "FETCH_FAILED";
-            }
-            session.close();
-        }catch(Exception e)
-        {
-            // if the error message is "out of memory",
-            // it probably means no database file is found
-            System.err.println(e.getMessage());
-        }
-        finally
-        {
-            try
-            {
-                if(session != null)
-                    session.close();
-            }
-            catch(Exception e)
-            {
-                // connection close failed.
-                System.err.println(e.getMessage());
-            }
-        }
-        return message;
-    }
-
-
+    /**
+     * this method to request all Questions from the DB
+     * then send the message response that is holding the ArrayList of the requested Questions back to the client
+     */
     public static Message retrieveAllQuestions() {
         System.out.println("retrieving all Questions ");
         try {

@@ -3,6 +3,10 @@ package data;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+/**
+ * this class QuizData holds all the information about the Quiz to be sent using messages
+ * with constructor and all getter and setter
+ */
 public class QuizData implements Serializable {
     private String course;
     private String name;

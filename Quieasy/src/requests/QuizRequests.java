@@ -12,6 +12,11 @@ public class QuizRequests {
     private static Message request;
     private static Message response;
 
+    /**
+     * this method should make a request to the server to persist new Quiz in the DB
+     * the Quiz is hold by the message which will be sent with the request,
+     * then get the response that telling us if the Question are persisted successfully or not
+     */
     public static boolean createNewQuiz(QuizData newQuizData, UserData user){
         ClientAgent clientAgent = ClientAgent.getClientAgent();
         request = new Message();
@@ -25,7 +30,10 @@ public class QuizRequests {
         response = clientAgent.sendAndWaitForResponse(request);
         return response.status;
     }
-
+    /**
+     * this method to request all Quizzes for a specific given user from the DB
+     * then get the response from the server that is holding the requested Quizzes
+     */
    public static ArrayList<QuizData> fetchAllUserQuizzes(UserData user){
        ClientAgent clientAgent = ClientAgent.getClientAgent();
        request = new Message();
@@ -50,16 +58,16 @@ public class QuizRequests {
        response = clientAgent.sendAndWaitForResponse(request);
        return response.status;
    }
+    /**
+     * this method to request all Quizzes from the server
+     * then get the response from the server that is holding the requested Quizzes
+     */
     public static ArrayList<QuizData> fetchAllQuizzes(){
         ClientAgent clientAgent = ClientAgent.getClientAgent();
         request = new Message();
         request.task = "FETCH_ALL_QUIZZES";
 
         response = clientAgent.sendAndWaitForResponse(request);
-//        System.out.println(response.allQuizzes.get(0).getName());
-//        System.out.println(response.allQuizzes.get(0).getQuestions().get(0).getQuestion());
-//        System.out.println(response.allQuizzes.get(0).getQuestions().get(0).getAnswers().get(0).getChoiceDescription());
-//        System.out.println(response.allQuizzes.get(0).getUser());
         if(response != null && response.status){
             System.out.println("Fetch quizzes successful.");
             return response.allQuizzes;

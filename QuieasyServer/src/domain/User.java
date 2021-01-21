@@ -3,6 +3,9 @@ import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * this is a mapping class to a table q_user with all needed attributes and methods(getter and setter) and relationships
+ */
 @Entity
 @Table(name="q_user")
 public class User {

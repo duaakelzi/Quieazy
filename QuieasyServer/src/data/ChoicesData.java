@@ -3,6 +3,10 @@ package data;
 import java.io.Serializable;
 import java.lang.Comparable;
 
+/**
+ * this class ChoiceData holds all the information for the choice to be sent using messages
+ * with constructor and all getter and setter
+ */
 public class ChoicesData implements Serializable, Comparable {
     private String choiceDescription;
     private boolean isCorrect;

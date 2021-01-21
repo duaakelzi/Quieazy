@@ -10,6 +10,13 @@ import persistence.HibernateUtil;
 
 
 public class LoginAction {
+
+    /**
+     * after we got request to allow new user to log in we call this method to
+     * check if the user is existing in the server or not
+     * and if the user is existing check the password if correct
+     * and return appropriate response to the user
+     */
     public static Message login(String email, String password) {
         Session session = HibernateUtil.getSessionFactory().openSession();
 

@@ -13,7 +13,11 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 public class Converter {
-
+    /**
+     * because we have a mapping class Question that hold the Questions from the DB
+     * and have data class QuestionData that used to send the request, here we convert the question
+     * after we retrieve it to QuestionData object
+     */
     public static QuestionData convertQuestionToQuestionData(Question question) {
         QuestionData newQuestion = new QuestionData();
         newQuestion.setQuestion(question.getQuestionText());
@@ -36,8 +40,11 @@ public class Converter {
             Choices choice = new Choices(ch.getChoiceDescription());
             return choice;
     }
-
-    // seems this method won't need to be used. keep for the timebeing
+    /**
+     * because we have a mapping class Quiz that hold the Quizzes from the DB
+     * and have data class QuizData that used to send the request here we convert the Quiz
+     * after we retrieve it to QuizData object
+     */
     public static QuizData convertQuizToQuizData(Quiz quiz) {
         ArrayList<QuestionData> quizDataQuestionArray = new ArrayList<>();
         //first convert the set of questions into array of questionData

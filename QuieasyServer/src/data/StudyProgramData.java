@@ -3,6 +3,10 @@ package data;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+/**
+ * this class StudyProgramData holds all the information about the study Program to be sent using messages
+ * with constructor and all getter and setter
+ */
 public class StudyProgramData implements Serializable {
 
     private String studyprogram;
