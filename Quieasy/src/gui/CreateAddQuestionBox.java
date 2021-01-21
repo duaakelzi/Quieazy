@@ -25,16 +25,16 @@ public class CreateAddQuestionBox extends VBox {
     /**
      * CreateAddQuestionBox class give to the user the way either to crate his own Questions or to import from already in use Questions from another Quizzes
      */
-        private static CreateAddQuestionBox createAddQuestionBox;
-        private TableView<TableFillQuestions> tableViewListQuestions;
-        private static ArrayList<QuestionData> allQuestions; //to list all questions
-        private static ArrayList<QuestionData> newQuestions; //for new questions only
-        private static ArrayList<QuestionData> oldQuestions; //for questions from the QuestionBank
-        private TableFillQuestions selectedItem;
-        private static ArrayList<QuestionData> updatedQuestions;
-        private HBox buttonsAddImportHBox;
-        private VBox listofQuestion;
-        private HBox savebtn;
+    private static CreateAddQuestionBox createAddQuestionBox;
+    private TableView<TableFillQuestions> tableViewListQuestions;
+    private static ArrayList<QuestionData> allQuestions; //to list all questions
+    private static ArrayList<QuestionData> newQuestions; //for new questions only
+    private static ArrayList<QuestionData> oldQuestions; //for questions from the QuestionBank
+    private TableFillQuestions selectedItem;
+    private static ArrayList<QuestionData> updatedQuestions;
+    private HBox buttonsAddImportHBox;
+    private VBox listofQuestion;
+    private HBox savebtn;
 
     /**
      * Constructor that create:
@@ -43,17 +43,17 @@ public class CreateAddQuestionBox extends VBox {
      * 3.Display the lists of Questions that form the Quiz
      * 4.Save and Publish button to save the Question in the already new created Quiz
      */
-        private CreateAddQuestionBox() {
-            super();
-            initiateAddButton();
-            initiateListOfQuestions();
-            initiateSaveBtns();
-            this.getChildren().addAll(buttonsAddImportHBox, listofQuestion, savebtn);
-            allQuestions = new ArrayList<>(); //to list all questions
-            newQuestions = new ArrayList<>(); //for new questions only
-            oldQuestions = new ArrayList<>(); //for questions from the QuestionBank
-            updatedQuestions = new ArrayList<>();
-        }
+    private CreateAddQuestionBox() {
+        super();
+        initiateAddButton();
+        initiateListOfQuestions();
+        initiateSaveBtns();
+        this.getChildren().addAll(buttonsAddImportHBox, listofQuestion, savebtn);
+        allQuestions = new ArrayList<>(); //to list all questions
+        newQuestions = new ArrayList<>(); //for new questions only
+        oldQuestions = new ArrayList<>(); //for questions from the QuestionBank
+        updatedQuestions = new ArrayList<>();
+    }
 
     /**
      * Getter for new Question
@@ -93,33 +93,33 @@ public class CreateAddQuestionBox extends VBox {
      * @return the view where user can insert the Question in the new Quiz
      */
     public static CreateAddQuestionBox getCreateAddQuestionBox(){
-            if(createAddQuestionBox == null){
-                createAddQuestionBox = new CreateAddQuestionBox();
-            }
-            return createAddQuestionBox;
+        if(createAddQuestionBox == null){
+            createAddQuestionBox = new CreateAddQuestionBox();
+        }
+        return createAddQuestionBox;
     }
 
     /**
      * Create Add Question that leads to another windows where user can create a new Question
      */
     private void initiateAddButton(){
-            buttonsAddImportHBox = new HBox(230);
-            buttonsAddImportHBox.setPadding(new Insets(20));
-            Button newQuestion = new Button("➕ Question");
-            newQuestion.setOnAction(actionEvent -> {
-                System.out.println("Size of array of new questions before adding: " + newQuestions.size()); //temporary check
-                MainPane.getMainPane().getTabs().add(CreateQuestionChoicesTab.getCreateQuestionChoicesTab());
-                tableViewListQuestions.getSelectionModel().clearSelection();
-            });
-            newQuestion.setMinWidth(200);
-            newQuestion.setFont(Font.font("Times New Roman", FontWeight.NORMAL, 16));
-            Button importQuestion = new Button("▲ Import Question");
-            importQuestion.setOnAction(actionEvent -> {
-                MainPane.getMainPane().getTabs().add(CreateQuestionBankTab.getCreateQuestionBankTab());
-            });
-            importQuestion.setMinWidth(200);
-            importQuestion.setFont(Font.font("Times New Roman", FontWeight.NORMAL, 16));
-            buttonsAddImportHBox.getChildren().addAll(newQuestion, importQuestion);
+        buttonsAddImportHBox = new HBox(330);
+        buttonsAddImportHBox.setPadding(new Insets(20));
+        Button newQuestion = new Button("➕ Question");
+        newQuestion.setOnAction(actionEvent -> {
+            System.out.println("Size of array of new questions before adding: " + newQuestions.size()); //temporary check
+            MainPane.getMainPane().getTabs().add(CreateQuestionChoicesTab.getCreateQuestionChoicesTab());
+            tableViewListQuestions.getSelectionModel().clearSelection();
+        });
+        newQuestion.setMinWidth(200);
+        newQuestion.setFont(Font.font("Times New Roman", FontWeight.NORMAL, 16));
+        Button importQuestion = new Button("▲ Import Question");
+        importQuestion.setOnAction(actionEvent -> {
+            MainPane.getMainPane().getTabs().add(CreateQuestionBankTab.getCreateQuestionBankTab());
+        });
+        importQuestion.setMinWidth(200);
+        importQuestion.setFont(Font.font("Times New Roman", FontWeight.NORMAL, 16));
+        buttonsAddImportHBox.getChildren().addAll(newQuestion, importQuestion);
     }
 
     /**
@@ -170,7 +170,7 @@ public class CreateAddQuestionBox extends VBox {
             questionsToList.add(new TableFillQuestions(String.valueOf(i), allQuestions.get(i).getQuestion(),
                     allQuestions.get(i).getUser().getFirstName()+ " " + allQuestions.get(i).getUser().getLastName()));
         }
-           tableViewListQuestions.setItems(questionsToList);
+        tableViewListQuestions.setItems(questionsToList);
     }
 
     /**
@@ -179,26 +179,26 @@ public class CreateAddQuestionBox extends VBox {
      */
     private void addNrColumn(){
         TableColumn<TableFillQuestions, Integer> idCol = new TableColumn<>("#");
-            idCol.setMinWidth(25);
-            idCol.setMaxWidth(25);
-            idCol.setCellValueFactory(data -> new ReadOnlyObjectWrapper<>(Integer.parseInt(data.getValue().getNr())));
-            idCol.setCellFactory(new Callback<>() {
-                @Override
-                public TableCell<TableFillQuestions, Integer> call(TableColumn<TableFillQuestions, Integer> tableFillQuestionsIntegerTableColumn) {
-                    return new TableCell<>() {
-                        @Override
-                        protected void updateItem(Integer item, boolean empty) {
-                            super.updateItem(item, empty);
-                            if (this.getTableRow() != null && item != null) {
-                                setText(this.getTableRow().getIndex() + "");
-                            } else {
-                                setText("");
-                            }
+        idCol.setMinWidth(25);
+        idCol.setMaxWidth(25);
+        idCol.setCellValueFactory(data -> new ReadOnlyObjectWrapper<>(Integer.parseInt(data.getValue().getNr())));
+        idCol.setCellFactory(new Callback<>() {
+            @Override
+            public TableCell<TableFillQuestions, Integer> call(TableColumn<TableFillQuestions, Integer> tableFillQuestionsIntegerTableColumn) {
+                return new TableCell<>() {
+                    @Override
+                    protected void updateItem(Integer item, boolean empty) {
+                        super.updateItem(item, empty);
+                        if (this.getTableRow() != null && item != null) {
+                            setText(this.getTableRow().getIndex() + "");
+                        } else {
+                            setText("");
                         }
-                    };
-                }
-            });
-            tableViewListQuestions.getColumns().add(idCol);
+                    }
+                };
+            }
+        });
+        tableViewListQuestions.getColumns().add(idCol);
 
     }
 
@@ -207,7 +207,7 @@ public class CreateAddQuestionBox extends VBox {
      * TableCell factory as a pattern is used
      */
     private void addEditButtonstoListQuestion(){
-         // insert edit button in the fourth colomn
+        // insert edit button in the fourth colomn
         TableColumn<TableFillQuestions, Void> fourthCol = new TableColumn<>("EDIT");
         //fourthCol.setMinWidth(35);
         Callback<TableColumn<TableFillQuestions, Void>, TableCell<TableFillQuestions, Void>> editbtnFactory = new Callback<>() {
@@ -369,7 +369,7 @@ public class CreateAddQuestionBox extends VBox {
      * @return Save, Save and Publish buttons to user
      */
     private void initiateSaveBtns(){
-        savebtn = new HBox(360);
+        savebtn = new HBox(465);
         savebtn.setPadding(new Insets(30,10,30,30));
         Button save = new Button("▼ SAVE");
         //calls to make the array of questions persistent
@@ -377,7 +377,7 @@ public class CreateAddQuestionBox extends VBox {
             @Override
             public void handle(ActionEvent actionEvent) {
                 QuestionRequests.persistNewQuestions(UserRequests.getCurrentUser(), CreateQuizBox.getCreateQuizBox().getQuiz(), newQuestions);
-
+                CreateAddQuestionTab.getCreateAddQuestionTab().closeTab();
             }
         });
         save.setFont(Font.font("Times New Roman", FontWeight.SEMI_BOLD, 16));
@@ -385,7 +385,7 @@ public class CreateAddQuestionBox extends VBox {
         Button savePublish = new Button("▶ SAVE & PUBLISH");
         savePublish.setOnAction(actionEvent -> {
             QuestionRequests.persistNewQuestions(UserRequests.getCurrentUser(), CreateQuizBox.getCreateQuizBox().getQuiz(), newQuestions);
-            MainPane.getMainPane().getTabs().add(PlayQuizTab.getPlayQuizTab());
+
         });
 
         savePublish.setFont(Font.font("Times New Roman", FontWeight.SEMI_BOLD, 16));

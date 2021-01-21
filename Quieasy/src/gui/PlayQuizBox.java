@@ -1,7 +1,6 @@
 
 package gui;
 
-import data.ChoicesData;
 import data.QuestionData;
 import data.QuizData;
 import guib.QuizBrowser;
@@ -104,7 +103,8 @@ public class PlayQuizBox extends VBox {
     // the track to navigate among questions. linked to the actual array of questions
     public HBox initiateQuestionTrack() {
         //as soon as one of the arrows clicked (left or right), the text should change
-        HBox questionstrack = new HBox(quiz.getQuestions().size());
+        HBox questionstrack = new HBox(30);
+        questionstrack.setPadding(new Insets(20,0,20,0));
         questionstrack.setAlignment(Pos.CENTER);
         //questionstrack.setPadding(new Insets(10));
         trackquestions = new Pagination();
@@ -131,7 +131,8 @@ public class PlayQuizBox extends VBox {
 
     // this method should display the question and quiz info.
     public HBox initiateQuestionMarkandQuestion() {
-        HBox markQuestion = new HBox(10);
+        HBox markQuestion = new HBox(20);
+        markQuestion.setPadding(new Insets(0,0,30,0));
         //markQuestion.setPadding(new Insets(10));
         VBox mark = new VBox();
         mark.setBackground(new Background(new BackgroundFill(Color.LIGHTSTEELBLUE, new CornerRadii(0), Insets.EMPTY)));
@@ -159,7 +160,7 @@ public class PlayQuizBox extends VBox {
         mark.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
         HBox question = new HBox();
         question.setBackground(new Background(new BackgroundFill(Color.LIGHTSKYBLUE, null, null)));
-        question.setPrefWidth(535);
+        question.setPrefWidth(625);
         question.setPrefHeight(100);
         questionText = new Text();
         questionText.setWrappingWidth(535);
@@ -180,7 +181,7 @@ public class PlayQuizBox extends VBox {
         //answersCheck = new RadioButton[NUMBEROFCHOICES];
         // selectedAnswer =new String[quiz.getQuestions().size()];
         answers.setBackground(new Background(new BackgroundFill(Color.LIGHTCYAN, null, null)));
-        answers.setPadding(new Insets(20, 10, 10, 140));
+        answers.setPadding(new Insets(20, 10, 10, 150));
 
         choice_1 = new RadioButton();
         choice_2 = new RadioButton();
@@ -198,18 +199,8 @@ public class PlayQuizBox extends VBox {
         return answers;
     }
 
-    //depict the specific choice for the question
-    private RadioButton showAnswer(ArrayList<ChoicesData> questionChoices, int pos) {
-        RadioButton answer = new RadioButton();
-        answer.setFont(Font.font("Times New Roman", 16));
-        answer.setText(questionChoices.get(pos).getChoiceDescription());
-        //System.out.println("show"+questionChoices.get(pos).getChoiceDescription());
-        return answer;
-    }
-
-
     private HBox initiateButtons() {
-        HBox buttons = new HBox(120);
+        HBox buttons = new HBox(160);
         buttons.setPadding(new Insets(40));
         submit = initiateSubmitButton();
         next = initiateNextButton();
@@ -289,7 +280,7 @@ public class PlayQuizBox extends VBox {
         ImageView cancelimg = new ImageView(new Image("images/cancelicon.png"));
         cancel.setGraphic(cancelimg);
         cancel.setEffect(new DropShadow());
-        cancel.setOnAction(actionEvent -> PlayQuizTab.getPlayQuizTab().closeTab());
+        cancel.setOnAction(actionEvent -> PlayQuizTab.reset());
         return cancel;
     }
 

@@ -36,9 +36,9 @@ public class FilterDataQuestionBank {
         addButton.setMinWidth(30);
         delButton = new Button("-");
         delButton.setDisable(true);
-        delButton.setBackground(new Background(new BackgroundFill(Color.GREEN, null, null)));
+        delButton.setBackground(new Background(new BackgroundFill(Color.LIGHTGREY, null, null)));
         delButton.setMinWidth(30);
-        addButton.setBackground(new Background(new BackgroundFill(Color.GREY, null, null)));
+        addButton.setBackground(new Background(new BackgroundFill(Color.GREEN, null, null)));
         dataGrid.add(addButton, 0, 0);
         dataGrid.add(delButton, 1, 0);
 //            indexHide.getId();

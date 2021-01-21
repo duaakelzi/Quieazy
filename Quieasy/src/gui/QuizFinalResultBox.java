@@ -53,13 +53,13 @@ public class QuizFinalResultBox extends VBox {
         double totalPoints = PlayQuizBox.getPlayQuizBox().calculationTotalQuizPoints();
         double userPoints = PlayQuizBox.getPlayQuizBox().calculationUserPoints();
         passFailVBox = new VBox();
-        passFailVBox.setPadding(new Insets(0,0,10, 130));
+        passFailVBox.setPadding(new Insets(20,0,10, 210));
         ImageView congradulation = new ImageView(new Image("images/congradulations.png"));
-        passFailVBox.setPrefWidth(600);
+        passFailVBox.setPrefWidth(580);
         ImageView failer = new ImageView(new Image("images/fail.png"));
         Label yourScoreLabel = new Label("YOUR SCORE:  " + userPoints + " / " + totalPoints +" points" + "\n\tReview Your Choices");
 
-        yourScoreLabel.setPadding(new Insets(0,0,0,20));
+        yourScoreLabel.setPadding(new Insets(10,0,10,30));
         yourScoreLabel.setFont(Font.font("Times New Roman", FontWeight.EXTRA_BOLD, 26));
 
         if((userPoints/totalPoints)*100>= PlayQuizBox.getPlayQuizBox().returnThreshold()) {
@@ -75,8 +75,8 @@ public class QuizFinalResultBox extends VBox {
     private void initiateResultQuestionsAnswer(){
         gridPaneResult = new GridPane();
         gridPaneResult.setHgap(5);
-        gridPaneResult.setVgap(10);
-        pointsHbox = new HBox(200);
+        gridPaneResult.setVgap(20);
+        pointsHbox = new HBox(250);
         points = new Label();
         points.setFont(Font.font("Currier", FontWeight.EXTRA_BOLD, 16));
         pointsHbox.setBackground(new Background(new BackgroundFill(Color.LIGHTGREEN, null, null)));
@@ -132,17 +132,18 @@ public class QuizFinalResultBox extends VBox {
         questionHbox.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
         questionHbox.setBackground(new Background(new BackgroundFill(Color.LIGHTSKYBLUE, null, null)));
         question = new Text();
-        question.setWrappingWidth(550);
+        question.setFont(Font.font("Times New Roman", FontWeight.NORMAL, 18));
+        question.setWrappingWidth(650);
         questionHbox.getChildren().add(question);
-        questionHbox.setPrefSize(600, 70);
+        questionHbox.setPrefSize(700, 80);
         Label correctAnswerQuiz = new Label("✔");
         answerUser = new Text();
-        answerUser.setWrappingWidth(550);
+        answerUser.setWrappingWidth(650);
         correctAnswer = new Text();
-        correctAnswer.setFont(Font.font("Times New Roman", FontWeight.SEMI_BOLD, 16));
+        correctAnswer.setFont(Font.font("Times New Roman", FontWeight.SEMI_BOLD, 18));
         correctAnswer.setFill(Color.GREEN);
-        correctAnswer.setWrappingWidth(550);
-        answerUser.setFont(Font.font("Times New Roman", FontWeight.SEMI_BOLD, 16));
+        correctAnswer.setWrappingWidth(650);
+        answerUser.setFont(Font.font("Times New Roman", FontWeight.SEMI_BOLD, 18));
         gridPaneResult.add(pointsHbox, 1, 0);
         gridPaneResult.add(back, 0, 1);
         gridPaneResult.add(questionHbox, 1, 1);
@@ -163,12 +164,14 @@ public class QuizFinalResultBox extends VBox {
             pointsHbox.setBackground(new Background(new BackgroundFill(Color.LIGHTGREEN, null, null)));
             checkAnswer.setText("✔");
             checkAnswer.setTextFill(Color.GREEN);
+            checkAnswer.setFont(Font.font("Currier", FontWeight.SEMI_BOLD, 16));
 
         } else {
             points.setText("+ 0");
             pointsHbox.setBackground(new Background(new BackgroundFill(Color.LIGHTCORAL, null, null)));
             checkAnswer.setText("✗");
             checkAnswer.setTextFill(Color.FIREBRICK);
+            correctAnswer.setFont(Font.font("Currier", FontWeight.SEMI_BOLD, 16));
 
             //back.setDisable(true);
 
@@ -181,13 +184,13 @@ public class QuizFinalResultBox extends VBox {
 
     private void finishQuizButton(){
         finishHBox = new HBox();
-        finishHBox.setPadding(new Insets(10,0,0,500));
+        finishHBox.setPadding(new Insets(10,0,0,650));
         finishQuizButton = new Button("Finish");
         finishQuizButton.setFont(Font.font("Times New Roman", FontWeight.EXTRA_BOLD, 18));
         finishQuizButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                PlayQuizTab.getPlayQuizTab().closeTab();
+                PlayQuizTab.getPlayQuizTab();
                 QuizFinalResultTab.getQuizFinalResultTab().closeTab();
             }
         });

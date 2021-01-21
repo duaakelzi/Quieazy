@@ -98,7 +98,7 @@ public class CreateQuestionBankBox extends VBox {
         searchLabel.setFont(Font.font("Times New Roman", FontWeight.EXTRA_BOLD, 24));
         searchKeyWords = new TextField();
         searchKeyWords.setFont(Font.font("Times New Roman", FontWeight.NORMAL, 18));
-        searchKeyWords.setMinWidth(400);
+        searchKeyWords.setMinWidth(450);
         searchKeyWords.setPromptText("Search");
         Button searchButton = new Button("➔");
         searchButton.setOnAction(actionEvent -> {
@@ -146,7 +146,7 @@ public class CreateQuestionBankBox extends VBox {
      * an warning message is displayed to the user with containt="Question Not Found"
      */
     private void initiateWarrningMessageNotFound(){
-        warningNotFound = new HBox(200);
+        warningNotFound = new HBox(250);
         warrningNotFound = new Label();
         warrningNotFound.setPadding(new Insets(5, 0, 5, 175));
         warrningNotFound.setFont(Font.font("Courier New",FontWeight.SEMI_BOLD, 16));
@@ -161,8 +161,8 @@ public class CreateQuestionBankBox extends VBox {
      */
     private void initiateListViewData(){
         listViewData = new StackPane();
-        listViewData.setMaxWidth(665);
-        listViewData.setMaxHeight(310);
+        listViewData.setMaxWidth(760);
+        listViewData.setMaxHeight(380);
         listQuestions.setItems(filterDataQuestionBankObservableList);
         listQuestions.setCellFactory(questionDataListView -> new FilteredData());
         listViewData.getChildren().addAll(listQuestions);
@@ -174,6 +174,7 @@ public class CreateQuestionBankBox extends VBox {
     private void initiateSaveButton(){
         saveButton = new HBox();
         Button save = new Button("▼ SAVE QUESTION");
+        save.setFont(Font.font("Times New Roman", FontWeight.NORMAL, 16));
         save.setOnAction(actionEvent -> {
 
             CreateAddQuestionBox.getCreateAddQuestionBox().fillTableObservableListWithQuestion();
@@ -183,7 +184,7 @@ public class CreateQuestionBankBox extends VBox {
             CreateQuestionBankTab.getCreateQuestionBankTab().closeTab();
 
         });
-        saveButton.setPadding(new Insets(10, 0, 0, 535));
+        saveButton.setPadding(new Insets(20, 0, 0, 570));
         saveButton.getChildren().addAll(save);
     }
 
@@ -247,15 +248,8 @@ public class CreateQuestionBankBox extends VBox {
                     CreateAddQuestionBox.getOldQuestions().remove(questionData.getQuestions());
                     //remove from the almighty array of questions (not sure this works: should remove the question of this id)
                     CreateAddQuestionBox.getAllQuestions().remove(questionData.getQuestions());// (allQuestionsData.get(indexOf(questionData.getQuestion()))));
-
-//                    for(int i = 0; i < CreateQuestionBankBox.quiz.getQuestions().size(); i++){
-//                        if(questionData.getQuestion().getText().equals(CreateQuestionBankBox.quiz.getQuestions().get(i).getQuestion())){
-//                            CreateQuestionBankBox.quiz.removeSingleQuestion(i);
-//                            questionData.getAddButton().setDisable(false);
-//                            questionData.getDelButton().setDisable(true);
-//                        }
-//                    }
-
+                    questionData.getAddButton().setDisable(false);
+                    questionData.getDelButton().setDisable(true);//
                 });
 
 

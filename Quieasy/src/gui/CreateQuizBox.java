@@ -120,7 +120,7 @@ public class CreateQuizBox extends VBox {
 	 */
 	public void initiateStudyProgram(ObservableList<String>studyProgramHS) {
 		studyProgram = new HBox(30);
-		studyProgram.setPadding(new Insets(30));
+		studyProgram.setPadding(new Insets(60,0,30,30));
 		Label labelStudyProgram = new Label("Study Program*");
 		labelStudyProgram.setFont(Font.font("Times New Roman", FontWeight.EXTRA_BOLD, 20));
 		studyProgramComboBox = new ComboBox<>();
@@ -144,7 +144,7 @@ public class CreateQuizBox extends VBox {
 		//setting the appearance of text of item in the buttom cell
 		settingsComboBox(studyProgramComboBox);
 		studyProgramComboBox.setMinHeight(30);
-		studyProgramComboBox.setMinWidth(400);
+		studyProgramComboBox.setMinWidth(500);
 		studyProgram.getChildren().addAll(labelStudyProgram, studyProgramComboBox);
 	}
 
@@ -154,14 +154,14 @@ public class CreateQuizBox extends VBox {
 	 */
 	public void initiateCourse(){
 		courses = new HBox(100);
-		courses.setPadding(new Insets(0, 30, 0, 30));
+		courses.setPadding(new Insets(10, 0, 30, 30));
 		Label labelcourse = new Label("Course*");
 		labelcourse.setFont(Font.font("Times New Roman", FontWeight.EXTRA_BOLD, 20));
 		courseComboBox = new ComboBox<>();
 		courseComboBox.setPromptText("Select the course");
 		settingsComboBox(courseComboBox);
 		courseComboBox.setMinHeight(30);
-		courseComboBox.setMinWidth(400);
+		courseComboBox.setMinWidth(500);
 		courses.getChildren().addAll(labelcourse, courseComboBox);
 	}
 
@@ -214,13 +214,13 @@ public class CreateQuizBox extends VBox {
 	 */
 	public void initiateNameQuiz(){
 		nameQuiz = new HBox(110);
-		nameQuiz.setPadding(new Insets(30));
+		nameQuiz.setPadding(new Insets(10,0,30,30));
 		Label labelName = new Label("Name*");
 		labelName.setFont(Font.font("Times New Roman", FontWeight.EXTRA_BOLD, 20));
 		nameText = new TextField();
 		nameText.setFont(Font.font("Times New Roman", FontWeight.NORMAL, 18));
 		nameText.setPromptText("Name of the Quiz*");
-		nameText.setMinWidth(400);
+		nameText.setMinWidth(500);
 		nameText.setMinHeight(30);
 		nameQuiz.getChildren().addAll(labelName, nameText);
 	}
@@ -231,7 +231,7 @@ public class CreateQuizBox extends VBox {
 	 */
 	public void initiateTreshold(){
 		thresholdQuiz = new HBox(72);
-		thresholdQuiz.setPadding(new Insets(0, 30, 0, 30));
+		thresholdQuiz.setPadding(new Insets(10, 0, 30, 30));
 		Label labelThreshold = new Label("Threshold*");
 		labelThreshold.setFont(Font.font("Times New Roman", FontWeight.EXTRA_BOLD, 20));
 		thresholdText = new TextField();
@@ -256,7 +256,7 @@ public class CreateQuizBox extends VBox {
 		timeLimit = new HBox(70);
 		Label labelTime = new Label("Time limit*");
 		labelTime.setFont(Font.font("Times New Roman", FontWeight.EXTRA_BOLD, 20));
-		timeLimit.setPadding(new Insets(30));
+		timeLimit.setPadding(new Insets(10,0,30,30));
 		timeText = new TextField();
 
 		timeText.setFont(Font.font("Times New Roman", FontWeight.NORMAL, 18));
@@ -279,10 +279,11 @@ public class CreateQuizBox extends VBox {
 	 */
 	public void initiatewarning(){
 		warningMessage = new HBox();
-		warningMessage.setPadding(new Insets(0,0,0,200));
+		warningMessage.setPadding(new Insets(0,0,20,200));
 		warningLabel = new Label();
 		warningLabel.setTextFill(Color.FIREBRICK);
 		warningMessage.getChildren().add(warningLabel);
+		warningLabel.setFont(Font.font("Currier", FontWeight.NORMAL, 20));
 	}
 
 	/**
@@ -290,7 +291,7 @@ public class CreateQuizBox extends VBox {
 	 */
 	public void initiateBotton(){
 		createButtons = new HBox();
-		createButtons.setPadding(new Insets(40, 30, 0, 500));
+		createButtons.setPadding(new Insets(20, 0, 0, 580));
 		Button createButton = new Button("➦ Create Quiz");
 		createButton.setFont(Font.font("Times New Roman", FontWeight.NORMAL, 16));
 		createButtons.getChildren().addAll(createButton);

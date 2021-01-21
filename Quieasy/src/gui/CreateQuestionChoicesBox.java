@@ -2,7 +2,6 @@ package gui;
 
 import data.ChoicesData;
 import data.QuestionData;
-import data.QuizData;
 import javafx.geometry.Insets;
 import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
@@ -32,7 +31,7 @@ public class CreateQuestionChoicesBox extends VBox {
     private RadioButton fourthradiobtn;
     private TextArea textQuestion;
     private QuestionData newQuestionAdd;
-    private final QuizData quiz;
+    private final ArrayList<QuestionData> questionNewQuiz;
     private ArrayList<ChoicesData> choicesData;
     private int indexEditQuestion;
     private VBox questionVbox;
@@ -50,7 +49,7 @@ public class CreateQuestionChoicesBox extends VBox {
         // initiate saveButton
         initiateSaveQuestionBtn();
         this.getChildren().addAll(questionVbox, choices, buttonHBox);
-        quiz = CreateQuizBox.getCreateQuizBox().getQuiz();
+        questionNewQuiz = CreateAddQuestionBox.getAllQuestions();
     }
 
     /**
@@ -76,8 +75,8 @@ public class CreateQuestionChoicesBox extends VBox {
         textQuestion.setWrapText(true);
         textQuestion.setPrefHeight(100);
         textQuestion.setPrefWidth(600);
-        HBox questionPointsLabel = new HBox(470);
-        questionVbox.setPadding(new Insets(20,30, 10, 30));
+        HBox questionPointsLabel = new HBox(510);
+        questionVbox.setPadding(new Insets(30,30, 30, 30));
         Label pointsLabel = new Label("Points");
         pointsLabel.setFont(Font.font("Times New Roman", FontWeight.NORMAL, 16));
         questionPointsLabel.getChildren().addAll(questionlabel, pointsLabel);
@@ -97,43 +96,43 @@ public class CreateQuestionChoicesBox extends VBox {
      * @return VBox that holds all the Nodes input the choices and correct answer
      */
     private void initiateChoices(){
-        choices = new VBox(10);
-        choices.setPadding(new Insets(10,30,0,30));
-        HBox labelchoice = new HBox(470);
+        choices = new VBox(20);
+        choices.setPadding(new Insets(30,0,10,30));
+        HBox labelchoice = new HBox(530);
         Label choicelabel = new Label("Choices");
         choicelabel.setFont(Font.font("Times New Roman", FontWeight.BOLD, 20));
         Label correctlabel = new Label("Correct");
         correctlabel.setFont(Font.font("Times New Roman", FontWeight.NORMAL, 16));
         labelchoice.getChildren().addAll(choicelabel, correctlabel);
         // first field of answer with radio bottom
-        HBox fistanswer = new HBox(150);
+        HBox fistanswer = new HBox(170);
         firstchoice = new TextField();
         firstchoice.setPromptText("Enter the 1 st answer");
-        firstchoice.setMinWidth(400);
+        firstchoice.setMinWidth(450);
         firstradiobtn = new RadioButton();
         fistanswer.getChildren().addAll(firstchoice, firstradiobtn);
 
         //second field of answer with radio bottom
-        HBox secondanswer = new HBox(150);
+        HBox secondanswer = new HBox(170);
         secondchoice = new TextField();
         secondchoice.setPromptText("Enter the 2nd answer");
-        secondchoice.setMinWidth(400);
+        secondchoice.setMinWidth(450);
         secondradiobtn = new RadioButton();
         secondanswer.getChildren().addAll(secondchoice, secondradiobtn);
 
         //third field of answer with radio bottom
-        HBox thirdanswer = new HBox(150);
+        HBox thirdanswer = new HBox(170);
         thirdchoice = new TextField();
         thirdchoice.setPromptText("Enter the 3rd answer");
-        thirdchoice.setMinWidth(400);
+        thirdchoice.setMinWidth(450);
         thirdradiobtn = new RadioButton();
         thirdanswer.getChildren().addAll(thirdchoice, thirdradiobtn);
 
         // fourth field of answer with radio bottom
-        HBox fourthanswer = new HBox(150);
+        HBox fourthanswer = new HBox(170);
         fourthchoice = new TextField();
         fourthchoice.setPromptText("Enter the 4th answer");
-        fourthchoice.setMinWidth(400);
+        fourthchoice.setMinWidth(450);
         fourthradiobtn = new RadioButton();
         fourthanswer.getChildren().addAll(fourthchoice, fourthradiobtn);
 
@@ -149,12 +148,12 @@ public class CreateQuestionChoicesBox extends VBox {
      */
     private void initiateSaveQuestionBtn(){
         buttonHBox = new HBox();
-        buttonHBox.setPadding(new Insets(50, 30, 0, 490));
+        buttonHBox.setPadding(new Insets(30, 0, 0, 640));
         Button saveQ= new Button("ADD");
         saveQ.setFont(Font.font("Times New Roman", FontWeight.NORMAL, 16));
         saveQ.setOnAction(actionEvent -> {
                 indexEditQuestion = CreateAddQuestionBox.getCreateAddQuestionBox().indexSelecteditem();
-               if(indexEditQuestion >=0 && indexEditQuestion < quiz.getQuestions().size()){
+               if(indexEditQuestion >=0 && indexEditQuestion < questionNewQuiz.size()){
                    //update question with new data
                     saveEditedQuestion(indexEditQuestion);
                     CreateAddQuestionBox.getCreateAddQuestionBox().fillTableObservableListWithQuestion();
@@ -168,7 +167,7 @@ public class CreateQuestionChoicesBox extends VBox {
                    //add to allQuestions where imported questions are integrated
              //      quiz.getQuestions().add(newQuestionAdd);
                    CreateAddQuestionBox.getAllQuestions().add(newQuestionAdd);
-                   int index = quiz.getQuestions().indexOf(newQuestionAdd);
+                   int index = questionNewQuiz.indexOf(newQuestionAdd);
                    CreateAddQuestionBox.getCreateAddQuestionBox().fillTableObservableListWithQuestion();
                }
                 CreateQuestionChoicesTab.getCreateQuestionChoicesTab().closeTab();
@@ -183,18 +182,18 @@ public class CreateQuestionChoicesBox extends VBox {
      * @param index of the question in the list
      */
     public void editQuestion(int index){
-        textQuestion.setText(quiz.getQuestions().get(index).getQuestion());
-        firstchoice.setText(quiz.getQuestions().get(index).getAnswers().get(0).getChoiceDescription());
-        firstradiobtn.setSelected(quiz.getQuestions().get(index).getAnswers().get(0).isCorrect());
+        textQuestion.setText(questionNewQuiz.get(index).getQuestion());
+        firstchoice.setText(questionNewQuiz.get(index).getAnswers().get(0).getChoiceDescription());
+        firstradiobtn.setSelected(questionNewQuiz.get(index).getAnswers().get(0).isCorrect());
 
-        secondchoice.setText(quiz.getQuestions().get(index).getAnswers().get(1).getChoiceDescription());
-        secondradiobtn.setSelected(quiz.getQuestions().get(index).getAnswers().get(1).isCorrect());
+        secondchoice.setText(questionNewQuiz.get(index).getAnswers().get(1).getChoiceDescription());
+        secondradiobtn.setSelected(questionNewQuiz.get(index).getAnswers().get(1).isCorrect());
 
-        thirdchoice.setText(quiz.getQuestions().get(index).getAnswers().get(2).getChoiceDescription());
-        thirdradiobtn.setSelected(quiz.getQuestions().get(index).getAnswers().get(2).isCorrect());
+        thirdchoice.setText(questionNewQuiz.get(index).getAnswers().get(2).getChoiceDescription());
+        thirdradiobtn.setSelected(questionNewQuiz.get(index).getAnswers().get(2).isCorrect());
 
-        fourthchoice.setText(quiz.getQuestions().get(index).getAnswers().get(3).getChoiceDescription());
-        fourthradiobtn.setSelected(quiz.getQuestions().get(index).getAnswers().get(3).isCorrect());
+        fourthchoice.setText(questionNewQuiz.get(index).getAnswers().get(3).getChoiceDescription());
+        fourthradiobtn.setSelected(questionNewQuiz.get(index).getAnswers().get(3).isCorrect());
 
     }
 
@@ -233,7 +232,7 @@ public class CreateQuestionChoicesBox extends VBox {
      * @param index is the position of question in the list
      */
     private void saveEditedQuestion(int index){
-        quiz.getQuestions().get(index).setQuestion(textQuestion.getText());
+        CreateAddQuestionBox.getAllQuestions().get(index).setQuestion(textQuestion.getText());
         choicesData.get(0).setChoiceDescription(firstchoice.getText());
         choicesData.get(0).setCorrect(firstradiobtn.isSelected());
         choicesData.get(1).setChoiceDescription(secondchoice.getText());
@@ -243,8 +242,8 @@ public class CreateQuestionChoicesBox extends VBox {
         choicesData.get(3).setChoiceDescription(fourthchoice.getText());
         choicesData.get(3).setCorrect(fourthradiobtn.isSelected());
         //update answers Edit Button pushed
-        quiz.getQuestions().get(index).setAnswers(choicesData);
-        CreateAddQuestionBox.getUpdatedQuestions().add(quiz.getQuestions().get(index)); //for easier processing on the server side
+        CreateAddQuestionBox.getAllQuestions().get(index).setAnswers(choicesData);
+        CreateAddQuestionBox.getUpdatedQuestions().add(CreateAddQuestionBox.getAllQuestions().get(index)); //for easier processing on the server side
     }
 
 
