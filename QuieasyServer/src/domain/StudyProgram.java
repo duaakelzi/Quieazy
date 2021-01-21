@@ -3,7 +3,9 @@ package domain;
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
-
+/**
+ * this is a mapping class to a table study_program with all needed attributes and methods and relationships
+ */
 @Entity
 @Table(name="study_program")
 public class StudyProgram {

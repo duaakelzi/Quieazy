@@ -16,7 +16,9 @@ import java.util.Set;
 public class UpdateObjects {
     public static Session session = HibernateUtil.getSessionFactory().openSession();
     public static Message message = new Message();
-
+    /**
+     * this method is to update an existing quiz using Hibernate Framework
+     */
     public static Message updateQuiz(String name, double threshold, boolean isPublic, String course) {
         try {
             session.beginTransaction();
@@ -64,9 +66,10 @@ public class UpdateObjects {
 
 
 
-    //what do we do with isCorrect?? so far not in question, only choices
-    // switch QuestionChoice to Choice
 
+    /**
+     * this method is to update an existing questions using Hibernate Framework
+     */
     public static Message updateQuestion(Long questionID, List<ChoicesData> choicesList, String questionText, int points, boolean isCorrect) {
 
         try {

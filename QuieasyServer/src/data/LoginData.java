@@ -3,7 +3,10 @@
 package data;
 
 import java.io.Serializable;
-
+/**
+ * this class LoginData holds the information that we need to make a log in request
+ * with constructor and all getter and setter
+ */
 public class LoginData implements Serializable {
 	
 	// variables to store data

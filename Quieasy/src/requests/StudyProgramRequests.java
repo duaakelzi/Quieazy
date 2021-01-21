@@ -9,6 +9,10 @@ import java.util.ArrayList;
 public class StudyProgramRequests {
     private static Message request = new Message();
 
+    /**
+     * this method to request all Study Programs from the server
+     * then get the response from the server that is holding the requested Study programs
+     */
     public static ArrayList<StudyProgramData> fetchAllStudyPrograms(){
         ClientAgent clientAgent = ClientAgent.getClientAgent();
 

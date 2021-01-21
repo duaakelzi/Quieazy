@@ -4,6 +4,10 @@ package data;
 
 import java.io.Serializable;
 
+/**
+ * this class UserData holds all the information about the user to be sent using messages
+ * with constructor and all getter and setter
+ */
 public class UserData implements Serializable {
 	
 	// variables to store data

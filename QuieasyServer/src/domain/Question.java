@@ -2,7 +2,9 @@ package domain;
 
 import javax.persistence.*;
 import java.util.*;
-
+/**
+ * this is a mapping class to a table question with all needed attributes and methods(getter and setter)  and relationships
+ */
 @Entity
 @Table(name="question")
 public class Question  {

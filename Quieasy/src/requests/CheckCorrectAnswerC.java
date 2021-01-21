@@ -15,6 +15,11 @@ public class CheckCorrectAnswerC {
     public CheckCorrectAnswerC() {
     }
 
+    /**
+     * After the user completes playing the Quiz here we check if
+     * its points is enough to pass the quiz or not and pass the result
+     * to the DB to persist it
+     */
     public Message checkAnswers(QuizData quiz) {
         ClientAgent clientAgent = ClientAgent.getClientAgent();
 

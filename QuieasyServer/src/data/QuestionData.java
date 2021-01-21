@@ -3,6 +3,10 @@ package data;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+/**
+ * this class QuestionData holds all the information for the question to be sent using messages
+ * with constructor and all getter and setter
+ */
 //fully consistent with client-side QuestionData
 public class QuestionData implements Serializable {
 

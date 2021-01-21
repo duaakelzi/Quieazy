@@ -7,8 +7,12 @@ import java.util.ArrayList;
 public class QuestionRequests {
     // private UserData ownerQuiz;
     private static Message request;
-
-    //this method should: 1) persist new questions; 2) ask the message to add questions to quiz 3) maybe update quiz to add
+    /**
+     * this method should make a request to the server code to persist new Questions in the DB
+     * that is hold by the message which will be sent with the request
+     * then get the response that tell us if the Question are persisted successfully or not
+     */
+    //  2) ask the message to add questions to quiz 3) maybe update quiz to add
     // new questions there on class level
     public static boolean persistNewQuestions(UserData user, QuizData quiz, ArrayList<QuestionData> questionsToPersist) {
         ClientAgent clientAgent = ClientAgent.getClientAgent();
@@ -28,6 +32,8 @@ public class QuestionRequests {
         }
         return response.status;
     }
+
+
 
     //only text or choices were updated, not the relationships
     public static void updateEditedQuestions(ArrayList<QuestionData> questionsToUpdate){
@@ -50,7 +56,10 @@ public class QuestionRequests {
 //                                            UserC.getCurrentUser().getEmail());
         clientAgent.sendAndWaitForResponse(request);
     }
-
+    /**
+     * this method to request all questions for a specific given quiz from the DB
+     * then get the response from the server that is holding the requested Question
+     */
     //method to request all questions for given quiz. For now the received arraylist is not passed back to the gui from client decoder.
     public static ArrayList<QuestionData> fetchQuizQuestions(QuizData quiz) {
         ClientAgent clientAgent = ClientAgent.getClientAgent();
@@ -67,6 +76,10 @@ public class QuestionRequests {
         }
         return response.questionData;
     }
+    /**
+     * this method to request all Questions from the server
+     * then get the response from the server that is holding the requested Questions
+     */
     public static ArrayList<QuestionData> fetchAllQuestions() {
         ClientAgent clientAgent = ClientAgent.getClientAgent();
         request = new Message();
