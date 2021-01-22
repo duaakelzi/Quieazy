@@ -74,6 +74,15 @@ public class QuizData implements Serializable {
     }
 
     /**
+     * Setter to change the name of the Quiz
+     *
+     * @param name
+     */
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    /**
      * Getter for Course to which belongs the Quiz
      *
      * @return the course where the quiz can be found
@@ -90,15 +99,6 @@ public class QuizData implements Serializable {
 
     public void setCourse(String course) {
         this.course = course;
-    }
-
-    /**
-     * Setter to change the name of the Quiz
-     *
-     * @param name
-     */
-    public void setName(String name) {
-        this.name = name;
     }
 
     /**

@@ -6,9 +6,10 @@ import java.util.ArrayList;
 public class StudyProgramData implements Serializable {
 
     private String studyprogram;
-    private ArrayList<CourseData> courses  = new ArrayList<>();;
+    private ArrayList<CourseData> courses = new ArrayList<>();
 
-    public StudyProgramData(){}
+    public StudyProgramData() {
+    }
 
     public StudyProgramData(String studyprogram, ArrayList<CourseData> courses) {
         this.studyprogram = studyprogram;
@@ -19,11 +20,12 @@ public class StudyProgramData implements Serializable {
         return studyprogram;
     }
 
-    public ArrayList<CourseData> getCourses() {
-        return courses;
-    }
     public void setStudyprogram(String studyprogram) {
         this.studyprogram = studyprogram;
+    }
+
+    public ArrayList<CourseData> getCourses() {
+        return courses;
     }
 
     public void setCourses(ArrayList<CourseData> courses) {

@@ -11,60 +11,58 @@ import requests.UserRequests;
 
 public class Menu extends VBox {
 
-	private static Menu menu;
+    private static final double BTN_WIDTH = 100;
+    private static final double BTN_HEIGHT = 20;
+    private static Menu menu;
+    private static final Button profileButton = new Button("Profile");
+    private static final Button createQuizButton = new Button("Create Quiz");
+    private static final Button notifButton = new Button("Notifications");
+    private static final Button settingsButton = new Button("Settings");
+    private static final Button helpButton = new Button("Help");
+    private static final Button logoutButton = new Button("Log out");
 
-	private static final double BTN_WIDTH = 100;
-	private static final double BTN_HEIGHT = 20;
+    // constructor can only be accessed from within
+    private Menu() {
+        super(8);
+        this.setPadding(new Insets(15, 12, 15, 12));
+        profileButton.setPrefSize(BTN_WIDTH, BTN_HEIGHT);
+        createQuizButton.setPrefSize(BTN_WIDTH, BTN_HEIGHT);
+        notifButton.setPrefSize(BTN_WIDTH, BTN_HEIGHT);
+        settingsButton.setPrefSize(BTN_WIDTH, BTN_HEIGHT);
+        helpButton.setPrefSize(BTN_WIDTH, BTN_HEIGHT);
+        logoutButton.setPrefSize(BTN_WIDTH, BTN_HEIGHT);
 
-	private static Button profileButton = new Button("Profile");
-	private static Button createQuizButton = new Button("Create Quiz");
-	private static Button notifButton = new Button("Notifications");
-	private static Button settingsButton = new Button("Settings");
-	private static Button helpButton = new Button("Help");
-	private static Button logoutButton = new Button("Log out");
+        this.getChildren().addAll(profileButton, createQuizButton, notifButton, settingsButton, helpButton, logoutButton);
 
-	// constructor can only be accessed from within
-	private Menu() {
-		super(8);
-		this.setPadding(new Insets(15, 12, 15, 12));
-		profileButton.setPrefSize(BTN_WIDTH, BTN_HEIGHT);
-		createQuizButton.setPrefSize(BTN_WIDTH, BTN_HEIGHT);
-		notifButton.setPrefSize(BTN_WIDTH, BTN_HEIGHT);
-		settingsButton.setPrefSize(BTN_WIDTH, BTN_HEIGHT);
-		helpButton.setPrefSize(BTN_WIDTH, BTN_HEIGHT);
-		logoutButton.setPrefSize(BTN_WIDTH, BTN_HEIGHT);
+        logoutButton.setOnAction(new EventHandler<ActionEvent>() {
 
-		this.getChildren().addAll(profileButton, createQuizButton, notifButton, settingsButton, helpButton,logoutButton);
+            public void handle(ActionEvent e) {
 
-		logoutButton.setOnAction(new EventHandler<ActionEvent>() {
+                UserRequests.logout();
+                PrimeScene.login();
+            }
 
-			public void handle(ActionEvent e) {
+        });
 
-				UserRequests.logout();
-				PrimeScene.login();
-			}
+        createQuizButton.setOnAction(new EventHandler<ActionEvent>() {
 
-		});
+            public void handle(ActionEvent e) {
 
-		createQuizButton.setOnAction(new EventHandler<ActionEvent>() {
+                MainPane.getMainPane().getTabs().add(CreateQuizTab.getCreateQuizTab());
+                MainPane.getMainPane().getSelectionModel().select(CreateQuizTab.getCreateQuizTab());
 
-			public void handle(ActionEvent e) {
+            }
 
-				MainPane.getMainPane().getTabs().add(CreateQuizTab.getCreateQuizTab());
-				MainPane.getMainPane().getSelectionModel().select(CreateQuizTab.getCreateQuizTab());
+        });
 
-			}
+    }
 
-		});
+    // Gets the current instance -> Singleton
+    public static Menu getMenu() {
 
-	}
+        if (menu == null) menu = new Menu();
+        return menu;
 
-	// Gets the current instance -> Singleton
-	public static Menu getMenu() {
-
-		if (menu == null) menu = new Menu();
-		return menu;
-
-	}
+    }
 
 }

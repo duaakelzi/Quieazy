@@ -7,8 +7,18 @@ public class ResultData implements Serializable {
     private boolean passed;
     private int statistics;
 
-    private boolean []correctAnswers;
+    private boolean[] correctAnswers;
 
+
+    //c'tor
+    public ResultData() {
+    }
+
+    // getters/setters
+    public ResultData(int points, boolean passed) {
+        this.points = points;
+        this.passed = passed;
+    }
 
     public boolean[] getCorrectAnswers() {
         return correctAnswers;
@@ -18,16 +28,13 @@ public class ResultData implements Serializable {
         this.correctAnswers = correctAnswers;
     }
 
-    //c'tor
-    public ResultData(){}
-    // getters/setters
-    public ResultData(int points, boolean passed) {
-        this.points = points;
-        this.passed = passed;
+    public int getStatistics() {
+        return statistics;
     }
-    public int getStatistics() { return statistics; }
 
-    public void setStatistics(int statistics) { this.statistics = statistics; }
+    public void setStatistics(int statistics) {
+        this.statistics = statistics;
+    }
 
     public int getPoints() {
         return points;

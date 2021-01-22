@@ -97,6 +97,16 @@ public class QuestionData implements Serializable {
     }
 
     /**
+     * Setter for Question
+     *
+     * @param question
+     */
+
+    public void setQuestion(String question) {
+        this.question = question;
+    }
+
+    /**
      * Getter for Answers
      *
      * @return an arrayList of Answers
@@ -106,13 +116,12 @@ public class QuestionData implements Serializable {
     }
 
     /**
-     * Setter for Question
+     * Setter for Answers
      *
-     * @param question
+     * @param choicesData as a list of Answers
      */
-
-    public void setQuestion(String question) {
-        this.question = question;
+    public void setAnswers(ArrayList<ChoicesData> choicesData) {
+        this.answers = choicesData;
     }
 
     /**
@@ -130,21 +139,12 @@ public class QuestionData implements Serializable {
         return answerCorrect;
     }
 
-    /**
-     * Setter for Answers
-     *
-     * @param choicesData as a list of Answers
-     */
-    public void setAnswers(ArrayList<ChoicesData> choicesData) {
-        this.answers = choicesData;
+    public Long getId() {
+        return this.id;
     }
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Long getId() {
-        return this.id;
     }
 
     /**

@@ -1,14 +1,14 @@
 package data;
 
 import java.io.Serializable;
-import java.lang.Comparable;
 
-public class ChoicesData implements Serializable, Comparable  {
+public class ChoicesData implements Serializable, Comparable {
     private String choiceDescription;
     private boolean isCorrect;
     private int id;
 
-    public ChoicesData(){ }
+    public ChoicesData() {
+    }
 
     public ChoicesData(String choiceDescription, boolean isCorrect) {
         this.choiceDescription = choiceDescription;
@@ -19,20 +19,19 @@ public class ChoicesData implements Serializable, Comparable  {
         return choiceDescription;
     }
 
+    public void setChoiceDescription(String choiceDescription) {
+        this.choiceDescription = choiceDescription;
+    }
 
     public boolean isCorrect() {
         return isCorrect;
 
     }
 
-
-    public void setChoiceDescription(String choiceDescription){
-        this.choiceDescription = choiceDescription;
-    }
-
-    public void setCorrect(boolean correct){
+    public void setCorrect(boolean correct) {
         this.isCorrect = correct;
     }
+
     public int getId() {
         return id;
     }
@@ -48,6 +47,7 @@ public class ChoicesData implements Serializable, Comparable  {
         return (choiceDescription.equals(choiceToCompare.getChoiceDescription()) &&
                 isCorrect == choiceToCompare.isCorrect());
     }
+
     @Override
     public int compareTo(Object o) {
         ChoicesData choiceToCompare = (ChoicesData) o;
