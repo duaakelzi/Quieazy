@@ -1,5 +1,3 @@
-// Connects to the server, sends and receives message over network.
-// Runs on a thread of its own.
 
 package application;
 
@@ -13,6 +11,9 @@ import java.net.UnknownHostException;
 import java.util.LinkedList;
 import java.util.Queue;
 
+/**
+ * Connects to the server, sends and receives message objects over the network. Runs on a thread of its own.
+ */
 public class ClientAgent implements Runnable {
 
 	private static ClientAgent clientAgent;
@@ -24,7 +25,7 @@ public class ClientAgent implements Runnable {
 	private final int MAX_RETRIES = 40;
 
 	/**
-	 * Constructor
+	 * Private constructor.
 	 */
 	private ClientAgent() {
 
@@ -84,8 +85,8 @@ public class ClientAgent implements Runnable {
 	}
 
 	/**
-	 * Gets the current instance -> Singleton.
-	 * @return this
+	 * Gets the single instance of this class.
+	 * @return The single instance of this class.
 	 */
 	public static ClientAgent getClientAgent() {
 
@@ -96,9 +97,9 @@ public class ClientAgent implements Runnable {
 	}
 
 	/**
-	 * user request sent here and processed further in private methods until relevant response returned
-	 * @param message
-	 * @return message or null
+	 * Send request to the server and wait until a relevant response is received.
+	 * @param message Message to be sent.
+	 * @return Server response.
 	 */
 	public Message sendAndWaitForResponse(Message message) {
 		send(message);
@@ -106,8 +107,8 @@ public class ClientAgent implements Runnable {
 	}
 
 	/**
-	 * Send messages
-	 * @param message
+	 * Send message.
+	 * @param message Message to be sent.
 	 */
 	private void send(Message message) {
 
@@ -125,9 +126,9 @@ public class ClientAgent implements Runnable {
 	}
 
 	/**
-	 * call receiveResponse() until the relevant response is there or the max_retries is reached
-	 * @param request
-	 * @return
+	 * Wait until the relevant response is received or there or the max_retries is reached.
+	 * @param request Client request to the server.
+	 * @return Server response.
 	 */
 	private Message waitForResponse(Message request){
 
@@ -146,9 +147,9 @@ public class ClientAgent implements Runnable {
 	}
 
 	/**
-	 * checks the queue and see if message is relevant
-	 * @param request
-	 * @return
+	 * Checks the message queue and see if message is relevant.
+	 * @param request Client request to the server.
+	 * @return Server response.
 	 */
 	private Message receiveResponse(Message request) {
 		//check if relevant messages there
@@ -165,6 +166,5 @@ public class ClientAgent implements Runnable {
 		}
 		return result;
 	}
-
 
 }
