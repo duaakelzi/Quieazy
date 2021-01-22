@@ -10,6 +10,9 @@ import java.util.ArrayList;
 
 import static org.junit.Assert.*;
 
+/**
+ * class to test quiz related methods
+ */
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class QuizRequestsTest {
     private static ClientAgent tempClient;
@@ -22,6 +25,10 @@ public class QuizRequestsTest {
     private static QuizData fakeQuiz;
     private static QuizData nonAccessibleQuiz;
 
+    /**
+     * method to set up initial variables and connection
+     * @throws Exception
+     */
     @BeforeClass
     public static void setUp() throws Exception {
         tempClient = ClientAgent.getClientAgent();
@@ -42,8 +49,10 @@ public class QuizRequestsTest {
 //        UserC.getUser(anotherUser.getFirstName(), anotherUser.getLastName(), anotherUser.getEmail());
     }
 
+    /**
+     * method to test creation of new quiz
+     */
     @Test
-   // Testing whether Quizzes are being created (in later tests fetched)
     public void testCreateNewQuiz(){
         try{
             //create new quiz for Zefrank
@@ -54,8 +63,10 @@ public class QuizRequestsTest {
         }
     }
 
+    /**
+     * method to test retrieval of all quizzes
+     */
     @Test
- //   @DisplayName("Testing whether Quizzes for the right user being fetched")
     public void testFetchAllQuizzes() {
         try {
             // no quizzes should be found for fake user -> size 0
@@ -75,8 +86,10 @@ public class QuizRequestsTest {
         }
     }
 
+    /**
+     * method to test content of retrieved with quiz
+     */
     @Test
-  //  Testing whether retrieved quizzes contain expected data
     public void testQuizContentOfFetchedQuizzes() {
             //SP: ComputerScience (id_sp = 1) contains Programming 1 (id_course = 1) which contains quiz java
             // existingUser should have access to CS, hence also to Prog 1
@@ -97,16 +110,22 @@ public class QuizRequestsTest {
             System.out.println("assertFalse for anotherUser  passed. Non-accessible quiz not retrieved");
     }
 
+    /**
+     * method to test quiz deletion
+     */
     @Test
-    //  Testing whether quiz deletion works
     public void testQuizDelete() {
         assertTrue(QuizRequests.deleteQuiz(nonAccessibleQuiz));
         System.out.println("assertTrue for deleteQuiz passed. Nonaccessible quiz deleted");
         assertSame(QuizRequests.fetchAllUserQuizzes(anotherUser).size(), 0);
         System.out.println("assertSame for Nonaccessible quiz passed. Array size 0");
     }
+
+    /**
+     * method to destroy created variables
+     * @throws Exception
+     */
     @AfterClass
-    //doesn't do anything
     public static void tearDown() throws Exception {
         tempArrayQuizzes1 = null; tempArrayQuizzes2 = null;
         existingUser = null; fakeUser = null; anotherUser = null;
