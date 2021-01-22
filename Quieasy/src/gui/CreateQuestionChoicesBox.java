@@ -93,8 +93,6 @@ public class CreateQuestionChoicesBox extends VBox {
 
     /**
      * Create 4 text field with radio Button to insert the choices for Question and to select the correct Question
-     *
-     * @return VBox that holds all the Nodes input the choices and correct answer
      */
     private void initiateChoices() {
         choices = new VBox(20);

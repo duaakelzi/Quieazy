@@ -100,7 +100,6 @@ public class PlayQuizBox extends VBox {
      * Track to navigate among questions. linked to the actual array of questions
      * pagination can be used to navigate backward and upwards to question with choices
      *
-     * @return progress of answered questions and the current answered question
      */
     public void initiateQuestionTrack() {
         questionsTrack = new HBox(30);

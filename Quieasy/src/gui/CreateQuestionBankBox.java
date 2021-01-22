@@ -139,8 +139,6 @@ public class CreateQuestionBankBox extends VBox {
 
     /**
      * Method to display the question in the ListView
-     *
-     * @return the view of question
      */
     private void initiateListViewData() {
         listViewData = new StackPane();
@@ -205,7 +203,7 @@ class FilteredData extends ListCell<FilterDataQuestionBank> {
      * @param empty        is the row is empty to set up a empty row without object
      *                     add Button get the question and added to the Quiz
      *                     remove button remove the question from listView and Quiz
-     * @override updateItem is a listener of listview row, filling each row of list with FilteredData
+     *                     updateItem is a listener of listview row, filling each row of list with FilteredData
      */
     @Override
     protected void updateItem(FilterDataQuestionBank questionData, boolean empty) {

@@ -315,8 +315,6 @@ public class CreateAddQuestionBox extends VBox {
      * Creates 2 buttons:
      * Save - to save the Quiz and it is visible only for owner
      * Save and Publish to save and to be visible to another users
-     *
-     * @return Save, Save and Publish buttons to user
      */
     private void initiateSaveBtns() {
         savebtn = new HBox(465);

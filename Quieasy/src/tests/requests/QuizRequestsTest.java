@@ -1,10 +1,14 @@
-package requests;
+package tests.requests;
 
 import application.ClientAgent;
 import data.QuizData;
 import data.UserData;
-import org.junit.*;
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
+import org.junit.FixMethodOrder;
+import org.junit.Test;
 import org.junit.runners.MethodSorters;
+import requests.QuizRequests;
 
 import java.util.ArrayList;
 
