@@ -223,8 +223,7 @@ public class CreateQuestionChoicesBox extends VBox {
         choicesData.add(new ChoicesData(thirdchoice.getText(), thirdradiobtn.isSelected()));
         choicesData.add(new ChoicesData(fourthchoice.getText(), fourthradiobtn.isSelected()));
         //create questionData with necessary attributes
-        QuestionData newQuestion = new QuestionData(textQuestion.getText(), choicesData, valueSpinner.getValue());
-        return newQuestion;
+        return new QuestionData(textQuestion.getText(), choicesData, valueSpinner.getValue());
     }
 
     /**

@@ -4,13 +4,21 @@ package data;
 
 import java.io.Serializable;
 
+/**
+ * this class LoginData holds the information that we need to make a log in request
+ * with constructor and all getter and setter
+ */
 public class LoginData implements Serializable {
 
-    /**
-     * Login Data that holds the username- email and the password
-     */
+    // variables to store data
     private String email, password;
 
+    /**
+     * constructor
+     *
+     * @param email
+     * @param password
+     */
     public LoginData(String email, String password) {
 
         this.email = email;
@@ -19,9 +27,9 @@ public class LoginData implements Serializable {
     }
 
     /**
-     * Getters and Setters for email and password member variable
+     * getter and setter
      *
-     * @return
+     * @return email, password
      */
     public String getEmail() {
         return email;
@@ -38,4 +46,5 @@ public class LoginData implements Serializable {
     public void setPassword(String password) {
         this.password = password;
     }
+
 }

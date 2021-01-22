@@ -1,6 +1,5 @@
 package gui;
 
-import data.FilterDataQuestionBank;
 import data.QuestionData;
 import javafx.animation.PauseTransition;
 import javafx.collections.FXCollections;
