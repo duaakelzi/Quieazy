@@ -14,10 +14,17 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 
+/**
+ * Snippet to display some information about a quiz. To be shown in the Quiz Browser's results box.
+ */
 public class QuizSnippet extends VBox {
 	
-	private QuizData quiz;
-	
+	private QuizData quiz; // The quiz to show.
+
+	/**
+	 * Snippet constructor.
+	 * @param quiz Quiz to show.
+	 */
 	public QuizSnippet(QuizData quiz) {
 		
 		super(6);
@@ -29,24 +36,24 @@ public class QuizSnippet extends VBox {
 		
 		HBox hbox = new HBox(100);
 		
-		Text quizID = new Text(quiz.getName());
+		Text quizID = new Text(quiz.getName()); // Quiz ID
 		quizID.setFont(new Font(14));
 		quizID.setStyle("-fx-color: #336699;");
 		
-		Text quizAuth = new Text(quiz.getUser().getLastName() + ", " + quiz.getUser().getFirstName());
+		Text quizAuth = new Text(quiz.getUser().getLastName() + ", " + quiz.getUser().getFirstName()); // Quiz author
 		quizAuth.setFont(new Font(14));
 		quizAuth.setStyle("-fx-color: #336699;");
 		
 		hbox.getChildren().addAll(quizID, quizAuth);
 		
-		Text courseName = new Text(quiz.getCourse());
+		Text courseName = new Text(quiz.getCourse()); // Quiz course
 		courseName.setFont(new Font(14));
 		courseName.setStyle("-fx-color: #336699;");
 		
 		HBox hbox2 = new HBox(10);
 		hbox2.setAlignment(Pos.CENTER);
 		
-		Button playButton = new Button("Play");
+		Button playButton = new Button("Play"); // Play button
 		playButton.setStyle("-fx-color: #336699;");
 		
 		hbox2.getChildren().add(playButton);
@@ -57,31 +64,34 @@ public class QuizSnippet extends VBox {
 			 
 		    public void handle(ActionEvent e) {
 		        
-		    	// launch "Play Quiz" from here.
-				if(QuizBrowser.getQuizToPlay() != null){
+		    	// Launch QuizPlayer for this quiz
 
-					if(!quiz.equals(QuizBrowser.getQuizToPlay())){
+				if(QuizBrowser.getQuizToPlay() != null){ // If QuizPlayer is already open
 
-						// close the current tab first
+					if(!quiz.equals(QuizBrowser.getQuizToPlay())){ // If playing a different quiz
+
+						// Quit the current quiz first
 						MainPane.getMainPane().getTabs().remove(PlayQuizTab.getPlayQuizTab());
 						PlayQuizTab.reset();
-						//
 
-						QuizBrowser.setQuizToPlay(quiz);
-						MainPane.getMainPane().getTabs().add(PlayQuizTab.getPlayQuizTab());
-						MainPane.getMainPane().getSelectionModel().select(PlayQuizTab.getPlayQuizTab());
+						// Play this quiz
 
-					}else{
+						QuizBrowser.setQuizToPlay(quiz); // set this quiz to play
+						MainPane.getMainPane().getTabs().add(PlayQuizTab.getPlayQuizTab()); // start QuizPlayer
+						MainPane.getMainPane().getSelectionModel().select(PlayQuizTab.getPlayQuizTab()); // Show QuizPlayer tab
 
+					}else{ // If playing the same quiz
+
+						// Just show the QuizPlayer
 						MainPane.getMainPane().getSelectionModel().select(PlayQuizTab.getPlayQuizTab());
 
 					}
 
-				}else{
+				}else{ // If QuizPlayer is not already open
 
-					QuizBrowser.setQuizToPlay(quiz);
-					MainPane.getMainPane().getTabs().add(PlayQuizTab.getPlayQuizTab());
-					MainPane.getMainPane().getSelectionModel().select(PlayQuizTab.getPlayQuizTab());
+					QuizBrowser.setQuizToPlay(quiz); // set this quiz to play
+					MainPane.getMainPane().getTabs().add(PlayQuizTab.getPlayQuizTab()); // start QuizPlayer
+					MainPane.getMainPane().getSelectionModel().select(PlayQuizTab.getPlayQuizTab()); // Show QuizPlayer tab
 
 				}
 		    	

@@ -1,5 +1,3 @@
-// Dialog for creating a new account
-
 package gui;
 
 import requests.UserRequests;
@@ -13,19 +11,28 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+/**
+ * GUI for creating a new account.
+ */
 public class Register extends VBox{
 	
-	private static Register register;
-	
+	private static Register register; // singleton
+
+	// input fields for user details
 	private static TextField firstName = new TextField();
 	private static TextField lastName = new TextField();
 	private static TextField email = new TextField();
 	private static PasswordField password1 = new PasswordField();
 	private static PasswordField password2 = new PasswordField();
 	
-	private static Text msg = new Text("");
-	
-	// constructor can only be accessed from within
+	private static Text msg = new Text(""); // text message to the user by the system
+
+	/**
+	 * Private constructor.
+	 */
 	private Register() {
 		
 		super();
@@ -88,8 +95,11 @@ public class Register extends VBox{
 		});
 		
 	}
-	
-	// Gets the current instance -> Singleton.
+
+	/**
+	 * Gets the single instance of this class.
+	 * @return The single instance of this class.
+	 */
 	public static Register getRegister() {
 		
 		if (register == null) register = new Register();
@@ -97,36 +107,97 @@ public class Register extends VBox{
 		return register;
 		
 	}
-	
-	// validate input and register
+
+	/**
+	 * Validate user input and create account.
+	 * @param firstName User first name.
+	 * @param lastName User last name.
+	 * @param email User email.
+	 * @param password1 User password.
+	 * @param password2 User password repeated.
+	 */
 	private void validate(String firstName, String lastName, String email, String password1, String password2) {
-		
+
 		boolean valid = true;
 		String errorMessage = "";
-		
-		/*
-		 * VALIDATION: will be implemented latter.
-		 */
-		
-		if(valid) UserRequests.register(firstName, lastName, email, password1);
+
+		String regex = "^([_a-zA-Z0-9-]+(\\.[_a-zA-Z0-9-]+)*@[a-zA-Z0-9-]+(\\.[a-zA-Z0-9-]+)*(\\.[a-zA-Z]{1,6}))?$";
+		Pattern pattern = Pattern.compile(regex);
+		Matcher matcher = pattern.matcher(email);
+
+		if(firstName.equals("")){
+
+			errorMessage = "First name required!";
+			valid = false;
+
+		}else if(lastName.equals("")){
+
+			errorMessage = "Last name required!";
+			valid = false;
+
+		}else if(email.equals("")){
+
+			errorMessage = "Email required!";
+			valid = false;
+
+		}else if(!matcher.matches()){
+
+			errorMessage = "Invalid email!";
+			valid = false;
+
+		}else if(password1.equals("")){
+
+			errorMessage = "Password required!";
+			valid = false;
+
+		}else if(password2.equals("")){
+
+			errorMessage = "Repeat password!";
+			valid = false;
+
+		}else if(!password1.equals(password2)){
+
+			errorMessage = "Passwords don't match!";
+			valid = false;
+
+		}
+
+		if(valid){
+
+			UserRequests.register(firstName, lastName, email, password1);
+
+		}else{
+
+			msg.setFill(Color.FIREBRICK);
+			msg.setText(errorMessage);
+
+		}
 		
 	}
-	
-	// Gets the current instance -> Singleton.
+
+	/**
+	 * Show "Email already exists!" if already registered email is used to create a new account.
+	 */
 	public static void emailInUse() {
 		
 		password1.setText("");
 		password2.setText("");
 		msg.setFill(Color.FIREBRICK);
-		msg.setText("Registration failed.");
+		msg.setText("Registration failed! Email already exists.");
 		
 	}
-	
+
+	/**
+	 * Switch to account log in view.
+	 */
 	private static void switchToLogin() {
 		clear();
 		PrimeScene.login();
 	}
-	
+
+	/**
+	 * Clear all user input and system message.
+	 */
 	public static void clear() {
 		firstName.setText("");
 		lastName.setText("");

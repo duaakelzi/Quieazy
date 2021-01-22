@@ -1,5 +1,3 @@
-// Result box
-
 package guib;
 
 import javafx.event.ActionEvent;
@@ -11,11 +9,16 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
+/**
+ * Displays a list of quizzes that match the filter criteria or search ID in the Quiz Browser.
+ */
 public class ResultBox extends VBox {
 	
-	private static ResultBox resultBox;
-	
-	// constructor can only be accessed from within
+	private static ResultBox resultBox; // Singleton
+
+	/**
+	 * Private constructor.
+	 */
 	private ResultBox() {
 		
 		super(8);
@@ -23,8 +26,11 @@ public class ResultBox extends VBox {
 		addNodes();
 		
 	}
-	
-	// Gets the current instance -> Singleton
+
+	/**
+	 * Gets the single instance of this class.
+	 * @return The single instance of this class.
+	 */
 	public static ResultBox instance() {
 		
 		if (resultBox == null) resultBox = new ResultBox();
@@ -32,7 +38,10 @@ public class ResultBox extends VBox {
 		return resultBox;
 		
 	}
-	
+
+	/**
+	 * Add nodes to this ResultBox and adjust layout.
+	 */
 	private void addNodes() {
 		
 		HBox hbox = new HBox(10);
@@ -40,7 +49,7 @@ public class ResultBox extends VBox {
 		hbox.setPadding(new Insets(0, 20, 0, 0));
 		hbox.setAlignment(Pos.CENTER_RIGHT);
 		
-		Button refreshButton = new Button("Refresh");
+		Button refreshButton = new Button("Refresh"); // Refresh button: reloads quizzes from server and resets filter.
 		
 		hbox.getChildren().add(refreshButton);
 		
@@ -48,7 +57,7 @@ public class ResultBox extends VBox {
 		ScrollPane scrollPane = new ScrollPane();
 		scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
 		scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
-		scrollPane.setContent(Result.instance());
+		scrollPane.setContent(Result.instance()); // Show filter or search result
 		scrollPane.setFitToWidth(true);
 		
 		this.getChildren().addAll(hbox, scrollPane);
@@ -56,6 +65,8 @@ public class ResultBox extends VBox {
 		refreshButton.setOnAction(new EventHandler<ActionEvent>() {
 
 			public void handle(ActionEvent e) {
+
+				// Reload quizzes from server and reset filter.
 
 				BrowserData.load();
 				CourseSelectionBox.loadOptions();

@@ -1,5 +1,3 @@
-// Filter bar
-
 package guib;
 
 import javafx.beans.value.ObservableValue;
@@ -11,26 +9,31 @@ import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
+/**
+ * Filter bar - contains fields and buttons to filter quizzes by course or author and search by ID.
+ */
 public class FilterBar extends VBox {
 	
-	private static FilterBar filterBar;
+	private static FilterBar filterBar; // Singleton
 
-	private Button resetButton = new Button ("Reset");
+	private Button resetButton = new Button ("Reset"); // Reset button to restore filter values to default
 	
 	private static HBox hbox3 = new HBox(30);
-	private final static ToggleGroup toggleGroup = new ToggleGroup();
-	RadioButton rbCourse = new RadioButton("Course");
-	private RadioButton rbAuthor = new RadioButton("Author");
-	private RadioButton rbNone = new RadioButton("None");
+	private final static ToggleGroup toggleGroup = new ToggleGroup(); // Toggle filter type: course or author.
+	RadioButton rbCourse = new RadioButton("Course"); // filter by course
+	private RadioButton rbAuthor = new RadioButton("Author"); // filter by author
+	private RadioButton rbNone = new RadioButton("None"); // no filter
 	
 	// third line of controls
-	private Button applyButton = new Button ("Apply Filter");
+	private Button applyButton = new Button ("Apply Filter"); // Apply filter
 	
 	// fourth line of controls
-	private TextField quizIDField = new TextField();
-	private Button searchButton = new Button ("Search");
-	
-	// constructor can only be accessed from within
+	private TextField quizIDField = new TextField(); // Input field for quiz ID
+	private Button searchButton = new Button ("Search"); // Search button to find quiz by ID
+
+	/**
+	 * Private constructor.
+	 */
 	private FilterBar() {
 		
 		super(15);
@@ -41,8 +44,11 @@ public class FilterBar extends VBox {
 		addListeners();
 		
 	}
-	
-	// Gets the current instance -> Singleton
+
+	/**
+	 * Gets the single instance of this class.
+	 * @return The single instance of this class.
+	 */
 	public static FilterBar instance() {
 		
 		if (filterBar == null) filterBar = new FilterBar();
@@ -50,8 +56,10 @@ public class FilterBar extends VBox {
 		return filterBar;
 		
 	}
-	
-	// create and add nodes and adjust layout
+
+	/**
+	 * Add nodes to the filter bar and adjust layout.
+	 */
 	private void addNodes() {
 		
 		// first line of controls
@@ -94,8 +102,10 @@ public class FilterBar extends VBox {
 		this.getChildren().addAll(hbox1, hbox2, hbox3, hbox4);
 		
 	}
-	
-	// add listeners for UI controls
+
+	/**
+	 * Add event handlers to the controls in the filter bar.
+	 */
 	private void addListeners() {
 		
 		resetButton.setOnAction(new EventHandler<ActionEvent>() {
@@ -151,7 +161,10 @@ public class FilterBar extends VBox {
 		});
 		
 	}
-	
+
+	/**
+	 * Reset the filter to default.
+	 */
 	public void reset() {
 
 		rbNone.setSelected(true);
@@ -159,8 +172,10 @@ public class FilterBar extends VBox {
 		filter();
 		
 	}
-	
-	// run filter on the quizzes and show results
+
+	/**
+	 * Run filter on the quizzes and show results.
+	 */
 	public static void filter() {
 		
 		Result.filter(toggleGroup.getSelectedToggle().getUserData(), ((ComboBox)hbox3.getChildren().get(0)).getValue());

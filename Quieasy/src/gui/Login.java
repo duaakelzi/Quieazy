@@ -1,5 +1,3 @@
-// GUI for log in.
-
 package gui;
 
 import javafx.scene.text.*;
@@ -12,15 +10,20 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
 
+/**
+ * GUI for logging the user in.
+ */
 public class Login extends VBox{
 	
-	private static Login login;
+	private static Login login; // singleton
 	
-	private static TextField email = new TextField();
-	private static PasswordField password = new PasswordField();
-	private static Text msg = new Text("");
-	
-	// constructor can only be accessed from within
+	private static TextField email = new TextField(); // email input field
+	private static PasswordField password = new PasswordField(); // password input field
+	private static Text msg = new Text(""); // text message to the user by the system
+
+	/**
+	 * Private constructor.
+	 */
 	private Login() {
 		
 		super();
@@ -56,7 +59,7 @@ public class Login extends VBox{
 		loginButton.setOnAction(new EventHandler<ActionEvent>() {
 			 
 		    public void handle(ActionEvent e) {
-		        //use userdata here, maybe
+
 		    	UserRequests.login(email.getText(), password.getText());
 
 		    }
@@ -74,8 +77,11 @@ public class Login extends VBox{
 		});
 		
 	}
-	
-	// Gets the current instance -> Singleton.
+
+	/**
+	 * Gets the single instance of this class.
+	 * @return The single instance of this class.
+	 */
 	public static Login getLogin() {
 		
 		if (login == null) login = new Login();
@@ -83,8 +89,10 @@ public class Login extends VBox{
 		return login;
 		
 	}
-	
-	// Prompt user to try again on unsuccessful login attempt.
+
+	/**
+	 * Prompt user to try again on unsuccessful login attempt.
+	 */
 	public static void fail() {
 		
 		clear();
@@ -92,14 +100,18 @@ public class Login extends VBox{
 	    msg.setText("Incorrect email or password! Please try again.");
 	    
 	}
-	
-	// Open registration form for a new user
+
+	/**
+	 * Switch to create account view.
+	 */
 	private static void switchToRegister() {
 		clear();
 		PrimeScene.register();
 	}
-	
-	// Clear user input
+
+	/**
+	 * Clear all user input and system message.
+	 */
 	public static void clear() {
 		email.setText("");
 		password.setText("");

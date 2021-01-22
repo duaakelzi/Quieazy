@@ -1,5 +1,3 @@
-// course selection box
-
 package guib;
 
 import javafx.collections.FXCollections;
@@ -8,24 +6,32 @@ import javafx.scene.control.ComboBox;
 
 import java.util.ArrayList;
 
+/**
+ * A ComboBox class to select course.
+ */
 public class CourseSelectionBox extends ComboBox {
 	
-	private static CourseSelectionBox courseSelectionBox;
+	private static CourseSelectionBox courseSelectionBox; // Singleton
 	
-	private static ObservableList<String> options = FXCollections.observableArrayList();
-	
-	// constructor can only be accessed from within
+	private static ObservableList<String> options = FXCollections.observableArrayList(); // A list of course names
+
+	/**
+	 * Private constructor.
+	 */
 	private CourseSelectionBox() {
 		
 		super(options);
 		
-		CourseSelectionBox.loadOptions();
+		CourseSelectionBox.loadOptions(); // Load the list of course names
 		
-		this.setValue("Select course");
+		this.setValue("Select course"); // Set the default selected value
 		
 	}
-	
-	// Gets the current instance -> Singleton
+
+	/**
+	 * Gets the single instance of this class.
+	 * @return The single instance of this class.
+	 */
 	public static CourseSelectionBox instance() {
 		
 		if (courseSelectionBox == null) {
@@ -37,7 +43,10 @@ public class CourseSelectionBox extends ComboBox {
 		return courseSelectionBox;
 		
 	}
-	
+
+	/**
+	 * Load a list of course names into the ComboBox.
+	 */
 	public static void loadOptions() {
 		
 		options.clear();
@@ -52,6 +61,9 @@ public class CourseSelectionBox extends ComboBox {
 		
 	}
 
+	/**
+	 * Set the default selected value.
+	 */
 	public static void setDefault(){
 
 		courseSelectionBox.setValue("Select course");
