@@ -4,8 +4,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
- * this class QuizData holds all the information about the Quiz to be sent using messages
- * with constructor and all getter and setter
+ *  this class QuizData is serializable forms of the domain class Quiz to be sent using messages
+ *  with constructor and all getter and setter
  */
 public class QuizData implements Serializable {
     private String course;
@@ -26,6 +26,16 @@ public class QuizData implements Serializable {
     public QuizData() {  }
     // studyprogram removed from the constructor of QuizData, because we don't need it:
     // if a course that holds the quiz, belongs to one or two programs, makes no difference for the quiz
+
+    /**
+     * constructor
+     * @param course
+     * @param name
+     * @param threshold
+     * @param timer
+     * @param questions
+     * @param user
+     */
     public QuizData(String course, String name, double threshold, int timer, ArrayList<QuestionData> questions, UserData user) {
         this.course = course;
         this.name = name;
@@ -35,6 +45,13 @@ public class QuizData implements Serializable {
         this.user=user;
     }
 
+    /**
+     * second constructor
+     * @param course
+     * @param name
+     * @param threshold
+     * @param timer
+     */
     // because fetchAllUserQuizzes doesn't need the questions yet
     public QuizData(String course, String name, double threshold, int timer) {
         // this.program = program;

@@ -17,6 +17,8 @@ public class Converter {
      * because we have a mapping class Question that hold the Questions from the DB
      * and have data class QuestionData that used to send the request, here we convert the question
      * after we retrieve it to QuestionData object
+     * @param question the question that we want to convert it to QuestionData
+     * @return newQuestion QuestionData object
      */
     public static QuestionData convertQuestionToQuestionData(Question question) {
         QuestionData newQuestion = new QuestionData();
@@ -44,6 +46,8 @@ public class Converter {
      * because we have a mapping class Quiz that hold the Quizzes from the DB
      * and have data class QuizData that used to send the request here we convert the Quiz
      * after we retrieve it to QuizData object
+     * @param quiz the quiz that we want to convert to QuizData
+     * @return newQuiz QuizData object
      */
     public static QuizData convertQuizToQuizData(Quiz quiz) {
         ArrayList<QuestionData> quizDataQuestionArray = new ArrayList<>();

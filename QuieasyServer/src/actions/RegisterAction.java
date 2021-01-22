@@ -12,6 +12,11 @@ public class RegisterAction {
     /**
      * this method to register a new user in the server
      * then return the response from the server that telling the client if the user is registered successfully or not
+     * @param firstName
+     * @param lastName
+     * @param email
+     * @param password
+     * @return  message : the response message tells the user if the work is done
      */
     public static Message register(String firstName, String lastName, String email, String password) {
         Session session = HibernateUtil.getSessionFactory().openSession();

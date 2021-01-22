@@ -4,6 +4,10 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 
 public class JDBC {
+
+    /**
+     * this class to make JDBC connection
+     */
     public static void connectMySQL() {
         String url="jdbc:mysql://myquieazyserver.mysql.database.azure.com:3306/quieazy?serverTimezone=UTC";
         String user ="kelzi@myquieazyserver";

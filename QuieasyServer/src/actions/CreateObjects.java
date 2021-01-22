@@ -22,6 +22,13 @@ public class CreateObjects {
      * in this method we persist a new Quiz in the DB after we got a request to do this
      * using Hibernate Framework
      * then return a response back to the user to tell him if the creation done or not
+     * @param name name of the quiz
+     * @param threshold threshold of the quiz
+     * @param isPublic availability of the quiz
+     * @param timer timer of the quiz
+     * @param course course that we want to create quiz in
+     * @param email email of the user that created the quiz
+     * @return  response : the response message tells the user if the work is done
      */
     public static Message CreateQuiz(String name,double threshold,boolean isPublic,int timer, String email,String course)
     {
@@ -91,6 +98,12 @@ public class CreateObjects {
      * in this method we persist a new Questions with its specific Choices in the DB
      * and link it with the newly created Quiz using Hibernate Framework
      * then return a response back to the user to tell him if the creation done or not
+     * @param questionText question text
+     * @param points how many points this question have
+     * @param questionChoicesList list of choices
+     * @param quizName the quiz that the user want to create question in
+     * @param email email of the user that created the question
+     * @return  response : the response message tells the user if the work is done
      */
     public static Message CreateQuestion(String questionText, int points, List<ChoicesData> questionChoicesList, String quizName,String email)
     {
@@ -208,6 +221,11 @@ public class CreateObjects {
     /**
      * this method is called after the user has finished playing the quiz
      * to persist his/her final Results in the DB
+     * @param points how many points the user got
+     * @param isPassed if he passed or not
+     * @param quizName the quiz that the user played
+     * @param userEmail email of the user that played the quiz
+     * @return  response : the response message tells the user if the work is done
      */
 //int points, boolean isPassed, String userEmail
     public static Message createResult(int points, boolean isPassed, String quizName, String userEmail) {

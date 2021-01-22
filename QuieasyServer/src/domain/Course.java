@@ -30,6 +30,7 @@ public class Course {
 		this.shortcut = shortcut;
 		this.sp = sp;
 	}
+
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column (name="id_course")
@@ -53,9 +54,11 @@ public class Course {
 	public void setShortcut(String shortcut) {
 		this.shortcut = shortcut;
 	}
-	
-	
-	
+
+
+	/**
+	 * relationship between Course and studyProgram
+	 */
 	@ManyToMany( mappedBy = "courses")
 	public Set<StudyProgram> getSp() {
 		return sp;
@@ -64,7 +67,9 @@ public class Course {
 		this.sp = sp;
 	}
 
-	
+	/**
+	 * relationship between Course and user
+	 */
 	@ManyToMany( mappedBy = "courses")
 	public Set<User> getUsers() {
 		return users;
@@ -72,6 +77,9 @@ public class Course {
 	public void setUsers(Set<User> users) {
 		this.users = users;
 	}
+	/**
+	 * relationship between Course and quiz
+	 */
 	@OneToMany(mappedBy="course")
 	   
     public Set<Quiz> getQuiz() {

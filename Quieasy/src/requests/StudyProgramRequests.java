@@ -12,6 +12,7 @@ public class StudyProgramRequests {
     /**
      * this method to request all Study Programs from the server
      * then get the response from the server that is holding the requested Study programs
+     * @return returnedSP list of all study programs in the DB
      */
     public static ArrayList<StudyProgramData> fetchAllStudyPrograms(){
         ClientAgent clientAgent = ClientAgent.getClientAgent();

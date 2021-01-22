@@ -15,6 +15,8 @@ public class RetrieveObjects {
     /**
      * this method to retrieve all Quizzes for a specific given user from the DB using Hibernate Framework
      * then send the message response that is holding the ArrayList of the requested Quizzes back to the client
+     * @param email the email of the user that we want to retrieve his/her quizzes
+     * @return  message :the message that hold the list of all the quizzes of this user
      */
     public static Message retrieveUserQuizzes(String email) { //used to be List<Quiz>
         System.out.println("retrieving all user Quizzes ");
@@ -65,6 +67,7 @@ public class RetrieveObjects {
     /**
      * this method to request all Quizzes from the DB
      * then send the message response that is holding the ArrayList of the requested Quizzes back to the client
+     * @return  message :the message that hold the list of all the quizzes
      */
     public static Message retrieveQuizzes() {
         System.out.println("retrieving all Quizzes ");
@@ -116,8 +119,11 @@ public class RetrieveObjects {
         return message;
     }
     /**
-     * this method to request all Questions that are belonging to a specific course from the DB
+     * this method to request all Questions that are belonging to a specific a specific quiz from a specific course from the DB
      * then send the message response that is holding the ArrayList of the requested Questions back to the client
+     * @param quizName
+     * @param courseName
+     * @return message :the message that holds list of all retrieved question from the DB
      */
 
     public static Message retrieveQuestions(String courseName, String quizName) { //used to be List<Quiz>
@@ -215,6 +221,7 @@ public class RetrieveObjects {
     /**
      * this method to request all Questions that are belonging to a specific course from the DB
      * then send the message response that is holding the ArrayList of the requested Questions back to the client
+     * @return message : the message that holds List of all study programs in the DB
      */
 
     public static Message retrieveSP() {
@@ -266,6 +273,7 @@ public class RetrieveObjects {
     /**
      * this method to request all Questions from the DB
      * then send the message response that is holding the ArrayList of the requested Questions back to the client
+     * @return message :the message that holds list of all retrieved question from the DB
      */
     public static Message retrieveAllQuestions() {
         System.out.println("retrieving all Questions ");

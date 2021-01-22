@@ -2,17 +2,26 @@ package data;
 
 import java.io.Serializable;
 /**
- * this class CourseData holds all the information for the course to be sent using messages
+ * this class CourseData is serializable forms of the domain class course to be sent using messages
  * with constructor and all getter and setter
  */
 public class CourseData implements Serializable {
     private String course;
 
+
     public CourseData(){}
+    /**
+     * constructor
+     * @param course
+     */
     public CourseData(String course) {
         this.course = course;
     }
 
+    /**
+     * getter and setter
+     * @param course
+     */
     public void setCourse(String course) {
         this.course = course;
     }

@@ -16,6 +16,9 @@ public class QuizRequests {
      * this method should make a request to the server to persist new Quiz in the DB
      * the Quiz is hold by the message which will be sent with the request,
      * then get the response that telling us if the Question are persisted successfully or not
+     * @param user the user that created the quiz
+     * @param newQuizData the quiz with all information
+     * @return response : the response message telling us if the work is done
      */
     public static boolean createNewQuiz(QuizData newQuizData, UserData user){
         ClientAgent clientAgent = ClientAgent.getClientAgent();
@@ -33,6 +36,8 @@ public class QuizRequests {
     /**
      * this method to request all Quizzes for a specific given user from the DB
      * then get the response from the server that is holding the requested Quizzes
+     * @param user the user that we want to retrieve all his/her quizzes
+     * @return  response.allQuizzes list of all the quizzes of this user
      */
    public static ArrayList<QuizData> fetchAllUserQuizzes(UserData user){
        ClientAgent clientAgent = ClientAgent.getClientAgent();
@@ -61,6 +66,7 @@ public class QuizRequests {
     /**
      * this method to request all Quizzes from the server
      * then get the response from the server that is holding the requested Quizzes
+     * @return  response.allQuizzes list of all the quizzes in the DB
      */
     public static ArrayList<QuizData> fetchAllQuizzes(){
         ClientAgent clientAgent = ClientAgent.getClientAgent();

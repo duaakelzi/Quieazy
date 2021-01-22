@@ -11,7 +11,12 @@ public class LoginData implements Serializable {
 	
 	// variables to store data
 	private String email, password;
-	
+
+	/**
+	 * constructor
+	 * @param email
+	 * @param password
+	 */
 	public LoginData (String email, String password) {
 		
 		this.email = email;
@@ -19,6 +24,10 @@ public class LoginData implements Serializable {
 		
 	}
 
+	/**
+	 * getter and setter
+	 * @return email,password
+	 */
 	public String getEmail() {
 		return email;
 	}

@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.lang.Comparable;
 
 /**
- * this class ChoiceData holds all the information for the choice to be sent using messages
+ * this class ChoiceData is serializable forms of the domain class choice to be sent using messages
  * with constructor and all getter and setter
  */
 public class ChoicesData implements Serializable, Comparable {
@@ -13,15 +13,23 @@ public class ChoicesData implements Serializable, Comparable {
     private int id;
     //c-tor
 
-    public ChoicesData(){ }
 
+    public ChoicesData(){ }
+    /**
+     * constructor
+     * @param isCorrect
+     * @param choiceDescription
+     */
     public ChoicesData(String choiceDescription, boolean isCorrect) {
         this.choiceDescription = choiceDescription;
         this.isCorrect = isCorrect;
     }
 
     //getter and setter
-
+    /**
+     * getter and setter
+     * @return choiceDescription , isCorrect
+     */
     public String getChoiceDescription() {
         return choiceDescription;
     }

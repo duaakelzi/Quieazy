@@ -16,6 +16,9 @@ public class LoginAction {
      * check if the user is existing in the server or not
      * and if the user is existing check the password if correct
      * and return appropriate response to the user
+     * @param email
+     * @param password
+     * @return  message : the response message tells the user if the work is done
      */
     public static Message login(String email, String password) {
         Session session = HibernateUtil.getSessionFactory().openSession();

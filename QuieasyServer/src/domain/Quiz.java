@@ -108,7 +108,9 @@ public class Quiz  {
         this.question.add(question);
     }
     public void deleteQuestion(Question question) { this.question.remove(question);}
-
+    /**
+     * relationship between quiz and user
+     */
     @ManyToOne
     @JoinColumn(name = "id_user")
     public User getUser() {
@@ -118,6 +120,9 @@ public class Quiz  {
     public void setUser(User user) {
         this.user = user;
     }
+    /**
+     * relationship between Course and quiz
+     */
     @ManyToOne
     @JoinColumn(name = "id_course")
     public Course getCourse() {
@@ -132,7 +137,9 @@ public class Quiz  {
     public Set<Result> getResults() {
         return results;
     }
-
+    /**
+     * relationship between result and quiz
+     */
     public void setResults(Set<Result> results) {
         this.results = results;
     }

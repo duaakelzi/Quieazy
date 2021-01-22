@@ -29,6 +29,10 @@ public class UserRequests {
 	/**
 	 * this method to make a request to register a new user in the server
 	 * then get the response from the server that telling us if the user is registered successfully or not
+	 * @param firstName
+	 * @param lastName
+	 * @param email
+	 * @param password
 	 */
 	// create a new account
 	public static void register(String firstName, String lastName, String email, String password) {
@@ -56,6 +60,8 @@ public class UserRequests {
 	 * this method to make a request to log in the user
 	 * then get the response from the server to know if the user has an account to let him
 	 * log into the app
+	 * @param email
+	 * @param password
 	 */
 	// log user in
 	public static void login(String email, String password) {

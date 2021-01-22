@@ -12,7 +12,14 @@ public class RegisterData implements Serializable {
 	
 	// variables to store data
 	private String firstName, lastName, email, password;
-	
+
+	/**
+	 * constructor
+	 * @param firstName
+	 * @param lastName
+	 * @param email
+	 * @param password
+	 */
 	public RegisterData (String firstName, String lastName, String email, String password) {
 		
 		this.firstName = firstName;

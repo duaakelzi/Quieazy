@@ -11,6 +11,10 @@ public class QuestionRequests {
      * this method should make a request to the server code to persist new Questions in the DB
      * that is hold by the message which will be sent with the request
      * then get the response that tell us if the Question are persisted successfully or not
+     * @param user the user that wants to create the questions
+     * @param quiz the quiz that contains the questions
+     * @param questionsToPersist arrayList of the created questions
+     * @return response : the response message telling us if the work is done
      */
     //  2) ask the message to add questions to quiz 3) maybe update quiz to add
     // new questions there on class level
@@ -59,6 +63,8 @@ public class QuestionRequests {
     /**
      * this method to request all questions for a specific given quiz from the DB
      * then get the response from the server that is holding the requested Question
+     * @param quiz the quiz that we want to retrieve the questions from
+     * @return response.questionData list of the retrieved questions
      */
     //method to request all questions for given quiz. For now the received arraylist is not passed back to the gui from client decoder.
     public static ArrayList<QuestionData> fetchQuizQuestions(QuizData quiz) {
@@ -79,6 +85,7 @@ public class QuestionRequests {
     /**
      * this method to request all Questions from the server
      * then get the response from the server that is holding the requested Questions
+     * @return response.questionData list of the retrieved questions
      */
     public static ArrayList<QuestionData> fetchAllQuestions() {
         ClientAgent clientAgent = ClientAgent.getClientAgent();

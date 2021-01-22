@@ -83,6 +83,9 @@ public class Question  {
 
 
 	//owning for Questions
+	/**
+	 * relationship between question and choices
+	 */
 	@OneToMany(mappedBy = "primaryKey.question", cascade = CascadeType.ALL)
 
 	public Set<QuestionChoice> getQuestionChoices() {
@@ -96,7 +99,9 @@ public class Question  {
 	public void addChoice(QuestionChoice questionChoice) {
 		this.questionChoices.add(questionChoice);
 	}
-	
+	/**
+	 * relationship between question and user
+	 */
 	@ManyToOne
     @JoinColumn(name = "id_user")
 	public User getUser() {

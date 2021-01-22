@@ -19,6 +19,8 @@ public class CheckCorrectAnswerC {
      * After the user completes playing the Quiz here we check if
      * its points is enough to pass the quiz or not and pass the result
      * to the DB to persist it
+     *  @param quiz :the quiz that the user played
+     *  @return response : the response message telling us if the work is done
      */
     public Message checkAnswers(QuizData quiz) {
         ClientAgent clientAgent = ClientAgent.getClientAgent();
@@ -35,9 +37,9 @@ public class CheckCorrectAnswerC {
             request.resultData=re;
         }
         else
-            { re.setPassed(false);
-                request.resultData=re;
-             }
+        { re.setPassed(false);
+            request.resultData=re;
+        }
         Message response =  clientAgent.sendAndWaitForResponse(request);
         if(response != null && response.status){
             System.out.println("Result Saved successfully.");

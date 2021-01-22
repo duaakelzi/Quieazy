@@ -63,7 +63,9 @@ public class StudyProgram {
 		this.shortcut = shortcut;
 	}
 
-	
+	/**
+	 * relationship between Course and studyProgram
+	 */
 	@ManyToMany(cascade = {CascadeType.ALL})
 	@JoinTable(name = "sp_course", joinColumns = { @JoinColumn(name = "id_sp") }, inverseJoinColumns = { @JoinColumn(name = "id_course") })
 	public Set<Course> getCourses() { return courses; }
@@ -71,7 +73,9 @@ public class StudyProgram {
 	public void setCourses(Set<Course> courses) {
 			this.courses = courses;
 				}
-
+	/**
+	 * relationship between User and studyProgram
+	 */
 	@ManyToMany(cascade = {CascadeType.ALL} )
 	@JoinTable(name = "sp_user", joinColumns = { @JoinColumn(name = "id_sp") }, inverseJoinColumns = { @JoinColumn(name = "id_user") })
 	public Set<User> getUsers() {

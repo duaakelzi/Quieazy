@@ -60,6 +60,9 @@ public class Result {
     public void setPoints(int points) {
         this.points = points;
     }
+    /**
+     * relationship between Result and Quiz
+     */
     @ManyToOne
     @JoinColumn(name = "id_quiz")
     public Quiz getQuiz() {
@@ -69,6 +72,9 @@ public class Result {
     public void setQuiz(Quiz quiz) {
         this.quiz = quiz;
     }
+    /**
+     * relationship between Result and User
+     */
     @ManyToOne
     @JoinColumn(name = "id_user")
     public User getUser() {

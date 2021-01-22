@@ -4,8 +4,8 @@ import java.io.Serializable;
 
 
 /**
- * this class ResultData holds all the information about the result of the user to be sent using messages
- * with constructor and all getter and setter
+ * this class ResultData is serializable forms of the domain class Result to be sent using messages
+ *  with constructor and all getter and setter
  */
 public class ResultData implements Serializable {
     private int points;

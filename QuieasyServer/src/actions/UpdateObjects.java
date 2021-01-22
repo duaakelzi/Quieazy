@@ -18,6 +18,11 @@ public class UpdateObjects {
     public static Message message = new Message();
     /**
      * this method is to update an existing quiz using Hibernate Framework
+     * @param name
+     * @param threshold
+     * @param isPublic
+     * @param course
+     * @return  message : the response message tells the user if the work is done
      */
     public static Message updateQuiz(String name, double threshold, boolean isPublic, String course) {
         try {
@@ -69,6 +74,12 @@ public class UpdateObjects {
 
     /**
      * this method is to update an existing questions using Hibernate Framework
+     * @param questionID
+     * @param questionText
+     * @param points
+     * @param choicesList
+     * @param isCorrect
+     * @return  message : the response message tells the user if the work is done
      */
     public static Message updateQuestion(Long questionID, List<ChoicesData> choicesList, String questionText, int points, boolean isCorrect) {
 

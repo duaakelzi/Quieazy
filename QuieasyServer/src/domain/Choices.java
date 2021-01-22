@@ -53,6 +53,11 @@ public class Choices {
 		this.questionChoices = questionChoices;
 	}
 	//inverse side for Question
+
+	/**
+	 * define the relationship between question and choices
+	 * @return questionChoices
+	 */
 	@OneToMany(mappedBy = "primaryKey.choices", cascade = CascadeType.ALL)
 	public Set<QuestionChoice> getQuestionChoices() {
 		return this.questionChoices;
