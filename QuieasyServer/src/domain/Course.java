@@ -18,12 +18,24 @@ public class Course {
 	private Set<Quiz> quiz=new HashSet<Quiz>(0);
 	
 	public Course() {};
+
+	/**
+	 * constructor 1 for Course
+	 * @param courseName
+	 * @param shortcut
+	 */
 	public Course(String courseName, String shortcut) {
 		super();
 		this.courseName = courseName;
 		this.shortcut = shortcut;
 	}
-	
+
+	/**
+	 * constructor 2 for Course
+	 * @param courseName
+	 * @param shortcut
+	 * @param sp
+	 */
 	public Course(String courseName, String shortcut, Set<StudyProgram> sp) {
 		super();
 		this.courseName = courseName;

@@ -27,6 +27,14 @@ public class Quiz  {
     // c'tors
     public Quiz() {};
 
+    /**
+     * constructor 1 for Quiz
+     * @param quiz_Name
+     * @param threshold
+     * @param isPublic
+     * @param deleted
+     * @param timer
+     */
     public Quiz(String quiz_Name, double threshold, boolean isPublic, boolean deleted,int timer) { //deleted??
         super();
         this.quiz_Name = quiz_Name;
@@ -36,6 +44,15 @@ public class Quiz  {
         this.timer=timer;
 
     }
+
+    /**
+     * constructor 2 for Quiz
+     * @param quiz_Name
+     * @param threshold
+     * @param isPublic
+     * @param deleted
+     * @param question
+     */
     public Quiz( String quiz_Name, double threshold, boolean isPublic, boolean deleted, Set<Question> question) {
         super();
 
@@ -137,18 +154,28 @@ public class Quiz  {
     public Set<Result> getResults() {
         return results;
     }
+
     /**
      * relationship between result and quiz
+     * @param results
      */
     public void setResults(Set<Result> results) {
         this.results = results;
     }
-    //orphan removal for bidirectional 1-N
-    //result
+
+    /**
+     * orphan linkage for bidirectional 1-N
+     * @param res
+     */
     public void addResult(Result res) {
         res.setQuiz(this); //add this quiz to the result
         results.add(res); //add res to this quiz
     }
+
+    /**
+     * orphan removal for bidirectional 1-N
+     * @param res
+     */
     public void deleteResult(Result res) {
         results.remove(res); //remove res from results
     }

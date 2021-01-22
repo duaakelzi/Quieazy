@@ -7,7 +7,6 @@ import java.util.ArrayList;
  * this class QuestionData is serializable forms of the domain class Question to be sent using messages
  * with constructor and all getter and setter
  */
-//fully consistent with client-side QuestionData
 public class QuestionData implements Serializable {
 
     private String question;
@@ -18,12 +17,26 @@ public class QuestionData implements Serializable {
 
     public QuestionData(){}
 
+    /**
+     * constructor 1 for QuestionData
+     * @param question
+     * @param answers
+     * @param points
+     */
     public QuestionData(String question, ArrayList<ChoicesData> answers,int points) {
         this.question = question;
         this.answers = answers;
         this.points = points;
     }
 
+    /**
+     * constructor 2 for QuestionData
+     * @param question
+     * @param points
+     * @param answers
+     * @param id
+     * @param user
+     */
     public QuestionData(String question, int points, ArrayList<ChoicesData> answers, Long id, UserData user) {
         this.question = question;
         this.points = points;
@@ -54,6 +67,10 @@ public class QuestionData implements Serializable {
 
     public void setQuestion(String question){ this.question = question; }
 
+    /**
+     * method to print the correct answer
+     * @return String
+     */
     public String getCorrectAnswer(){
         String answerCorrect = "";
         for (ChoicesData answer : answers) {
@@ -75,6 +92,12 @@ public class QuestionData implements Serializable {
         }
         return res;
     }
+
+    /**
+     * override to enable comparisons for testing
+     * @param o
+     * @return boolean
+     */
     @Override
     public boolean equals(Object o) {
         QuestionData questionToCompare = (QuestionData) o;

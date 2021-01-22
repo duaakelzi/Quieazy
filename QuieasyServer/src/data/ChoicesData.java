@@ -25,7 +25,6 @@ public class ChoicesData implements Serializable, Comparable {
         this.isCorrect = isCorrect;
     }
 
-    //getter and setter
     /**
      * getter and setter
      * @return choiceDescription , isCorrect
@@ -54,7 +53,12 @@ public class ChoicesData implements Serializable, Comparable {
         this.id = id;
     }
 
-    @Override //can be changed with ids
+    /**
+     * override to enable comparisons during testing
+     * @param o
+     * @return boolean
+     */
+    @Override
     public boolean equals(Object o) {
         ChoicesData choiceToCompare = (ChoicesData) o;
         //(String choiceDescription, boolean isCorrect)
@@ -62,6 +66,11 @@ public class ChoicesData implements Serializable, Comparable {
                 isCorrect == choiceToCompare.isCorrect());
     }
 
+    /**
+     * override to enable comparisons during testing
+     * @param o
+     * @return int
+     */
     @Override
     public int compareTo(Object o) {
         ChoicesData choiceToCompare = (ChoicesData) o;

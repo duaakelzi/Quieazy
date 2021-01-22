@@ -10,6 +10,10 @@ public class HibernateUtil {
 
     private static final SessionFactory sessionFactory = buildSessionFactory();
 
+    /**
+     * this method builds the sessionfactory
+     * @return SessionFactory
+     */
     private static SessionFactory buildSessionFactory() {
         try {
             // Create the SessionFactory from hibernate.cfg.xml
@@ -21,6 +25,10 @@ public class HibernateUtil {
         }
     }
 
+    /**
+     * this is a getter
+     * @return SessionFactory
+     */
     public static SessionFactory getSessionFactory() {
         return sessionFactory;
     }

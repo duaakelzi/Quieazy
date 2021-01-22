@@ -69,9 +69,6 @@ public class UpdateObjects {
     }
 
 
-
-
-
     /**
      * this method is to update an existing questions using Hibernate Framework
      * @param questionID
@@ -98,8 +95,6 @@ public class UpdateObjects {
                 session.update(questionToUpdate);
                 session.getTransaction().commit();
                 message.task = "UPDATE_OK";
-                //return choiceslist too
-               // message.questionData = new QuestionData(questionToUpdate.getId(), questionToUpdate.getQuestionText(), (List) questionToUpdate.getQuestionChoices(), questionToUpdate.getPoints(), questionToUpdate.getUser());
             }
         } catch(Exception e){
             // if the error message is "out of memory",

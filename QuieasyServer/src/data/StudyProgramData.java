@@ -44,6 +44,12 @@ public class StudyProgramData implements Serializable {
     public void setCourses(ArrayList<CourseData> courses) {
         this.courses = courses;
     }
+
+    /**
+     * override to enable comparisons for testing
+     * @param o
+     * @return boolean
+     */
     @Override
     public boolean equals(Object o) {
         StudyProgramData spToCompare = (StudyProgramData) o;

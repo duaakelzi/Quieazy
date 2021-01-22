@@ -18,6 +18,12 @@ public class DeleteObjects {
     public static Session session;
     public static Message message;
 
+    /**
+     * this method deletes quiz from the database
+     * @param quizName
+     * @param courseName
+     * @return
+     */
     public static Message deleteQuiz(String quizName, String courseName)
     {
         try {
@@ -58,6 +64,11 @@ public class DeleteObjects {
         return message;
     }
 
+    /**
+     * this method deletes questions from the database
+     * @param questionID
+     * @return
+     */
     public static Message deleteQuestion(Long questionID)
     {
         try {

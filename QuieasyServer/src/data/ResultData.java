@@ -25,7 +25,12 @@ public class ResultData implements Serializable {
 
     //c'tor
     public ResultData(){}
-    // getters/setters
+
+    /**
+     * constructor for ResultData
+     * @param points
+     * @param passed
+     */
     public ResultData(int points, boolean passed) {
         this.points = points;
         this.passed = passed;

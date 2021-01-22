@@ -12,6 +12,9 @@ import static org.junit.Assert.*;
 
 import java.util.ArrayList;
 
+/**
+ * class to test question related methods
+ */
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class QuestionRequestsTest {
     private static ClientAgent tempClient;
@@ -20,6 +23,10 @@ public class QuestionRequestsTest {
     protected static ArrayList<QuestionData> tempArray;
     private static UserData existingUser;
 
+    /**
+     * method to set up initial variables and connection
+     * @throws Exception
+     */
     @BeforeClass
     public static void setUp() throws Exception {
         tempClient = ClientAgent.getClientAgent();
@@ -45,6 +52,10 @@ public class QuestionRequestsTest {
 
         existingUser = new UserData("Duaa", "kelzi", "user@mail.com"); //id_user = 1
     }
+
+    /**
+     * method to test with non-existent question
+     */
     @Test
     public void testBeforeAllSetup() {
         //first the quiz should be persisted, as it's not in the system
@@ -56,6 +67,9 @@ public class QuestionRequestsTest {
         System.out.println("assertFalse for fetch before persistence passed.");
     }
 
+    /**
+     * method to test question persistence
+     */
     @Test
     public void testFirstPersistNewQuestions() {
         //persist the question
@@ -64,6 +78,9 @@ public class QuestionRequestsTest {
     //    System.out.println("Question id: " + tempArray.get(0).getId());
     }
 
+    /**
+     * method to test retrieval with existing quiz
+     */
     @Test
     public void testSecondFetchQuizQuestions() {
         //make sure the persisted question is found as expected by user
@@ -72,7 +89,7 @@ public class QuestionRequestsTest {
         System.out.println("assertTrue for fetch after persistence passed.");
     }
 
-    //test deletion of Question: info loss of q.id
+    //test deletion of Question: not used
   //  @Test
 //    public void testThirdQuestionsDeletion() {
 //        //make sure deletion of the question goes ok
@@ -80,6 +97,10 @@ public class QuestionRequestsTest {
 //        System.out.println("assertTrue for deleting question passed.");
 //    }
 
+    /**
+     * method to destroy created variables
+     * @throws Exception
+     */
     @AfterClass
     public static void tearDown() throws Exception {
         //quiz deletion tested separately

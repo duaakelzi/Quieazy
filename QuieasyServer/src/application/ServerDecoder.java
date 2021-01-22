@@ -9,16 +9,15 @@ import persistence.Request;
 
 import java.util.ArrayList;
 
+/**
+ * decodes the received request, triggers necessary classes, returns response to the request
+ */
 public class ServerDecoder {
     private static Message response;
-    //can we get rid of the if-else??
     public static Message decode(Message message) {
-        //init response here
-        //set task here
-        response = new Message();
 
         if (message.task.equals("LOG_IN")) {
-
+            response = new Message();
             LoginData data = message.loginData;
             response = Request.login(data.getEmail(), data.getPassword());
             response.task = message.task;
@@ -102,18 +101,15 @@ public class ServerDecoder {
             response.task = message.task;
             return response;
         } else if (message.task.equals("FETCH_ALL_QUESTIONS")) {
-            //Long id, String course, String name, double threshold, int timer
-            //enforce use of a specific contructor (with ID)
             QuizData quiz = message.quizData;
-           // quiz.setId(quiz.getId());
             response = new Message();
-            response = Request.retrieveQuestions(quiz.getCourse(), quiz.getName()); //for this, all quizzes should have an id saved
+            response = Request.retrieveQuestions(quiz.getCourse(), quiz.getName());
             response.task = message.task;
             return response;
         } else if (message.task.equals("FETCH_ALL_EXISTING_QUESTIONS")) {
 
             response = new Message();
-            response = Request.retrieveAllQuestions(); //for this, all quizzes should have an id saved
+            response = Request.retrieveAllQuestions();
             response.task = message.task;
             return response;
         }else if (message.task.equals("SAVE_RESULT")) {
@@ -121,10 +117,6 @@ public class ServerDecoder {
             QuizData quizData = message.quizData;
             ResultData resultData = message.resultData;
 
-            //go through array of results and make each persistent
-
-                //ideally, we should be working with IDs here
-                //session closed after each call to persist. Might be interfering
               response = new Message();
               response= Request.createResult(resultData.getPoints(), resultData.isPassed(), quizData.getName(), userData.getEmail());
               response.task = message.task;
@@ -134,7 +126,7 @@ public class ServerDecoder {
             UserData userData = message.userData;
             return Request.retrieveResults(userData.getEmail());
         }else if (message.task.equals("UPDATE_RESULT")) {
-            //to be added once repeat quiz is ready
+            //TODO: to be added once repeat quiz is ready
         }else if (message.task.equals("FETCH_STUDY_PROGRAMS")) {
             //create new message, otherwise the old one seems to be returned
             //returns a message with the task + array of sps (with courses)

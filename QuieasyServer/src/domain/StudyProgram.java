@@ -15,7 +15,13 @@ public class StudyProgram {
 	private String shortcut;
 	private Set <Course> courses =new HashSet<Course>(0);
 	private Set <User> users =new HashSet<User>(0);
-	
+
+	/**
+	 * constructor 1 for StudyProgram
+	 * @param studyProgramName
+	 * @param shortcut
+	 * @param courses
+	 */
 	public StudyProgram(String studyProgramName, String shortcut, Set<Course> courses) {
 		super(); //object
 		StudyProgramName = studyProgramName;
@@ -28,6 +34,11 @@ public class StudyProgram {
 		// TODO Auto-generated constructor stub
 	}
 
+	/**
+	 * constructor 2 for StudyProgram
+	 * @param studyProgramName
+	 * @param shortcut
+	 */
 	public StudyProgram(String studyProgramName, String shortcut) {
 		super();
 		StudyProgramName = studyProgramName;
