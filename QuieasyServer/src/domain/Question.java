@@ -17,12 +17,25 @@ public class Question  {
 	private Set<QuestionChoice> questionChoices = new HashSet<QuestionChoice>(0);
 	
 	public Question() {}
-	
+
+	/**
+	 * constructor 1 for Question
+	 * @param questionText
+	 * @param points
+	 */
 	public Question(String questionText, int points) {
 		super();
 		this.questionText = questionText;
 		this.points = points;
 	}
+
+	/**
+	 * constructor 2 for Question
+	 * @param id
+	 * @param questionText
+	 * @param points
+	 * @param quiz
+	 */
 	public Question(Long id, String questionText, int points, Set<Quiz> quiz) {
 		super();
 		this.id = id;
@@ -30,6 +43,15 @@ public class Question  {
 		this.points = points;
 		this.quiz = quiz;
 	}
+
+	/**
+	 * constructor 3 for Question
+	 * @param id
+	 * @param questionText
+	 * @param points
+	 * @param quiz
+	 * @param questionChoices
+	 */
 	public Question(Long id, String questionText, int points, Set<Quiz> quiz, Set<QuestionChoice> questionChoices) {
 		super();
 		this.id = id;

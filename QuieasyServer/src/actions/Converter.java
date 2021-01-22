@@ -38,6 +38,11 @@ public class Converter {
         return newQuestion;
     }
 
+    /**
+     * this method converts ChoicesData to Choices
+     * @param ch
+     * @return
+     */
     public static Choices convertChoicesDataToChoices(ChoicesData ch) {
             Choices choice = new Choices(ch.getChoiceDescription());
             return choice;

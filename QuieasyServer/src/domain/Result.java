@@ -22,12 +22,23 @@ public class Result {
         super();
     }
 
+    /**
+     * constructor 1 for Result
+     * @param id
+     * @param isPassed
+     * @param points
+     */
     public Result(int id, boolean isPassed, int points) {
         this.id = id;
         this.isPassed = isPassed;
         this.points = points;
     }
 
+    /**
+     * constructor 2 for Result
+     * @param isPassed
+     * @param points
+     */
     public Result(boolean isPassed, int points) {
         this.isPassed = isPassed;
         this.points = points;

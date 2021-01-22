@@ -26,6 +26,13 @@ public class User {
     public User() {
     }
 
+    /**
+     * constructor 1 for User
+     * @param firstName
+     * @param lastName
+     * @param email
+     * @param password
+     */
     public User(String firstName, String lastName, String email, String password) {
         this.firstName = firstName;
         this.lastName = lastName;
@@ -123,14 +130,20 @@ public class User {
     public void setResults(Set<Result> results) {
         this.results = results;
     }
-    //methods
 
-    //orphan removal for bidirectional 1-N
-    //result
+    /**
+     * orphan linkage for bidirectional 1-N
+     * @param res
+     */
     public void addResult(Result res) {
         res.setUser(this); //add this quiz to the result
         results.add(res); //add res to this user
     }
+
+    /**
+     * orphan removal for bidirectional 1-N
+     * @param res
+     */
     public void deleteResult(Result res) {
         results.remove(res); //remove res from user
     }

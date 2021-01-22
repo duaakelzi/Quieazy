@@ -104,6 +104,11 @@ public class QuizData implements Serializable {
         return questions;
     }
 
+    /**
+     * override to enable comparisons for testing
+     * @param o
+     * @return boolean
+     */
     @Override
     public boolean equals(Object o) {
         QuizData quizToCompare = (QuizData) o;

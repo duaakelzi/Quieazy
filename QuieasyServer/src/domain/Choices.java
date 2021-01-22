@@ -15,14 +15,24 @@ public class Choices {
 	private Set<QuestionChoice> questionChoices = new HashSet<QuestionChoice>();
 	//constructors
 	public Choices() {}
+
+	/**
+	 * constructor 1 for Choices
+	 * @param id
+	 * @param choiceDescription
+	 * @param questionChoices
+	 */
 	public Choices(int id, String choiceDescription, Set<QuestionChoice> questionChoices) {
 		super();
 		this.id = id;
 		this.choiceDescription = choiceDescription;
 		this.questionChoices = questionChoices;
 	}
-	
-	
+
+	/**
+	 * constructor 2 for Choices
+	 * @param choiceDescription
+	 */
 	public Choices(String choiceDescription) {
 		super();
 		this.choiceDescription = choiceDescription;
@@ -67,7 +77,10 @@ public class Choices {
 		this.questionChoices = questionChoices;
 	}
 
-	// methods
+	/**
+	 * method to add questionChoices to Choices
+	 * @param questionChoice
+	 */
 	public void addQuestionsChoices(QuestionChoice questionChoice) {
 		this.questionChoices.add(questionChoice);
 	}

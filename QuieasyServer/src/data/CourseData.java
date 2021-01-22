@@ -29,6 +29,11 @@ public class CourseData implements Serializable {
         return course;
     }
 
+    /**
+     * override to enable comparisons during testing
+     * @param o
+     * @return boolean
+     */
     @Override
     public boolean equals(Object o) {
         CourseData courseToCompare = (CourseData) o;

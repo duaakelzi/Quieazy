@@ -8,7 +8,6 @@ import org.hibernate.Session;
 import org.hibernate.query.Query;
 import persistence.HibernateUtil;
 
-
 public class LoginAction {
 
     /**
