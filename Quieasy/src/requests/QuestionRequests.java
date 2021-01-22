@@ -102,6 +102,13 @@ public class QuestionRequests {
         }
         return response.questionData;
     }
+
+    /**
+     * method to send the request to delete Questions
+     * @param quiz
+     * @param questions
+     * @return boolean
+     */
     public static boolean deleteQuestions(QuizData quiz, ArrayList<QuestionData> questions) {
         ClientAgent clientAgent = ClientAgent.getClientAgent();
         request = new Message();

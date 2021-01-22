@@ -55,6 +55,11 @@ public class QuizRequests {
        return response.allQuizzes;
    }
 
+    /**
+     * method to delete quiz
+     * @param quiz
+     * @return boolean
+     */
    public static boolean deleteQuiz(QuizData quiz) {
        ClientAgent clientAgent = ClientAgent.getClientAgent();
        request = new Message();
