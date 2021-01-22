@@ -2,6 +2,11 @@ package data;
 
 import java.io.Serializable;
 
+
+/**
+ * this class ResultData is serializable forms of the domain class Result to be sent using messages
+ * with constructor and all getter and setter
+ */
 public class ResultData implements Serializable {
     private int points;
     private boolean passed;
@@ -14,7 +19,12 @@ public class ResultData implements Serializable {
     public ResultData() {
     }
 
-    // getters/setters
+    /**
+     * constructor for ResultData
+     *
+     * @param points
+     * @param passed
+     */
     public ResultData(int points, boolean passed) {
         this.points = points;
         this.passed = passed;

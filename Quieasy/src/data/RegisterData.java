@@ -4,11 +4,23 @@ package data;
 
 import java.io.Serializable;
 
+/**
+ * this class RegisterData holds the information that we need to register a new user
+ * with constructor and all getter and setter
+ */
 public class RegisterData implements Serializable {
 
     // variables to store data
     private String firstName, lastName, email, password;
 
+    /**
+     * constructor
+     *
+     * @param firstName
+     * @param lastName
+     * @param email
+     * @param password
+     */
     public RegisterData(String firstName, String lastName, String email, String password) {
 
         this.firstName = firstName;
@@ -49,5 +61,4 @@ public class RegisterData implements Serializable {
     public void setPassword(String password) {
         this.password = password;
     }
-
 }

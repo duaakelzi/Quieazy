@@ -4,6 +4,10 @@ package data;
 
 import java.io.Serializable;
 
+/**
+ * this class ResultData is serializable forms of the domain class Result to be sent using messages
+ * with constructor and all getter and setter
+ */
 public class UserData implements Serializable {
 
     // variables to store data
@@ -17,6 +21,7 @@ public class UserData implements Serializable {
 
     }
 
+    //getters and setters
     public String getFirstName() {
         return firstName;
     }

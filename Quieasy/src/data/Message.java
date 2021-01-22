@@ -7,15 +7,23 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 public class Message implements Serializable {
-
-    // variables to store data
-    public String task; // tell the server or client what to do with the data (if any). eg. "REGISTER" for account creation
-    //the response to be received: positive and negative
-    public boolean status; // will be set by the server to true, if successful
+    /**
+     * the class that holds all the serializable information
+     * variables to store data
+     * tell the server or client what to do with the data (if any). eg. "REGISTER" for account creation
+     */
+    public String task;// tell the server or client what to do with the data (if any). eg. "REGISTER" for account creation
+    /**
+     * status set by server to true if the work is done
+     */
+    public boolean status;
+    /**
+     * the data that we need to persist
+     */
     public RegisterData registerData; // field values from "create account" form
     public UserData userData; // user email, first and last name
     public LoginData loginData; // user email and password
-    public QuizData quizData;
+    public QuizData quizData; //for quizzes
     public ArrayList<QuestionData> questionData = new ArrayList<>();
     public ResultData resultData;
     public ArrayList<StudyProgramData> studyProgramData = new ArrayList<>();
